@@ -1,35 +1,53 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useRouter } from "next/navigation"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 export default function AddTalentPage() {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("")
-  const [videoFile, setVideoFile] = useState<File | null>(null)
-  const router = useRouter()
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    // Here you would typically:
-    // 1. Create a FormData object
-    // 2. Append all the fields
-    // 3. Send a POST request to your API
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("category", category);
+    if (videoFile) {
+      formData.append("video", videoFile);
+    }
 
-    console.log({ title, description, category, videoFile })
+    try {
+      // Here you would typically upload to your backend/storage
+      const response = await fetch("/api/talents", {
+        method: "POST",
+        body: formData,
+      });
 
-    // Redirect to the talents page after submission
-    router.push("/talents")
-  }
+      if (response.ok) {
+        router.push("/talents");
+      }
+    } catch (error) {
+      console.error("Error uploading talent:", error);
+    }
+  };
 
   return (
     <div className="container mx-auto py-8">
@@ -74,17 +92,21 @@ export default function AddTalentPage() {
           <Input
             id="video"
             type="file"
-            onChange={(e) => setVideoFile(e.target.files ? e.target.files[0] : null)}
+            onChange={(e) =>
+              setVideoFile(e.target.files ? e.target.files[0] : null)
+            }
             required
             accept="video/*"
             className="bg-[#1a2942] border-gray-700 text-white"
           />
         </div>
-        <Button type="submit" className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+        <Button
+          type="submit"
+          className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
+        >
           Submit Talent
         </Button>
       </form>
     </div>
-  )
+  );
 }
-

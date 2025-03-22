@@ -5,6 +5,35 @@ import { Eye, Heart, MessageSquare, Share2 } from "lucide-react"
 import Link from "next/link"
 import FavoriteButton from "@/components/favorite-button"
 
+// Helper function to convert YouTube URLs to embed format
+function getYouTubeEmbedUrl(url) {
+  if (!url) return '';
+  
+  // If it's already an embed URL, return it
+  if (url.includes('youtube.com/embed/')) {
+    return url;
+  }
+  
+  // Extract video ID from various YouTube URL formats
+  let videoId = '';
+  
+  // Match format: youtube.com/watch?v=VIDEO_ID
+  const watchMatch = url.match(/youtube\.com\/watch\?v=([^&]+)/);
+  if (watchMatch) videoId = watchMatch[1];
+  
+  // Match format: youtu.be/VIDEO_ID
+  const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+  if (shortMatch) videoId = shortMatch[1];
+  
+  // If we found a video ID, create an embed URL
+  if (videoId) {
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+  
+  // If we can't parse it, return the original URL
+  return url;
+}
+
 async function getTalentDetails(id: string) {
   const { data: video, error } = await supabase
     .from("videos")
@@ -24,9 +53,6 @@ async function getTalentDetails(id: string) {
   const { data: relatedVideos, error: relatedError } = await supabase
     .from("videos")
     .select(`
-      *,
-      channels (
-
       *,
       channels (*)
     `)
@@ -50,6 +76,8 @@ export default async function TalentPage({ params }: { params: { id: string } })
     return <div className="text-white">Video not found</div>
   }
 
+  const embedUrl = getYouTubeEmbedUrl(talent.video_url);
+
   return (
     <div className="max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -58,7 +86,7 @@ export default async function TalentPage({ params }: { params: { id: string } })
             <iframe
               width="100%"
               height="100%"
-              src={talent.video_url}
+              src={embedUrl}
               title={talent.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -130,7 +158,7 @@ export default async function TalentPage({ params }: { params: { id: string } })
                   <iframe
                     width="100%"
                     height="100%"
-                    src={item.video_url}
+                    src={getYouTubeEmbedUrl(item.video_url)}
                     title={item.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -139,7 +167,7 @@ export default async function TalentPage({ params }: { params: { id: string } })
                 </div>
                 <div>
                   <h4 className="text-white font-medium group-hover:text-[#9d4edd]">{item.title}</h4>
-                  <p className="text-[#9d4edd] text-sm">{talent.channels?.name}</p>
+                  <p className="text-[#9d4edd] text-sm">{item.channels?.name}</p>
                   <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
                     <span className="flex items-center">
                       <Eye className="h-3 w-3 mr-1" /> {item.views?.toLocaleString()}
@@ -157,4 +185,3 @@ export default async function TalentPage({ params }: { params: { id: string } })
     </div>
   )
 }
-
