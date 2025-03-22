@@ -1,12 +1,11 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { supabase } from "@/lib/supabase"
 
 export default async function ChannelsPage() {
-  const supabase = createServerComponentClient({ cookies });
   
   // Get current user and type
   const { data: { session } } = await supabase.auth.getSession();
