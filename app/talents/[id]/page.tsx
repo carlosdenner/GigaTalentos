@@ -1,82 +1,66 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { supabase } from "@/lib/supabase"
-import { Eye, Heart, MessageSquare, Share2 } from "lucide-react"
-import Link from "next/link"
-import FavoriteButton from "@/components/favorite-button"
-
-// Helper function to convert YouTube URLs to embed format
-function getYouTubeEmbedUrl(url) {
-  if (!url) return '';
-  
-  // If it's already an embed URL, return it
-  if (url.includes('youtube.com/embed/')) {
-    return url;
-  }
-  
-  // Extract video ID from various YouTube URL formats
-  let videoId = '';
-  
-  // Match format: youtube.com/watch?v=VIDEO_ID
-  const watchMatch = url.match(/youtube\.com\/watch\?v=([^&]+)/);
-  if (watchMatch) videoId = watchMatch[1];
-  
-  // Match format: youtu.be/VIDEO_ID
-  const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
-  if (shortMatch) videoId = shortMatch[1];
-  
-  // If we found a video ID, create an embed URL
-  if (videoId) {
-    return `https://www.youtube.com/embed/${videoId}`;
-  }
-  
-  // If we can't parse it, return the original URL
-  return url;
-}
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
+import { Eye, Heart, MessageSquare, Share2 } from "lucide-react";
+import Link from "next/link";
+import FavoriteButton from "@/components/favorite-button";
+import { getYouTubeEmbedUrl } from "@/utils";
+import { useUserType } from '@/hooks/useUserType';
+import SponsorRecommendations from "@/components/sponsor-recommendations"
+import router from "next/router";
 
 async function getTalentDetails(id: string) {
   const { data: video, error } = await supabase
     .from("videos")
-    .select(`
+    .select(
+      `
       *,
       channels (*)
-    `)
+    `
+    )
     .eq("id", id)
-    .single()
+    .single();
 
   if (error) {
-    console.error("Error fetching video:", error)
-    return null
+    console.error("Error fetching video:", error);
+    return null;
   }
 
   // Get related videos from the same channel
   const { data: relatedVideos, error: relatedError } = await supabase
     .from("videos")
-    .select(`
+    .select(
+      `
       *,
       channels (*)
-    `)
+    `
+    )
     .eq("channel_id", video.channel_id)
     .neq("id", id)
     .order("views", { ascending: false })
-    .limit(3)
+    .limit(3);
 
   if (relatedError) {
-    console.error("Error fetching related videos:", relatedError)
-    return { ...video, relatedVideos: [] }
+    console.error("Error fetching related videos:", relatedError);
+    return { ...video, relatedVideos: [] };
   }
 
-  return { ...video, relatedVideos }
+  return { ...video, relatedVideos };
 }
 
-export default async function TalentPage({ params }: { params: { id: string } }) {
-  const talent = await getTalentDetails(params.id)
+export default async function TalentPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const talent = await getTalentDetails(params.id);
 
   if (!talent) {
-    return <div className="text-white">Video not found</div>
+    return <div className="text-white">Video not found</div>;
   }
 
   const embedUrl = getYouTubeEmbedUrl(talent.video_url);
+  const {userType,isLoading} = useUserType();
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -97,7 +81,10 @@ export default async function TalentPage({ params }: { params: { id: string } })
           <div className="mt-6 flex items-center">
             <Avatar className="h-12 w-12 mr-4">
               <AvatarImage
-                src={talent.channels?.avatar || "/placeholder.svg?height=48&width=48"}
+                src={
+                  talent.channels?.avatar ||
+                  "/placeholder.svg?height=48&width=48"
+                }
                 alt={talent.channels?.name}
               />
               <AvatarFallback>
@@ -112,26 +99,44 @@ export default async function TalentPage({ params }: { params: { id: string } })
               <div className="flex items-center gap-4 text-sm text-gray-400">
                 <span>
                   By{" "}
-                  <Link href={`/channels/${talent.channel_id}`} className="text-[#9d4edd]">
+                  <Link
+                    href={`/channels/${talent.channel_id}`}
+                    className="text-[#9d4edd]"
+                  >
                     {talent.channels?.name}
                   </Link>
                 </span>
-                <span className="text-[#9d4edd]">{talent.views?.toLocaleString()} Views</span>
+                <span className="text-[#9d4edd]">
+                  {talent.views?.toLocaleString()} Views
+                </span>
                 <span>{new Date(talent.created_at).toLocaleDateString()}</span>
               </div>
             </div>
           </div>
 
           <div className="mt-6 flex items-center gap-4">
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">Subscribe</Button>
-            <div className="text-white font-bold">{talent.channels?.subscribers?.toLocaleString()}</div>
+            {userType === 'fan' && (
+              <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+                Subscribe
+              </Button>
+            )}
+            
+            {userType === 'sponsor' && (
+              <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">
+                Contact Talent
+              </Button>
+            )}
 
             <div className="flex items-center ml-auto gap-6">
-              <FavoriteButton videoId={talent.id} />
+              {(userType === 'fan' || userType === 'sponsor') && (
+                <FavoriteButton videoId={talent.id} />
+              )}
+              
               <Button variant="ghost" className="text-gray-400 hover:text-white">
                 <MessageSquare className="h-6 w-6 mr-2" />
                 <span>Comment</span>
               </Button>
+              
               <Button variant="ghost" className="text-gray-400 hover:text-white">
                 <Share2 className="h-6 w-6" />
               </Button>
@@ -142,7 +147,10 @@ export default async function TalentPage({ params }: { params: { id: string } })
             <p className="text-gray-300">{talent.description}</p>
             <p className="mt-4 text-gray-300">
               Category:{" "}
-              <Link href={`/categories/${talent.channels?.category.toLowerCase()}`} className="text-[#9d4edd]">
+              <Link
+                href={`/categories/${talent.channels?.category.toLowerCase()}`}
+                className="text-[#9d4edd]"
+              >
                 {talent.channels?.category}
               </Link>
             </p>
@@ -150,38 +158,65 @@ export default async function TalentPage({ params }: { params: { id: string } })
         </div>
 
         <div className="lg:col-span-1">
-          <h3 className="text-xl font-bold text-white mb-4">Related Videos</h3>
-          <div className="space-y-4">
-            {talent.relatedVideos?.map((item: any) => (
-              <Link href={`/talents/${item.id}`} key={item.id} className="flex gap-4 group">
-                <div className="relative w-40 h-24 rounded-lg overflow-hidden bg-gray-800 flex-shrink-0">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={getYouTubeEmbedUrl(item.video_url)}
-                    title={item.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-                <div>
-                  <h4 className="text-white font-medium group-hover:text-[#9d4edd]">{item.title}</h4>
-                  <p className="text-[#9d4edd] text-sm">{item.channels?.name}</p>
-                  <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
-                    <span className="flex items-center">
-                      <Eye className="h-3 w-3 mr-1" /> {item.views?.toLocaleString()}
-                    </span>
-                    <span className="flex items-center">
-                      <Heart className="h-3 w-3 mr-1" /> {item.likes?.toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {userType === 'sponsor' ? (
+            <>
+              <div className="mb-8">
+                <Button 
+                  className="w-full bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white"
+                  onClick={() => router.push(`/messages/${talent.channels?.user_id}`)}
+                >
+                  <MessageSquare className="h-5 w-5 mr-2" />
+                  Contact Talent
+                </Button>
+              </div>
+              <SponsorRecommendations />
+            </>
+          ) : (
+            <>
+              <h3 className="text-xl font-bold text-white mb-4">Related Videos</h3>
+              <div className="space-y-4">
+                {talent.relatedVideos?.map((item: any) => (
+                  <Link
+                    href={`/talents/${item.id}`}
+                    key={item.id}
+                    className="flex gap-4 group"
+                  >
+                    <div className="relative w-40 h-24 rounded-lg overflow-hidden bg-gray-800 flex-shrink-0">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={getYouTubeEmbedUrl(item.video_url)}
+                        title={item.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium group-hover:text-[#9d4edd]">
+                        {item.title}
+                      </h4>
+                      <p className="text-[#9d4edd] text-sm">
+                        {item.channels?.name}
+                      </p>
+                      <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
+                        <span className="flex items-center">
+                          <Eye className="h-3 w-3 mr-1" />{" "}
+                          {item.views?.toLocaleString()}
+                        </span>
+                        <span className="flex items-center">
+                          <Heart className="h-3 w-3 mr-1" />{" "}
+                          {item.likes?.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }

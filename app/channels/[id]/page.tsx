@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Eye, Heart } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import Link from "next/link"
+import { getYouTubeEmbedUrl } from "@/utils"
 
 async function getChannelData(id: string) {
   // Get channel data
@@ -77,7 +78,7 @@ export default async function ChannelPage({ params }: { params: { id: string } }
                   <iframe
                     width="100%"
                     height="100%"
-                    src={video.video_url}
+                    src={getYouTubeEmbedUrl(video.video_url)}
                     title={video.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

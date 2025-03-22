@@ -1,64 +1,91 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import Link from "next/link"
-import { Users } from "lucide-react"
-import { supabase } from "@/lib/supabase"
-
-async function getChannels() {
-  const { data: channels, error } = await supabase
-    .from("channels")
-    .select("*")
-    .order("subscribers", { ascending: false })
-    .limit(6)
-
-  if (error) {
-    console.error("Error fetching channels:", error)
-    return []
-  }
-
-  return channels
-}
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function ChannelsPage() {
-  const channels = await getChannels()
+  const supabase = createServerComponentClient({ cookies });
+  
+  // Get current user and type
+  const { data: { session } } = await supabase.auth.getSession();
+  const { data: userData } = session ? await supabase
+    .from('users')
+    .select('account_type')
+    .eq('id', session.user.id)
+    .single() : { data: null };
+
+  // Get user's channel if they are a talent
+  const { data: userChannel } = userData?.account_type === 'talent' && session ? await supabase
+    .from('channels')
+    .select('*')
+    .eq('user_id', session.user.id)
+    .single() : { data: null };
+
+  // Get popular channels
+  const { data: popularChannels } = await supabase
+    .from('channels')
+    .select('*')
+    .order('subscribers', { ascending: false })
+    .limit(12);
+
+  if (userData?.account_type === 'talent' && !userChannel) {
+    return (
+      <div className="container mx-auto py-16 text-center">
+        <h1 className="text-3xl font-bold text-white mb-6">Create Your Channel</h1>
+        <p className="text-gray-400 mb-8">Start sharing your talents with the world</p>
+        <Button asChild>
+          <Link href="/channel/create">Create Channel</Link>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Popular Channels</h1>
+      {userData?.account_type === 'talent' && userChannel && (
+        <Card className="bg-[#1a2942] border-gray-800 text-white mb-8">
+          <CardHeader>
+            <CardTitle>Your Channel</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Link href={`/channel/${userChannel.id}`} className="flex items-center gap-4">
+              <Avatar className="h-16 w-16">
+                <AvatarImage src={userChannel.avatar} />
+                <AvatarFallback>{userChannel.name?.charAt(0).toUpperCase()}</AvatarFallback>
+              </Avatar>
+              <div>
+                <h2 className="text-xl font-semibold">{userChannel.name}</h2>
+                <p className="text-gray-400">{userChannel.subscribers?.toLocaleString()} subscribers</p>
+              </div>
+            </Link>
+          </CardContent>
+        </Card>
+      )}
+
+      <h2 className="text-2xl font-bold text-white mb-6">Popular Channels</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {channels.map((channel) => (
-          <Card key={channel.id} className="bg-[#1a2942] border-gray-800">
-            <CardContent className="p-6">
-              <div className="flex items-center mb-4">
-                <Avatar className="h-16 w-16 mr-4">
-                  <AvatarImage src={channel.avatar} alt={channel.name} />
-                  <AvatarFallback>
-                    {channel.name
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")}
-                  </AvatarFallback>
+        {popularChannels?.map((channel) => (
+          <Card key={channel.id} className="bg-[#1a2942] border-gray-800 text-white">
+            <CardContent className="pt-6">
+              <Link href={`/channel/${channel.id}`} className="flex items-center gap-4">
+                <Avatar className="h-12 w-12">
+                  <AvatarImage src={channel.avatar} />
+                  <AvatarFallback>{channel.name?.charAt(0).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h2 className="text-xl font-semibold text-white">{channel.name}</h2>
-                  <p className="text-[#9d4edd]">{channel.category}</p>
+                  <h3 className="font-semibold">{channel.name}</h3>
+                  <p className="text-sm text-gray-400">
+                    {channel.subscribers?.toLocaleString()} subscribers
+                  </p>
                 </div>
-              </div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-gray-400 flex items-center">
-                  <Users className="h-5 w-5 mr-2" />
-                  {channel.subscribers.toLocaleString()} subscribers
-                </span>
-              </div>
-              <Link href={`/channels/${channel.id}`}>
-                <Button className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">View Channel</Button>
               </Link>
             </CardContent>
           </Card>
         ))}
       </div>
     </div>
-  )
+  );
 }
 

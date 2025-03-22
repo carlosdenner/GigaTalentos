@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Eye, Heart, Zap } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase"
+import { getYouTubeEmbedUrl } from "@/utils"
 
 async function getVideosByCategory(category: string) {
   // First, find channels in this category
@@ -80,7 +81,7 @@ export default async function CategoryPage({ params }: { params: { category: str
                   <iframe
                     width="100%"
                     height="100%"
-                    src={video.video_url}
+                    src={getYouTubeEmbedUrl(video.video_url)}
                     title={video.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

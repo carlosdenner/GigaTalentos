@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Heart, Eye } from "lucide-react"
 import { supabase } from "@/lib/supabase"
 import { cookies } from "next/headers"
+import { getYouTubeEmbedUrl } from "@/utils"
 
 async function getFavorites() {
   // Get the current user's session
@@ -86,7 +87,7 @@ export default async function FavoritesPage() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src={favorite.video_url}
+                    src={getYouTubeEmbedUrl(favorite.video_url)}
                     title={favorite.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

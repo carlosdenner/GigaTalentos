@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Zap, Eye, Heart } from "lucide-react"
 import { supabase } from "@/lib/supabase"
+import { getYouTubeEmbedUrl } from "@/utils"
 
 async function getFeaturedVideos() {
   const { data, error } = await supabase
@@ -73,7 +74,7 @@ export default async function Home() {
                 <iframe
                   width="100%"
                   height="100%"
-                  src={video.video_url}
+                  src={getYouTubeEmbedUrl(video.video_url)}
                   title={video.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
