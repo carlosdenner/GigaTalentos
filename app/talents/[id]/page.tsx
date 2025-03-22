@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
@@ -7,7 +9,7 @@ import FavoriteButton from "@/components/favorite-button";
 import { getYouTubeEmbedUrl } from "@/utils";
 import { useUserType } from '@/hooks/useUserType';
 import SponsorRecommendations from "@/components/sponsor-recommendations"
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 async function getTalentDetails(id: string) {
   const { data: video, error } = await supabase
@@ -61,6 +63,7 @@ export default async function TalentPage({
 
   const embedUrl = getYouTubeEmbedUrl(talent.video_url);
   const {userType,isLoading} = useUserType();
+  const router = useRouter();
 
   return (
     <div className="max-w-7xl mx-auto">
