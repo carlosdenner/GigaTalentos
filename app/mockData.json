@@ -1,0 +1,61 @@
+{
+  "channels": [
+    {
+      "id": "1",
+      "name": "Saju Engine",
+      "description": "Bringing you the best of African music and dance",
+      "subscribers": 50000,
+      "avatar": "/placeholder.svg?height=100&width=100&text=SE",
+      "coverImage": "/placeholder.svg?height=300&width=1200&text=Saju+Engine+Cover",
+      "category": "Music"
+    },
+    {
+      "id": "2",
+      "name": "Izo Man",
+      "description": "Comedy sketches and stand-up from across Africa",
+      "subscribers": 75000,
+      "avatar": "/placeholder.svg?height=100&width=100&text=IM",
+      "coverImage": "/placeholder.svg?height=300&width=1200&text=Izo+Man+Cover",
+      "category": "Comedy"
+    },
+    {
+      "id": "3",
+      "name": "Bruce Melodie",
+      "description": "Showcasing the best vocal talents in Africa",
+      "subscribers": 100000,
+      "avatar": "/placeholder.svg?height=100&width=100&text=BM",
+      "coverImage": "/placeholder.svg?height=300&width=1200&text=Bruce+Melodie+Cover",
+      "category": "Music"
+    }
+  ],
+  "videos": [
+    {
+      "id": "1",
+      "title": "Amazing Performance",
+      "channelId": "1",
+      "views": 10000,
+      "likes": 500,
+      "thumbnail": "/placeholder.svg?height=180&width=320&text=Amazing+Performance",
+      "duration": "3:45"
+    },
+    {
+      "id": "2",
+      "title": "Hilarious Sketch",
+      "channelId": "2",
+      "views": 15000,
+      "likes": 750,
+      "thumbnail": "/placeholder.svg?height=180&width=320&text=Hilarious+Sketch",
+      "duration": "5:20"
+    },
+    {
+      "id": "3",
+      "title": "Vocal Masterpiece",
+      "channelId": "3",
+      "views": 20000,
+      "likes": 1000,
+      "thumbnail": "/placeholder.svg?height=180&width=320&text=Vocal+Masterpiece",
+      "duration": "4:10"
+    }
+  ]
+}
+
