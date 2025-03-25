@@ -310,7 +310,7 @@ export default function TalentDetailsPage() {
                   <CardContent className="p-4">
                     <div className="relative aspect-video rounded-lg overflow-hidden mb-2">
                       <Image
-                        src={video.thumbnail || `/placeholder.jpg`}
+                        src={getYouTubeEmbedUrl(video.thumbnail) || `/placeholder.jpg`}
                         alt={video.title}
                         fill
                         className="object-cover"
