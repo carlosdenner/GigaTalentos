@@ -15,23 +15,29 @@ export async function GET(
     await connectDB();
     const video = await Video.findById(resolvedParams.id).populate({
       path: "channel_id",
-      select: "name avatar category",
+      select: "name avatar category user_id",
     });
 
     if (!video) {
       return NextResponse.json({ error: "Talent not found" }, { status: 404 });
     }
 
-    // Get related videos
+    // Get related videos from the same category
     const relatedVideos = await Video.find({
-      channel_id: video.channel_id,
       _id: { $ne: video._id },
+      channel_id: {
+        $in: await Channel.find({ category: video.channel_id.category }).select('_id')
+      }
     })
       .populate("channel_id", "name avatar")
       .sort({ views: -1 })
       .limit(3);
 
-    return NextResponse.json({ ...video.toJSON(), relatedVideos });
+    return NextResponse.json({ 
+      ...video.toJSON(), 
+      user_id: video.channel_id.user_id,
+      relatedVideos 
+    });
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch talent" },

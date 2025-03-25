@@ -10,11 +10,24 @@ import Category from "@/models/Category";
 async function getVideosByCategory(category: string) {
   try {
     await connectDB();
-    const channels = await Channel.find({ category }).select('_id');
-    const channelIds = channels?.map(c => c._id);
     
-    const videos = await Video.find({ channel_id: { $in: channelIds } })
-      .populate('channel_id', 'name avatar')
+    // Find all channels in this category
+    const channels = await Channel.find({ 
+      category: { 
+        $regex: new RegExp(`^${category}$`, 'i') 
+      } 
+    }).select('_id');
+    
+    const channelIds = channels.map(c => c._id);
+    
+    // Get videos from these channels
+    const videos = await Video.find({ 
+      channel_id: { $in: channelIds } 
+    })
+      .populate({
+        path: 'channel_id',
+        select: 'name avatar category'
+      })
       .sort({ views: -1 });
       
     return JSON.parse(JSON.stringify(videos));
@@ -23,6 +36,7 @@ async function getVideosByCategory(category: string) {
     return [];
   }
 }
+
 
 async function getCategoryInfo(categoryName: string) {
   try {
