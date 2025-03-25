@@ -80,10 +80,10 @@ export default function Sidebar() {
         <div className="mt-8 px-4 flex-grow">
           <h3 className="text-[#9d4edd] mb-4">Featured Channels</h3>
           <div className="flex flex-col gap-3">
-            { channels.length > 0 && channels?.map((channel: any) => (
+            {channels.map((channel: any) => (
               <Link
-                key={channel.id}
-                href={`/channels/${channel.id}`}
+                key={channel._id} // Changed from channel.id to channel._id
+                href={`/channels/${channel._id}`} // Updated href to use _id
                 className="flex items-center gap-3 text-gray-300 hover:text-white py-2"
               >
                 <Avatar className="h-8 w-8">
@@ -151,4 +151,3 @@ export default function Sidebar() {
     </aside>
   )
 }
-
