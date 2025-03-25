@@ -10,14 +10,20 @@ import { getYouTubeEmbedUrl } from "@/utils";
 import { useUserType } from "@/hooks/useUserType";
 import SponsorRecommendations from "@/components/sponsor-recommendations";
 import { useRouter } from "next/navigation";
+import MessageDialog from "@/components/message-dialog";
 
-export default function TalentPage({ params }: { params: Promise<{ id: string }> }) {
+export default function TalentPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const resolvedParams = use(params);
   const router = useRouter();
   const { userType, isLoading: userTypeLoading } = useUserType();
   const [talent, setTalent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [embedUrl, setEmbedUrl] = useState<string>('');
+  const [embedUrl, setEmbedUrl] = useState<string>("");
+  const [messageDialogOpen, setMessageDialogOpen] = useState(false);
 
   useEffect(() => {
     async function fetchTalent() {
@@ -215,4 +221,24 @@ export default function TalentPage({ params }: { params: Promise<{ id: string }>
       </div>
     </div>
   );
+  // Add this near the channel information section
+  {
+    userType === "sponsor" && (
+      <>
+        <Button
+          onClick={() => setMessageDialogOpen(true)}
+          className="bg-[#1e90ff] hover:bg-[#1e90ff]/90"
+        >
+          <MessageSquare className="h-4 w-4 mr-2" />
+          Contact Talent
+        </Button>
+        <MessageDialog
+          receiverId={talent.channels?.user_id}
+          receiverName={talent.channels?.name}
+          isOpen={messageDialogOpen}
+          onClose={() => setMessageDialogOpen(false)}
+        />
+      </>
+    );
+  }
 }
