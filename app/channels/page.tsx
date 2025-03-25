@@ -44,7 +44,7 @@ export default async function ChannelsPage() {
             <CardTitle>Your Channel</CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href={`/channel/${userChannel._id}`} className="flex items-center gap-4">
+            <Link href={`/channels/${userChannel._id}`} className="flex items-center gap-4">
               <Avatar className="h-16 w-16">
                 <AvatarImage src={userChannel.avatar} />
                 <AvatarFallback>{userChannel.name?.charAt(0).toUpperCase()}</AvatarFallback>
@@ -63,7 +63,7 @@ export default async function ChannelsPage() {
         {popularChannels?.map((channel) => (
           <Card key={channel._id} className="bg-[#1a2942] border-gray-800 text-white">
             <CardContent className="pt-6">
-              <Link href={`/channel/${channel._id}`} className="flex items-center gap-4">
+              <Link href={`/channels/${channel._id}`} className="flex items-center gap-4">
                 <Avatar className="h-12 w-12">
                   <AvatarImage src={channel.avatar} />
                   <AvatarFallback>{channel.name?.charAt(0).toUpperCase()}</AvatarFallback>

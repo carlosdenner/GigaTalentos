@@ -1,10 +1,8 @@
-import connectDB from '@/lib/mongodb';
-import Category from '@/models/Category';
-import * as dotenv from 'dotenv';
-import path from 'path';
-
-// Load environment variables from .env.local
-dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import connectDB from "@/lib/mongodb";
+import Category from "@/models/Category";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 const initialCategories = [
   {
@@ -39,11 +37,15 @@ const initialCategories = [
   }
 ];
 
-async function seedCategories() {
+export async function POST() {
   try {
-    if (!process.env.MONGODB_URI) {
-      throw new Error('MONGODB_URI is not defined in .env.local');
-    }
+    // const session = await getServerSession(authOptions);
+    // if (!session?.user?.email) {
+    //   return NextResponse.json(
+    //     { error: "Not authorized to seed data" },
+    //     { status: 401 }
+    //   );
+    // }
 
     await connectDB();
     
@@ -51,14 +53,17 @@ async function seedCategories() {
     await Category.deleteMany({});
     
     // Insert new categories
-    await Category.insertMany(initialCategories);
+    const categories = await Category.insertMany(initialCategories);
     
-    console.log('Categories seeded successfully');
-    process.exit(0);
+    return NextResponse.json({ 
+      message: "Categories seeded successfully",
+      categories 
+    });
   } catch (error) {
-    console.error('Error seeding categories:', error);
-    process.exit(1);
+    console.error("Error seeding categories:", error);
+    return NextResponse.json(
+      { error: "Failed to seed categories" },
+      { status: 500 }
+    );
   }
 }
-
-seedCategories();

@@ -13,8 +13,11 @@ import { useRouter } from "next/navigation";
 
 export default function TalentPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
+  const router = useRouter();
+  const { userType, isLoading: userTypeLoading } = useUserType();
   const [talent, setTalent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [embedUrl, setEmbedUrl] = useState<string>('');
 
   useEffect(() => {
     async function fetchTalent() {
@@ -23,6 +26,7 @@ export default function TalentPage({ params }: { params: Promise<{ id: string }>
         const data = await response.json();
         if (response.ok) {
           setTalent(data);
+          setEmbedUrl(getYouTubeEmbedUrl(data.video_url));
         } else {
           console.error("Error fetching talent:", data.error);
         }
@@ -43,10 +47,6 @@ export default function TalentPage({ params }: { params: Promise<{ id: string }>
   if (!talent) {
     return <div className="text-white">Talent not found</div>;
   }
-
-  const embedUrl = getYouTubeEmbedUrl(talent.video_url);
-  const { userType, isLoading } = useUserType();
-  const router = useRouter();
 
   return (
     <div className="max-w-7xl mx-auto">

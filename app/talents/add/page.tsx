@@ -29,28 +29,43 @@ export default function AddTalentPage() {
   const [previewUrl, setPreviewUrl] = useState("");
   const [hasChannel, setHasChannel] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function checkUserChannel() {
+    async function loadCategories() {
       try {
-        if (!session?.user?.id) {
-          router.push("/auth/login");
-          return;
-        }
-
-        const response = await fetch(`/api/channels?userId=${session.user.id}`);
+        const response = await fetch('/api/categories');
         const data = await response.json();
-        setHasChannel(!!data.length);
+        setCategories(data);
       } catch (error) {
-        console.error("Error checking channel:", error);
-      } finally {
-        setIsLoading(false);
-        setMounted(true);
+        console.error('Error loading categories:', error);
       }
     }
 
-    checkUserChannel();
-  }, [session, router]);
+    loadCategories();
+  }, []);
+
+useEffect(() => {
+  async function checkUserChannel() {
+    try {
+      if (!session?.user?.id) {
+        router.push("/auth/login");
+        return;
+      }
+
+      const response = await fetch(`/api/channels?userId=${session.user.id}`);
+      const data = await response.json();
+      setHasChannel(!!data.length);
+    } catch (error) {
+      console.error("Error checking channel:", error);
+    } finally {
+      setIsLoading(false);
+      setMounted(true);
+    }
+  }
+
+  checkUserChannel();
+}, [session, router]);
 
   const handleVideoUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
@@ -170,10 +185,11 @@ export default function AddTalentPage() {
               <SelectValue placeholder="Select a category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="singing">Singing</SelectItem>
-              <SelectItem value="dancing">Dancing</SelectItem>
-              <SelectItem value="comedy">Comedy</SelectItem>
-              <SelectItem value="art">Art</SelectItem>
+              {categories.map((cat: any) => (
+                <SelectItem key={cat._id} value={cat._id}>
+                  {cat.name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
