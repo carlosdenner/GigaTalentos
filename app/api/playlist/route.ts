@@ -1,62 +1,55 @@
-import { NextResponse } from "next/server"
-import { getUserPlaylists, getPlaylist, getPlaylistVideos, createPlaylist } from "@/lib/supabase"
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import connectDB from "@/lib/mongodb";
+import Playlist from "@/models/Playlist";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const userId = searchParams.get("userId")
-  const playlistId = searchParams.get("playlistId")
-
-  if (playlistId) {
-    const playlist = await getPlaylist(playlistId)
-
-    if (!playlist) {
-      return NextResponse.json({ error: "Playlist not found" }, { status: 404 })
+  try {
+    const session = await getServerSession();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    const videos = await getPlaylistVideos(playlistId)
+    await connectDB();
+    const playlists = await Playlist.find({
+      user_id: session.user.id,
+    }).populate({
+      path: "videos",
+      populate: {
+        path: "channel_id",
+        select: "name avatar",
+      },
+    });
 
-    return NextResponse.json({
-      ...playlist,
-      videos,
-    })
+    return NextResponse.json(playlists);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch playlists" },
+      { status: 500 }
+    );
   }
-
-  if (!userId) {
-    return NextResponse.json({ error: "User ID is required" }, { status: 400 })
-  }
-
-  const playlists = await getUserPlaylists(userId)
-  return NextResponse.json(playlists)
 }
 
 export async function POST(request: Request) {
   try {
-    const { userId, name } = await request.json()
-
-    if (!userId || !name) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "User ID and playlist name are required",
-        },
-        { status: 400 },
-      )
+    const session = await getServerSession();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    const playlist = await createPlaylist(userId, name)
+    const playlistData = await request.json();
+    await connectDB();
 
-    return NextResponse.json({
-      success: true,
-      playlist,
-    })
+    const playlist = await Playlist.create({
+      ...playlistData,
+      user_id: session.user.id,
+    });
+
+    return NextResponse.json(playlist, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      {
-        success: false,
-        error: "Failed to create playlist",
-      },
-      { status: 500 },
-    )
+      { error: "Failed to create playlist" },
+      { status: 500 }
+    );
   }
 }
-

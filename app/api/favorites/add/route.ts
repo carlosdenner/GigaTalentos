@@ -1,60 +1,53 @@
-import { NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase"
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import connectDB from "@/lib/mongodb";
+import Favorite from "@/models/Favorite";
 
 export async function POST(request: Request) {
   try {
-    const { userId, videoId } = await request.json()
-
-    if (!userId || !videoId) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "User ID and Video ID are required",
-        },
-        { status: 400 },
-      )
+    const session = await getServerSession();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
+    const { videoId } = await request.json();
+    if (!videoId) {
+      return NextResponse.json(
+        { error: "Video ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await connectDB();
+
     // Check if already favorited
-    const { data: existingFavorite } = await supabase
-      .from("favorites")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("video_id", videoId)
-      .single()
+    const existingFavorite = await Favorite.findOne({
+      user_id: session.user.id,
+      video_id: videoId
+    });
 
     if (existingFavorite) {
       return NextResponse.json({
         success: true,
-        message: "Already in favorites",
-      })
+        message: "Already in favorites"
+      });
     }
 
     // Add to favorites
-    const { data, error } = await supabase.from("favorites").insert({ user_id: userId, video_id: videoId }).select()
-
-    if (error) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: error.message,
-        },
-        { status: 500 },
-      )
-    }
+    const favorite = await Favorite.create({
+      user_id: session.user.id,
+      video_id: videoId
+    });
 
     return NextResponse.json({
       success: true,
-      favorite: data[0],
-    })
+      favorite
+    });
   } catch (error: any) {
     return NextResponse.json(
-      {
-        success: false,
-        error: error.message || "Error adding to favorites",
-      },
-      { status: 500 },
-    )
+      { error: error.message || "Error adding to favorites" },
+      { status: 500 }
+    );
   }
 }
 

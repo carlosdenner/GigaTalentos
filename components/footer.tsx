@@ -3,8 +3,9 @@ import { Facebook, Instagram, Twitter, Youtube } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a192f] border-t border-gray-800 py-4 px-8">
-      <div className="flex flex-wrap justify-between items-center gap-4">
+    <footer className="bg-[#0a192f] border-t border-gray-800 py-6 px-8 ">
+      <div className="container mx-auto">
+        <div className="flex flex-wrap justify-between items-center gap-4">
         <div className="flex items-center space-x-4">
           <Link href="/" className="text-xl font-bold">
             <span className="text-[#ff1493]">Rise</span>
@@ -41,8 +42,9 @@ export default function Footer() {
             <Youtube className="h-5 w-5" />
           </a>
         </div>
+        </div>
       </div>
     </footer>
-  )
+  );
 }
 

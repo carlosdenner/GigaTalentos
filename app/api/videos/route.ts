@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     const { data: channels } = await supabase.from("channels").select("id").eq("category", category)
 
     if (channels && channels.length > 0) {
-      const channelIds = channels.map((c) => c.id)
+      const channelIds = channels?.map((c) => c.id)
       query = query.in("channel_id", channelIds)
     }
   }

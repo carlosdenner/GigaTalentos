@@ -2,13 +2,13 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { supabase } from "@/lib/supabase"
 import { useUserType } from "@/hooks/useUserType"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
+import axios from "axios"
 
 export default function CreateChannelPage() {
   const { userType } = useUserType();
@@ -18,6 +18,7 @@ export default function CreateChannelPage() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [coverImage, setCoverImage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,62 +35,26 @@ export default function CreateChannelPage() {
     try {
       setIsSubmitting(true);
 
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (!session?.user) {
-        throw new Error("User not authenticated");
-      }
-
-      console.log("Session User ID:", session);
-
-      // Check if user already has a channel
-      const { data: existingChannel } = await supabase
-        .from("channels")
-        .select("id")
-        .eq("user_id", session.user.id)
-        .single();
-
-        console.log("Existing Channel:", existingChannel);
-
-      if (existingChannel) {
-        toast({
-          title: "Channel Exists",
-          description: "You already have a channel",
-          variant: "destructive",
-        });
-        router.push(`/channel/${existingChannel.id}`);
-        return;
-      }
-
-      // Create new channel
-      const { data: channel, error } = await supabase
-        .from("channels")
-        .insert({
-          name,
-          description,
-          category,
-          avatar,
-          user_id: session.user.id,
-        })
-        .select()
-        .single();
-
-        console.log("New Channel:", channel);
-
-      if (error) throw error;
-      console.log("Error:", error);
+      // Create new channel - remove user_id from payload
+      const channelResponse = await axios.post('/api/channels', {
+        name,
+        description,
+        category,
+        avatar,
+        cover_image: coverImage,
+      });
 
       toast({
         title: "Success!",
         description: "Your channel has been created.",
       });
 
-      router.push(`/channel/${channel.id}`);
+      router.push(`/channels/${channelResponse.data._id}`);
     } catch (error: any) {
       console.error("Error creating channel:", error);
       toast({
         title: "Error",
-        description: error.message || "Failed to create channel. Please try again.",
+        description: error.response?.data?.error || "Failed to create channel. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -150,6 +115,17 @@ export default function CreateChannelPage() {
             onChange={(e) => setAvatar(e.target.value)}
             className="bg-[#1a2942] border-gray-700 text-white"
             placeholder="https://example.com/avatar.jpg"
+          />
+        </div>
+        <div>
+          <Label htmlFor="coverImage">Cover Image URL</Label>
+          <Input
+            id="coverImage"
+            type="url"
+            value={coverImage}
+            onChange={(e) => setCoverImage(e.target.value)}
+            className="bg-[#1a2942] border-gray-700 text-white"
+            placeholder="https://example.com/cover.jpg"
           />
         </div>
 

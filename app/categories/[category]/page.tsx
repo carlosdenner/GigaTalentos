@@ -1,50 +1,40 @@
-import { Button } from "@/components/ui/button"
-import { Eye, Heart, Zap } from "lucide-react"
-import Link from "next/link"
-import { supabase } from "@/lib/supabase"
-import { getYouTubeEmbedUrl } from "@/utils"
+import { Button } from "@/components/ui/button";
+import { Eye, Heart, Zap } from "lucide-react";
+import Link from "next/link";
+import connectDB from "@/lib/mongodb";
+import Channel from "@/models/Channel";
+import Video from "@/models/Video";
+import { getYouTubeEmbedUrl } from "@/utils";
+import Category from "@/models/Category";
 
 async function getVideosByCategory(category: string) {
-  // First, find channels in this category
-  const { data: channels, error: channelsError } = await supabase.from("channels").select("id").eq("category", category)
-
-  if (channelsError) {
-    console.error("Error fetching channels:", channelsError)
-    return []
+  try {
+    await connectDB();
+    const channels = await Channel.find({ category }).select('_id');
+    const channelIds = channels?.map(c => c._id);
+    
+    const videos = await Video.find({ channel_id: { $in: channelIds } })
+      .populate('channel_id', 'name avatar')
+      .sort({ views: -1 });
+      
+    return JSON.parse(JSON.stringify(videos));
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    return [];
   }
-
-  // If we have channels, get videos from those channels
-  if (channels && channels.length > 0) {
-    const channelIds = channels.map((c) => c.id)
-
-    const { data: videos, error: videosError } = await supabase
-      .from("videos")
-      .select(`
-        *,
-        channels (name, avatar)
-      `)
-      .in("channel_id", channelIds)
-
-    if (videosError) {
-      console.error("Error fetching videos:", videosError)
-      return []
-    }
-
-    return videos
-  }
-
-  return []
 }
 
 async function getCategoryInfo(categoryName: string) {
-  const { data, error } = await supabase.from("categories").select("*").ilike("name", categoryName).single()
-
-  if (error) {
-    console.error("Error fetching category:", error)
-    return null
+  try {
+    await connectDB();
+    const category = await Category.findOne({ 
+      name: { $regex: new RegExp(`^${categoryName}$`, 'i') } 
+    });
+    return JSON.parse(JSON.stringify(category));
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    return null;
   }
-
-  return data
 }
 
 export default async function CategoryPage({ params }: { params: { category: string } }) {

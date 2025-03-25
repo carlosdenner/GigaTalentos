@@ -21,7 +21,7 @@ export default async function FeaturedChannelsPage() {
     <div className="space-y-8">
       <h1 className="text-4xl font-bold text-white mb-8">Featured Channels</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {channels.map((channel: any) => (
+        {channels?.map((channel: any) => (
           <Card key={channel.id} className="bg-[#1a2942] border-gray-800">
             <CardContent className="p-6">
               <div className="relative h-32 rounded-lg overflow-hidden mb-4">

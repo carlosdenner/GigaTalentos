@@ -1,21 +1,51 @@
-import { NextResponse } from "next/server"
-
-// Mock database
-const talents = [
-  { id: "1", title: "Amazing Singer", description: "Beautiful voice", category: "singing", views: 1000, likes: 500 },
-  { id: "2", title: "Incredible Dancer", description: "Smooth moves", category: "dancing", views: 800, likes: 400 },
-]
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import connectDB from "@/lib/mongodb";
+import Video from "@/models/Video";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET() {
-  return NextResponse.json(talents)
+  try {
+    await connectDB();
+    const videos = await Video.find()
+      .populate('channel_id', 'name avatar category')
+      .sort({ views: -1 });
+
+    return NextResponse.json(videos);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch talents" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: Request) {
-  const talent = await request.json()
-  talent.id = String(talents.length + 1)
-  talent.views = 0
-  talent.likes = 0
-  talents.push(talent)
-  return NextResponse.json(talent, { status: 201 })
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Not authenticated" },
+        { status: 401 }
+      );
+    }
+
+    const videoData = await request.json();
+    await connectDB();
+
+    const video = await Video.create({
+      ...videoData,
+      views: 0,
+      likes: 0,
+      user_id: session.user.id
+    });
+
+    return NextResponse.json(video, { status: 201 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || "Failed to create talent" },
+      { status: 500 }
+    );
+  }
 }
 

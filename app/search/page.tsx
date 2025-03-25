@@ -13,8 +13,8 @@ import { supabase } from "@/lib/supabase"
 export default function SearchPage() {
   const [query, setQuery] = useState("")
   const [activeTab, setActiveTab] = useState("videos")
-  const [videos, setVideos] = useState([])
-  const [channels, setChannels] = useState([])
+  const [videos, setVideos] = useState<any[]>([])
+  const [channels, setChannels] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSearch = async () => {
@@ -144,7 +144,7 @@ export default function SearchPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {channels.map((channel: any) => (
+                {channels?.map((channel: any) => (
                   <Card key={channel.id} className="bg-[#1a2942] border-gray-800">
                     <CardContent className="p-6">
                       <div className="flex items-center mb-4">

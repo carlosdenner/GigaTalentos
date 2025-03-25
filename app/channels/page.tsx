@@ -3,30 +3,25 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { supabase } from "@/lib/supabase"
+import { getServerSession } from "next-auth";
+import connectDB from "@/lib/mongodb";
+import Channel from "@/models/Channel";
+import User from "@/models/User";
 
 export default async function ChannelsPage() {
+  await connectDB();
   
   // Get current user and type
-  const { data: { session } } = await supabase.auth.getSession();
-  const { data: userData } = session ? await supabase
-    .from('users')
-    .select('account_type')
-    .eq('id', session.user.id)
-    .single() : { data: null };
+  const session = await getServerSession();
+  const userData = session ? await User.findById(session.user.id).select('account_type') : null;
 
   // Get user's channel if they are a talent
-  const { data: userChannel } = userData?.account_type === 'talent' && session ? await supabase
-    .from('channels')
-    .select('*')
-    .eq('user_id', session.user.id)
-    .single() : { data: null };
+  const userChannel = userData?.account_type === 'talent' && session ? 
+    await Channel.findOne({ user_id: session.user.id }) : null;
 
   // Get popular channels
-  const { data: popularChannels } = await supabase
-    .from('channels')
-    .select('*')
-    .order('subscribers', { ascending: false })
+  const popularChannels = await Channel.find()
+    .sort({ subscribers: -1 })
     .limit(12);
 
   if (userData?.account_type === 'talent' && !userChannel) {
@@ -49,7 +44,7 @@ export default async function ChannelsPage() {
             <CardTitle>Your Channel</CardTitle>
           </CardHeader>
           <CardContent>
-            <Link href={`/channel/${userChannel.id}`} className="flex items-center gap-4">
+            <Link href={`/channel/${userChannel._id}`} className="flex items-center gap-4">
               <Avatar className="h-16 w-16">
                 <AvatarImage src={userChannel.avatar} />
                 <AvatarFallback>{userChannel.name?.charAt(0).toUpperCase()}</AvatarFallback>
@@ -66,9 +61,9 @@ export default async function ChannelsPage() {
       <h2 className="text-2xl font-bold text-white mb-6">Popular Channels</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {popularChannels?.map((channel) => (
-          <Card key={channel.id} className="bg-[#1a2942] border-gray-800 text-white">
+          <Card key={channel._id} className="bg-[#1a2942] border-gray-800 text-white">
             <CardContent className="pt-6">
-              <Link href={`/channel/${channel.id}`} className="flex items-center gap-4">
+              <Link href={`/channel/${channel._id}`} className="flex items-center gap-4">
                 <Avatar className="h-12 w-12">
                   <AvatarImage src={channel.avatar} />
                   <AvatarFallback>{channel.name?.charAt(0).toUpperCase()}</AvatarFallback>

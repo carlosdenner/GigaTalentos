@@ -1,27 +1,23 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useSession } from 'next-auth/react';
 
 export function useUserType() {
   const [userType, setUserType] = useState<'fan' | 'sponsor' | 'talent' | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { data: session } = useSession();
 
   useEffect(() => {
     async function getUserType() {
-      const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
-        const { data: user } = await supabase
-          .from('users')
-          .select('account_type')
-          .eq('id', session.user.id)
-          .single();
-        
+        const response = await fetch('/api/profile');
+        const user = await response.json();
         setUserType(user?.account_type || null);
       }
       setIsLoading(false);
     }
 
     getUserType();
-  }, []);
+  }, [session]);
 
   return { userType, isLoading };
 }

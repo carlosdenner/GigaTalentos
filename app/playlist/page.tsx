@@ -7,7 +7,7 @@ import Link from "next/link"
 
 async function getPlaylist() {
   // Get the current user's session
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const supabaseToken = cookieStore.get("sb-access-token")?.value
 
   if (!supabaseToken) {
@@ -64,7 +64,7 @@ async function getPlaylist() {
 
 export default async function PlaylistPage() {
   const playlist = await getPlaylist()
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const isLoggedIn = !!cookieStore.get("sb-access-token")?.value
 
   // Calculate total duration

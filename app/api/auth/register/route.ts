@@ -1,69 +1,50 @@
-import { NextResponse } from "next/server"
-import { supabase } from "@/lib/supabase"
+import { NextResponse } from "next/server";
+import bcrypt from "bcryptjs";
+import connectDB from "@/lib/mongodb";
+import User from "@/models/User";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password, accountType } = await request.json()
+    const { name, email, password, accountType } = await request.json();
 
-    // Create auth user
-    const { data, error } = await supabase.auth.signUp({
+    await connectDB();
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "User already exists" },
+        { status: 400 }
+      );
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create user
+    const user = await User.create({
+      name,
       email,
-      password,
-    })
-
-    if (error) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: error.message,
-        },
-        { status: 400 },
-      )
-    }
-
-    if (!data.user) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "User creation failed",
-        },
-        { status: 500 },
-      )
-    }
-
-    // Create user profile
-    const { error: profileError } = await supabase.from("users").insert([
-      {
-        id: data.user.id,
-        email,
-        name,
-        account_type: accountType,
-        avatar: `/placeholder.svg?height=100&width=100&text=${name.substring(0, 2).toUpperCase()}`,
-      },
-    ])
-
-    if (profileError) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: profileError.message,
-        },
-        { status: 500 },
-      )
-    }
+      password: hashedPassword,
+      account_type: accountType,
+      avatar: `/placeholder.svg?height=100&width=100&text=${name
+        .substring(0, 2)
+        .toUpperCase()}`,
+    });
 
     return NextResponse.json({
-      success: true,
-      message: "Registration successful",
-    })
-  } catch (error) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Registration failed",
+      message: "User created successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        accountType: user.account_type,
       },
-      { status: 500 },
-    )
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || "Failed to create user" },
+      { status: 500 }
+    );
   }
 }
-

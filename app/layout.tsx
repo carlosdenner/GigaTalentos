@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/contexts/auth-context"
 import { Toaster } from "@/components/ui/toaster"
+import { Providers } from "@/components/providers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,31 +19,36 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${inter.className} h-full bg-[#0a192f]`}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>
           <AuthProvider>
-            <div className="flex h-full">
-              <Sidebar />
-              <div className="flex-1 flex flex-col">
-                <main className="flex-1 overflow-y-auto p-8">
-                  <div className="max-w-7xl mx-auto">{children}</div>
-                </main>
-                <Footer />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <div className="flex h-screen">
+                <Sidebar />
+                <div className="flex flex-col flex-1">
+                  <main className="flex-1 bg-[#0a192f] overflow-y-auto">
+                    <div className="container mx-auto px-4 py-8">
+                      {children}
+                    </div>
+                  </main>
+                  <Footer />
+                </div>
               </div>
-            </div>
-            <Toaster />
+              <Toaster />
+            </ThemeProvider>
           </AuthProvider>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
-  )
+  );
 }
-
-
-
-import './globals.css'

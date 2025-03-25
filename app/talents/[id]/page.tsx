@@ -1,68 +1,51 @@
 "use client";
 
+import { useEffect, useState, use } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase";
 import { Eye, Heart, MessageSquare, Share2 } from "lucide-react";
 import Link from "next/link";
 import FavoriteButton from "@/components/favorite-button";
 import { getYouTubeEmbedUrl } from "@/utils";
-import { useUserType } from '@/hooks/useUserType';
-import SponsorRecommendations from "@/components/sponsor-recommendations"
+import { useUserType } from "@/hooks/useUserType";
+import SponsorRecommendations from "@/components/sponsor-recommendations";
 import { useRouter } from "next/navigation";
 
-async function getTalentDetails(id: string) {
-  const { data: video, error } = await supabase
-    .from("videos")
-    .select(
-      `
-      *,
-      channels (*)
-    `
-    )
-    .eq("id", id)
-    .single();
+export default function TalentPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const [talent, setTalent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (error) {
-    console.error("Error fetching video:", error);
-    return null;
+  useEffect(() => {
+    async function fetchTalent() {
+      try {
+        const response = await fetch(`/api/talents/${resolvedParams.id}`);
+        const data = await response.json();
+        if (response.ok) {
+          setTalent(data);
+        } else {
+          console.error("Error fetching talent:", data.error);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchTalent();
+  }, [resolvedParams.id]);
+
+  if (loading) {
+    return <div className="text-white">Loading...</div>;
   }
-
-  // Get related videos from the same channel
-  const { data: relatedVideos, error: relatedError } = await supabase
-    .from("videos")
-    .select(
-      `
-      *,
-      channels (*)
-    `
-    )
-    .eq("channel_id", video.channel_id)
-    .neq("id", id)
-    .order("views", { ascending: false })
-    .limit(3);
-
-  if (relatedError) {
-    console.error("Error fetching related videos:", relatedError);
-    return { ...video, relatedVideos: [] };
-  }
-
-  return { ...video, relatedVideos };
-}
-
-export default async function TalentPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const talent = await getTalentDetails(params.id);
 
   if (!talent) {
-    return <div className="text-white">Video not found</div>;
+    return <div className="text-white">Talent not found</div>;
   }
 
   const embedUrl = getYouTubeEmbedUrl(talent.video_url);
-  const {userType,isLoading} = useUserType();
+  const { userType, isLoading } = useUserType();
   const router = useRouter();
 
   return (
@@ -118,29 +101,35 @@ export default async function TalentPage({
           </div>
 
           <div className="mt-6 flex items-center gap-4">
-            {userType === 'fan' && (
+            {userType === "fan" && (
               <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
                 Subscribe
               </Button>
             )}
-            
-            {userType === 'sponsor' && (
+
+            {userType === "sponsor" && (
               <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">
                 Contact Talent
               </Button>
             )}
 
             <div className="flex items-center ml-auto gap-6">
-              {(userType === 'fan' || userType === 'sponsor') && (
+              {(userType === "fan" || userType === "sponsor") && (
                 <FavoriteButton videoId={talent.id} />
               )}
-              
-              <Button variant="ghost" className="text-gray-400 hover:text-white">
+
+              <Button
+                variant="ghost"
+                className="text-gray-400 hover:text-white"
+              >
                 <MessageSquare className="h-6 w-6 mr-2" />
                 <span>Comment</span>
               </Button>
-              
-              <Button variant="ghost" className="text-gray-400 hover:text-white">
+
+              <Button
+                variant="ghost"
+                className="text-gray-400 hover:text-white"
+              >
                 <Share2 className="h-6 w-6" />
               </Button>
             </div>
@@ -161,12 +150,14 @@ export default async function TalentPage({
         </div>
 
         <div className="lg:col-span-1">
-          {userType === 'sponsor' ? (
+          {userType === "sponsor" ? (
             <>
               <div className="mb-8">
-                <Button 
+                <Button
                   className="w-full bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white"
-                  onClick={() => router.push(`/messages/${talent.channels?.user_id}`)}
+                  onClick={() =>
+                    router.push(`/messages/${talent.channels?.user_id}`)
+                  }
                 >
                   <MessageSquare className="h-5 w-5 mr-2" />
                   Contact Talent
@@ -176,7 +167,9 @@ export default async function TalentPage({
             </>
           ) : (
             <>
-              <h3 className="text-xl font-bold text-white mb-4">Related Videos</h3>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Related Videos
+              </h3>
               <div className="space-y-4">
                 {talent.relatedVideos?.map((item: any) => (
                   <Link

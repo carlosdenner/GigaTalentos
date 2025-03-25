@@ -1,110 +1,111 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Heart } from "lucide-react"
-import { useState, useEffect } from "react"
-import { useAuth } from "@/contexts/auth-context"
-import { useToast } from "@/hooks/use-toast"
-import { supabase } from "@/lib/supabase"
-import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { Heart } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/auth-context";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface FavoriteButtonProps {
-  videoId: string
-  variant?: "ghost" | "outline" | "default"
-  className?: string
+  videoId: string;
+  variant?: "ghost" | "outline" | "default";
+  className?: string;
 }
 
-export default function FavoriteButton({ videoId, variant = "ghost", className }: FavoriteButtonProps) {
-  const [isFavorite, setIsFavorite] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const { user } = useAuth()
-  const { toast } = useToast()
-  const router = useRouter()
+export default function FavoriteButton({
+  videoId,
+  variant = "ghost",
+  className,
+}: FavoriteButtonProps) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = useSession();
+  const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     const checkIfFavorite = async () => {
-      if (!user) return
+      if (!session?.user) return;
 
       try {
-        const { data } = await supabase
-          .from("favorites")
-          .select("*")
-          .eq("user_id", user.id)
-          .eq("video_id", videoId)
-          .single()
-
-        setIsFavorite(!!data)
+        const response = await fetch(`/api/favorites?videoId=${videoId}`);
+        const data = await response.json();
+        setIsFavorite(data.some((fav: any) => fav._id === videoId));
       } catch (error) {
-        // Not found, not a favorite
-        setIsFavorite(false)
+        setIsFavorite(false);
       }
-    }
+    };
 
-    checkIfFavorite()
-  }, [videoId, user])
+    checkIfFavorite();
+  }, [videoId, session]);
 
   const toggleFavorite = async () => {
-    if (!user) {
+    if (!session?.user) {
       toast({
         title: "Login Required",
         description: "Please log in to save favorites",
-      })
-
-      // Redirect to login page
-      router.push("/auth/login")
-      return
+      });
+      router.push("/auth/login");
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       if (isFavorite) {
-        // Remove from favorites
-        await fetch(`/api/favorites/remove?userId=${user.id}&videoId=${videoId}`, {
+        await fetch(`/api/favorites/remove?videoId=${videoId}`, {
           method: "DELETE",
-        })
-
-        setIsFavorite(false)
+        });
+        setIsFavorite(false);
         toast({
           title: "Removed from favorites",
           description: "Video removed from your favorites",
-        })
+        });
       } else {
-        // Add to favorites
         await fetch("/api/favorites/add", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: user.id,
-            videoId: videoId,
-          }),
-        })
-
-        setIsFavorite(true)
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ videoId }),
+        });
+        setIsFavorite(true);
         toast({
           title: "Added to favorites",
           description: "Video added to your favorites",
-        })
+        });
       }
     } catch (error) {
-      console.error("Error toggling favorite:", error)
+      console.error("Error toggling favorite:", error);
       toast({
         title: "Error",
         description: "Failed to update favorites",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <Button variant={variant} onClick={toggleFavorite} disabled={isLoading} className={className}>
-      <Heart className={`h-6 w-6 mr-2 ${isFavorite ? "fill-[#ff1493] text-[#ff1493]" : ""}`} />
-      <span>{user ? (isFavorite ? "Favorited" : "Add to Favorites") : "Save to Favorites"}</span>
+    <Button
+      variant={variant}
+      onClick={toggleFavorite}
+      disabled={isLoading}
+      className={className}
+    >
+      <Heart
+        className={`h-6 w-6 mr-2 ${
+          isFavorite ? "fill-[#ff1493] text-[#ff1493]" : ""
+        }`}
+      />
+      <span>
+        {session?.user
+          ? isFavorite
+            ? "Favorited"
+            : "Add to Favorites"
+          : "Save to Favorites"}
+      </span>
     </Button>
-  )
+  );
 }
-

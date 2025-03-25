@@ -8,7 +8,7 @@ import { getYouTubeEmbedUrl } from "@/utils"
 
 async function getFavorites() {
   // Get the current user's session
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const supabaseToken = cookieStore.get("sb-access-token")?.value
 
   if (!supabaseToken) {
@@ -55,7 +55,7 @@ async function getFavorites() {
 
 export default async function FavoritesPage() {
   const favorites = await getFavorites()
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const isLoggedIn = !!cookieStore.get("sb-access-token")?.value
 
   return (
