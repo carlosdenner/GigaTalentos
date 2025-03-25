@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
-import { Eye, Heart, ListPlus, Star } from "lucide-react";
+import { Eye, Heart, ListPlus, Star, MessageSquare } from "lucide-react";
 import { getYouTubeEmbedUrl } from "@/utils";
 import { useSession } from "next-auth/react";
 import { toast } from "@/hooks/use-toast";
@@ -39,6 +39,7 @@ interface RecommendedVideo {
 }
 
 export default function TalentDetailsPage() {
+  const router = useRouter();
   const params = useParams();
   const { data: session, status } = useSession();
   const [video, setVideo] = useState<TalentVideo | null>(null);
@@ -46,6 +47,7 @@ export default function TalentDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [showPlaylistDialog, setShowPlaylistDialog] = useState(false);
+  const [userType, setUserType] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -97,6 +99,13 @@ export default function TalentDetailsPage() {
             isFavorite: favoritesData.isFavorite
           } : null);
           setIsSubscribed(subsData.isSubscribed);
+        }
+
+        // Fetch user type
+        if (session?.user) {
+          const userResponse = await fetch(`/api/users/${session.user.id}`);
+          const userData = await userResponse.json();
+          setUserType(userData.account_type);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -189,6 +198,20 @@ export default function TalentDetailsPage() {
     }
   };
 
+  const handleContact = () => {
+    if (!session) {
+      toast({
+        title: "Authentication Required",
+        description: "Please login to contact talents",
+        variant: "destructive"
+      });
+      return;
+    }
+    // Navigate to messaging page with the specific channel/talent
+    router.push(`/messages/${video?.channel_id?._id}`);
+  };
+
+
   if (status === 'loading' || loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
@@ -197,8 +220,6 @@ export default function TalentDetailsPage() {
     );
   }
 
-  console.log("video", video);
-
   if (!video) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
@@ -206,6 +227,7 @@ export default function TalentDetailsPage() {
       </div>
     );
   }
+
 
   return (
     <div className="container mx-auto py-8">
@@ -272,12 +294,24 @@ export default function TalentDetailsPage() {
                   </div>
                 </div>
                 
-                <Button
-                  onClick={handleSubscribe}
-                  className={`${isSubscribed ? "bg-gray-700 hover:bg-gray-600" : "bg-[#ff1493] hover:bg-[#ff1493]/90"} transition`}
-                >
-                  {isSubscribed ? "Subscribed" : "Subscribe"}
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    onClick={handleSubscribe}
+                    className={`${isSubscribed ? "bg-gray-700 hover:bg-gray-600" : "bg-[#ff1493] hover:bg-[#ff1493]/90"} transition`}
+                  >
+                    {isSubscribed ? "Subscribed" : "Subscribe"}
+                  </Button>
+                  
+                  {/* New Messaging Button */}
+                  <Button
+                    onClick={handleContact}
+                    variant="outline"
+                    className="text-gray-400 hover:text-white hover:bg-gray-700"
+                  >
+                    <MessageSquare className="h-4 w-4 mr-1" />
+                    Contact
+                  </Button>
+                </div>
               </div>
 
               {/* Video Stats */}
@@ -309,12 +343,17 @@ export default function TalentDetailsPage() {
                 <Card className="bg-[#1a2942] border-gray-800 hover:bg-[#243555] transition">
                   <CardContent className="p-4">
                     <div className="relative aspect-video rounded-lg overflow-hidden mb-2">
-                      <Image
-                        src={getYouTubeEmbedUrl(video.thumbnail) || `/placeholder.jpg`}
-                        alt={video.title}
-                        fill
-                        className="object-cover"
-                      />
+                    <div className="relative aspect-video rounded-lg overflow-hidden mb-6">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={getYouTubeEmbedUrl(video?.video_url)}
+                  title={video?.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
                     </div>
                     <h3 className="text-sm font-medium text-white line-clamp-2">{video.title}</h3>
                     <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
