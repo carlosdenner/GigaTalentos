@@ -21,7 +21,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.accountType === "sponsor") {
+    if (session?.user?.accountType !== "sponsor") {
       return NextResponse.json(
         { error: "Only sponsors can create categories" },
         { status: 403 }

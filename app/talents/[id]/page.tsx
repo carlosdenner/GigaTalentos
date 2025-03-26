@@ -133,13 +133,24 @@ export default function TalentDetailsPage() {
     }
 
     try {
-      const res = await fetch(`/api/talents/${video?._id}/like`, {
-        method: 'POST'
+      const res = await fetch(`/api/videos/${params.id}/like`, { // Changed from video?._id
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
+      
+      if (!res.ok) throw new Error('Failed to like video');
+      
       const data = await res.json();
       setVideo(prev => prev ? { ...prev, likes: data.likes, isLiked: data.isLiked } : null);
     } catch (error) {
       console.error('Error liking video:', error);
+      toast({
+        title: "Error",
+        description: "Failed to like video",
+        variant: "destructive"
+      });
     }
   };
 
@@ -188,13 +199,34 @@ export default function TalentDetailsPage() {
     }
 
     try {
-      const res = await fetch(`/api/favorites/${video?._id}`, {
-        method: 'POST'
+      const res = await fetch('/api/favorites/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', // Add this line
+        body: JSON.stringify({ videoId: params.id })
       });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Failed to add to favorites');
+      }
+      
       const data = await res.json();
-      setVideo(prev => prev ? { ...prev, isFavorite: data.isFavorite } : null);
-    } catch (error) {
+      setVideo(prev => prev ? { ...prev, isFavorite: true } : null);
+      
+      toast({
+        title: "Success",
+        description: "Added to favorites"
+      });
+    } catch (error: any) {
       console.error('Error updating favorites:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to add to favorites",
+        variant: "destructive"
+      });
     }
   };
 
@@ -207,8 +239,17 @@ export default function TalentDetailsPage() {
       });
       return;
     }
-    // Navigate to messaging page with the specific channel/talent
-    router.push(`/messages/${video?.channel_id?._id}`);
+
+    if (!video?.channel_id?._id) {
+      toast({
+        title: "Error",
+        description: "Channel information not available",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    router.push(`/messages/${video.channel_id._id}`);
   };
 
 

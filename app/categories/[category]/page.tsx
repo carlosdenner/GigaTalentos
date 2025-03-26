@@ -80,8 +80,8 @@ export default async function CategoryPage({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {videos.map((video: any) => (
               <Link
-                href={`/talents/${video.id}`}
-                key={video.id}
+                href={`/talents/${video._id}`} // Changed from video.id
+                key={video._id} // Changed from video.id
                 className="group"
               >
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800">

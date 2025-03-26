@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../auth/[...nextauth]/route";
 import connectDB from "@/lib/mongodb";
 import Favorite from "@/models/Favorite";
 
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions); // Add authOptions here
+    
     if (!session?.user?.id) {
+      console.log("Session data:", session); // For debugging
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
@@ -44,6 +47,7 @@ export async function POST(request: Request) {
       favorite
     });
   } catch (error: any) {
+    console.error("Favorites error:", error); // Add error logging
     return NextResponse.json(
       { error: error.message || "Error adding to favorites" },
       { status: 500 }
