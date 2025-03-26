@@ -19,7 +19,7 @@ interface TalentVideo {
   views: number;
   likes: number;
   favorites?: any[];
-  channel_id: {
+  channel: {
     _id: string;
     name: string;
     subscribers: number;
@@ -165,7 +165,7 @@ export default function TalentDetailsPage() {
     }
 
     try {
-      const res = await fetch(`/api/channels/${video?.channel_id._id}/subscribe`, {
+      const res = await fetch(`/api/channels/${video?.channel._id}/subscribe`, {
         method: 'POST'
       });
       const data = await res.json();
@@ -199,38 +199,56 @@ export default function TalentDetailsPage() {
     }
 
     try {
-      const res = await fetch('/api/favorites/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include', // Add this line
-        body: JSON.stringify({ videoId: params.id })
-      });
+      if (video?.isFavorite) {
+        // Remove from favorites
+        const res = await fetch(`/api/favorites/${params.id}`, {
+          method: 'DELETE',
+          credentials: 'include',
+        });
 
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || 'Failed to add to favorites');
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.error || 'Failed to remove from favorites');
+        }
+
+        setVideo(prev => prev ? { ...prev, isFavorite: false } : null);
+        toast({
+          title: "Success",
+          description: "Removed from favorites"
+        });
+      } else {
+        // Add to favorites
+        const res = await fetch('/api/favorites/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({ videoId: params.id })
+        });
+
+        if (!res.ok) {
+          const error = await res.json();
+          throw new Error(error.error || 'Failed to add to favorites');
+        }
+
+        setVideo(prev => prev ? { ...prev, isFavorite: true } : null);
+        toast({
+          title: "Success",
+          description: "Added to favorites"
+        });
       }
-      
-      const data = await res.json();
-      setVideo(prev => prev ? { ...prev, isFavorite: true } : null);
-      
-      toast({
-        title: "Success",
-        description: "Added to favorites"
-      });
     } catch (error: any) {
       console.error('Error updating favorites:', error);
       toast({
         title: "Error",
-        description: error.message || "Failed to add to favorites",
+        description: error.message || "Failed to update favorites",
         variant: "destructive"
       });
     }
   };
 
-  const handleContact = () => {
+  const handleContact = async () => {
     if (!session) {
       toast({
         title: "Authentication Required",
@@ -240,7 +258,7 @@ export default function TalentDetailsPage() {
       return;
     }
 
-    if (!video?.channel_id?._id) {
+    if (!video?.channel?._id) {
       toast({
         title: "Error",
         description: "Channel information not available",
@@ -249,8 +267,32 @@ export default function TalentDetailsPage() {
       return;
     }
 
-    router.push(`/messages/${video.channel_id._id}`);
-  };
+    // Check if user is a sponsor
+    if (userType !== 'sponsor') {
+      toast({
+        title: "Access Denied",
+        description: "Only sponsors can send messages to talents",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      // Verify channel exists before redirecting
+      const channelRes = await fetch(`/api/channels/${video.channel._id}`);
+      if (!channelRes.ok) {
+        throw new Error('Channel not found');
+      }
+      
+      router.push(`/messages/${video.channel._id}`);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to access messaging",
+        variant: "destructive"
+      });
+    }
+};
 
 
   if (status === 'loading' || loading) {
@@ -318,19 +360,19 @@ export default function TalentDetailsPage() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-4">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src={video?.channel_id?.avatar} />
+                    <AvatarImage src={video?.channel?.avatar} />
                     <AvatarFallback>
-                      {video?.channel_id?.name ? video.channel_id.name[0].toUpperCase() : '?'}
+                      {video?.channel?.name ? video.channel.name[0].toUpperCase() : '?'}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <Link href={`/channels/${video?.channel_id?._id}`}>
+                    <Link href={`/channels/${video?.channel?._id}`}>
                       <p className="font-medium text-white hover:text-[#ff1493] transition">
-                        {video?.channel_id?.name || 'Unknown Channel'}
+                        {video?.channel?.name || 'Unknown Channel'}
                       </p>
                     </Link>
                     <p className="text-sm text-gray-400">
-                      {video?.channel_id?.subscribers?.toLocaleString() || 0} subscribers
+                      {video?.channel?.subscribers?.toLocaleString() || 0} subscribers
                     </p>
                   </div>
                 </div>

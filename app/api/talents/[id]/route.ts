@@ -7,8 +7,25 @@ export async function GET(
 ) {
   try {
    const video = await Video.findById(params.id);
+   const { channel_id, ...videoData } = video.toObject();
+    const channel = await video.populate('channel_id', 'name avatar');
+    const channelData = channel.channel_id.toObject();
+    const videoWithChannel = {
+      ...videoData,
+      channel: {
+        ...channelData,
+        id: channelData._id,
+      },
+    };
+    const formattedVideo = {
+      ...videoWithChannel,
+      id: video._id,
+      channel_id: channel._id,
+      createdAt: video.createdAt,
+      updatedAt: video.updatedAt,
+    };
       
-    return NextResponse.json(video);
+    return NextResponse.json(formattedVideo);
   } catch (error) {
     console.error('Error fetching video:', error);
     return NextResponse.json(
