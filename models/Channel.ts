@@ -6,7 +6,7 @@ const ChannelSchema = new mongoose.Schema({
   subscribers: { type: Number, default: 0 },
   avatar: { type: String },
   cover_image: { type: String },
-  category: { type: String },
+  category: { type: mongoose.Schema.ObjectId, ref: 'Category' },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },

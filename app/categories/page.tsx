@@ -2,13 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
-import connectDB from "@/lib/mongodb";
 import Category from "@/models/Category";
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 
 async function getCategories() {
   try {
-    await connectDB();
     const categories = await Category.find({}).sort({ name: 1 });
     return JSON.parse(JSON.stringify(categories));
   } catch (error) {
@@ -37,7 +35,7 @@ export default async function CategoriesPage() {
               </div>
               <h2 className="text-2xl font-semibold text-white mb-4">{category.name}</h2>
               <p className="text-gray-400 mb-4 line-clamp-2">{category.description}</p>
-              <Link href={`/categories/${(typeof category.name === 'string' ? category.name.toLowerCase() : '')}`}>
+              <Link href={`/categories/${category?._id}`}>
                 <Button className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
                   Explore {category.name}
                 </Button>

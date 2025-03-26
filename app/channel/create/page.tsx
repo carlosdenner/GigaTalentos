@@ -1,14 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { useUserType } from "@/hooks/useUserType"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useUserType } from "@/hooks/useUserType";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import axios from "axios";
+import Category from "@/models/Category";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function CreateChannelPage() {
   const { userType } = useUserType();
@@ -19,6 +27,7 @@ export default function CreateChannelPage() {
   const [category, setCategory] = useState("");
   const [avatar, setAvatar] = useState("");
   const [coverImage, setCoverImage] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +45,7 @@ export default function CreateChannelPage() {
       setIsSubmitting(true);
 
       // Create new channel - remove user_id from payload
-      const channelResponse = await axios.post('/api/channels', {
+      const channelResponse = await axios.post("/api/channels", {
         name,
         description,
         category,
@@ -54,7 +63,9 @@ export default function CreateChannelPage() {
       console.error("Error creating channel:", error);
       toast({
         title: "Error",
-        description: error.response?.data?.error || "Failed to create channel. Please try again.",
+        description:
+          error.response?.data?.error ||
+          "Failed to create channel. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -62,18 +73,36 @@ export default function CreateChannelPage() {
     }
   };
 
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const response = await fetch("/api/categories");
+        const data = await response.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error loading categories:", error);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
   if (userType !== "talent") {
     return (
       <div className="text-center py-16">
         <h2 className="text-2xl font-bold text-white mb-4">Access Denied</h2>
-        <p className="text-gray-400">Only talent accounts can create channels.</p>
+        <p className="text-gray-400">
+          Only talent accounts can create channels.
+        </p>
       </div>
     );
   }
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Create Your Channel</h1>
+      <h1 className="text-4xl font-bold text-white mb-8">
+        Create Your Channel
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
         <div>
           <Label htmlFor="name">Channel Name</Label>
@@ -97,14 +126,18 @@ export default function CreateChannelPage() {
         </div>
         <div>
           <Label htmlFor="category">Channel Category</Label>
-          <Input
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-            className="bg-[#1a2942] border-gray-700 text-white"
-            placeholder="e.g., Music, Dance, Comedy"
-          />
+          <Select value={category} onValueChange={setCategory}>
+            <SelectTrigger className="bg-[#1a2942] border-gray-700 text-white">
+              <SelectValue placeholder="Select a category" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((cat: any) => (
+                <SelectItem key={cat._id} value={cat._id}>
+                  {cat.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div>
           <Label htmlFor="avatar">Avatar URL</Label>
