@@ -7,11 +7,25 @@ import { getYouTubeEmbedUrl } from "@/utils";
 import Category from "@/models/Category";
 import { Types } from "mongoose";
 
+// Add interface for type safety
+interface Video {
+  _id: string;
+  title: string;
+  video_url: string;
+  duration: string;
+  views: number;
+  likes: number;
+  channel_id: {
+    name: string;
+    avatar: string;
+    category: string;
+  };
+}
+
 async function getVideosByCategory(category: string) {
   try {
-    // Find videos directly by category
     const videos = await Video.find({
-      category: category, // Use the category directly
+      category: category,
     })
       .populate({
         path: "channel_id",
@@ -44,12 +58,9 @@ export default async function CategoryPage({
 }: {
   params: { category: string };
 }) {
-  const categoryId = await params.category;
+  const categoryId = params.category; // Removed await as it's not needed
   const videos = await getVideosByCategory(categoryId);
   const categoryInfo = await getCategoryInfo(categoryId);
-
-  // console.log("Category Info:", categoryInfo);
-  // console.log("Videos:", videos);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a192f]">
@@ -78,10 +89,10 @@ export default async function CategoryPage({
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {videos.map((video: any) => (
+            {videos.map((video: Video) => (
               <Link
-                href={`/talents/${video._id}`} // Changed from video.id
-                key={video._id} // Changed from video.id
+                href={`/talents/${video._id}`}
+                key={video._id}
                 className="group"
               >
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800">
@@ -100,13 +111,13 @@ export default async function CategoryPage({
                   <div className="absolute top-2 left-2 flex items-center gap-1">
                     <Eye className="h-4 w-4 text-[#1e90ff]" />
                     <span className="text-white text-sm">
-                      {video.views?.toLocaleString()}
+                      {video.views?.toLocaleString() || 0}
                     </span>
                   </div>
                   <div className="absolute top-2 right-2 flex items-center gap-1">
                     <Heart className="h-4 w-4 text-[#ff1493]" />
                     <span className="text-white text-sm">
-                      {video.likes?.toLocaleString()}
+                      {video.likes?.toLocaleString() || 0}
                     </span>
                   </div>
                 </div>
@@ -114,7 +125,7 @@ export default async function CategoryPage({
                   <h3 className="text-white font-medium group-hover:text-[#1e90ff]">
                     {video.title}
                   </h3>
-                  <p className="text-[#1e90ff]">{video.channels?.name}</p>
+                  <p className="text-[#1e90ff]">{video.channel_id?.name}</p>
                 </div>
               </Link>
             ))}
