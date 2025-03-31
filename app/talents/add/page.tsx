@@ -7,27 +7,27 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Upload, Link as LinkIcon } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { getYouTubeEmbedUrl } from "@/utils"
 import { useToast } from "@/hooks/use-toast"
-import { useRouter } from "next/navigation"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 interface Category {
   _id: string;
   name: string;
 }
 
-export default function AddTalentPage() {
+// Create a wrapper component for the form content
+function AddTalentForm() {
   const { toast } = useToast()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [categories, setCategories] = useState<Category[]>([])
   const [dragActive, setDragActive] = useState(false)
   const [videoUrl, setVideoUrl] = useState("")
   const [previewUrl, setPreviewUrl] = useState("")
   const [uploadMethod, setUploadMethod] = useState<"file" | "url">("url")
-  const searchParams = useSearchParams()
   const channelId = searchParams?.get('channelId') || ""
 
   const [formData, setFormData] = useState({
@@ -277,5 +277,18 @@ export default function AddTalentPage() {
       </form>
     </div>
     </div>
+  )
+}
+
+// Main component with Suspense boundary
+export default function AddTalentPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#0a192f] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    }>
+      <AddTalentForm />
+    </Suspense>
   )
 }
