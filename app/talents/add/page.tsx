@@ -1,243 +1,281 @@
-"use client";
+"use client"
 
-import { SetStateAction, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { getYouTubeEmbedUrl } from "@/utils";
-import { toast } from "@/components/ui/use-toast";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Upload, Link as LinkIcon } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getYouTubeEmbedUrl } from "@/utils"
+import { useToast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
+import { useSearchParams } from "next/navigation"
+
+interface Category {
+  _id: string;
+  name: string;
+}
 
 export default function AddTalentPage() {
-  const { data: session } = useSession() as { data: { user: { id: string } } | null };
-  const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [videoUrl, setVideoUrl] = useState("");
-  const [previewUrl, setPreviewUrl] = useState("");
-  const [hasChannel, setHasChannel] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [categories, setCategories] = useState([]);
+  const { toast } = useToast()
+  const router = useRouter()
+  const [categories, setCategories] = useState<Category[]>([])
+  const [dragActive, setDragActive] = useState(false)
+  const [videoUrl, setVideoUrl] = useState("")
+  const [previewUrl, setPreviewUrl] = useState("")
+  const [uploadMethod, setUploadMethod] = useState<"file" | "url">("url")
+  const searchParams = useSearchParams()
+  const channelId = searchParams?.get('channelId') || ""
+
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    category: "",
+    channel_id: channelId || "", // Add channel_id to formData
+  })
 
   useEffect(() => {
-    async function loadCategories() {
-      try {
-        const response = await fetch('/api/categories');
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error('Error loading categories:', error);
-      }
-    }
+    loadCategories()
+  }, [])
 
-    loadCategories();
-  }, []);
-
-useEffect(() => {
-  async function checkUserChannel() {
+  async function loadCategories() {
     try {
-      if (!session?.user?.id) {
-        router.push("/auth/login");
-        return;
-      }
-
-      const response = await fetch(`/api/channels?userId=${session.user.id}`);
-      const data = await response.json();
-      setHasChannel(!!data.length);
+      const response = await fetch('/api/categories')
+      const data = await response.json()
+      setCategories(data)
     } catch (error) {
-      console.error("Error checking channel:", error);
-    } finally {
-      setIsLoading(false);
-      setMounted(true);
+      console.error('Error loading categories:', error)
+      toast({
+        title: "Error",
+        description: "Failed to load categories",
+        variant: "destructive"
+      })
     }
   }
 
-  checkUserChannel();
-}, [session, router]);
-
   const handleVideoUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const url = e.target.value;
-    setVideoUrl(url);
-
-    if (url && mounted) {
-      setTimeout(() => {
-        const embedUrl = getYouTubeEmbedUrl(url);
-        setPreviewUrl(embedUrl);
-      }, 100);
+    const url = e.target.value
+    setVideoUrl(url)
+    if (url) {
+      const embedUrl = getYouTubeEmbedUrl(url)
+      setPreviewUrl(embedUrl)
     } else {
-      setPreviewUrl("");
+      setPreviewUrl("")
     }
-  };
+  }
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+    e.preventDefault()
+    
+    if (!videoUrl && uploadMethod === "url") {
+      toast({
+        title: "Error",
+        description: "Please provide a video URL",
+        variant: "destructive"
+      })
+      return
+    }
+
+    if (!formData.channel_id) {
+      toast({
+        title: "Error",
+        description: "Channel ID is required",
+        variant: "destructive"
+      })
+      return
+    }
 
     try {
-      if (!session?.user?.id) {
-        router.push("/auth/login");
-        return;
-      }
-
-      // Get user's channel
-      const channelResponse = await fetch(
-        `/api/channels?userId=${session.user.id}`
-      );
-      const channelData = await channelResponse.json();
-
-      if (!channelData.length) {
-        toast({
-          title: "Channel Required",
-          description: "Please create a channel before adding talents",
-          variant: "destructive",
-        });
-        router.push("/channel/create");
-        return;
-      }
-
-      // Add video
-      const response = await fetch("/api/talents", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/talents', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          title,
-          description,
-          channel_id: channelData[0]._id,
-          video_url: videoUrl,
-          category,
-        }),
-      });
+          ...formData,
+          video_url: videoUrl
+        })
+      })
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error);
+      if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.error || 'Failed to upload talent')
+      }
 
       toast({
-        title: "Success!",
-        description: "Your talent has been added successfully",
-      });
-
-      router.push(`/talents/${data._id}`);
+        title: "Success",
+        description: "Your talent has been uploaded successfully"
+      })
+      
+      router.push('/talents')
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "Failed to add talent",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+        description: error.message || "Failed to upload talent",
+        variant: "destructive"
+      })
     }
-  };
-
-  if (!mounted || isLoading) {
-    return <div>Loading...</div>;
   }
 
-  if (!hasChannel) {
-    router.push("/channel/create");
-    return null;
-  }
-
-  // Modify the iframe rendering to avoid hydration issues
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Add Your Talent</h1>
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
-        <div>
-          <Label htmlFor="title">Title</Label>
-          <Input
-            id="title"
-            value={title}
-            onChange={(e: { target: { value: SetStateAction<string> } }) =>
-              setTitle(e.target.value)
-            }
-            required
-            className="bg-[#1a2942] border-gray-700 text-white"
-          />
-        </div>
-        <div>
-          <Label htmlFor="description">Description</Label>
-          <Textarea
-            id="description"
-            value={description}
-            onChange={(e: { target: { value: SetStateAction<string> } }) =>
-              setDescription(e.target.value)
-            }
-            required
-            className="bg-[#1a2942] border-gray-700 text-white"
-          />
-        </div>
-        <div>
-          <Label htmlFor="category">Category</Label>
-          <Select value={category} onValueChange={setCategory}>
-            <SelectTrigger className="bg-[#1a2942] border-gray-700 text-white">
-              <SelectValue placeholder="Select a category" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((cat: any) => (
-                <SelectItem key={cat._id} value={cat._id}>
-                  {cat.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Label htmlFor="video">YouTube Video URL</Label>
-          <Input
-            id="video"
-            type="url"
-            value={videoUrl}
-            onChange={handleVideoUrlChange}
-            placeholder="https://www.youtube.com/watch?v=..."
-            required
-            className="bg-[#1a2942] border-gray-700 text-white"
-          />
-        </div>
+    <div className="min-h-screen bg-[#0a192f] overflow-y-auto">
+      <div className="container mx-auto px-4 py-8 overflow-y-auto">
+        <h1 className="text-3xl font-bold text-white mb-8">Add New Talent</h1>
 
-        {previewUrl && (
-          <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800">
-            <iframe
-              key={previewUrl} // Add key to force re-render
-              width="100%"
-              height="100%"
-              src={previewUrl}
-              title="Video Preview"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        )}
+        <form onSubmit={handleSubmit} className="max-w-4xl mx-auto w-full pb-8">
+          <Card className="bg-[#1a2942] border-gray-800 text-white mb-6">
+            <CardHeader>
+              <CardTitle>Video Upload</CardTitle>
+              <CardDescription className="text-gray-400">Share your talent with the world</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <Tabs defaultValue="url" onValueChange={(value) => setUploadMethod(value as "file" | "url")}>
+                <TabsList className="bg-[#0a192f] border-gray-700">
+                  <TabsTrigger value="url" className="data-[state=active]:bg-[#1e90ff]">
+                    <LinkIcon className="h-4 w-4 mr-2" />
+                    Video URL
+                  </TabsTrigger>
+                  <TabsTrigger value="file" className="data-[state=active]:bg-[#1e90ff]">
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload File
+                  </TabsTrigger>
+                </TabsList>
 
-        <Button
-          type="submit"
-          disabled={
-            isSubmitting || !videoUrl || !title || !description || !category
-          }
-          className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
-        >
-          {isSubmitting ? (
-            <>
-              <span className="animate-spin mr-2">⏳</span>
-              Submitting...
-            </>
-          ) : (
-            "Submit Talent"
-          )}
+                <TabsContent value="url" className="mt-4">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="videoUrl">Video URL</Label>
+                      <Input
+                        id="videoUrl"
+                        placeholder="Enter YouTube video URL"
+                        className="bg-[#0a192f] border-gray-700"
+                        value={videoUrl}
+                        onChange={handleVideoUrlChange}
+                      />
+                    </div>
+                    <div className="min-h-[300px] flex items-center justify-center bg-[#0a192f]/50 rounded-lg">
+                      {previewUrl ? (
+                        <div className="w-full aspect-video rounded-lg overflow-hidden">
+                          <iframe
+                            src={previewUrl}
+                            title="Video preview"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                      ) : (
+                        <div className="text-gray-400 text-center">
+                          <p>Enter a YouTube URL to preview the video</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="file" className="mt-4">
+                  <div className="min-h-[300px]">
+                    <div
+                      className={`border-2 border-dashed rounded-lg p-8 text-center h-full flex items-center justify-center ${
+                        dragActive ? "border-[#ff1493] bg-[#ff1493]/10" : "border-gray-700"
+                      }`}
+                      onDragEnter={() => setDragActive(true)}
+                      onDragLeave={() => setDragActive(false)}
+                      onDragOver={(e) => {
+                        e.preventDefault()
+                        setDragActive(true)
+                      }}
+                      onDrop={() => setDragActive(false)}
+                    >
+                      <div className="flex flex-col items-center justify-center gap-4">
+                        <Upload className="h-12 w-12 text-gray-400" />
+                        <div className="space-y-2">
+                          <h3 className="text-xl font-medium">Drag and drop your video file</h3>
+                          <p className="text-gray-400">or click to browse files</p>
+                        </div>
+                        <Button type="button" className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">
+                          Select File
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+              </Tabs>
+
+            <div className="space-y-6 pt-4">
+              <div className="space-y-2">
+                <Label htmlFor="title">Title</Label>
+                <Input
+                  id="title"
+                  name="title"
+                  placeholder="Enter a title for your talent"
+                  className="bg-[#0a192f] border-gray-700"
+                  value={formData.title}
+                  onChange={handleFormChange}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="description">Description</Label>
+                <Textarea
+                  id="description"
+                  name="description"
+                  placeholder="Describe your talent..."
+                  className="bg-[#0a192f] border-gray-700 min-h-[120px]"
+                  value={formData.description}
+                  onChange={handleFormChange}
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="category">Category</Label>
+                <Select name="category" value={formData.category} onValueChange={(value) => handleFormChange({ target: { name: 'category', value } } as any)}>
+                  <SelectTrigger className="bg-[#0a192f] border-gray-700">
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#1a2942] border-gray-700 text-white">
+                    {categories.map((category) => (
+                      <SelectItem key={category._id} value={category._id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* <div className="space-y-2">
+                <Label htmlFor="tags">Tags</Label>
+                <Input
+                  id="tags"
+                  name="tags"
+                  placeholder="Add tags separated by commas"
+                  className="bg-[#0a192f] border-gray-700"
+                  value={formData.tags}
+                  onChange={handleFormChange}
+                />
+              </div> */}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Button type="submit" className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+          Upload Talent
         </Button>
       </form>
     </div>
-  );
+    </div>
+  )
 }

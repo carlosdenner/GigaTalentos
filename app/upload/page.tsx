@@ -6,11 +6,27 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Upload } from "lucide-react"
+import { Upload, Link as LinkIcon } from "lucide-react"
 import { useState } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getYouTubeEmbedUrl } from "@/utils"
 
 export default function UploadPage() {
   const [dragActive, setDragActive] = useState(false)
+  const [videoUrl, setVideoUrl] = useState("")
+  const [previewUrl, setPreviewUrl] = useState("")
+  const [uploadMethod, setUploadMethod] = useState<"file" | "url">("file")
+
+  const handleVideoUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value
+    setVideoUrl(url)
+    if (url) {
+      const embedUrl = getYouTubeEmbedUrl(url)
+      setPreviewUrl(embedUrl)
+    } else {
+      setPreviewUrl("")
+    }
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a192f] p-8">
@@ -24,27 +40,72 @@ export default function UploadPage() {
               <CardDescription className="text-gray-400">Share your talent with the world</CardDescription>
             </CardHeader>
             <CardContent>
-              <div
-                className={`border-2 border-dashed rounded-lg p-12 text-center ${
-                  dragActive ? "border-[#ff1493] bg-[#ff1493]/10" : "border-gray-700"
-                }`}
-                onDragEnter={() => setDragActive(true)}
-                onDragLeave={() => setDragActive(false)}
-                onDragOver={(e) => {
-                  e.preventDefault()
-                  setDragActive(true)
-                }}
-                onDrop={() => setDragActive(false)}
-              >
-                <div className="flex flex-col items-center justify-center gap-4">
-                  <Upload className="h-12 w-12 text-gray-400" />
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-medium">Drag and drop your video file</h3>
-                    <p className="text-gray-400">or click to browse files</p>
+              <Tabs defaultValue="file" className="mb-8" onValueChange={(value) => setUploadMethod(value as "file" | "url")}>
+                <TabsList className="bg-[#0a192f] border-gray-700">
+                  <TabsTrigger value="file" className="data-[state=active]:bg-[#1e90ff]">
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload File
+                  </TabsTrigger>
+                  <TabsTrigger value="url" className="data-[state=active]:bg-[#1e90ff]">
+                    <LinkIcon className="h-4 w-4 mr-2" />
+                    Video URL
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="file">
+                  <div
+                    className={`border-2 border-dashed rounded-lg p-12 text-center ${
+                      dragActive ? "border-[#ff1493] bg-[#ff1493]/10" : "border-gray-700"
+                    }`}
+                    onDragEnter={() => setDragActive(true)}
+                    onDragLeave={() => setDragActive(false)}
+                    onDragOver={(e) => {
+                      e.preventDefault()
+                      setDragActive(true)
+                    }}
+                    onDrop={() => setDragActive(false)}
+                  >
+                    <div className="flex flex-col items-center justify-center gap-4">
+                      <Upload className="h-12 w-12 text-gray-400" />
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-medium">Drag and drop your video file</h3>
+                        <p className="text-gray-400">or click to browse files</p>
+                      </div>
+                      <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">
+                        Select File
+                      </Button>
+                    </div>
                   </div>
-                  <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">Select File</Button>
-                </div>
-              </div>
+                </TabsContent>
+
+                <TabsContent value="url">
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="videoUrl">Video URL</Label>
+                      <Input
+                        id="videoUrl"
+                        placeholder="Enter YouTube video URL"
+                        className="bg-[#0a192f] border-gray-700"
+                        value={videoUrl}
+                        onChange={handleVideoUrlChange}
+                      />
+                    </div>
+                    {previewUrl && (
+                      <div className="aspect-video rounded-lg overflow-hidden">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={previewUrl}
+                          title="Video preview"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    )}
+                  </div>
+                </TabsContent>
+              </Tabs>
 
               <div className="mt-8 space-y-6">
                 <div className="space-y-2">

@@ -61,10 +61,6 @@ export default function Sidebar() {
             <Heart className="h-5 w-5 text-[#9d4edd]" />
             <span>{isAuthenticated ? "Your Favorites" : "Popular Videos"}</span>
           </Link>
-          <Link href="/talents/add" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-            <Star className="h-5 w-5 text-[#9d4edd]" />
-            <span>Add Talent</span>
-          </Link>
         </nav>
 
         <div className="mt-8 px-4">

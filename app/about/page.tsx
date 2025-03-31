@@ -29,7 +29,7 @@ export default function AboutPage() {
           </div>
           <div className="relative aspect-video rounded-lg overflow-hidden">
             <Image
-              src="/placeholder.svg?height=400&width=600&text=Our+Mission"
+              src="/handsup.jpg?height=400&width=600&text=Our+Mission"
               alt="Our Mission"
               fill
               className="object-cover"
@@ -111,7 +111,7 @@ export default function AboutPage() {
             <Card key={member.name} className="bg-[#1a2942] border-gray-800 text-white">
               <CardContent className="p-6 text-center">
                 <Avatar className="h-24 w-24 mx-auto mb-4">
-                  <AvatarImage src={member.avatar} alt={member.name} />
+                  {/* <AvatarImage src={member.avatar} alt={member.name} /> */}
                   <AvatarFallback>
                     {member.name
                       .split(" ")
