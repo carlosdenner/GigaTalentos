@@ -29,8 +29,6 @@ RiseMeUp is a dynamic platform connecting talented African youth with global opp
 ## 🌍 User Experiences
 
 ### For Creators
-- Personalized dashboard to track growth and engagement
-- Analytics to understand your audience
 - Tools to promote your content across the platform
 - Opportunities to collaborate with other creators
 
@@ -52,9 +50,9 @@ Built with modern technologies to ensure a smooth, responsive experience:
 
 - **Frontend**: Next.js 14, React, Tailwind CSS, shadcn/ui
 - **Backend**: Next.js API Routes with Supabase integration
-- **Data**: PostgreSQL database via Supabase
+- **Data**: MongoDB database
 - **Media**: Optimized video streaming and storage
-- **Security**: Robust authentication via Supabase Auth
+- **Security**: Robust authentication NextJS Auth
 - **Deployment**: Continuous deployment through Vercel
 
 ## 🛠️ Development Setup
@@ -62,14 +60,14 @@ Built with modern technologies to ensure a smooth, responsive experience:
 ### Prerequisites
 - Node.js 18.x or higher
 - npm or yarn package manager
-- Supabase account for backend services
+- MongoDB atlas account or local mongoDB 
 - Vercel account (recommended for deployment)
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/risemeup.git
+   git clone https://github.com/Mugisha-isaac/RiseMeUp.git
    cd risemeup
    ```
 
@@ -84,7 +82,7 @@ Built with modern technologies to ensure a smooth, responsive experience:
    ```bash
    cp .env.example .env.local
    ```
-   Then edit `.env.local` with your Supabase credentials.
+   Then edit `.env.local` with your MONGODB_URI,NEXTAUTH_SECRET and NEXTAUTH_URL
 
 4. Start the development server:
    ```bash
