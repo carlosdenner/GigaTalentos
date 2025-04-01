@@ -1,6 +1,6 @@
 # RiseMeUp
 
-![RiseMeUp Logo](public/logo.png)
+![RiseMeUp Logo](public/handsup.jpg)
 
 ## Discover Africa's Rising Stars
 
