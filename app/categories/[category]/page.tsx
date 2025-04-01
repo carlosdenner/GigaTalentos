@@ -6,6 +6,7 @@ import Video from "@/models/Video";
 import { getYouTubeEmbedUrl } from "@/utils";
 import Category from "@/models/Category";
 import { Types } from "mongoose";
+import connectDB from "@/lib/mongodb"; // Add this import
 
 // Add interface for type safety
 interface Video {
@@ -24,6 +25,7 @@ interface Video {
 
 async function getVideosByCategory(category: string) {
   try {
+    await connectDB(); // Add this line
     const videos = await Video.find({
       category: category,
     })
@@ -42,6 +44,7 @@ async function getVideosByCategory(category: string) {
 
 async function getCategoryInfo(categoryId: string) {
   try {
+    await connectDB(); // Add this line
     const category = await Category.findOne({
       _id: categoryId,
     });
