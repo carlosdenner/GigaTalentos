@@ -61,13 +61,12 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center justify-center">
             <span className="text-4xl font-bold">
-              <span className="text-[#ff1493]">Rise</span>
-              <span className="text-[#9d4edd]">Me</span>
-              <span className="text-[#ff1493]">Up</span>
+              <span className="text-[#10b981]">Giga</span>
+              <span className="text-[#3b82f6]">Talentos</span>
             </span>
           </Link>
           <div className="flex items-center justify-center gap-2 mt-2">
-            <Zap className="h-5 w-5 text-[#ff1493]" />
+            <Zap className="h-5 w-5 text-[#10b981]" />
             <p className="text-white">Discover African Talent</p>
           </div>
         </div>
@@ -95,7 +94,7 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <Link href="/auth/forgot-password" className="text-sm text-[#9d4edd] hover:underline">
+                  <Link href="/auth/forgot-password" className="text-sm text-[#3b82f6] hover:underline">
                     Forgot password?
                   </Link>
                 </div>
@@ -123,7 +122,7 @@ export default function LoginPage() {
               </div>
               <Button
                 type="submit"
-                className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
+                className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
                 disabled={isLoading}
               >
                 {isLoading ? "Logging in..." : "Login"}
@@ -149,7 +148,7 @@ export default function LoginPage() {
             </div>
             <p className="text-center text-sm text-gray-400">
               Don&apos;t have an account?{" "}
-              <Link href="/auth/register" className="text-[#9d4edd] hover:underline">
+              <Link href="/auth/register" className="text-[#3b82f6] hover:underline">
                 Sign up
               </Link>
             </p>

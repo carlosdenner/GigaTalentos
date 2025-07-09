@@ -367,7 +367,7 @@ export default function TalentDetailsPage() {
                   </Avatar>
                   <div>
                     <Link href={`/channels/${video?.channel?._id}`}>
-                      <p className="font-medium text-white hover:text-[#ff1493] transition">
+                      <p className="font-medium text-white hover:text-[#10b981] transition">
                         {video?.channel?.name || 'Unknown Channel'}
                       </p>
                     </Link>
@@ -380,7 +380,7 @@ export default function TalentDetailsPage() {
                 <div className="flex items-center gap-2">
                   <Button
                     onClick={handleSubscribe}
-                    className={`${isSubscribed ? "bg-gray-700 hover:bg-gray-600" : "bg-[#ff1493] hover:bg-[#ff1493]/90"} transition`}
+                    className={`${isSubscribed ? "bg-gray-700 hover:bg-gray-600" : "bg-[#10b981] hover:bg-[#10b981]/90"} transition`}
                   >
                     {isSubscribed ? "Subscribed" : "Subscribe"}
                   </Button>
@@ -403,7 +403,7 @@ export default function TalentDetailsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={handleLike}
-                  className={`hover:bg-gray-700 ${video?.isLiked ? "text-[#ff1493]" : "text-gray-400"}`}
+                  className={`hover:bg-gray-700 ${video?.isLiked ? "text-[#10b981]" : "text-gray-400"}`}
                 >
                   <Heart className={`h-5 w-5 mr-1 ${video?.isLiked ? "fill-current" : ""}`} />
                   {video?.likes?.toLocaleString() || 0}

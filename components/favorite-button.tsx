@@ -96,7 +96,7 @@ export default function FavoriteButton({
     >
       <Heart
         className={`h-6 w-6 mr-2 ${
-          isFavorite ? "fill-[#ff1493] text-[#ff1493]" : ""
+          isFavorite ? "fill-[#10b981] text-[#10b981]" : ""
         }`}
       />
       <span>

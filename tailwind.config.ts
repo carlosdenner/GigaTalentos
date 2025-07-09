@@ -53,6 +53,13 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom brand colors for Giga Talentos
+        brand: {
+          green: "#10b981",
+          blue: "#3b82f6",
+          "dark-green": "#059669",
+          "dark-blue": "#1d4ed8",
+        },
       },
       borderWidth: {
         "l-12": "12px",

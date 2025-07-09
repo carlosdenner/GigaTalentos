@@ -64,13 +64,12 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center justify-center">
             <span className="text-4xl font-bold">
-              <span className="text-[#ff1493]">Rise</span>
-              <span className="text-[#9d4edd]">Me</span>
-              <span className="text-[#ff1493]">Up</span>
+              <span className="text-[#10b981]">Giga</span>
+              <span className="text-[#3b82f6]">Talentos</span>
             </span>
           </Link>
           <div className="flex items-center justify-center gap-2 mt-2">
-            <Zap className="h-5 w-5 text-[#ff1493]" />
+            <Zap className="h-5 w-5 text-[#10b981]" />
             <p className="text-white">Discover African Talent</p>
           </div>
         </div>
@@ -143,18 +142,18 @@ export default function RegisterPage() {
                 />
                 <Label htmlFor="terms" className="text-sm text-gray-400">
                   I agree to the{" "}
-                  <Link href="/terms" className="text-[#9d4edd] hover:underline">
+                  <Link href="/terms" className="text-[#3b82f6] hover:underline">
                     Terms of Service
                   </Link>{" "}
                   and{" "}
-                  <Link href="/privacy" className="text-[#9d4edd] hover:underline">
+                  <Link href="/privacy" className="text-[#3b82f6] hover:underline">
                     Privacy Policy
                   </Link>
                 </Label>
               </div>
               <Button
                 type="submit"
-                className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
+                className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
                 disabled={isLoading || !agreeTerms}
               >
                 {isLoading ? "Creating account..." : "Create Account"}

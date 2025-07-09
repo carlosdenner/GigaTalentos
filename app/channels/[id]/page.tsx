@@ -140,12 +140,12 @@ export default async function ChannelPage({
           
           <div className="flex gap-3">
             <Link href={`/talents/add?channelId=${channelData._id}`}>
-              <Button className="bg-[#9d4edd] hover:bg-[#9d4edd]/90 text-white">
+              <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Talent
               </Button>
             </Link>
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white px-8">
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white px-8">
               Subscribe
             </Button>
           </div>

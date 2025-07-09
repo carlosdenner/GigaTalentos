@@ -70,7 +70,7 @@ export default function SearchPage() {
           />
         </div>
         <Button
-          className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white h-12 px-6"
+          className="bg-[#10b981] hover:bg-[#10b981]/90 text-white h-12 px-6"
           onClick={handleSearch}
           disabled={isLoading}
         >
@@ -81,10 +81,10 @@ export default function SearchPage() {
       {query && (
         <Tabs defaultValue="videos" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="bg-[#1a2942]">
-            <TabsTrigger value="videos" className="data-[state=active]:bg-[#ff1493] data-[state=active]:text-white">
+            <TabsTrigger value="videos" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
               Videos
             </TabsTrigger>
-            <TabsTrigger value="channels" className="data-[state=active]:bg-[#ff1493] data-[state=active]:text-white">
+            <TabsTrigger value="channels" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
               Channels
             </TabsTrigger>
           </TabsList>
@@ -111,7 +111,7 @@ export default function SearchPage() {
                             allowFullScreen
                           ></iframe>
                         </div>
-                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#ff1493]">
+                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#10b981]">
                           {video.title}
                         </h3>
                         <div className="flex items-center gap-2 mb-2">
@@ -119,7 +119,7 @@ export default function SearchPage() {
                             <AvatarImage src={video.channels?.avatar} alt={video.channels?.name} />
                             <AvatarFallback>{video.channels?.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                           </Avatar>
-                          <span className="text-sm text-[#9d4edd]">{video.channels?.name}</span>
+                          <span className="text-sm text-[#3b82f6]">{video.channels?.name}</span>
                         </div>
                         <div className="flex items-center justify-between text-sm text-gray-400">
                           <span className="flex items-center">

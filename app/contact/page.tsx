@@ -49,8 +49,8 @@ export default function ContactPage() {
           <Card className="bg-[#1a2942] border-gray-800 text-white">
             <CardContent className="p-6">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-[#ff1493]/10 p-3 rounded-full">
-                  <Mail className="h-6 w-6 text-[#ff1493]" />
+                <div className="bg-[#10b981]/10 p-3 rounded-full">
+                  <Mail className="h-6 w-6 text-[#10b981]" />
                 </div>
                 <div>
                   <h3 className="font-medium text-white">Email</h3>
@@ -59,8 +59,8 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-[#9d4edd]/10 p-3 rounded-full">
-                  <Phone className="h-6 w-6 text-[#9d4edd]" />
+                <div className="bg-[#3b82f6]/10 p-3 rounded-full">
+                  <Phone className="h-6 w-6 text-[#3b82f6]" />
                 </div>
                 <div>
                   <h3 className="font-medium text-white">Phone</h3>
@@ -173,7 +173,7 @@ export default function ContactPage() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
+                  className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
                   disabled={isLoading}
                 >
                   {isLoading ? "Sending..." : "Send Message"}

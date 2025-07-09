@@ -7,52 +7,52 @@ import User from "@/models/User";
 
 const sampleVideos = [
   {
-    title: "Amazing Singing Performance",
-    description: "A beautiful vocal performance showcasing African talent",
+    title: "Innovative Tech Solution Pitch",
+    description: "A brilliant technical presentation showcasing problem-solving abilities and innovative thinking",
     video_url: "https://www.youtube.com/watch?v=FDcRHfhWZvA",
     views: 125000,
     likes: 4500,
-    category: "Singing"
+    category: "Cognitive & Technical Ability"
   },
   {
-    title: "Traditional Dance Performance",
-    description: "Cultural dance performance from Rwanda",
+    title: "Creative Startup Concept Demo",
+    description: "Original business idea demonstration with novel approach to market challenges",
     video_url: "https://www.youtube.com/watch?v=xvQoxkKIpbw",
     views: 98000,
     likes: 3200,
-    category: "Dancing"
+    category: "Creativity & Innovation"
   },
   {
-    title: "Comedy Show Highlights",
-    description: "Funny moments from local comedy show",
+    title: "Entrepreneurial Journey Story",
+    description: "Personal story of perseverance, grit, and sustained effort in building a startup",
     video_url: "https://www.youtube.com/watch?v=5Ym1YA0F3S0",
     views: 89000,
     likes: 2800,
-    category: "Comedy"
+    category: "Motivation & Passion"
   },
   {
-    title: "Music Production Tutorial",
-    description: "Learn beat making with local producer",
+    title: "Team Leadership in Hackathon",
+    description: "Demonstrating leadership skills and collaborative teamwork during intensive hackathon challenge",
     video_url: "https://www.youtube.com/watch?v=Nt2xC8bm3mU",
     views: 75000,
     likes: 2100,
-    category: "Music Production"
+    category: "Leadership & Collaboration"
   },
   {
-    title: "Acting Workshop",
-    description: "Behind the scenes of acting workshop",
+    title: "Social Impact Startup Pitch",
+    description: "Ethical innovation project focused on sustainable social progress and community impact",
     video_url: "https://www.youtube.com/watch?v=8Uojy2vfawQ",
     views: 65000,
     likes: 1900,
-    category: "Acting"
+    category: "Social Consciousness & Integrity"
   },
   {
-    title: "Digital Art Creation",
-    description: "Time-lapse of digital art creation process",
+    title: "Pivot Story: From Failure to Success",
+    description: "How adapting to setbacks and iterating on feedback led to breakthrough innovation",
     video_url: "https://www.youtube.com/watch?v=R0dZDDl9zvM",
     views: 55000,
     likes: 1600,
-    category: "Art"
+    category: "Adaptability & Resilience"
   }
 ];
 

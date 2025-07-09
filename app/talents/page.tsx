@@ -101,7 +101,7 @@ export default function TalentsPage() {
         </div>
         
         <Link href="/add-talent">
-          <Button className="bg-[#ff1493] hover:bg-[#ff1493]/80 text-white">
+          <Button className="bg-[#10b981] hover:bg-[#10b981]/80 text-white">
             Add New Talent
           </Button>
         </Link>
@@ -112,7 +112,7 @@ export default function TalentsPage() {
           {Object.entries(categorizedVideos).map(([category, categoryVideos]) => (
             <div key={category} className="space-y-6">
               <div className="flex items-center gap-2 border-b border-gray-800 pb-2">
-                <Medal className="text-[#ff1493]" size={20} />
+                <Medal className="text-[#10b981]" size={20} />
                 <h2 className="text-2xl font-semibold text-white">{category}</h2>
               </div>
               
@@ -120,7 +120,7 @@ export default function TalentsPage() {
                 {categoryVideos.map((video) => (
                   <Card 
                     key={video._id} 
-                    className="bg-[#1a2942] border-gray-800 hover:shadow-lg hover:shadow-[#ff1493]/10 transition-all duration-300 overflow-hidden group"
+                    className="bg-[#1a2942] border-gray-800 hover:shadow-lg hover:shadow-[#10b981]/10 transition-all duration-300 overflow-hidden group"
                   >
                     <div className="relative aspect-video bg-[#0a192f] overflow-hidden">
                       <Image
@@ -130,9 +130,9 @@ export default function TalentsPage() {
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a2942] to-transparent opacity-60"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-60"></div>
                       {video.featured && (
-                        <div className="absolute top-2 right-2 bg-[#ff1493]/90 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                        <div className="absolute top-2 right-2 bg-[#10b981]/90 text-white text-xs px-2 py-1 rounded-full flex items-center">
                           <Star className="mr-1" size={12} /> Featured
                         </div>
                       )}
@@ -148,7 +148,7 @@ export default function TalentsPage() {
                           <Clock size={12} className="mr-1" /> {formatDate(video.created_at)}
                         </span>
                         <Link href={`/talents/${video._id}`}>
-                          <Button size="sm" variant="outline" className="border-[#ff1493] text-[#ff1493] hover:bg-[#ff1493]/10">
+                          <Button size="sm" variant="outline" className="border-[#10b981] text-[#10b981] hover:bg-[#10b981]/10">
                             View Details
                           </Button>
                         </Link>
@@ -161,7 +161,7 @@ export default function TalentsPage() {
               {categoryVideos.length > 3 && (
                 <div className="flex justify-end">
                   <Link href={`/categories/${category.toLowerCase()}`}>
-                    <Button variant="ghost" className="text-[#ff1493] hover:text-[#ff1493] hover:bg-[#ff1493]/10">
+                    <Button variant="ghost" className="text-[#10b981] hover:text-[#10b981] hover:bg-[#10b981]/10">
                       View all in {category} →
                     </Button>
                   </Link>
@@ -176,7 +176,7 @@ export default function TalentsPage() {
           <h3 className="text-xl font-medium text-white mb-2">No talents added yet</h3>
           <p className="text-gray-400 mb-6">Start showcasing your abilities by adding your first talent</p>
           <Link href="/add-talent">
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/80 text-white">
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/80 text-white">
               Add Your First Talent
             </Button>
           </Link>

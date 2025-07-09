@@ -86,7 +86,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a192f]">
-      <div className="h-48 bg-gradient-to-r from-[#1e90ff] to-[#ff1493] relative">
+      <div className="h-48 bg-gradient-to-r from-[#10b981] to-[#3b82f6] relative">
         <div className="absolute -bottom-16 left-8 flex items-end">
           <Avatar className="h-32 w-32 border-4 border-[#0a192f]">
             {/* <AvatarImage src={profile.avatar} alt={profile.name} /> */}
@@ -110,7 +110,7 @@ export default function ProfilePage() {
             </Button>
           </Link>
           <Link href="/talents/add">
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">
               <Upload className="h-4 w-4 mr-2" />
               Upload
             </Button>
@@ -156,13 +156,13 @@ export default function ProfilePage() {
 
         <Tabs defaultValue="videos" className="mt-8">
           <TabsList className="bg-[#1a2942]">
-            <TabsTrigger value="videos" className="data-[state=active]:bg-[#ff1493] data-[state=active]:text-white">
+            <TabsTrigger value="videos" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
               Videos
             </TabsTrigger>
-            <TabsTrigger value="about" className="data-[state=active]:bg-[#ff1493] data-[state=active]:text-white">
+            <TabsTrigger value="about" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
               About
             </TabsTrigger>
-            <TabsTrigger value="sponsors" className="data-[state=active]:bg-[#ff1493] data-[state=active]:text-white">
+            <TabsTrigger value="sponsors" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
               Sponsors
             </TabsTrigger>
           </TabsList>
@@ -185,7 +185,7 @@ export default function ProfilePage() {
                         <span className="text-white text-sm">{video.views?.toLocaleString()}</span>
                       </div>
                       <div className="absolute top-2 right-2 flex items-center gap-1">
-                        <Heart className="h-4 w-4 text-[#ff1493]" />
+                        <Heart className="h-4 w-4 text-[#10b981]" />
                         <span className="text-white text-sm">{video.likes?.toLocaleString()}</span>
                       </div>
                     </div>
@@ -280,7 +280,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white w-full">
+                  <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white w-full">
                     Contact for Sponsorship
                   </Button>
                 </div>

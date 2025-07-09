@@ -179,7 +179,7 @@ export default function MessagesPage() {
                   <div
                     className={`rounded-lg p-3 ${
                       message.sender_id._id === session?.user?.id
-                        ? "bg-[#ff1493] text-white"
+                        ? "bg-[#10b981] text-white"
                         : "bg-gray-700 text-white"
                     }`}
                   >
@@ -204,7 +204,7 @@ export default function MessagesPage() {
             />
             <Button
               type="submit"
-              className="bg-[#ff1493] hover:bg-[#ff1493]/90"
+              className="bg-[#10b981] hover:bg-[#10b981]/90"
             >
               <Send className="h-4 w-4" />
             </Button>

@@ -188,7 +188,7 @@ function AddTalentForm() {
                   <div className="min-h-[300px]">
                     <div
                       className={`border-2 border-dashed rounded-lg p-8 text-center h-full flex items-center justify-center ${
-                        dragActive ? "border-[#ff1493] bg-[#ff1493]/10" : "border-gray-700"
+                        dragActive ? "border-[#10b981] bg-[#10b981]/10" : "border-gray-700"
                       }`}
                       onDragEnter={() => setDragActive(true)}
                       onDragLeave={() => setDragActive(false)}
@@ -271,7 +271,7 @@ function AddTalentForm() {
           </CardContent>
         </Card>
 
-        <Button type="submit" className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+        <Button type="submit" className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white">
           Upload Talent
         </Button>
       </form>

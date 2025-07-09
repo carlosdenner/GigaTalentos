@@ -87,7 +87,7 @@ export default async function PlaylistPage() {
         <h1 className="text-4xl font-bold text-white">{isLoggedIn ? playlist.name : "Popular Videos"}</h1>
         {!isLoggedIn && (
           <Link href="/auth/login">
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">Login to Create Playlists</Button>
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">Login to Create Playlists</Button>
           </Link>
         )}
       </div>
@@ -101,7 +101,7 @@ export default async function PlaylistPage() {
                 {playlist.videos?.length || 0} videos • {formatDuration(totalDuration)}
               </p>
             </div>
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">Play All</Button>
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">Play All</Button>
           </div>
 
           {playlist.videos?.length === 0 ? (
@@ -142,7 +142,7 @@ export default async function PlaylistPage() {
         <Button variant="outline" size="icon">
           <SkipBack className="h-4 w-4" />
         </Button>
-        <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white" size="icon">
+        <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white" size="icon">
           <Play className="h-4 w-4" />
         </Button>
         <Button variant="outline" size="icon">

@@ -33,7 +33,7 @@ export default async function ChannelsPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-white">My Channels</h1>
         <Link href="/channel/create">
-          <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+          <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">
             <Plus className="h-4 w-4 mr-2" />
             Create New Channel
           </Button>
@@ -45,7 +45,7 @@ export default async function ChannelsPage() {
           <h2 className="text-2xl font-bold text-white mb-4">Sign in to Create Channels</h2>
           <p className="text-gray-400 mb-8">Join RiseMeUp to showcase your talents</p>
           <Link href="/auth/login">
-            <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">
               Sign In
             </Button>
           </Link>
@@ -56,7 +56,7 @@ export default async function ChannelsPage() {
             <h2 className="text-2xl font-bold text-white mb-4">Create Your First Channel</h2>
             <p className="text-gray-400 mb-8">Start sharing your talents with the world</p>
             <Link href="/channel/create">
-              <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+              <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">
                 <Plus className="h-4 w-4 mr-2" />
                 Create Channel
               </Button>

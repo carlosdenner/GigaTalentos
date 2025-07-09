@@ -36,7 +36,7 @@ export default async function CategoriesPage() {
               <h2 className="text-2xl font-semibold text-white mb-4">{category.name}</h2>
               <p className="text-gray-400 mb-4 line-clamp-2">{category.description}</p>
               <Link href={`/categories/${category?._id}`}>
-                <Button className="w-full bg-[#ff1493] hover:bg-[#ff1493]/90 text-white">
+                <Button className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white">
                   Explore {category.name}
                 </Button>
               </Link>

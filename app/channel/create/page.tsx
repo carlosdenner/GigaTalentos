@@ -165,7 +165,7 @@ export default function CreateChannelPage() {
         <Button
           type="submit"
           disabled={isSubmitting || !name || !description || !category}
-          className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
+          className="bg-[#10b981] hover:bg-[#10b981]/90 text-white"
         >
           {isSubmitting ? (
             <>

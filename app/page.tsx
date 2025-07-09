@@ -50,23 +50,23 @@ export default async function Home() {
   return (
     <div className="space-y-12">
       <section className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">Welcome to RiseMeUp</h1>
-        <p className="text-xl text-gray-400 mb-8">Discover and showcase African talent</p>
+        <h1 className="text-4xl font-bold text-white mb-4">Welcome to Giga Talentos</h1>
+        <p className="text-xl text-gray-400 mb-8">Discover Brazil's Rising Entrepreneurs</p>
         <Link href="/categories">
-          <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white text-lg px-8 py-4">Get Started</Button>
+          <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white text-lg px-8 py-4">Get Started</Button>
         </Link>
       </section>
 
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Featured Categories</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Talent Identification Dimensions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category) => (
-            <Card key={category.id} className="bg-[#1a2942] border-gray-800">
+            <Card key={category._id} className="bg-[#1a2942] border-gray-800">
               <CardContent className="p-6">
-                <Zap className="h-8 w-8 text-[#9d4edd] mb-4" />
+                <Zap className="h-8 w-8 text-[#3b82f6] mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">{category.name}</h3>
                 <p className="text-gray-400 mb-4">{category.description}</p>
-                <Link href={`/categories/${category.name.toLowerCase()}`}>
+                <Link href={`/categories/${category.name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}>
                   <Button variant="outline" className="w-full">
                     Explore {category.name}
                   </Button>
@@ -78,7 +78,7 @@ export default async function Home() {
       </section>
 
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Trending Videos</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Featured Entrepreneurial Showcases</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredVideos.map((video: any) => (
             <Link href={`/talents/${video._id}`} key={video._id} className="group">
@@ -100,7 +100,7 @@ export default async function Home() {
                   <span className="text-white text-sm">{video.views?.toLocaleString()}</span>
                 </div>
                 <div className="absolute top-2 right-2 flex items-center gap-1">
-                  <Heart className="h-4 w-4 text-[#ff1493]" />
+                  <Heart className="h-4 w-4 text-[#10b981]" />
                   <span className="text-white text-sm">{video.likes?.toLocaleString()}</span>
                 </div>
               </div>
@@ -113,17 +113,17 @@ export default async function Home() {
         </div>
         <div className="mt-4 text-center">
           <Link href="/categories">
-            <Button className="bg-[#9d4edd] hover:bg-[#9d4edd]/90 text-white">Explore More Videos</Button>
+            <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">Explore More Projects</Button>
           </Link>
         </div>
       </section>
 
       <section className="text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to showcase your talent?</h2>
-        <p className="text-xl text-gray-400 mb-8">Join thousands of talented individuals across Africa</p>
+        <h2 className="text-3xl font-bold text-white mb-4">Ready to showcase your entrepreneurial talent?</h2>
+        <p className="text-xl text-gray-400 mb-8">Join thousands of talented entrepreneurs across Brazil</p>
         <Link href="/talents/add">
-          <Button className="bg-[#9d4edd] hover:bg-[#9d4edd]/90 text-white text-lg px-8 py-4">
-            Upload Your Talent
+          <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white text-lg px-8 py-4">
+            Submit Your Project
           </Button>
         </Link>
       </section>

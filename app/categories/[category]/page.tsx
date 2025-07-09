@@ -118,7 +118,7 @@ export default async function CategoryPage({
                     </span>
                   </div>
                   <div className="absolute top-2 right-2 flex items-center gap-1">
-                    <Heart className="h-4 w-4 text-[#ff1493]" />
+                    <Heart className="h-4 w-4 text-[#10b981]" />
                     <span className="text-white text-sm">
                       {video.likes?.toLocaleString() || 0}
                     </span>

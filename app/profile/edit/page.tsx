@@ -118,7 +118,7 @@ export default function EditProfilePage() {
         <div className="flex gap-4">
           <Button
             type="submit"
-            className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white"
+            className="bg-[#10b981] hover:bg-[#10b981]/90 text-white"
           >
             Save Changes
           </Button>

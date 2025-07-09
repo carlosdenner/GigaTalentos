@@ -8,11 +8,10 @@ export default function Footer() {
         <div className="flex flex-wrap justify-between items-center gap-4">
         <div className="flex items-center space-x-4">
           <Link href="/" className="text-xl font-bold">
-            <span className="text-[#ff1493]">Rise</span>
-            <span className="text-[#9d4edd]">Me</span>
-            <span className="text-[#ff1493]">Up</span>
+            <span className="text-[#10b981]">Giga</span>
+            <span className="text-[#3b82f6]">Talentos</span>
           </Link>
-          <p className="text-sm text-gray-400">Empowering African youth</p>
+          <p className="text-sm text-gray-400">Desenvolvendo talentos brasileiros</p>
         </div>
         <div className="flex items-center space-x-4">
           <Link href="/about" className="text-gray-400 hover:text-white text-sm">
@@ -29,16 +28,16 @@ export default function Footer() {
           </Link>
         </div>
         <div className="flex space-x-4">
-          <a href="#" className="text-gray-400 hover:text-[#ff1493]">
+          <a href="#" className="text-gray-400 hover:text-[#10b981]">
             <Facebook className="h-5 w-5" />
           </a>
-          <a href="#" className="text-gray-400 hover:text-[#ff1493]">
+          <a href="#" className="text-gray-400 hover:text-[#10b981]">
             <Instagram className="h-5 w-5" />
           </a>
-          <a href="#" className="text-gray-400 hover:text-[#ff1493]">
+          <a href="#" className="text-gray-400 hover:text-[#10b981]">
             <Twitter className="h-5 w-5" />
           </a>
-          <a href="#" className="text-gray-400 hover:text-[#ff1493]">
+          <a href="#" className="text-gray-400 hover:text-[#3b82f6]">
             <Youtube className="h-5 w-5" />
           </a>
         </div>

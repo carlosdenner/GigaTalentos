@@ -12,8 +12,8 @@ import { Providers } from "@/components/providers"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "RiseMeUp - African Youth Talent Discovery Platform",
-  description: "Connect talented African youth with opportunities in creative fields",
+  title: "Giga Talentos - Plataforma de Empreendedorismo e Identificação de Talentos",
+  description: "Conecte jovens talentos brasileiros com oportunidades de empreendedorismo e desenvolvimento profissional",
     generator: 'v0.dev'
 }
 

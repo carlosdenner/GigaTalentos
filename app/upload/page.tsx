@@ -55,7 +55,7 @@ export default function UploadPage() {
                 <TabsContent value="file">
                   <div
                     className={`border-2 border-dashed rounded-lg p-12 text-center ${
-                      dragActive ? "border-[#ff1493] bg-[#ff1493]/10" : "border-gray-700"
+                      dragActive ? "border-[#10b981] bg-[#10b981]/10" : "border-gray-700"
                     }`}
                     onDragEnter={() => setDragActive(true)}
                     onDragLeave={() => setDragActive(false)}
@@ -151,7 +151,7 @@ export default function UploadPage() {
                 </div>
 
                 <div className="pt-4">
-                  <Button className="bg-[#ff1493] hover:bg-[#ff1493]/90 text-white w-full">Upload Video</Button>
+                  <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white w-full">Upload Video</Button>
                 </div>
               </div>
             </CardContent>
