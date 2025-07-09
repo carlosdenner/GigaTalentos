@@ -56,14 +56,14 @@ export default function SearchPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Search</h1>
+      <h1 className="text-4xl font-bold text-white mb-8">Buscar</h1>
 
       <div className="flex gap-4 mb-8">
         <div className="relative flex-1">
           <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input
             className="bg-[#1a2942] border-gray-700 text-white pl-10 h-12"
-            placeholder="Search for videos, channels, or creators..."
+            placeholder="Buscar por vídeos, canais ou criadores..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
@@ -74,7 +74,7 @@ export default function SearchPage() {
           onClick={handleSearch}
           disabled={isLoading}
         >
-          {isLoading ? "Searching..." : "Search"}
+          {isLoading ? "Buscando..." : "Buscar"}
         </Button>
       </div>
 
@@ -82,17 +82,17 @@ export default function SearchPage() {
         <Tabs defaultValue="videos" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="bg-[#1a2942]">
             <TabsTrigger value="videos" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Videos
+              Vídeos
             </TabsTrigger>
             <TabsTrigger value="channels" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Channels
+              Canais
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="videos" className="mt-6">
             {videos.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-400">No videos found matching "{query}"</p>
+                <p className="text-gray-400">Nenhum vídeo encontrado para "{query}"</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,7 +140,7 @@ export default function SearchPage() {
           <TabsContent value="channels" className="mt-6">
             {channels.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-400">No channels found matching "{query}"</p>
+                <p className="text-gray-400">Nenhum canal encontrado para "{query}"</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -159,9 +159,9 @@ export default function SearchPage() {
                       </div>
                       <p className="text-gray-300 mb-4 line-clamp-2">{channel.description}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-400">{channel.subscribers.toLocaleString()} subscribers</span>
+                        <span className="text-gray-400">{channel.subscribers.toLocaleString()} inscritos</span>
                         <Link href={`/channels/${channel.id}`}>
-                          <Button variant="outline">View Channel</Button>
+                          <Button variant="outline">Ver Canal</Button>
                         </Link>
                       </div>
                     </CardContent>

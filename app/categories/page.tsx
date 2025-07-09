@@ -20,7 +20,7 @@ export default async function CategoriesPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Talent Categories</h1>
+      <h1 className="text-4xl font-bold text-white mb-8">Categorias de Talentos</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((category: { _id: Key | null | undefined; thumbnail: any; name: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; description: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
           <Card key={category._id} className="bg-[#1a2942] border-gray-800">
@@ -37,7 +37,7 @@ export default async function CategoriesPage() {
               <p className="text-gray-400 mb-4 line-clamp-2">{category.description}</p>
               <Link href={`/categories/${category?._id}`}>
                 <Button className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white">
-                  Explore {category.name}
+                  Explorar {category.name}
                 </Button>
               </Link>
             </CardContent>

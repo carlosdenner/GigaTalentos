@@ -30,11 +30,11 @@ export default function FavoritesPage() {
     }
   }, [session]);
 
-  if (loading) return <div className="text-white">Loading...</div>;
+  if (loading) return <div className="text-white">Carregando...</div>;
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-white mb-8">My Favorites</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">Meus Favoritos</h1>
       
       {favorites.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -72,7 +72,7 @@ export default function FavoritesPage() {
         </div>
       ) : (
         <div className="text-center text-gray-400 py-12">
-          No favorite videos yet
+          Nenhum vídeo favorito ainda
         </div>
       )}
     </div>

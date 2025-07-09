@@ -84,10 +84,10 @@ export default async function PlaylistPage() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-white">{isLoggedIn ? playlist.name : "Popular Videos"}</h1>
+        <h1 className="text-4xl font-bold text-white">{isLoggedIn ? playlist.name : "Vídeos Populares"}</h1>
         {!isLoggedIn && (
           <Link href="/auth/login">
-            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">Login to Create Playlists</Button>
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">Entrar para Criar Playlists</Button>
           </Link>
         )}
       </div>
@@ -98,19 +98,19 @@ export default async function PlaylistPage() {
             <div>
               <h2 className="text-2xl font-semibold text-white">{playlist.name}</h2>
               <p className="text-gray-400">
-                {playlist.videos?.length || 0} videos • {formatDuration(totalDuration)}
+                {playlist.videos?.length || 0} vídeos • {formatDuration(totalDuration)}
               </p>
             </div>
-            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">Play All</Button>
+            <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">Reproduzir Todos</Button>
           </div>
 
           {playlist.videos?.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-gray-400 mb-4">
-                {isLoggedIn ? "Your playlist is empty. Add some videos!" : "Login to create and manage your playlists."}
+                {isLoggedIn ? "Sua playlist está vazia. Adicione alguns vídeos!" : "Entre para criar e gerenciar suas playlists."}
               </p>
               <Link href="/categories">
-                <Button variant="outline">Browse Videos</Button>
+                <Button variant="outline">Navegar Vídeos</Button>
               </Link>
             </div>
           ) : (
@@ -124,7 +124,7 @@ export default async function PlaylistPage() {
                     <span className="text-gray-400 w-8">{index + 1}</span>
                     <div className="ml-4">
                       <h3 className="text-white font-medium">{item.title}</h3>
-                      <p className="text-gray-400 text-sm">{item.channels?.name || "Unknown Artist"}</p>
+                      <p className="text-gray-400 text-sm">{item.channels?.name || "Artista Desconhecido"}</p>
                     </div>
                   </div>
                   <span className="text-gray-400">{item.duration}</span>

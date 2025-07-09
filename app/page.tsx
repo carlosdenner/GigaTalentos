@@ -50,15 +50,15 @@ export default async function Home() {
   return (
     <div className="space-y-12">
       <section className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">Welcome to Giga Talentos</h1>
-        <p className="text-xl text-gray-400 mb-8">Discover Brazil's Rising Entrepreneurs</p>
+        <h1 className="text-4xl font-bold text-white mb-4">Bem-vindo ao Giga Talentos</h1>
+        <p className="text-xl text-gray-400 mb-8">Descubra os Empreendedores Brasileiros em Ascensão</p>
         <Link href="/categories">
-          <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white text-lg px-8 py-4">Get Started</Button>
+          <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white text-lg px-8 py-4">Começar</Button>
         </Link>
       </section>
 
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Talent Identification Dimensions</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Dimensões de Identificação de Talentos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category) => (
             <Card key={category._id} className="bg-[#1a2942] border-gray-800">
@@ -68,7 +68,7 @@ export default async function Home() {
                 <p className="text-gray-400 mb-4">{category.description}</p>
                 <Link href={`/categories/${category.name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}>
                   <Button variant="outline" className="w-full">
-                    Explore {category.name}
+                    Explorar {category.name}
                   </Button>
                 </Link>
               </CardContent>
@@ -78,7 +78,7 @@ export default async function Home() {
       </section>
 
       <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Featured Entrepreneurial Showcases</h2>
+        <h2 className="text-3xl font-bold text-white mb-6">Showcases Empreendedoriais em Destaque</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredVideos.map((video: any) => (
             <Link href={`/talents/${video._id}`} key={video._id} className="group">
@@ -113,17 +113,17 @@ export default async function Home() {
         </div>
         <div className="mt-4 text-center">
           <Link href="/categories">
-            <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">Explore More Projects</Button>
+            <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">Explorar Mais Projetos</Button>
           </Link>
         </div>
       </section>
 
       <section className="text-center">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to showcase your entrepreneurial talent?</h2>
-        <p className="text-xl text-gray-400 mb-8">Join thousands of talented entrepreneurs across Brazil</p>
+        <h2 className="text-3xl font-bold text-white mb-4">Pronto para mostrar seu talento empreendedor?</h2>
+        <p className="text-xl text-gray-400 mb-8">Junte-se a milhares de empreendedores talentosos em todo o Brasil</p>
         <Link href="/talents/add">
           <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white text-lg px-8 py-4">
-            Submit Your Project
+            Submeter Seu Projeto
           </Button>
         </Link>
       </section>
