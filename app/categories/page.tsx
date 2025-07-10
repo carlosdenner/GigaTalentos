@@ -81,9 +81,9 @@ export default function CategoriesPage() {
   return (
     <div className="space-y-8">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4">Categorias de Talentos</h1>
+        <h1 className="text-4xl font-bold text-white mb-4">Habilidades Empreendedoras</h1>
         <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-          Explore as seis dimensões científicas de talento que identificam os empreendedores mais promissores do Brasil
+          Ative as seis dimensões que impulsionam os talentos mais promissores do Brasil
         </p>
       </div>
       

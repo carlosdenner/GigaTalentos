@@ -19,7 +19,7 @@ export default function Sidebar() {
               <span className="text-[#3b82f6]">Talentos</span>
             </span>
           </Link>
-          <div className="text-[#3b82f6] text-sm mt-1">Empreendedorismo & Talentos</div>
+          <div className="text-[#3b82f6] text-sm mt-1">Empreendedorismo & Tecnologia</div>
         </div>
 
         <div className="mt-6 px-4">
@@ -34,7 +34,7 @@ export default function Sidebar() {
         <nav className="mt-6 flex flex-col gap-2 px-4">
           <Link href="/categories" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
             <Zap className="h-5 w-5 text-[#3b82f6]" />
-            <span>Categorias</span>
+            <span>Habilidades</span>
           </Link>
           <Link href="/desafios" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
             <Users className="h-5 w-5 text-[#3b82f6]" />
