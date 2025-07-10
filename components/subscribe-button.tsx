@@ -41,7 +41,7 @@ export default function SubscribeButton({ channelId, initialSubscribed = false, 
       onClick={handleSubscribe}
       className={subscribed ? 'bg-gray-600' : 'bg-[#10b981]'}
     >
-      {subscribed ? 'Subscribed' : 'Subscribe'} 
+      {subscribed ? 'Seguindo' : 'Seguir'} 
       <span className="ml-2">({subscriberCount})</span>
     </Button>
   );

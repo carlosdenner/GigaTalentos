@@ -6,34 +6,34 @@ import { authOptions } from "../auth/[...nextauth]/route";
 
 const initialCategories = [
   {
-    name: "Cognitive & Technical Ability",
-    description: "Above-average intellectual or domain-specific ability in STEM, problem-solving, and technical skills",
-    thumbnail: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    name: "Habilidade Cognitiva & Técnica",
+    description: "Capacidade de resolver problemas complexos, pensamento analítico e competências técnicas específicas necessárias para desenvolvimento de soluções inovadoras.",
+    thumbnail: "/placeholder.jpg",
   },
   {
-    name: "Creativity & Innovation",
-    description: "Creative thinking, ability to generate novel ideas and solutions, pursuing tasks in original ways",
-    thumbnail: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    name: "Criatividade & Inovação",
+    description: "Capacidade de gerar ideias originais e implementar soluções inovadoras para desafios existentes, transformando conceitos em realidade.",
+    thumbnail: "/placeholder.jpg",
   },
   {
-    name: "Motivation & Passion",
-    description: "Intense intrinsic motivation, perseverance, grit, and sustained effort with enthusiasm for interests",
-    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    name: "Liderança & Colaboração",
+    description: "Habilidade de inspirar equipes, facilitar colaboração efetiva e dirigir projetos multidisciplinares para o sucesso.",
+    thumbnail: "/placeholder.jpg",
   },
   {
-    name: "Leadership & Collaboration",
-    description: "Leadership skills, ability to work in teams, take initiative, and guide projects effectively",
-    thumbnail: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    name: "Resiliência & Adaptabilidade",
+    description: "Capacidade de superar obstáculos, aprender com falhas e adaptar-se rapidamente a mudanças do mercado e tecnologia.",
+    thumbnail: "/placeholder.jpg",
   },
   {
-    name: "Social Consciousness & Integrity",
-    description: "Empathy, ethics, strong moral principles, and drive to impact society positively through innovation",
-    thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    name: "Consciência Social & Ética",
+    description: "Compreensão do impacto social, responsabilidade ética e compromisso com desenvolvimento sustentável e inclusivo.",
+    thumbnail: "/placeholder.jpg",
   },
   {
-    name: "Adaptability & Resilience",
-    description: "Ability to adapt, bounce back from failure, cope with challenges, and iterate on setbacks",
-    thumbnail: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+    name: "Comunicação & Persuasão",
+    description: "Habilidade de comunicar ideias complexas de forma clara e influenciar stakeholders para ação e mudança positiva.",
+    thumbnail: "/placeholder.jpg",
   }
 ];
 
@@ -56,13 +56,13 @@ export async function POST() {
     const categories = await Category.insertMany(initialCategories);
     
     return NextResponse.json({ 
-      message: "Categories seeded successfully",
+      message: "Categorias criadas com sucesso",
       categories 
     });
   } catch (error) {
-    console.error("Error seeding categories:", error);
+    console.error("Erro ao criar categorias:", error);
     return NextResponse.json(
-      { error: "Failed to seed categories" },
+      { error: "Falha ao criar categorias" },
       { status: 500 }
     );
   }

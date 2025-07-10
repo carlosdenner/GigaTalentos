@@ -410,7 +410,7 @@ export default function TalentDetailsPage() {
                 </Button>
                 <span className="flex items-center gap-1">
                   <Eye className="h-5 w-5" />
-                  {video?.views?.toLocaleString() || 0} views
+                  {video?.views?.toLocaleString() || 0} visualizações
                 </span>
               </div>
             </CardContent>

@@ -149,7 +149,7 @@ export default function TalentsPage() {
                         </span>
                         <Link href={`/talents/${video._id}`}>
                           <Button size="sm" variant="outline" className="border-[#10b981] text-[#10b981] hover:bg-[#10b981]/10">
-                            View Details
+                            Ver Detalhes
                           </Button>
                         </Link>
                       </div>
@@ -162,7 +162,7 @@ export default function TalentsPage() {
                 <div className="flex justify-end">
                   <Link href={`/categories/${category.toLowerCase()}`}>
                     <Button variant="ghost" className="text-[#10b981] hover:text-[#10b981] hover:bg-[#10b981]/10">
-                      View all in {category} →
+                      Ver todos em {category} →
                     </Button>
                   </Link>
                 </div>

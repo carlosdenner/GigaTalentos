@@ -112,7 +112,7 @@ export default function ProfilePage() {
           <Link href="/talents/add">
             <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">
               <Upload className="h-4 w-4 mr-2" />
-              Upload
+              Enviar
             </Button>
           </Link>
         </div>
@@ -123,47 +123,47 @@ export default function ProfilePage() {
           <div className="flex items-center gap-6">
             <div className="text-center">
               <div className="text-xl font-bold text-white">{profile.videosCount}</div>
-              <div className="text-sm text-gray-400">Videos</div>
+              <div className="text-sm text-gray-400">Vídeos</div>
             </div>
             <div className="text-center">
               <div className="text-xl font-bold text-white">{profile.followersCount}</div>
-              <div className="text-sm text-gray-400">Followers</div>
+              <div className="text-sm text-gray-400">Seguidores</div>
             </div>
             <div className="text-center">
               <div className="text-xl font-bold text-white">{profile.followingCount}</div>
-              <div className="text-sm text-gray-400">Following</div>
+              <div className="text-sm text-gray-400">Seguindo</div>
             </div>
           </div>
           {/* Keep sponsor section hardcoded */}
           <div className="flex gap-2">
             <Button variant="outline" className="border-[#1e90ff] text-[#1e90ff]">
               <MessageSquare className="h-4 w-4 mr-2" />
-              Message
+              Mensagem
             </Button>
             <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">
               <UserPlus className="h-4 w-4 mr-2" />
-              Follow
+              Seguir
             </Button>
           </div>
         </div>
 
         <div className="mt-8">
           <p className="text-gray-300 max-w-2xl">
-            Professional singer and songwriter based in Kigali. Passionate about discovering new talent and
-            collaborating with artists across Africa.
+            Empreendedor e inovador profissional baseado em São Paulo. Apaixonado por descobrir novos talentos e
+            colaborar com empreendedores de todo o Brasil.
           </p>
         </div>
 
         <Tabs defaultValue="videos" className="mt-8">
           <TabsList className="bg-[#1a2942]">
             <TabsTrigger value="videos" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Videos
+              Vídeos
             </TabsTrigger>
             <TabsTrigger value="about" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              About
+              Sobre
             </TabsTrigger>
             <TabsTrigger value="sponsors" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Sponsors
+              Patrocinadores
             </TabsTrigger>
           </TabsList>
           
@@ -199,7 +199,7 @@ export default function ProfilePage() {
                 ))
               ) : (
                 <div className="col-span-full text-center py-12 text-gray-400">
-                  No videos uploaded yet.
+                  Nenhum vídeo enviado ainda.
                 </div>
               )}
             </div>

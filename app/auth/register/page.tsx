@@ -35,22 +35,22 @@ export default function RegisterPage() {
 
       if (success) {
         toast({
-          title: "Registration successful",
-          description: "Your account has been created. Please log in.",
+          title: "Cadastro realizado com sucesso",
+          description: "Sua conta foi criada. Por favor, faça login.",
         })
 
         router.push("/auth/login")
       } else {
         toast({
-          title: "Registration failed",
-          description: error || "Please check your information and try again.",
+          title: "Falha no cadastro",
+          description: error || "Por favor, verifique suas informações e tente novamente.",
           variant: "destructive",
         })
       }
     } catch (error) {
       toast({
-        title: "Registration failed",
-        description: "An error occurred. Please try again later.",
+        title: "Falha no cadastro",
+        description: "Ocorreu um erro. Por favor, tente novamente mais tarde.",
         variant: "destructive",
       })
     } finally {
@@ -70,22 +70,22 @@ export default function RegisterPage() {
           </Link>
           <div className="flex items-center justify-center gap-2 mt-2">
             <Zap className="h-5 w-5 text-[#10b981]" />
-            <p className="text-white">Discover African Talent</p>
+            <p className="text-white">Descubra Talentos Brasileiros</p>
           </div>
         </div>
 
         <Card className="bg-[#1a2942] border-gray-800 text-white">
           <CardHeader>
-            <CardTitle className="text-2xl">Create an account</CardTitle>
-            <CardDescription className="text-gray-400">Join the African talent discovery platform</CardDescription>
+            <CardTitle className="text-2xl">Criar uma conta</CardTitle>
+            <CardDescription className="text-gray-400">Junte-se à plataforma de descoberta de talentos brasileiros</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">Nome Completo</Label>
                 <Input
                   id="name"
-                  placeholder="John Doe"
+                  placeholder="João Silva"
                   className="bg-[#0a192f] border-gray-700"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -94,11 +94,11 @@ export default function RegisterPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="name@example.com"
+                  placeholder="nome@exemplo.com"
                   className="bg-[#0a192f] border-gray-700"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Senha</Label>
                 <Input
                   id="password"
                   type="password"
@@ -120,15 +120,15 @@ export default function RegisterPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="account-type">Account Type</Label>
+                <Label htmlFor="account-type">Tipo de Conta</Label>
                 <Select value={accountType} onValueChange={setAccountType} disabled={isLoading}>
                   <SelectTrigger className="bg-[#0a192f] border-gray-700">
-                    <SelectValue placeholder="Select account type" />
+                    <SelectValue placeholder="Selecione o tipo de conta" />
                   </SelectTrigger>
                   <SelectContent className="bg-[#1a2942] border-gray-700 text-white">
-                    <SelectItem value="talent">Talent</SelectItem>
-                    <SelectItem value="sponsor">Sponsor</SelectItem>
-                    <SelectItem value="fan">Fan</SelectItem>
+                    <SelectItem value="talent">Talento</SelectItem>
+                    <SelectItem value="sponsor">Patrocinador</SelectItem>
+                    <SelectItem value="fan">Admirador</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -141,13 +141,13 @@ export default function RegisterPage() {
                   disabled={isLoading}
                 />
                 <Label htmlFor="terms" className="text-sm text-gray-400">
-                  I agree to the{" "}
+                  Eu concordo com os{" "}
                   <Link href="/terms" className="text-[#3b82f6] hover:underline">
-                    Terms of Service
+                    Termos de Serviço
                   </Link>{" "}
-                  and{" "}
+                  e{" "}
                   <Link href="/privacy" className="text-[#3b82f6] hover:underline">
-                    Privacy Policy
+                    Política de Privacidade
                   </Link>
                 </Label>
               </div>
@@ -156,7 +156,7 @@ export default function RegisterPage() {
                 className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
                 disabled={isLoading || !agreeTerms}
               >
-                {isLoading ? "Creating account..." : "Create Account"}
+                {isLoading ? "Criando conta..." : "Criar Conta"}
               </Button>
             </form>
           </CardContent>
@@ -166,7 +166,7 @@ export default function RegisterPage() {
                 <span className="w-full border-t border-gray-700"></span>
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-[#1a2942] px-2 text-gray-400">Or continue with</span>
+                <span className="bg-[#1a2942] px-2 text-gray-400">Ou continue com</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -178,9 +178,9 @@ export default function RegisterPage() {
               </Button>
             </div>
             <p className="text-center text-sm text-gray-400">
-              Already have an account?{" "}
-              <Link href="/auth/login" className="text-[#9d4edd] hover:underline">
-                Login
+              Já tem uma conta?{" "}
+              <Link href="/auth/login" className="text-[#3b82f6] hover:underline">
+                Entrar
               </Link>
             </p>
           </CardFooter>

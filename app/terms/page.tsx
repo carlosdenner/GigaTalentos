@@ -5,12 +5,12 @@ export default function TermsPage() {
 
       <div className="prose prose-invert">
         <p className="text-gray-300 mb-6">
-          Welcome to RiseMeUp. By accessing or using our platform, you agree to be bound by these Terms of Service.
+          Bem-vindo ao Giga Talentos. Ao acessar ou usar nossa plataforma, você concorda em estar vinculado a estes Termos de Serviço.
         </p>
 
         <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Acceptance of Terms</h2>
         <p className="text-gray-300 mb-4">
-          By accessing or using the RiseMeUp platform, you agree to be bound by these Terms of Service and all
+          Ao acessar ou usar a plataforma Giga Talentos, você concorda em estar vinculado a estes Termos de Serviço e todas
           applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or
           accessing this site.
         </p>
@@ -27,18 +27,18 @@ export default function TermsPage() {
           <li className="mb-2">You must own or have the rights to all content you upload</li>
           <li className="mb-2">Content must not violate any laws or regulations</li>
           <li className="mb-2">Content must not be harmful, offensive, or inappropriate</li>
-          <li className="mb-2">RiseMeUp reserves the right to remove content at its discretion</li>
+          <li className="mb-2">Giga Talentos reserva-se o direito de remover conteúdo a seu critério</li>
         </ul>
 
         <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Intellectual Property</h2>
         <p className="text-gray-300 mb-4">
-          The RiseMeUp platform and its original content, features, and functionality are owned by RiseMeUp and are
+          A plataforma Giga Talentos e seu conteúdo original, recursos e funcionalidades são de propriedade do Giga Talentos e estão
           protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
         </p>
 
         <h2 className="text-2xl font-bold text-white mt-8 mb-4">5. User Content License</h2>
         <p className="text-gray-300 mb-4">
-          By uploading content to RiseMeUp, you grant us a non-exclusive, worldwide, royalty-free license to use,
+          Ao fazer upload de conteúdo para o Giga Talentos, você nos concede uma licença não exclusiva, mundial e isenta de royalties para usar,
           reproduce, adapt, publish, translate, and distribute your content in any existing or future media formats.
         </p>
 
@@ -50,7 +50,7 @@ export default function TermsPage() {
 
         <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Limitation of Liability</h2>
         <p className="text-gray-300 mb-4">
-          In no event shall RiseMeUp, nor its directors, employees, partners, agents, suppliers, or affiliates, be
+          Em hipótese alguma o Giga Talentos, nem seus diretores, funcionários, parceiros, agentes, fornecedores ou afiliados, serão
           liable for any indirect, incidental, special, consequential or punitive damages, including without limitation,
           loss of profits, data, use, goodwill, or other intangible losses.
         </p>
@@ -63,7 +63,7 @@ export default function TermsPage() {
 
         <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. Contact Us</h2>
         <p className="text-gray-300 mb-4">
-          If you have any questions about these Terms, please contact us at support@risemeup.com.
+          Se você tiver alguma dúvida sobre estes Termos, entre em contato conosco em suporte@gigatalentos.com.
         </p>
 
         <p className="text-gray-400 mt-8 italic">Last updated: March 19, 2025</p>

@@ -30,25 +30,25 @@ export default function UploadPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0a192f] p-8">
-      <h1 className="text-3xl font-bold text-white mb-8">Upload Your Talent</h1>
+      <h1 className="text-3xl font-bold text-white mb-8">Envie Seu Projeto</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <Card className="bg-[#1a2942] border-gray-800 text-white">
             <CardHeader>
-              <CardTitle>Video Upload</CardTitle>
-              <CardDescription className="text-gray-400">Share your talent with the world</CardDescription>
+              <CardTitle>Envio de Vídeo</CardTitle>
+              <CardDescription className="text-gray-400">Compartilhe seu projeto com o mundo</CardDescription>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="file" className="mb-8" onValueChange={(value) => setUploadMethod(value as "file" | "url")}>
                 <TabsList className="bg-[#0a192f] border-gray-700">
                   <TabsTrigger value="file" className="data-[state=active]:bg-[#1e90ff]">
                     <Upload className="h-4 w-4 mr-2" />
-                    Upload File
+                    Enviar Arquivo
                   </TabsTrigger>
                   <TabsTrigger value="url" className="data-[state=active]:bg-[#1e90ff]">
                     <LinkIcon className="h-4 w-4 mr-2" />
-                    Video URL
+                    URL do Vídeo
                   </TabsTrigger>
                 </TabsList>
 
@@ -68,11 +68,11 @@ export default function UploadPage() {
                     <div className="flex flex-col items-center justify-center gap-4">
                       <Upload className="h-12 w-12 text-gray-400" />
                       <div className="space-y-2">
-                        <h3 className="text-xl font-medium">Drag and drop your video file</h3>
-                        <p className="text-gray-400">or click to browse files</p>
+                        <h3 className="text-xl font-medium">Arraste e solte seu arquivo de vídeo</h3>
+                        <p className="text-gray-400">ou clique para procurar arquivos</p>
                       </div>
                       <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white">
-                        Select File
+                        Selecionar Arquivo
                       </Button>
                     </div>
                   </div>
@@ -81,10 +81,10 @@ export default function UploadPage() {
                 <TabsContent value="url">
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="videoUrl">Video URL</Label>
+                      <Label htmlFor="videoUrl">URL do Vídeo</Label>
                       <Input
                         id="videoUrl"
-                        placeholder="Enter YouTube video URL"
+                        placeholder="Digite a URL do vídeo do YouTube"
                         className="bg-[#0a192f] border-gray-700"
                         value={videoUrl}
                         onChange={handleVideoUrlChange}
@@ -109,34 +109,34 @@ export default function UploadPage() {
 
               <div className="mt-8 space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title</Label>
+                  <Label htmlFor="title">Título</Label>
                   <Input
                     id="title"
-                    placeholder="Enter a title for your video"
+                    placeholder="Digite um título para seu vídeo"
                     className="bg-[#0a192f] border-gray-700"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="description">Description</Label>
+                  <Label htmlFor="description">Descrição</Label>
                   <Textarea
                     id="description"
-                    placeholder="Describe your talent..."
+                    placeholder="Descreva seu projeto..."
                     className="bg-[#0a192f] border-gray-700 min-h-[120px]"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category">Categoria</Label>
                   <Select>
                     <SelectTrigger className="bg-[#0a192f] border-gray-700">
-                      <SelectValue placeholder="Select a category" />
+                      <SelectValue placeholder="Selecione uma categoria" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#1a2942] border-gray-700 text-white">
-                      <SelectItem value="singing">Singing</SelectItem>
-                      <SelectItem value="dancing">Dancing</SelectItem>
-                      <SelectItem value="comedy">Comedy</SelectItem>
-                      <SelectItem value="art">Art</SelectItem>
+                      <SelectItem value="cognitive">Habilidade Cognitiva & Técnica</SelectItem>
+                      <SelectItem value="creative">Criatividade & Inovação</SelectItem>
+                      <SelectItem value="motivation">Motivação & Paixão</SelectItem>
+                      <SelectItem value="leadership">Liderança & Colaboração</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -145,13 +145,13 @@ export default function UploadPage() {
                   <Label htmlFor="tags">Tags</Label>
                   <Input
                     id="tags"
-                    placeholder="Add tags separated by commas"
+                    placeholder="Adicione tags separadas por vírgulas"
                     className="bg-[#0a192f] border-gray-700"
                   />
                 </div>
 
                 <div className="pt-4">
-                  <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white w-full">Upload Video</Button>
+                  <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white w-full">Enviar Vídeo</Button>
                 </div>
               </div>
             </CardContent>
@@ -161,51 +161,51 @@ export default function UploadPage() {
         <div className="lg:col-span-1">
           <Card className="bg-[#1a2942] border-gray-800 text-white">
             <CardHeader>
-              <CardTitle>Upload Guidelines</CardTitle>
-              <CardDescription className="text-gray-400">Follow these rules for a successful upload</CardDescription>
+              <CardTitle>Diretrizes de Envio</CardTitle>
+              <CardDescription className="text-gray-400">Siga estas regras para um envio bem-sucedido</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="font-medium mb-1">Accepted Formats</h3>
-                <p className="text-gray-400 text-sm">MP4, MOV, AVI (max 100MB)</p>
+                <h3 className="font-medium mb-1">Formatos Aceitos</h3>
+                <p className="text-gray-400 text-sm">MP4, MOV, AVI (máx 100MB)</p>
               </div>
 
               <div>
-                <h3 className="font-medium mb-1">Content Policy</h3>
+                <h3 className="font-medium mb-1">Política de Conteúdo</h3>
                 <p className="text-gray-400 text-sm">
-                  All content must be appropriate and follow our community guidelines
+                  Todo conteúdo deve ser apropriado e seguir nossas diretrizes da comunidade
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium mb-1">Copyright</h3>
-                <p className="text-gray-400 text-sm">Only upload content you own or have permission to use</p>
+                <h3 className="font-medium mb-1">Direitos Autorais</h3>
+                <p className="text-gray-400 text-sm">Envie apenas conteúdo que você possui ou tem permissão para usar</p>
               </div>
 
               <div>
-                <h3 className="font-medium mb-1">Processing Time</h3>
-                <p className="text-gray-400 text-sm">Videos may take up to 30 minutes to process after upload</p>
+                <h3 className="font-medium mb-1">Tempo de Processamento</h3>
+                <p className="text-gray-400 text-sm">Vídeos podem levar até 30 minutos para processar após o envio</p>
               </div>
             </CardContent>
           </Card>
 
           <Card className="bg-[#1a2942] border-gray-800 text-white mt-6">
             <CardHeader>
-              <CardTitle>Sponsor Connections</CardTitle>
-              <CardDescription className="text-gray-400">Get discovered by sponsors</CardDescription>
+              <CardTitle>Conexões com Mentores</CardTitle>
+              <CardDescription className="text-gray-400">Seja descoberto por mentores</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-gray-400 text-sm">
-                By uploading your talent, you agree to be discoverable by verified sponsors on our platform.
+                Ao enviar seu projeto, você concorda em ser descoberto por mentores verificados em nossa plataforma.
               </p>
 
               <div className="bg-[#0a192f] p-4 rounded-lg">
-                <h3 className="font-medium mb-1">Sponsor Verification</h3>
-                <p className="text-gray-400 text-sm">All sponsors are verified to ensure legitimacy and safety</p>
+                <h3 className="font-medium mb-1">Verificação de Mentores</h3>
+                <p className="text-gray-400 text-sm">Todos os mentores são verificados para garantir legitimidade e segurança</p>
               </div>
 
               <Button className="bg-[#1e90ff] hover:bg-[#1e90ff]/90 text-white w-full">
-                Learn More About Sponsors
+                Saiba Mais Sobre Mentores
               </Button>
             </CardContent>
           </Card>

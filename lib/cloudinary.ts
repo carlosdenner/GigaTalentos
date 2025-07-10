@@ -5,4 +5,4 @@ export type UploadResult = {
   public_id: string;
 };
 
-export const uploadPreset = "risemeup_talents";
+export const uploadPreset = "gigatalentos_projetos";

@@ -27,8 +27,8 @@ export default function ContactPage() {
     // Simulate API call
     setTimeout(() => {
       toast({
-        title: "Message sent",
-        description: "We'll get back to you as soon as possible.",
+        title: "Mensagem enviada",
+        description: "Entraremos em contato o mais breve possível.",
       })
 
       // Reset form
@@ -42,7 +42,7 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-6xl mx-auto py-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Contact Us</h1>
+      <h1 className="text-4xl font-bold text-white mb-8">Entre em Contato</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-1 space-y-6">
@@ -54,7 +54,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-medium text-white">Email</h3>
-                  <p className="text-gray-400">info@risemeup.com</p>
+                  <p className="text-gray-400">contatos@gigacandanga.net.br</p>
                 </div>
               </div>
 
@@ -63,8 +63,8 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 text-[#3b82f6]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-white">Phone</h3>
-                  <p className="text-gray-400">+250 788 123 456</p>
+                  <h3 className="font-medium text-white">Telefone</h3>
+                  <p className="text-gray-400">+55 61 3340-6543</p>
                 </div>
               </div>
 
@@ -73,8 +73,11 @@ export default function ContactPage() {
                   <MapPin className="h-6 w-6 text-[#1e90ff]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-white">Address</h3>
-                  <p className="text-gray-400">Kigali Innovation City, Rwanda</p>
+                  <h3 className="font-medium text-white">Endereço</h3>
+                  <p className="text-gray-400">Edifício CEFTRU, Bloco B, Sala BT 07/20<br />
+                    Campus Darcy Ribeiro – UnB<br />
+                    Asa Norte, Brasília – DF<br />
+                    CEP: 70910-900</p>
                 </div>
               </div>
             </CardContent>
@@ -82,22 +85,22 @@ export default function ContactPage() {
 
           <Card className="bg-[#1a2942] border-gray-800 text-white">
             <CardHeader>
-              <CardTitle>Office Hours</CardTitle>
-              <CardDescription className="text-gray-400">When you can reach us</CardDescription>
+              <CardTitle>Horário de Funcionamento</CardTitle>
+              <CardDescription className="text-gray-400">Quando você pode nos encontrar</CardDescription>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Monday - Friday</span>
-                  <span className="text-white">9:00 AM - 6:00 PM</span>
+                  <span className="text-gray-400">Segunda - Sexta</span>
+                  <span className="text-white">9:00 - 18:00</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Saturday</span>
-                  <span className="text-white">10:00 AM - 4:00 PM</span>
+                  <span className="text-gray-400">Sábado</span>
+                  <span className="text-white">10:00 - 16:00</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Sunday</span>
-                  <span className="text-white">Closed</span>
+                  <span className="text-gray-400">Domingo</span>
+                  <span className="text-white">Fechado</span>
                 </div>
               </div>
             </CardContent>
@@ -107,19 +110,19 @@ export default function ContactPage() {
         <div className="md:col-span-2">
           <Card className="bg-[#1a2942] border-gray-800 text-white">
             <CardHeader>
-              <CardTitle>Send us a message</CardTitle>
+              <CardTitle>Envie-nos uma mensagem</CardTitle>
               <CardDescription className="text-gray-400">
-                Fill out the form below and we'll get back to you as soon as possible.
+                Preencha o formulário abaixo e entraremos em contato o mais breve possível.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name">Nome Completo</Label>
                     <Input
                       id="name"
-                      placeholder="John Doe"
+                      placeholder="João Silva"
                       className="bg-[#0a192f] border-gray-700"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -128,11 +131,11 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">E-mail</Label>
                     <Input
                       id="email"
                       type="email"
-                      placeholder="name@example.com"
+                      placeholder="nome@exemplo.com"
                       className="bg-[#0a192f] border-gray-700"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -143,26 +146,26 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
+                  <Label htmlFor="subject">Assunto</Label>
                   <Select value={subject} onValueChange={setSubject} disabled={isLoading}>
                     <SelectTrigger className="bg-[#0a192f] border-gray-700">
-                      <SelectValue placeholder="Select a subject" />
+                      <SelectValue placeholder="Selecione um assunto" />
                     </SelectTrigger>
                     <SelectContent className="bg-[#1a2942] border-gray-700 text-white">
-                      <SelectItem value="general">General Inquiry</SelectItem>
-                      <SelectItem value="support">Technical Support</SelectItem>
-                      <SelectItem value="partnership">Partnership Opportunities</SelectItem>
-                      <SelectItem value="sponsorship">Sponsorship</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="general">Consulta Geral</SelectItem>
+                      <SelectItem value="support">Suporte Técnico</SelectItem>
+                      <SelectItem value="partnership">Oportunidades de Parceria</SelectItem>
+                      <SelectItem value="sponsorship">Patrocínio</SelectItem>
+                      <SelectItem value="other">Outro</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message">Mensagem</Label>
                   <Textarea
                     id="message"
-                    placeholder="How can we help you?"
+                    placeholder="Como podemos ajudá-lo?"
                     className="bg-[#0a192f] border-gray-700 min-h-[150px]"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -176,7 +179,7 @@ export default function ContactPage() {
                   className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Sending..." : "Send Message"}
+                  {isLoading ? "Enviando..." : "Enviar Mensagem"}
                 </Button>
               </form>
             </CardContent>

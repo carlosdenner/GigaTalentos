@@ -67,23 +67,23 @@ export default function LoginPage() {
           </Link>
           <div className="flex items-center justify-center gap-2 mt-2">
             <Zap className="h-5 w-5 text-[#10b981]" />
-            <p className="text-white">Discover African Talent</p>
+            <p className="text-white">Descubra Talentos Brasileiros</p>
           </div>
         </div>
 
         <Card className="bg-[#1a2942] border-gray-800 text-white">
           <CardHeader>
-            <CardTitle className="text-2xl">Welcome back</CardTitle>
-            <CardDescription className="text-gray-400">Login to your account to continue</CardDescription>
+            <CardTitle className="text-2xl">Bem-vindo de volta</CardTitle>
+            <CardDescription className="text-gray-400">Faça login na sua conta para continuar</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-mail</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="name@example.com"
+                  placeholder="nome@exemplo.com"
                   className="bg-[#0a192f] border-gray-700"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -93,9 +93,9 @@ export default function LoginPage() {
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Senha</Label>
                   <Link href="/auth/forgot-password" className="text-sm text-[#3b82f6] hover:underline">
-                    Forgot password?
+                    Esqueceu a senha?
                   </Link>
                 </div>
                 <Input
@@ -117,7 +117,7 @@ export default function LoginPage() {
                   disabled={isLoading}
                 />
                 <Label htmlFor="remember" className="text-sm text-gray-400">
-                  Remember me
+                  Lembrar de mim
                 </Label>
               </div>
               <Button
@@ -125,7 +125,7 @@ export default function LoginPage() {
                 className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
                 disabled={isLoading}
               >
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? "Fazendo login..." : "Entrar"}
               </Button>
             </form>
           </CardContent>
@@ -135,7 +135,7 @@ export default function LoginPage() {
                 <span className="w-full border-t border-gray-700"></span>
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-[#1a2942] px-2 text-gray-400">Or continue with</span>
+                <span className="bg-[#1a2942] px-2 text-gray-400">Ou continue com</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -147,9 +147,9 @@ export default function LoginPage() {
               </Button>
             </div>
             <p className="text-center text-sm text-gray-400">
-              Don&apos;t have an account?{" "}
+              Não tem uma conta?{" "}
               <Link href="/auth/register" className="text-[#3b82f6] hover:underline">
-                Sign up
+                Cadastre-se
               </Link>
             </p>
           </CardFooter>

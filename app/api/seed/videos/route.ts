@@ -7,52 +7,52 @@ import User from "@/models/User";
 
 const sampleVideos = [
   {
-    title: "Innovative Tech Solution Pitch",
-    description: "A brilliant technical presentation showcasing problem-solving abilities and innovative thinking",
+    title: "Solução Tecnológica Inovadora",
+    description: "Uma apresentação técnica brilhante mostrando habilidades de resolução de problemas e pensamento inovador",
     video_url: "https://www.youtube.com/watch?v=FDcRHfhWZvA",
     views: 125000,
     likes: 4500,
-    category: "Cognitive & Technical Ability"
+    category: "Habilidade Cognitiva & Técnica"
   },
   {
-    title: "Creative Startup Concept Demo",
-    description: "Original business idea demonstration with novel approach to market challenges",
+    title: "Demo de Conceito Criativo de Startup",
+    description: "Demonstração de ideia de negócio original com abordagem inovadora para desafios de mercado",
     video_url: "https://www.youtube.com/watch?v=xvQoxkKIpbw",
     views: 98000,
     likes: 3200,
-    category: "Creativity & Innovation"
+    category: "Criatividade & Inovação"
   },
   {
-    title: "Entrepreneurial Journey Story",
-    description: "Personal story of perseverance, grit, and sustained effort in building a startup",
+    title: "História da Jornada Empreendedora",
+    description: "História pessoal de perseverança, determinação e esforço sustentado na construção de uma startup",
     video_url: "https://www.youtube.com/watch?v=5Ym1YA0F3S0",
     views: 89000,
     likes: 2800,
-    category: "Motivation & Passion"
+    category: "Motivação & Paixão"
   },
   {
-    title: "Team Leadership in Hackathon",
-    description: "Demonstrating leadership skills and collaborative teamwork during intensive hackathon challenge",
+    title: "Liderança de Equipe em Hackathon",
+    description: "Demonstrando habilidades de liderança e trabalho em equipe colaborativo durante desafio intensivo de hackathon",
     video_url: "https://www.youtube.com/watch?v=Nt2xC8bm3mU",
     views: 75000,
     likes: 2100,
-    category: "Leadership & Collaboration"
+    category: "Liderança & Colaboração"
   },
   {
-    title: "Social Impact Startup Pitch",
-    description: "Ethical innovation project focused on sustainable social progress and community impact",
+    title: "Pitch de Startup de Impacto Social",
+    description: "Projeto de inovação ética focado no progresso social sustentável e impacto comunitário",
     video_url: "https://www.youtube.com/watch?v=8Uojy2vfawQ",
     views: 65000,
     likes: 1900,
-    category: "Social Consciousness & Integrity"
+    category: "Consciência Social & Integridade"
   },
   {
-    title: "Pivot Story: From Failure to Success",
-    description: "How adapting to setbacks and iterating on feedback led to breakthrough innovation",
+    title: "História de Pivot: Do Fracasso ao Sucesso",
+    description: "Como se adaptar a contratempos e iterar com base no feedback levou à inovação revolucionária",
     video_url: "https://www.youtube.com/watch?v=R0dZDDl9zvM",
     views: 55000,
     likes: 1600,
-    category: "Adaptability & Resilience"
+    category: "Adaptabilidade & Resistência"
   }
 ];
 
@@ -67,8 +67,8 @@ export async function POST() {
     
     // Create sample user
     const sampleUser = await User.create({
-      name: "Sample Creator",
-      email: "creator@example.com",
+      name: "Criador de Exemplo",
+      email: "criador@exemplo.com",
       password: "hashedpassword123",
       account_type: "talent"
     });
@@ -80,11 +80,11 @@ export async function POST() {
     const channels = [];
     for (const category of categories) {
       const channel = await Channel.create({
-        name: `${category.name} Channel`,
-        description: `Showcasing the best ${category.name.toLowerCase()} talents`,
+        name: `Canal ${category.name}`,
+        description: `Apresentando os melhores talentos em ${category.name.toLowerCase()}`,
         subscribers: Math.floor(Math.random() * 50000) + 10000,
         avatar: `https://images.unsplash.com/200x200?text=${category.name}`,
-        cover_image: `https://images.unsplash.com/1200x300?text=${category.name}+Channel`,
+        cover_image: `https://images.unsplash.com/1200x300?text=${category.name}+Canal`,
         category: category._id,
         user_id: sampleUser._id
       });
@@ -112,15 +112,15 @@ export async function POST() {
     }
     
     return NextResponse.json({ 
-      message: "Sample data seeded successfully",
+      message: "Dados de exemplo inseridos com sucesso",
       user: sampleUser,
       channels: channels.length,
       videos: videos.length
     });
   } catch (error) {
-    console.error("Error seeding sample data:", error);
+    console.error("Erro ao inserir dados de exemplo:", error);
     return NextResponse.json(
-      { error: "Failed to seed sample data" },
+      { error: "Falha ao inserir dados de exemplo" },
       { status: 500 }
     );
   }

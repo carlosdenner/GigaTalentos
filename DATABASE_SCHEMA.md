@@ -1,7 +1,7 @@
-# RiseMeUp Database Schema & Content Structure
+# Giga Talentos Database Schema & Content Structure
 
 ## Overview
-RiseMeUp uses MongoDB as its primary database with Mongoose ODM for schema definitions. The application follows a document-based data model designed for a talent discovery platform connecting African creators with global opportunities.
+Giga Talentos uses MongoDB as its primary database with Mongoose ODM for schema definitions. The application follows a document-based data model designed for a talent discovery platform connecting Brazilian entrepreneurs with mentors and opportunities in innovation and business.
 
 ## Database Architecture
 
@@ -238,7 +238,7 @@ const sampleVideos = [
 ## UI Labels & Text Content
 
 ### Main Application Labels
-- **Platform Name**: "RiseMeUp"
+- **Platform Name**: "Giga Talentos"
 - **Tagline**: "Discover Africa's Rising Stars"
 - **Primary CTA**: "Get Started"
 - **Secondary CTA**: "Upload Your Talent"

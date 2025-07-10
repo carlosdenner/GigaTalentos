@@ -61,7 +61,7 @@ export default async function CategoryPage({
 }: {
   params: { category: string };
 }) {
-  const categoryId = params.category; // Removed await as it's not needed
+  const categoryId = (await params).category;
   const videos = await getVideosByCategory(categoryId);
   const categoryInfo = await getCategoryInfo(categoryId);
 
