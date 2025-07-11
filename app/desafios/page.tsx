@@ -112,8 +112,7 @@ export default function DesafiosPage() {
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold text-white">Desafios de Empreendedorismo</h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          Participe de desafios exclusivos que testam suas habilidades empreendedoras nas 6 dimensões-chave do talento. 
-          Compete com outros talentos e desenvolva suas competências.
+          Participe de desafios exclusivos que testam suas habilidades empreendedoras nas 6 dimensões-chave do talento.
         </p>
       </div>
 

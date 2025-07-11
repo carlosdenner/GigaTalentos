@@ -1,17 +1,39 @@
 "use client"
 
 import Link from "next/link"
-import { Heart, ListMusic, Zap, LogIn, UserPlus, Users, Star, User, LogOut, Search } from "lucide-react"
+import { Heart, ListMusic, Zap, LogIn, UserPlus, Users, Star, User, LogOut, Search, Trophy, PlayCircle, BookOpen } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/contexts/auth-context"
+import { useEffect, useState } from "react"
+
+interface Desafio {
+  _id: string;
+  title: string;
+  participants: number;
+  category: {
+    name: string;
+  };
+  difficulty: string;
+}
 
 export default function Sidebar() {
   const { user, signOut, isAuthenticated } = useAuth()
+  const [popularDesafios, setPopularDesafios] = useState<Desafio[]>([])
+
+  useEffect(() => {
+    fetch('/api/desafios')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setPopularDesafios(data.slice(0, 4)) // Show top 4
+        }
+      })
+      .catch(err => console.error('Error fetching desafios:', err))
+  }, [])
 
   return (
-    <aside className="w-64 bg-[#0a192f] border-r border-gray-800 h-screen sticky top-0 overflow-y-auto">
-      <div className="w-64 flex-shrink-0 bg-[#0a192f] text-white flex flex-col border-r border-gray-800 overflow-y-auto">
+    <aside className="w-64 bg-[#0a192f] border-r border-gray-800 h-screen sticky top-0 overflow-y-auto text-white flex flex-col">
         <div className="p-4">
           <Link href="/" className="flex items-center">
             <span className="text-3xl font-bold">
@@ -33,59 +55,79 @@ export default function Sidebar() {
 
         <nav className="mt-6 flex flex-col gap-2 px-4">
           <Link href="/categories" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-            <Zap className="h-5 w-5 text-[#3b82f6]" />
+            <BookOpen className="h-5 w-5 text-[#10b981]" />
             <span>Habilidades</span>
           </Link>
           <Link href="/desafios" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-            <Users className="h-5 w-5 text-[#3b82f6]" />
+            <Trophy className="h-5 w-5 text-[#3b82f6]" />
             <span>Desafios</span>
-          </Link>
-          <Link href="/favorites" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-            <Heart className="h-5 w-5 text-[#3b82f6]" />
-            <span>{isAuthenticated ? "Seus Favoritos" : "Vídeos Populares"}</span>
           </Link>
         </nav>
 
         <div className="mt-8 px-4">
-          <h3 className="text-[#3b82f6] mb-4">{isAuthenticated ? "Seus Vídeos" : "Vídeos"}</h3>
+          <h3 className="text-[#10b981] mb-4 text-sm font-semibold">DESCOBRIR</h3>
+          <nav className="flex flex-col gap-2">
+            <Link href="/featured-channels" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
+              <PlayCircle className="h-5 w-5 text-gray-400" />
+              <span>Projetos em Destaque</span>
+            </Link>
+            <Link href="/talents" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
+              <Users className="h-5 w-5 text-gray-400" />
+              <span>Talentos da Comunidade</span>
+            </Link>
+          </nav>
+        </div>
+
+        <div className="mt-8 px-4">
+          <h3 className="text-[#3b82f6] mb-4 text-sm font-semibold">BIBLIOTECA PESSOAL</h3>
           <nav className="flex flex-col gap-2">
             <Link href="/playlist" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-              <ListMusic className="h-5 w-5 text-gray-300" />
-              <span>{isAuthenticated ? "Sua Playlist" : "Vídeos Populares"}</span>
+              <ListMusic className="h-5 w-5 text-gray-400" />
+              <span>{isAuthenticated ? "Minha Playlist" : "Playlists Inspiradoras"}</span>
+            </Link>
+            <Link href="/favorites" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
+              <Heart className="h-5 w-5 text-gray-400" />
+              <span>{isAuthenticated ? "Meus Favoritos" : "Projetos Mais Curtidos"}</span>
             </Link>
           </nav>
         </div>
 
         <div className="mt-8 px-4 flex-grow">
-          <h3 className="text-[#3b82f6] mb-4">Desafios Populares</h3>
+          <h3 className="text-[#3b82f6] mb-4 text-sm font-semibold">DESAFIOS EM DESTAQUE</h3>
           <div className="flex flex-col gap-3">
-            <Link href="/desafios/1" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                <Zap className="h-4 w-4 text-white" />
+            {popularDesafios.length > 0 ? (
+              popularDesafios.map((desafio) => (
+                <Link 
+                  key={desafio._id} 
+                  href={`/desafios/${desafio._id}`} 
+                  className="flex items-start gap-3 text-gray-300 hover:text-white py-2 group"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#10b981] to-[#3b82f6] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Trophy className="h-4 w-4 text-white" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-medium truncate group-hover:text-[#10b981] transition-colors">
+                      {desafio.title}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      {desafio.participants} participantes
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              // Show loading or empty state while loading
+              <div className="text-center text-gray-500 text-sm py-4">
+                <div className="animate-pulse">
+                  <div className="h-8 w-8 bg-gray-700 rounded-lg mx-auto mb-2"></div>
+                  <div className="h-3 bg-gray-700 rounded mb-1"></div>
+                  <div className="h-2 bg-gray-700 rounded w-3/4 mx-auto"></div>
+                </div>
               </div>
-              <span>Habilidade Cognitiva</span>
-            </Link>
-            <Link href="/desafios/2" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-              <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
-                <Star className="h-4 w-4 text-white" />
-              </div>
-              <span>Criatividade</span>
-            </Link>
-            <Link href="/desafios/3" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-              <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
-                <Heart className="h-4 w-4 text-white" />
-              </div>
-              <span>Motivação</span>
-            </Link>
-            <Link href="/desafios/4" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
-              <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                <Users className="h-4 w-4 text-white" />
-              </div>
-              <span>Liderança</span>
-            </Link>
+            )}
           </div>
-          <Link href="/desafios" className="text-[#3b82f6] hover:underline text-sm block mt-2">
-            Ver todos os desafios
+          <Link href="/desafios" className="text-[#3b82f6] hover:text-[#10b981] hover:underline text-sm block mt-4">
+            Ver todos os desafios →
           </Link>
         </div>
 
@@ -97,7 +139,7 @@ export default function Sidebar() {
                   <AvatarImage src={user?.avatar} alt={user?.name} />
                   <AvatarFallback>
                     {user?.name
-                      .split(" ")
+                      ?.split(" ")
                       .map((n: string) => n[0])
                       .join("")}
                   </AvatarFallback>
@@ -132,7 +174,6 @@ export default function Sidebar() {
             </Link>
           </div>
         )}
-      </div>
     </aside>
   )
 }

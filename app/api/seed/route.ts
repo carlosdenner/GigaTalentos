@@ -6,34 +6,34 @@ import { authOptions } from "../auth/[...nextauth]/route";
 
 const initialCategories = [
   {
-    name: "Habilidade Cognitiva & Técnica",
+    name: "Cognição & Competência Técnica",
     description: "Capacidade de resolver problemas complexos, pensamento analítico e competências técnicas específicas necessárias para desenvolvimento de soluções inovadoras.",
-    thumbnail: "/placeholder.jpg",
+    thumbnail: "/categories/category-1.jpg",
   },
   {
     name: "Criatividade & Inovação",
     description: "Capacidade de gerar ideias originais e implementar soluções inovadoras para desafios existentes, transformando conceitos em realidade.",
-    thumbnail: "/placeholder.jpg",
+    thumbnail: "/categories/category-2.jpg",
   },
   {
     name: "Liderança & Colaboração",
     description: "Habilidade de inspirar equipes, facilitar colaboração efetiva e dirigir projetos multidisciplinares para o sucesso.",
-    thumbnail: "/placeholder.jpg",
+    thumbnail: "/categories/category-3.jpg",
   },
   {
     name: "Resiliência & Adaptabilidade",
     description: "Capacidade de superar obstáculos, aprender com falhas e adaptar-se rapidamente a mudanças do mercado e tecnologia.",
-    thumbnail: "/placeholder.jpg",
+    thumbnail: "/categories/category-4.jpg",
   },
   {
     name: "Consciência Social & Ética",
     description: "Compreensão do impacto social, responsabilidade ética e compromisso com desenvolvimento sustentável e inclusivo.",
-    thumbnail: "/placeholder.jpg",
+    thumbnail: "/categories/category-5.jpg",
   },
   {
     name: "Comunicação & Persuasão",
     description: "Habilidade de comunicar ideias complexas de forma clara e influenciar stakeholders para ação e mudança positiva.",
-    thumbnail: "/placeholder.jpg",
+    thumbnail: "/categories/category-6.jpg",
   }
 ];
 

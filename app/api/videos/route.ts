@@ -27,6 +27,11 @@ export async function GET(request: Request) {
       query = { category: category }
     }
 
+    if (featured === "true") {
+      // For featured videos, we'll get the most viewed videos
+      query = { views: { $gte: 100 } } // Videos with at least 100 views
+    }
+
     // Get videos with populated channel data
     const videos = await Video.find(query)
       .populate('channel_id', 'name avatar category')
