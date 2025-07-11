@@ -16,6 +16,8 @@ export async function GET(request: Request) {
       // Buscar projetos de um portfólio específico
       const portfolioProjetos = await Projeto.find({ portfolio_id: portfolioId })
         .populate('talento_lider_id', 'name avatar')
+        .populate('criador_id', 'name avatar account_type')
+        .populate('sponsors', 'name avatar')
         .populate('portfolio_id', 'name')
         .populate('desafio_id', 'title')
         .sort({ criado_em: -1 });
@@ -25,6 +27,8 @@ export async function GET(request: Request) {
     if (userId) {
       const userProjetos = await Projeto.find({ talento_lider_id: userId })
         .populate('talento_lider_id', 'name avatar')
+        .populate('criador_id', 'name avatar account_type')
+        .populate('sponsors', 'name avatar')
         .populate('portfolio_id', 'name')
         .populate('desafio_id', 'title')
         .sort({ criado_em: -1 });
@@ -33,6 +37,8 @@ export async function GET(request: Request) {
 
     const projetos = await Projeto.find()
       .populate('talento_lider_id', 'name avatar')
+      .populate('criador_id', 'name avatar account_type')
+      .populate('sponsors', 'name avatar')
       .populate('portfolio_id', 'name')
       .populate('desafio_id', 'title')
       .sort({ seguidores: -1 });
