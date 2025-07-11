@@ -67,6 +67,10 @@ export default function Sidebar() {
         <div className="mt-8 px-4">
           <h3 className="text-[#10b981] mb-4 text-sm font-semibold">DESCOBRIR</h3>
           <nav className="flex flex-col gap-2">
+            <Link href="/projetos" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
+              <BookOpen className="h-5 w-5 text-gray-400" />
+              <span>Giga Projetos</span>
+            </Link>
             <Link href="/featured-channels" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
               <PlayCircle className="h-5 w-5 text-gray-400" />
               <span>Projetos em Destaque</span>

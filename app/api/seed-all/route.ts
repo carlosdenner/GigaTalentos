@@ -4,12 +4,13 @@ export async function POST() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
 
-    // Seed in order: Categories -> Users -> Desafios -> Projects
+    // Seed in order: Categories -> Users -> Desafios -> Projects -> Projetos
     const results = {
       categories: null,
       users: null,
       desafios: null,
-      projects: null
+      projects: null,
+      projetos: null
     };
 
     // 1. Seed Categories
@@ -64,13 +65,40 @@ export async function POST() {
       console.error('Error seeding projects:', error);
     }
 
+    // 5. Seed Giga Projetos
+    try {
+      const projetosResponse = await fetch(`${baseUrl}/api/seed-projetos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (projetosResponse.ok) {
+        results.projetos = await projetosResponse.json();
+      }
+    } catch (error) {
+      console.error('Error seeding projetos:', error);
+    }
+
+    // 5. Seed Projetos (nova funcionalidade)
+    try {
+      const projetosResponse = await fetch(`${baseUrl}/api/seed-projetos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (projetosResponse.ok) {
+        results.projetos = await projetosResponse.json();
+      }
+    } catch (error) {
+      console.error('Error seeding projetos:', error);
+    }
+
     return NextResponse.json({
       message: "Plataforma Giga Talentos populada com dados demo",
       results: {
         categories: results.categories?.categories?.length || 0,
         users: results.users?.users?.length || 0,
         desafios: results.desafios?.desafios?.length || 0,
-        projects: results.projects?.projects || 0
+        projects: results.projects?.projects || 0,
+        projetos: results.projetos?.projetos?.length || 0
       },
       success: true
     });

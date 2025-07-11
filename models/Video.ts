@@ -4,7 +4,8 @@ const VideoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },
   thumbnail: { type: String },
-  channel_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel', required: true },
+  channel_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel' }, // Manter por compatibilidade temporária
+  projeto_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Projeto' }, // Novo campo
   views: { type: Number, default: 0 },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   video_url: { type: String, required: true },

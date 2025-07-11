@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   avatar: { type: String },
-  account_type: { type: String, enum: ['fan', 'sponsor', 'talent'], required: true },
+  account_type: { type: String, enum: ['fan', 'mentor', 'talent'], required: true },
   bio: { type: String },
   location: { type: String },
   skills: [{ type: String }],
