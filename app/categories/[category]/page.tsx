@@ -42,12 +42,20 @@ async function getVideosByCategory(category: string) {
   }
 }
 
-async function getCategoryInfo(categoryId: string) {
+async function getCategoryInfo(categorySlug: string) {
   try {
-    await connectDB(); // Add this line
-    const category = await Category.findOne({
-      _id: categoryId,
+    await connectDB();
+    // Try to find by slug first, then by name if slug doesn't exist
+    let category = await Category.findOne({
+      slug: categorySlug,
     });
+    
+    if (!category) {
+      // If not found by slug, try by name (case insensitive)
+      category = await Category.findOne({
+        name: { $regex: new RegExp(categorySlug.replace(/-/g, ' '), 'i') }
+      });
+    }
 
     return JSON.parse(JSON.stringify(category));
   } catch (error) {

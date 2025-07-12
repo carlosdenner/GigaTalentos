@@ -1,26 +1,32 @@
 import { NextResponse } from 'next/server';
+import connectDB from '@/lib/mongodb';
 import Video from '@/models/Video';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-   const video = await Video.findById(params.id);
-   const { channel_id, ...videoData } = video.toObject();
-    const channel = await video.populate('channel_id', 'name avatar');
-    const channelData = channel.channel_id.toObject();
-    const videoWithChannel = {
-      ...videoData,
-      channel: {
-        ...channelData,
-        id: channelData._id,
-      },
-    };
+    await connectDB();
+    const { id } = await params;
+    
+    const video = await Video.findById(id)
+      .populate('channel_id', 'name avatar');
+    
+    if (!video) {
+      return NextResponse.json(
+        { error: 'Video not found' },
+        { status: 404 }
+      );
+    }
+
+    const { channel_id, ...videoData } = video.toObject();
+    const channelData = video.channel_id.toObject();
+    
     const formattedVideo = {
-      ...videoWithChannel,
+      ...videoData,
       id: video._id,
-      channel_id: channel._id,
+      channel_id: channelData,
       createdAt: video.createdAt,
       updatedAt: video.updatedAt,
     };

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import connectDB from '@/lib/mongodb';
 import Like from "@/models/Like";
 import Video from "@/models/Video";
 
@@ -8,6 +9,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    await connectDB();
     const session = await getServerSession();
     if (!session?.user?.id) {
       return NextResponse.json({ isLiked: false });
@@ -32,6 +34,7 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
+    await connectDB();
     const session = await getServerSession();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });

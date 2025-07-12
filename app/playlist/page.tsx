@@ -6,60 +6,23 @@ import { cookies } from "next/headers"
 import Link from "next/link"
 
 async function getPlaylist() {
-  // Get the current user's session
-  const cookieStore = await cookies()
-  const supabaseToken = cookieStore.get("sb-access-token")?.value
-
-  if (!supabaseToken) {
-    // For anonymous users, return a sample playlist
-    const { data: videos, error } = await supabase
-      .from("videos")
-      .select(`*, channels(*)`)
-      .order("views", { ascending: false })
-      .limit(10)
-
-    if (error) {
-      console.error("Error fetching sample videos:", error)
-      return { name: "Popular Videos", videos: [] }
+  try {
+    // For now, return sample videos from our MongoDB API
+    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/videos?featured=true&limit=10`, {
+      cache: 'no-store'
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch videos');
     }
-
-    return { name: "Popular Videos", videos }
+    
+    const videos = await response.json();
+    return { name: "Popular Videos", videos };
+  } catch (error) {
+    console.error("Error fetching sample videos:", error);
+    return { name: "Popular Videos", videos: [] };
   }
-
-  // Get the user's ID from the session
-  const {
-    data: { user },
-  } = await supabase.auth.getUser(supabaseToken)
-
-  if (!user) {
-    return { name: "Popular Videos", videos: [] }
-  }
-
-  // Get the user's first playlist
-  const { data: playlists, error: playlistError } = await supabase
-    .from("playlists")
-    .select("*")
-    .eq("user_id", user.id)
-    .limit(1)
-
-  if (playlistError || !playlists || playlists.length === 0) {
-    return { name: "Your Playlist", videos: [] }
-  }
-
-  // Get the playlist videos
-  const { data: playlistVideos, error: videosError } = await supabase
-    .from("playlist_videos")
-    .select(`
-      *,
-      videos (*, channels(*))
-    `)
-    .eq("playlist_id", playlists[0].id)
-
-  if (videosError) {
-    return { ...playlists[0], videos: [] }
-  }
-
-  return { ...playlists[0], videos: playlistVideos.map((pv) => pv.videos) }
 }
 
 export default async function PlaylistPage() {

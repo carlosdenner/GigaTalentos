@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   avatar: { type: String },
   account_type: { type: String, enum: ['fan', 'mentor', 'talent'], required: true },
+  user_type: { type: String, enum: ['fan', 'mentor', 'talent'] }, // Para compatibilidade
   bio: { type: String },
   location: { type: String },
   skills: [{ type: String }],

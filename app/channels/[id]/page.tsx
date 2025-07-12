@@ -85,9 +85,10 @@ async function getChannelData(id: string): Promise<ChannelWithVideos | null> {
 export default async function ChannelPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const channelData: ChannelWithVideos | null = await getChannelData(params.id);
+  const { id } = await params;
+  const channelData: ChannelWithVideos | null = await getChannelData(id);
 
   if (!channelData) {
     return (

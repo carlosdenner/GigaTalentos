@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
+import connectDB from '@/lib/mongodb';
 import Video from "@/models/Video";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await connectDB();
+    const { id } = await params;
     
-    const currentVideo = await Video.findById(params.id).select('channel_id');
+    const currentVideo = await Video.findById(id).select('channel_id');
     
     if (!currentVideo) {
       return NextResponse.json({ error: "Video not found" }, { status: 404 });
@@ -15,7 +18,7 @@ export async function GET(
 
     const recommendedVideos = await Video.find({
       channel_id: currentVideo.channel_id,
-      _id: { $ne: params.id }
+      _id: { $ne: id }
     })
       .populate('channel_id', 'name avatar')
       .select('title video_url views likes thumbnail')

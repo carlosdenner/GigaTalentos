@@ -9,6 +9,7 @@ const ProjetoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   descricao: { type: String },
   objetivo: { type: String }, // Objetivo específico do projeto
+  video_apresentacao: { type: String }, // URL do vídeo de apresentação do projeto
   seguidores: { type: Number, default: 0 },
   avatar: { type: String },
   imagem_capa: { type: String },

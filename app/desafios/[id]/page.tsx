@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, use } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -8,7 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Trophy, Users, Calendar, Star, ArrowRight, Target, Award, Clock } from "lucide-react"
 import Link from "next/link"
 
-export default function ChallengeDetailPage({ params }: { params: { id: string } }) {
+export default function ChallengeDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [isParticipating, setIsParticipating] = useState(false)
 
   // Mock challenge data based on ID
@@ -67,7 +68,7 @@ export default function ChallengeDetailPage({ params }: { params: { id: string }
     }
   }
 
-  const challenge = challenges[params.id as keyof typeof challenges]
+  const challenge = challenges[id as keyof typeof challenges]
 
   if (!challenge) {
     return <div className="text-white">Desafio não encontrado</div>

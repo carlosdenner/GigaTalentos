@@ -18,18 +18,18 @@ interface Projeto {
   imagem_capa: string;
   categoria: string;
   status: 'ativo' | 'concluido' | 'pausado';
-  talento_lider_id: {
+  talento_lider_id?: {
     _id: string;
     name: string;
     avatar: string;
   };
-  criador_id: {
+  criador_id?: {
     _id: string;
     name: string;
     avatar: string;
     account_type: string;
   };
-  portfolio_id: {
+  portfolio_id?: {
     _id: string;
     name: string;
   };
@@ -84,7 +84,7 @@ export default function ProjetosPage() {
     return true;
   });
 
-  const categorias = [...new Set(projetos.map(p => p.categoria))].sort();
+  const categorias = [...new Set(projetos.filter(p => p && p.categoria).map(p => p.categoria))].sort();
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -332,11 +332,13 @@ export default function ProjetosPage() {
                       Ver Projeto
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="sm" title={`Ver portfólio de ${projeto.talento_lider_id?.name}`}>
-                    <Link href={`/portfolios/${projeto.portfolio_id._id}`}>
-                      📁 Portfólio
-                    </Link>
-                  </Button>
+                  {projeto.portfolio_id && (
+                    <Button asChild variant="outline" size="sm" title={`Ver portfólio de ${projeto.talento_lider_id?.name}`}>
+                      <Link href={`/portfolios/${projeto.portfolio_id._id}`}>
+                        📁 Portfólio
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </div>
             </CardContent>
