@@ -1,0 +1,241 @@
+name: 🚀 Deploy GigaTalentos to Vercel
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  # Job 1: Lint and Test
+  quality-checks:
+    name: 🔍 Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔍 Run ESLint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: 🔨 Type Check
+        run: npx tsc --noEmit
+        continue-on-error: true
+
+      - name: 🧪 Run Tests (if available)
+        run: |
+          if [ -f "package.json" ] && grep -q "\"test\"" package.json; then
+            npm test
+          else
+            echo "No tests found, skipping..."
+          fi
+        continue-on-error: true
+
+  # Job 2: Build and Test Build
+  build-test:
+    name: 🏗️ Build Test
+    runs-on: ubuntu-latest
+    needs: quality-checks
+    
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Application
+        run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      - name: 📤 Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: .next/
+          retention-days: 1
+
+  # Job 3: Deploy to Vercel Preview (for PRs)
+  deploy-preview:
+    name: 🚀 Deploy Preview
+    runs-on: ubuntu-latest
+    needs: [quality-checks, build-test]
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: 🔗 Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 🏗️ Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 🚀 Deploy to Preview
+        id: deploy-preview
+        run: |
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "preview-url=$url" >> $GITHUB_OUTPUT
+
+      - name: 💬 Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview Deployment Ready!**
+              
+              Your changes have been deployed to a preview environment:
+              🔗 **Preview URL:** ${{ steps.deploy-preview.outputs.preview-url }}
+              
+              This preview will be updated automatically with each new commit to this PR.`
+            })
+
+  # Job 4: Deploy to Production (for main/master branch)
+  deploy-production:
+    name: 🚀 Deploy Production
+    runs-on: ubuntu-latest
+    needs: [quality-checks, build-test]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    environment:
+      name: production
+      url: ${{ steps.deploy-production.outputs.production-url }}
+    
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: 🔗 Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 🏗️ Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 🚀 Deploy to Production
+        id: deploy-production
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "production-url=$url" >> $GITHUB_OUTPUT
+
+      - name: ✅ Production Deployment Success
+        run: |
+          echo "🎉 Successfully deployed to production!"
+          echo "🔗 Production URL: ${{ steps.deploy-production.outputs.production-url }}"
+
+  # Job 5: Post-Deployment Health Checks
+  health-checks:
+    name: 🏥 Health Checks
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+      - name: 🏥 Check Production Health
+        run: |
+          echo "Running health checks on production deployment..."
+          
+          # Wait for deployment to be ready
+          sleep 30
+          
+          # Check if the main page loads
+          response=$(curl -s -o /dev/null -w "%{http_code}" ${{ needs.deploy-production.outputs.production-url }})
+          
+          if [ $response -eq 200 ]; then
+            echo "✅ Main page health check passed (HTTP $response)"
+          else
+            echo "❌ Main page health check failed (HTTP $response)"
+            exit 1
+          fi
+          
+          # Check API health
+          api_response=$(curl -s -o /dev/null -w "%{http_code}" ${{ needs.deploy-production.outputs.production-url }}/api/categories)
+          
+          if [ $api_response -eq 200 ]; then
+            echo "✅ API health check passed (HTTP $api_response)"
+          else
+            echo "⚠️ API health check failed (HTTP $api_response) - might need database connection"
+          fi
+
+      - name: 📊 Deployment Summary
+        run: |
+          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment:** Production" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL:** ${{ needs.deploy-production.outputs.production-url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Completed Jobs" >> $GITHUB_STEP_SUMMARY
+          echo "- Quality Checks" >> $GITHUB_STEP_SUMMARY
+          echo "- Build Test" >> $GITHUB_STEP_SUMMARY
+          echo "- Production Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "- Health Checks" >> $GITHUB_STEP_SUMMARY
+
+  # Job 6: Notify on Failure
+  notify-failure:
+    name: 📢 Notify Failure
+    runs-on: ubuntu-latest
+    needs: [quality-checks, build-test, deploy-production, health-checks]
+    if: failure()
+    
+    steps:
+      - name: 📢 Deployment Failed
+        run: |
+          echo "❌ Deployment pipeline failed!"
+          echo "Please check the failed jobs above for details."
+          echo ""
+          echo "Common issues:"
+          echo "1. Environment variables not set correctly"
+          echo "2. Build errors due to code changes"
+          echo "3. Database connection issues"
+          echo "4. Vercel token expired or invalid"

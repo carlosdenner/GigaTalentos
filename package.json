@@ -2,11 +2,20 @@
   "name": "giga-talentos",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "vaul": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "setup:github": "pwsh -ExecutionPolicy Bypass -File scripts/setup-github-actions.ps1",
     "seed:categories": "npx tsx scripts/seedCategories.ts",
     "seed:profiles": "npx tsx scripts/seedUserProfiles.ts",
     "seed:all": "npm run seed:categories && npm run seed:profiles"
