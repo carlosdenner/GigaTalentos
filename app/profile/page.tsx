@@ -163,7 +163,7 @@ export default function ProfilePage() {
               Sobre
             </TabsTrigger>
             <TabsTrigger value="sponsors" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Patrocinadores
+              Mentores
             </TabsTrigger>
           </TabsList>
           

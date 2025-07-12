@@ -237,7 +237,7 @@ export default function ProjetosPage() {
                   )}
                   {projeto.sponsors && projeto.sponsors.length > 0 && (
                     <Badge variant="secondary" className="text-xs">
-                      Patrocinado
+                      Com Mentoria
                     </Badge>
                   )}
                 </div>
@@ -306,7 +306,7 @@ export default function ProjetosPage() {
                   <div className="flex items-center gap-2">
                     <Star className="h-4 w-4 text-yellow-500" />
                     <span className="text-xs text-gray-500">
-                      Patrocinado por {projeto.sponsors.length} mentor{projeto.sponsors.length > 1 ? 'es' : ''}
+                      Com mentoria de {projeto.sponsors.length} mentor{projeto.sponsors.length > 1 ? 'es' : ''}
                     </span>
                   </div>
                 )}

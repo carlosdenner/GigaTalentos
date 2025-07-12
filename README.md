@@ -21,7 +21,7 @@ A Giga Talentos opera em um ecossistema onde:
 
 #### **Fase 1: Descoberta e Cadastro**
 - Usuário explora projetos em destaque e talentos da comunidade
-- Se cadastra escolhendo tipo de conta (Talento, Fã ou Patrocinador)
+- Se cadastra escolhendo tipo de conta (Talento, Fã ou Mentor)
 - Completa perfil com bio, habilidades e categorias de interesse
 
 #### **Fase 2: Construção de Portfólio**

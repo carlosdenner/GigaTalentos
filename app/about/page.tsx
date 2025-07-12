@@ -47,7 +47,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-semibold mb-2">Conectar Talentos</h3>
               <p className="text-gray-400">
-                Conectamos indivíduos talentosos com patrocinadores, mentores e oportunidades.
+                Conectamos indivíduos talentosos com mentores e oportunidades.
               </p>
             </CardContent>
           </Card>
@@ -131,7 +131,7 @@ export default function AboutPage() {
         <div className="bg-[#1a2942] border border-gray-800 rounded-lg p-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Junte-se à Nossa Comunidade</h2>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Seja você um indivíduo talentoso querendo mostrar suas habilidades, um patrocinador em busca da próxima grande estrela,
+            Seja você um indivíduo talentoso querendo mostrar suas habilidades, um mentor em busca da próxima grande estrela,
             ou um entusiasta que aprecia criatividade, há um lugar para você no Giga Talentos.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

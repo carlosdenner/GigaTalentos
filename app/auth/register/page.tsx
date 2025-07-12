@@ -127,7 +127,7 @@ export default function RegisterPage() {
                   </SelectTrigger>
                   <SelectContent className="bg-[#1a2942] border-gray-700 text-white">
                     <SelectItem value="talent">Talento</SelectItem>
-                    <SelectItem value="sponsor">Patrocinador</SelectItem>
+                    <SelectItem value="mentor">Mentor</SelectItem>
                     <SelectItem value="fan">Admirador</SelectItem>
                   </SelectContent>
                 </Select>
