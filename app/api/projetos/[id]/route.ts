@@ -1,19 +1,24 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import connectDB from "@/lib/mongodb";
-import Projeto from "@/models/Projeto";
+import { Projeto } from "@/models";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
     
-    const projeto = await Projeto.findById(params.id)
-      .populate('talento_lider_id', 'name avatar bio')
-      .populate('desafio_id', 'title description');
+    const { id } = await params;
+    const projeto = await Projeto.findById(id)
+      .populate('talento_lider_id', 'name avatar account_type verified bio')
+      .populate('criador_id', 'name avatar account_type')
+      .populate('sponsors', 'name avatar account_type')
+      .populate('participantes_aprovados', 'name avatar account_type skills')
+      .populate('portfolio_id', 'name')
+      .populate('desafio_id', 'title descricao');
 
     if (!projeto) {
       return NextResponse.json(
@@ -24,6 +29,7 @@ export async function GET(
 
     return NextResponse.json(projeto);
   } catch (error) {
+    console.error('Error fetching project:', error);
     return NextResponse.json(
       { error: "Falha ao buscar projeto" },
       { status: 500 }
@@ -33,7 +39,7 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -48,8 +54,9 @@ export async function PUT(
     const updateData = await request.json();
     await connectDB();
 
-    // Verificar se o usuário é o líder do projeto
-    const projeto = await Projeto.findById(params.id);
+    const { id } = await params;
+    // Find the project
+    const projeto = await Projeto.findById(id);
     if (!projeto) {
       return NextResponse.json(
         { error: "Projeto não encontrado" },
@@ -57,21 +64,33 @@ export async function PUT(
       );
     }
 
-    if (projeto.talento_lider_id.toString() !== session.user.id) {
+    // Check if user is the creator or leader of the project
+    const isCreator = projeto.criador_id && projeto.criador_id.toString() === session.user.id;
+    const isLeader = projeto.talento_lider_id.toString() === session.user.id;
+
+    if (!isCreator && !isLeader) {
       return NextResponse.json(
-        { error: "Apenas o líder pode editar o projeto" },
+        { error: "Apenas o criador ou líder do projeto pode editá-lo" },
         { status: 403 }
       );
     }
 
+    // Update the project
     const projetoAtualizado = await Projeto.findByIdAndUpdate(
-      params.id,
+      id,
       { ...updateData, atualizado_em: new Date() },
-      { new: true }
-    ).populate('talento_lider_id', 'name avatar bio');
+      { new: true, runValidators: true }
+    )
+      .populate('talento_lider_id', 'name avatar account_type verified bio')
+      .populate('criador_id', 'name avatar account_type')
+      .populate('sponsors', 'name avatar account_type')
+      .populate('participantes_aprovados', 'name avatar account_type skills')
+      .populate('portfolio_id', 'name')
+      .populate('desafio_id', 'title descricao');
 
     return NextResponse.json(projetoAtualizado);
   } catch (error: any) {
+    console.error('Error updating project:', error);
     return NextResponse.json(
       { error: error.message || "Falha ao atualizar projeto" },
       { status: 500 }
@@ -81,7 +100,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -95,8 +114,9 @@ export async function DELETE(
 
     await connectDB();
 
-    // Verificar se o usuário é o líder do projeto
-    const projeto = await Projeto.findById(params.id);
+    const { id } = await params;
+    // Find the project
+    const projeto = await Projeto.findById(id);
     if (!projeto) {
       return NextResponse.json(
         { error: "Projeto não encontrado" },
@@ -104,19 +124,30 @@ export async function DELETE(
       );
     }
 
-    if (projeto.talento_lider_id.toString() !== session.user.id) {
+    // Check if user is the creator of the project (only creator can delete)
+    const isCreator = projeto.criador_id && projeto.criador_id.toString() === session.user.id;
+
+    if (!isCreator) {
       return NextResponse.json(
-        { error: "Apenas o líder pode excluir o projeto" },
+        { error: "Apenas o criador do projeto pode deletá-lo" },
         { status: 403 }
       );
     }
 
-    await Projeto.findByIdAndDelete(params.id);
+    await Projeto.findByIdAndDelete(id);
 
-    return NextResponse.json({ message: "Projeto excluído com sucesso" });
+    // Note: You might want to also clean up related data like:
+    // - Participation requests for this project
+    // - Project favorites for this project
+    // This is left for future implementation if needed
+
+    return NextResponse.json({ 
+      message: "Projeto deletado com sucesso" 
+    });
   } catch (error: any) {
+    console.error('Error deleting project:', error);
     return NextResponse.json(
-      { error: error.message || "Falha ao excluir projeto" },
+      { error: error.message || "Falha ao deletar projeto" },
       { status: 500 }
     );
   }

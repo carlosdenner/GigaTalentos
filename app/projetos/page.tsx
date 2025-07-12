@@ -1,12 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Eye, Users, Calendar, Target, Heart, Star } from 'lucide-react';
+import { Eye, Users, Calendar, Target, Heart, Star, Plus, Settings } from 'lucide-react';
 import Link from 'next/link';
+import ProjectFavoriteButton from '@/components/project-favorite-button';
+import ProjectParticipationRequest from '@/components/project-participation-request';
 
 interface Projeto {
   _id: string;
@@ -48,6 +51,7 @@ interface Projeto {
 }
 
 export default function ProjetosPage() {
+  const { data: session } = useSession();
   const [projetos, setProjetos] = useState<Projeto[]>([]);
   const [loading, setLoading] = useState(true);
   const [filtroStatus, setFiltroStatus] = useState<string>('todos');
@@ -108,7 +112,25 @@ export default function ProjetosPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-4">Giga Projetos dos Talentos</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-3xl font-bold">Giga Projetos dos Talentos</h1>
+          {session && (
+            <div className="flex gap-2">
+              <Button asChild className="bg-[#10b981] hover:bg-[#10b981]/90">
+                <Link href="/projetos/create">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Criar Projeto
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/participation-requests">
+                  <Settings className="h-4 w-4 mr-2" />
+                  Minhas Solicitações
+                </Link>
+              </Button>
+            </div>
+          )}
+        </div>
         <p className="text-gray-600 mb-4">
           Explore projetos inovadores criados pelos talentos e mentores da plataforma
         </p>
@@ -326,16 +348,44 @@ export default function ProjetosPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-2">
-                  <Button asChild variant="outline" size="sm" className="flex-1">
+                <div className="flex gap-2 pt-2 flex-wrap">
+                  <Button asChild variant="outline" size="sm">
                     <Link href={`/projetos/${projeto._id}`}>
+                      <Eye className="h-4 w-4 mr-1" />
                       Ver Projeto
                     </Link>
                   </Button>
+                  
                   {projeto.portfolio_id && (
                     <Button asChild variant="outline" size="sm" title={`Ver portfólio de ${projeto.talento_lider_id?.name}`}>
-                      <Link href={`/portfolios/${projeto.portfolio_id._id}`}>
+                      <Link href={`/channels/${projeto.portfolio_id._id}`}>
                         📁 Portfólio
+                      </Link>
+                    </Button>
+                  )}
+
+                  {/* Favorite Button */}
+                  <ProjectFavoriteButton 
+                    projectId={projeto._id}
+                    initialFavorited={false} // TODO: Check if user has favorited this project
+                  />
+
+                  {/* Participation Request Button */}
+                  <ProjectParticipationRequest
+                    projectId={projeto._id}
+                    projectName={projeto.nome}
+                    isLeader={session?.user?.id === projeto.talento_lider_id?._id}
+                  />
+
+                  {/* Edit button for creators/leaders */}
+                  {session && (
+                    session.user.id === projeto.criador_id?._id || 
+                    session.user.id === projeto.talento_lider_id?._id
+                  ) && (
+                    <Button asChild variant="outline" size="sm">
+                      <Link href={`/projetos/${projeto._id}/edit`}>
+                        <Settings className="h-4 w-4 mr-1" />
+                        Editar
                       </Link>
                     </Button>
                   )}

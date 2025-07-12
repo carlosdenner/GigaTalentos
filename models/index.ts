@@ -8,6 +8,10 @@ import Like from './Like';
 import Message from './Message';
 import Playlist from './Playlist';
 import Subscription from './Subscription';
+import Projeto from './Projeto';
+import Desafio from './Desafio';
+import ParticipationRequest from './ParticipationRequest';
+import ProjectFavorite from './ProjectFavorite';
 
 export {
   User,
@@ -18,5 +22,9 @@ export {
   Like,
   Message,
   Playlist,
-  Subscription
+  Subscription,
+  Projeto,
+  Desafio,
+  ParticipationRequest,
+  ProjectFavorite
 };

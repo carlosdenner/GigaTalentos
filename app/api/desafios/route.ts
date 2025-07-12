@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Desafio from '@/models/Desafio';
+import { Desafio } from '@/models';
 
 export async function GET() {
   try {

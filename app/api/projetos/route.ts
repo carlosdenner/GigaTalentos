@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import connectDB from "@/lib/mongodb";
-import Projeto from "@/models/Projeto";
+import { Projeto } from "@/models";
 import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
@@ -66,16 +66,35 @@ export async function POST(request: Request) {
     const projetoData = await request.json();
     await connectDB();
 
+    // Validate required fields
+    if (!projetoData.nome || !projetoData.portfolio_id) {
+      return NextResponse.json(
+        { error: "Nome e Portfolio são obrigatórios" },
+        { status: 400 }
+      );
+    }
+
     // Criar novo projeto
     const projeto = await Projeto.create({
       ...projetoData,
       talento_lider_id: session.user.id,
+      criador_id: session.user.id, // The creator is the current user
       seguidores: 0,
-      status: 'ativo'
+      status: 'ativo',
+      favoritos: [],
+      participantes_solicitados: [],
+      participantes_aprovados: []
     });
 
-    return NextResponse.json(projeto, { status: 201 });
+    const populatedProjeto = await Projeto.findById(projeto._id)
+      .populate('talento_lider_id', 'name avatar')
+      .populate('criador_id', 'name avatar account_type')
+      .populate('portfolio_id', 'name')
+      .populate('desafio_id', 'title');
+
+    return NextResponse.json(populatedProjeto, { status: 201 });
   } catch (error: any) {
+    console.error('Error creating project:', error);
     return NextResponse.json(
       { error: error.message || "Falha ao criar projeto" },
       { status: 500 }
