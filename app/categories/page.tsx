@@ -12,37 +12,37 @@ const fallbackCategories = [
     _id: "1",
     name: "Habilidade Cognitiva & Técnica",
     description: "Capacidade de resolver problemas complexos, pensamento analítico e competências técnicas específicas.",
-    thumbnail: "/placeholder.jpg"
+    thumbnail: "/categories/category-1.jpg"
   },
   {
     _id: "2", 
     name: "Criatividade & Inovação",
     description: "Capacidade de gerar ideias originais e implementar soluções inovadoras para desafios existentes.",
-    thumbnail: "/placeholder.jpg"
+    thumbnail: "/categories/category-2.jpg"
   },
   {
     _id: "3",
     name: "Liderança & Colaboração", 
     description: "Habilidade de inspirar equipes, facilitar colaboração e dirigir projetos para o sucesso.",
-    thumbnail: "/placeholder.jpg"
+    thumbnail: "/categories/category-4.jpg"
   },
   {
     _id: "4",
     name: "Resiliência & Adaptabilidade",
     description: "Capacidade de superar obstáculos, aprender com falhas e adaptar-se a mudanças rapidamente.",
-    thumbnail: "/placeholder.jpg"
+    thumbnail: "/categories/category-6.jpg"
   },
   {
     _id: "5", 
     name: "Consciência Social & Ética",
     description: "Compreensão do impacto social, responsabilidade ética e compromisso com desenvolvimento sustentável.",
-    thumbnail: "/placeholder.jpg"
+    thumbnail: "/categories/category-5.jpg"
   },
   {
     _id: "6",
     name: "Comunicação & Persuasão",
     description: "Habilidade de comunicar ideias efetivamente e influenciar stakeholders para ação.",
-    thumbnail: "/placeholder.jpg"
+    thumbnail: "/categories/category-3.jpg"
   }
 ];
 
