@@ -67,6 +67,19 @@ export default function FeaturedContent() {
     fetchContent();
   }, [userType, userTypeLoading]);
 
+  // Track view events when content is displayed
+  useEffect(() => {
+    if (!loading && content.length > 0) {
+      content.forEach(item => {
+        trackView(item._id, item.type, {
+          source: 'featured-section',
+          userType: userType || 'anonymous',
+          position: content.indexOf(item)
+        });
+      });
+    }
+  }, [content, loading, trackView, userType]);
+
   // Track views for loaded content
   useEffect(() => {
     if (content.length > 0) {

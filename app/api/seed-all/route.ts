@@ -4,19 +4,23 @@ export async function POST() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
 
-    // Seed in order: Categories -> Users -> Desafios -> Projects -> Projetos
+    // Seed in order: Categories -> Users -> Desafios -> Projects -> Projetos -> Featured Content -> User Interactions
     const results: {
       categories: any;
       users: any;
       desafios: any;
       projects: any;
       projetos: any;
+      featuredContent: any;
+      userInteractions: any;
     } = {
       categories: null,
       users: null,
       desafios: null,
       projects: null,
-      projetos: null
+      projetos: null,
+      featuredContent: null,
+      userInteractions: null
     };
 
     // 1. Seed Categories
@@ -84,6 +88,32 @@ export async function POST() {
       console.error('Error seeding projetos:', error);
     }
 
+    // 6. Seed Featured Content
+    try {
+      const featuredResponse = await fetch(`${baseUrl}/api/seed/featured-content`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (featuredResponse.ok) {
+        results.featuredContent = await featuredResponse.json();
+      }
+    } catch (error) {
+      console.error('Error seeding featured content:', error);
+    }
+
+    // 7. Seed User Interactions (should be last to ensure content exists)
+    try {
+      const interactionsResponse = await fetch(`${baseUrl}/api/seed/user-interactions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (interactionsResponse.ok) {
+        results.userInteractions = await interactionsResponse.json();
+      }
+    } catch (error) {
+      console.error('Error seeding user interactions:', error);
+    }
+
     return NextResponse.json({
       message: "Plataforma Giga Talentos populada com dados demo",
       results: {
@@ -91,7 +121,16 @@ export async function POST() {
         users: results.users?.users?.length || 0,
         desafios: results.desafios?.desafios?.length || 0,
         projects: results.projects?.projects || 0,
-        projetos: results.projetos?.projetos?.length || 0
+        projetos: results.projetos?.projetos?.length || 0,
+        featuredContent: {
+          videos: results.featuredContent?.results?.videos || 0,
+          projetos: results.featuredContent?.results?.projetos || 0,
+          desafios: results.featuredContent?.results?.desafios || 0
+        },
+        userInteractions: {
+          usersUpdated: results.userInteractions?.results?.usersUpdated || 0,
+          totalInteractions: results.userInteractions?.results?.totalInteractions || 0
+        }
       },
       success: true
     });
