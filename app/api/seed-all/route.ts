@@ -5,7 +5,13 @@ export async function POST() {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
 
     // Seed in order: Categories -> Users -> Desafios -> Projects -> Projetos
-    const results = {
+    const results: {
+      categories: any;
+      users: any;
+      desafios: any;
+      projects: any;
+      projetos: any;
+    } = {
       categories: null,
       users: null,
       desafios: null,
@@ -66,19 +72,6 @@ export async function POST() {
     }
 
     // 5. Seed Giga Projetos
-    try {
-      const projetosResponse = await fetch(`${baseUrl}/api/seed-projetos`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      if (projetosResponse.ok) {
-        results.projetos = await projetosResponse.json();
-      }
-    } catch (error) {
-      console.error('Error seeding projetos:', error);
-    }
-
-    // 5. Seed Projetos (nova funcionalidade)
     try {
       const projetosResponse = await fetch(`${baseUrl}/api/seed-projetos`, {
         method: 'POST',

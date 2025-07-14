@@ -13,11 +13,18 @@ export async function POST() {
     // Get categories to link desafios
     const categories = await Category.find({});
     
+    // Helper function to find category safely
+    const findCategory = (searchTerm: string) => {
+      return categories.find(c => 
+        c.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ) || categories[0]; // Fallback to first category if not found
+    };
+    
     const desafiosData = [
       {
         title: "Startup Pitch Challenge",
         description: "Crie um pitch de 3 minutos para sua ideia de startup. Demonstre o problema, solução, mercado e modelo de negócio.",
-        category: categories.find(c => c.name.includes('Comunicação'))._id,
+        category: findCategory('comunicação')._id,
         difficulty: "Intermediário",
         duration: "2 semanas",
         participants: 127,
@@ -35,7 +42,7 @@ export async function POST() {
       {
         title: "Solução Tech Inovadora",
         description: "Desenvolva uma solução tecnológica para um problema social brasileiro. Use criatividade e inovação para impactar positivamente a sociedade.",
-        category: categories.find(c => c.name.includes('Criatividade'))._id,
+        category: findCategory('criatividade')._id,
         difficulty: "Avançado",
         duration: "1 mês",
         participants: 89,
@@ -52,7 +59,7 @@ export async function POST() {
       {
         title: "Liderança em Equipe",
         description: "Demonstre suas habilidades de liderança organizando e executando um projeto em equipe. Mostre colaboração e gestão eficazes.",
-        category: categories.find(c => c.name.includes('Liderança'))._id,
+        category: findCategory('liderança')._id,
         difficulty: "Intermediário",
         duration: "3 semanas",
         participants: 156,
@@ -69,7 +76,7 @@ export async function POST() {
       {
         title: "Análise de Dados para Negócios",
         description: "Use suas habilidades analíticas para resolver um case real de negócios. Demonstre pensamento crítico e competências técnicas.",
-        category: categories.find(c => c.name.includes('Cognitiva'))._id,
+        category: findCategory('cognitiva')._id,
         difficulty: "Avançado",
         duration: "2 semanas",
         participants: 73,
@@ -86,7 +93,7 @@ export async function POST() {
       {
         title: "Resiliência Empreendedora",
         description: "Compartilhe uma história pessoal de superação e como ela moldou sua mentalidade empreendedora. Inspire outros com sua jornada.",
-        category: categories.find(c => c.name.includes('Resiliência'))._id,
+        category: findCategory('resiliência')._id,
         difficulty: "Iniciante",
         duration: "1 semana",
         participants: 201,
@@ -103,7 +110,7 @@ export async function POST() {
       {
         title: "Impacto Social Sustentável",
         description: "Proponha uma iniciativa que combine consciência social com sustentabilidade. Demonstre ética e responsabilidade empresarial.",
-        category: categories.find(c => c.name.includes('Social'))._id,
+        category: findCategory('social')._id,
         difficulty: "Intermediário",
         duration: "3 semanas",
         participants: 94,

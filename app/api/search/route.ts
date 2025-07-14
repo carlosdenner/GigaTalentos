@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     await connectDB();
     const searchRegex = new RegExp(query, "i");
 
-    let results = [];
+    let results: any[] = [];
     if (type === "videos" || type === "all") {
       const videos = await Video.find({
         $or: [

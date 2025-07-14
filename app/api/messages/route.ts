@@ -59,11 +59,11 @@ export async function POST(request: Request) {
 
     await connectDB();
 
-    // Verify user is a sponsor
+    // Verify user is a mentor
     const user = await User.findById(session.user.id);
-    if (!user || user.account_type !== 'sponsor') {
+    if (!user || user.account_type !== 'mentor') {
       return NextResponse.json(
-        { error: "Only sponsors can send messages" },
+        { error: "Only mentors can send messages" },
         { status: 403 }
       );
     }
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
       .populate('receiver_id', 'name avatar');
 
     return NextResponse.json(populatedMessage);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Message error:', error);
     return NextResponse.json(
       { error: error.message || "Failed to send message" },

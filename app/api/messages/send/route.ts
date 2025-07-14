@@ -27,10 +27,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Verify sender is a sponsor
-    if (user.account_type !== 'sponsor') {
+    // Verify sender is a mentor (mentors can send messages to talents)
+    if (user.account_type !== 'mentor') {
       return NextResponse.json(
-        { error: "Only sponsors can send messages" },
+        { error: "Only mentors can send messages" },
         { status: 403 }
       );
     }
