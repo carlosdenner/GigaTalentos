@@ -1,27 +1,8 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
-import { Zap, Eye, Heart } from "lucide-react"
-import { getYouTubeEmbedUrl } from "@/utils"
-
-async function getFeaturedVideos() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"}/api/videos?featured=true`, { 
-      cache: "no-store" 
-    });
-    
-    if (!res.ok) {
-      console.error("Failed to fetch featured videos:", res.status);
-      return [];
-    }
-    
-    const result = await res.json();
-    return result.data ? result.data.slice(0, 6) : []; // Get data array from API response
-  } catch (error) {
-    console.error("Error fetching featured videos:", error);
-    return [];
-  }
-}
+import { Zap } from "lucide-react"
+import FeaturedContent from "@/components/featured-content"
 
 async function getCategories() {
   try {
@@ -44,7 +25,6 @@ async function getCategories() {
 }
 
 export default async function Home() {
-  const featuredVideos = await getFeaturedVideos()
   const categories = await getCategories()
 
   return (
@@ -77,46 +57,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section>
-        <h2 className="text-3xl font-bold text-white mb-6">Empreendedorismo em Destaque</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredVideos.map((video: any) => (
-            <Link href={`/talents/${video._id}`} key={video._id} className="group">
-              <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={getYouTubeEmbedUrl(video.video_url)}
-                  title={video.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-                <div className="absolute bottom-2 right-2 bg-black/70 px-2 py-1 rounded text-white text-sm">
-                  {video.duration || "N/A"}
-                </div>
-                <div className="absolute top-2 left-2 flex items-center gap-1">
-                  <Eye className="h-4 w-4 text-[#1e90ff]" />
-                  <span className="text-white text-sm">{video.views?.toLocaleString()}</span>
-                </div>
-                <div className="absolute top-2 right-2 flex items-center gap-1">
-                  <Heart className="h-4 w-4 text-[#10b981]" />
-                  <span className="text-white text-sm">{video.likes?.toLocaleString()}</span>
-                </div>
-              </div>
-              <div className="mt-2">
-                <h3 className="text-white font-medium group-hover:text-[#1e90ff]">{video.title}</h3>
-                <p className="text-[#1e90ff]">{video.channel_id?.name}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-4 text-center">
-          <Link href="/categories">
-            <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">Explorar Mais Projetos</Button>
-          </Link>
-        </div>
-      </section>
+      <FeaturedContent />
 
       <section className="text-center">
         <h2 className="text-3xl font-bold text-white mb-4">Pronto para mostrar seu talento empreendedor?</h2>

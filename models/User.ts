@@ -21,6 +21,19 @@ const UserSchema = new mongoose.Schema({
   projects_count: { type: Number, default: 0 },
   created_at: { type: Date, default: Date.now },
   password: { type: String, required: true },
+  // Recommendation system fields
+  preferences: {
+    categories: [{ type: String }],
+    topics: [{ type: String }],
+    contentTypes: [{ type: String }]
+  },
+  interactionHistory: [{
+    contentId: { type: String, required: true },
+    contentType: { type: String, required: true },
+    action: { type: String, required: true },
+    metadata: { type: mongoose.Schema.Types.Mixed },
+    timestamp: { type: Date, default: Date.now }
+  }]
 });
 
 export default mongoose.model('User', UserSchema);
