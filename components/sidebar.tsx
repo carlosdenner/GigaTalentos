@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Heart, ListMusic, Zap, LogIn, UserPlus, Users, Star, User, LogOut, Search, Trophy, PlayCircle, BookOpen } from "lucide-react"
+import { Heart, ListMusic, Zap, LogIn, UserPlus, Users, Star, User, LogOut, Search, Trophy, PlayCircle, BookOpen, Youtube } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/contexts/auth-context"
@@ -57,6 +57,10 @@ export default function Sidebar() {
           <Link href="/categories" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
             <BookOpen className="h-5 w-5 text-[#10b981]" />
             <span>Habilidades</span>
+          </Link>
+          <Link href="/videos" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
+            <Youtube className="h-5 w-5 text-red-600" />
+            <span>Vídeos</span>
           </Link>
           <Link href="/desafios" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
             <Trophy className="h-5 w-5 text-[#3b82f6]" />

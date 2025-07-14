@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const CategorySchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  code: { type: String, required: true, unique: true }, // Short code for easy reference
   description: { type: String, required: true },
   thumbnail: { type: String, required: true },
   created_at: { type: Date, default: Date.now },

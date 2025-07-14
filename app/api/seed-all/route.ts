@@ -4,10 +4,11 @@ export async function POST() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || '';
 
-    // Seed in order: Categories -> Users -> Desafios -> Projects -> Projetos -> Featured Content -> User Interactions
+    // Seed in order: Categories -> Users -> YouTube Videos -> Desafios -> Projects -> Projetos -> Featured Content -> User Interactions
     const results: {
       categories: any;
       users: any;
+      youtubeVideos: any;
       desafios: any;
       projects: any;
       projetos: any;
@@ -16,6 +17,7 @@ export async function POST() {
     } = {
       categories: null,
       users: null,
+      youtubeVideos: null,
       desafios: null,
       projects: null,
       projetos: null,
@@ -49,7 +51,20 @@ export async function POST() {
       console.error('Error seeding users:', error);
     }
 
-    // 3. Seed Desafios
+    // 3. Seed Real YouTube Videos
+    try {
+      const youtubeResponse = await fetch(`${baseUrl}/api/seed/youtube-videos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (youtubeResponse.ok) {
+        results.youtubeVideos = await youtubeResponse.json();
+      }
+    } catch (error) {
+      console.error('Error seeding YouTube videos:', error);
+    }
+
+    // 4. Seed Desafios
     try {
       const desafiosResponse = await fetch(`${baseUrl}/api/seed-desafios`, {
         method: 'POST',
@@ -62,7 +77,7 @@ export async function POST() {
       console.error('Error seeding desafios:', error);
     }
 
-    // 4. Seed Demo Projects
+    // 5. Seed Demo Projects
     try {
       const projectsResponse = await fetch(`${baseUrl}/api/seed-projects`, {
         method: 'POST',
@@ -75,7 +90,7 @@ export async function POST() {
       console.error('Error seeding projects:', error);
     }
 
-    // 5. Seed Giga Projetos
+    // 6. Seed Giga Projetos
     try {
       const projetosResponse = await fetch(`${baseUrl}/api/seed-projetos`, {
         method: 'POST',
@@ -88,7 +103,7 @@ export async function POST() {
       console.error('Error seeding projetos:', error);
     }
 
-    // 6. Seed Featured Content
+    // 7. Seed Featured Content
     try {
       const featuredResponse = await fetch(`${baseUrl}/api/seed/featured-content`, {
         method: 'POST',
@@ -101,7 +116,7 @@ export async function POST() {
       console.error('Error seeding featured content:', error);
     }
 
-    // 7. Seed User Interactions (should be last to ensure content exists)
+    // 8. Seed User Interactions (should be last to ensure content exists)
     try {
       const interactionsResponse = await fetch(`${baseUrl}/api/seed/user-interactions`, {
         method: 'POST',
@@ -115,10 +130,11 @@ export async function POST() {
     }
 
     return NextResponse.json({
-      message: "Plataforma Giga Talentos populada com dados demo",
+      message: "Plataforma Giga Talentos populada com dados demo e vídeos reais do YouTube",
       results: {
         categories: results.categories?.categories?.length || 0,
         users: results.users?.users?.length || 0,
+        youtubeVideos: results.youtubeVideos?.videos?.length || 0,
         desafios: results.desafios?.desafios?.length || 0,
         projects: results.projects?.projects || 0,
         projetos: results.projetos?.projetos?.length || 0,
@@ -132,6 +148,7 @@ export async function POST() {
           totalInteractions: results.userInteractions?.results?.totalInteractions || 0
         }
       },
+      youtubeChannels: results.youtubeVideos?.channels || [],
       success: true
     });
 
