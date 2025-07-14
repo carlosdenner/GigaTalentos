@@ -31,21 +31,27 @@ async function connectDB() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      serverSelectionTimeoutMS: 5000, // 5 second timeout
+      serverSelectionTimeoutMS: 10000, // Increased timeout for Vercel
       socketTimeoutMS: 45000, // 45 second socket timeout
-      connectTimeoutMS: 10000, // 10 second connection timeout
+      connectTimeoutMS: 15000, // Increased connection timeout
       maxPoolSize: 10,
       retryWrites: true,
       retryReads: true,
     };
 
+    console.log('Attempting to connect to MongoDB...');
+    console.log('MongoDB URI exists:', !!MONGODB_URI);
+    console.log('Environment:', process.env.NODE_ENV);
+
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('MongoDB connected successfully');
+      console.log('✅ MongoDB connected successfully');
+      console.log('Connected to database:', mongoose.connection.db?.databaseName);
       return mongoose;
     }).catch((error) => {
-      console.error('MongoDB connection error:', error);
+      console.error('❌ MongoDB connection error:', error.message);
+      console.error('Full error:', error);
       cached.promise = null;
-      throw error;
+      throw new Error(`MongoDB connection failed: ${error.message}`);
     });
   }
 
