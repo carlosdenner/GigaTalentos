@@ -52,7 +52,7 @@ const desafiosData = [
   {
     title: "Algoritmo Inteligente",
     description: "Crie um algoritmo de machine learning que resolva um problema real do mercado brasileiro utilizando dados abertos.",
-    category: "Habilidade Cognitiva & Técnica",
+    category: "Cognição & Competência Técnica",
     difficulty: "Avançado",
     duration: "8 semanas",
     participants: 156,

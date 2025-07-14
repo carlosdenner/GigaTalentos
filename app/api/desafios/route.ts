@@ -2,29 +2,146 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import { Desafio } from '@/models';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     await connectDB();
 
-    // Get featured desafios or most popular ones
-    const desafios = await Desafio.find({
-      $or: [
-        { featured: true },
-        { participants: { $gte: 100 } }
-      ]
-    })
-    .populate('category', 'name')
-    .sort({ participants: -1, featured: -1 })
-    .limit(6)
-    .lean()
-    .exec();
+    const { searchParams } = new URL(request.url);
+    const category = searchParams.get('category');
+    const difficulty = searchParams.get('difficulty');
+    const status = searchParams.get('status');
+    const sortBy = searchParams.get('sortBy') || 'popularity'; // popularity, newest, deadline
+    const limit = parseInt(searchParams.get('limit') || '50');
 
-    return NextResponse.json(desafios);
+    // Build filter object
+    const filter: any = {};
+    
+    if (category && category !== 'Todos') {
+      filter.category = category;
+    }
+    
+    if (difficulty && difficulty !== 'Todos') {
+      filter.difficulty = difficulty;
+    }
+    
+    if (status && status !== 'Todos') {
+      filter.status = status;
+    }
+
+    // Build sort object
+    let sortObject: any = {};
+    switch (sortBy) {
+      case 'popularity':
+        // Sort by participants (popularity), then featured status
+        sortObject = { participants: -1, featured: -1, created_at: -1 };
+        break;
+      case 'newest':
+        sortObject = { created_at: -1 };
+        break;
+      case 'deadline':
+        sortObject = { end_date: 1 }; // Earliest deadline first
+        break;
+      case 'prize':
+        // Sort by featured first (usually higher prizes), then participants
+        sortObject = { featured: -1, participants: -1 };
+        break;
+      default:
+        sortObject = { participants: -1, featured: -1, created_at: -1 };
+    }
+
+    const desafios = await Desafio.find(filter)
+      .populate('category', 'name thumbnail')
+      .sort(sortObject)
+      .limit(limit)
+      .lean()
+      .exec();
+
+    // Add popularity scoring for consistent ranking
+    const desafiosWithScores = desafios.map(desafio => ({
+      ...desafio,
+      popularityScore: calculateDesafioPopularity(desafio),
+      daysRemaining: calculateDaysRemaining(desafio.end_date),
+      formattedPrizes: formatPrizes(desafio.prizes)
+    }));
+
+    return NextResponse.json({
+      data: desafiosWithScores,
+      total: desafiosWithScores.length,
+      filters: {
+        category,
+        difficulty,
+        status,
+        sortBy
+      }
+    });
   } catch (error) {
     console.error("Error fetching desafios:", error);
     return NextResponse.json(
       { error: "Erro ao buscar desafios" },
       { status: 500 }
     );
+  }
+}
+
+// Helper function to calculate popularity score
+function calculateDesafioPopularity(desafio: any): number {
+  let score = 0;
+  
+  // Base score from participants (logarithmic scaling to prevent huge differences)
+  score += Math.log(desafio.participants + 1) * 10;
+  
+  // Featured bonus
+  if (desafio.featured) {
+    score += 50;
+  }
+  
+  // Status bonus
+  if (desafio.status === 'Ativo') {
+    score += 30;
+  } else if (desafio.status === 'Em Breve') {
+    score += 20;
+  }
+  
+  // Difficulty multiplier (advanced challenges get slight boost)
+  const difficultyMultiplier = {
+    'Iniciante': 1.0,
+    'Intermediário': 1.1,
+    'Avançado': 1.2
+  };
+  score *= difficultyMultiplier[desafio.difficulty as keyof typeof difficultyMultiplier] || 1.0;
+  
+  // Prize value bonus (rough estimation)
+  if (desafio.prizes && desafio.prizes.length > 0) {
+    const mainPrize = desafio.prizes[0];
+    if (mainPrize.value.includes('15.000') || mainPrize.value.includes('12.000')) {
+      score += 20;
+    } else if (mainPrize.value.includes('10.000') || mainPrize.value.includes('8.000')) {
+      score += 15;
+    } else if (mainPrize.value.includes('6.000') || mainPrize.value.includes('5.000')) {
+      score += 10;
+    }
+  }
+  
+  return Math.round(score);
+}
+
+// Helper function to calculate days remaining
+function calculateDaysRemaining(endDate: Date): number {
+  const now = new Date();
+  const end = new Date(endDate);
+  const diffTime = end.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return Math.max(0, diffDays);
+}
+
+// Helper function to format prizes for display
+function formatPrizes(prizes: any[]): string {
+  if (!prizes || prizes.length === 0) return 'Prêmios a definir';
+  
+  const mainPrize = prizes[0];
+  if (prizes.length === 1) {
+    return mainPrize.value;
+  } else {
+    return `${mainPrize.value} + ${prizes.length - 1} outros prêmios`;
   }
 }
