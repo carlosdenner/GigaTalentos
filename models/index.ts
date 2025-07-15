@@ -12,6 +12,9 @@ import Projeto from './Projeto';
 import Desafio from './Desafio';
 import ParticipationRequest from './ParticipationRequest';
 import ProjectFavorite from './ProjectFavorite';
+import Comment from './Comment';
+import VideoWatch from './VideoWatch';
+import UserInteraction from './UserInteraction';
 
 export {
   User,
@@ -26,5 +29,8 @@ export {
   Projeto,
   Desafio,
   ParticipationRequest,
-  ProjectFavorite
+  ProjectFavorite,
+  Comment,
+  VideoWatch,
+  UserInteraction
 };

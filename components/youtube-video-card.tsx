@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -24,11 +25,18 @@ interface YouTubeVideoProps {
   };
   showEmbed?: boolean;
   onPlay?: () => void;
+  source?: string; // For analytics tracking
 }
 
-export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: YouTubeVideoProps) {
+export default function YouTubeVideoCard({ 
+  video, 
+  showEmbed = false, 
+  onPlay,
+  source = 'video_list'
+}: YouTubeVideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const router = useRouter();
 
   const formatNumber = (num: number | undefined | null) => {
     if (!num || num === 0) {
@@ -55,13 +63,39 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
     if (fallbackThumbnail && fallbackThumbnail.trim() !== '') {
       return fallbackThumbnail;
     }
-    // Generate YouTube thumbnail URL from video ID
-    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    // Try different YouTube thumbnail qualities - start with medium quality which is more reliable
+    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+  };
+
+  const getFallbackThumbnails = (videoId: string) => {
+    return [
+      `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+      `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+      `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+      `https://img.youtube.com/vi/${videoId}/default.jpg`,
+      '/placeholder.jpg'
+    ];
+  };
+
+  const handleWatchVideo = () => {
+    // Navigate to carousel page instead of playing inline
+    const queryParams = new URLSearchParams({
+      category: video.category,
+      source: source
+    });
+    
+    router.push(`/video-carousel/${video._id}?${queryParams.toString()}`);
+    
+    if (onPlay) onPlay();
   };
 
   const handlePlay = () => {
-    setIsPlaying(true);
-    if (onPlay) onPlay();
+    if (showEmbed) {
+      setIsPlaying(true);
+      if (onPlay) onPlay();
+    } else {
+      handleWatchVideo();
+    }
   };
 
   const truncateDescription = (text: string | undefined | null, maxLength: number = 150) => {
@@ -91,8 +125,17 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               onError={(e) => {
-                // Fallback to a default placeholder if YouTube thumbnail fails
-                e.currentTarget.src = '/placeholder.jpg';
+                const img = e.currentTarget;
+                const fallbacks = getFallbackThumbnails(video.youtube_id);
+                const currentSrc = img.src;
+                const currentIndex = fallbacks.findIndex(url => img.src.includes(url.split('/').pop()?.split('.')[0] || ''));
+                
+                if (currentIndex < fallbacks.length - 1) {
+                  img.src = fallbacks[currentIndex + 1];
+                } else {
+                  // Last fallback - use placeholder
+                  img.src = '/placeholder.jpg';
+                }
               }}
             />
             
@@ -192,10 +235,10 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
         <div className="flex gap-2 pt-2">
           <Button 
             className="flex-1 bg-red-600 hover:bg-red-700 text-white"
-            onClick={handlePlay}
+            onClick={handleWatchVideo}
           >
             <Play className="mr-2 h-4 w-4" />
-            {isPlaying ? "Assistindo" : "Assistir"}
+            Assistir
           </Button>
           
           <Button 

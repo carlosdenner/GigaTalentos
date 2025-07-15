@@ -214,7 +214,12 @@ export default function VideosPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredVideos.map((video) => (
-                  <YouTubeVideoCard key={video._id} video={video} showEmbed={true} />
+                  <YouTubeVideoCard 
+                    key={video._id} 
+                    video={video} 
+                    showEmbed={false}
+                    source="video_list"
+                  />
                 ))}
               </div>
             )}
@@ -247,7 +252,12 @@ export default function VideosPage() {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredVideos.map((video) => (
-                    <YouTubeVideoCard key={video._id} video={video} showEmbed={true} />
+                    <YouTubeVideoCard 
+                      key={video._id} 
+                      video={video} 
+                      showEmbed={false}
+                      source={`category_${activeCategory}`}
+                    />
                   ))}
                 </div>
               )}
