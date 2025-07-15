@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+// Clear the model if it exists to force recreation with new schema
+if (mongoose.models.Video) {
+  delete mongoose.models.Video;
+}
+
 const VideoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },

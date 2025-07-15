@@ -11,16 +11,16 @@ interface YouTubeVideoProps {
   video: {
     _id: string;
     title: string;
-    description: string;
+    description?: string;
     thumbnail: string;
     youtube_id: string;
-    youtube_views: number;
-    youtube_likes: number;
-    youtube_channel_title: string;
-    duration: string;
+    youtube_views?: number;
+    youtube_likes?: number;
+    youtube_channel_title?: string;
+    duration?: string;
     category: string;
     featured: boolean;
-    tags: string[];
+    tags?: string[];
   };
   showEmbed?: boolean;
   onPlay?: () => void;
@@ -30,7 +30,10 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
   const [isPlaying, setIsPlaying] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  const formatNumber = (num: number) => {
+  const formatNumber = (num: number | undefined | null) => {
+    if (!num || num === 0) {
+      return '0';
+    }
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`;
     }
@@ -53,7 +56,8 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
     if (onPlay) onPlay();
   };
 
-  const truncateDescription = (text: string, maxLength: number = 150) => {
+  const truncateDescription = (text: string | undefined | null, maxLength: number = 150) => {
+    if (!text) return 'Sem descrição disponível';
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
   };
@@ -111,7 +115,7 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
               {video.title}
             </CardTitle>
             <p className="text-gray-400 text-sm mt-1">
-              {video.youtube_channel_title}
+              {video.youtube_channel_title || 'Canal desconhecido'}
             </p>
           </div>
         </div>
@@ -128,7 +132,7 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
           </div>
           <div className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
-            <span>{video.duration}</span>
+            <span>{video.duration || 'N/A'}</span>
           </div>
         </div>
       </CardHeader>
@@ -138,10 +142,10 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
         <div>
           <CardDescription className="text-gray-400 text-sm leading-relaxed">
             {showFullDescription 
-              ? video.description 
+              ? (video.description || 'Sem descrição disponível')
               : truncateDescription(video.description)
             }
-            {video.description.length > 150 && (
+            {video.description && video.description.length > 150 && (
               <button 
                 onClick={() => setShowFullDescription(!showFullDescription)}
                 className="text-[#10b981] hover:underline ml-1 text-sm"
