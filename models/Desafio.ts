@@ -70,6 +70,33 @@ const DesafioSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  created_by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  favoritos: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }], // Usuários que favoritaram o desafio
+  projetos_vinculados: [{
+    projeto_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Projeto'
+    },
+    status: {
+      type: String,
+      enum: ['pendente', 'aprovado', 'rejeitado'],
+      default: 'pendente'
+    },
+    solicitado_em: {
+      type: Date,
+      default: Date.now
+    },
+    aprovado_em: {
+      type: Date
+    }
+  }], // Projetos que solicitaram vinculação ao desafio
 });
 
 export default mongoose.models.Desafio || mongoose.model('Desafio', DesafioSchema);

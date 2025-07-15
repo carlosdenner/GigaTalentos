@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Desafio from '@/models/Desafio';
 import Category from '@/models/Category';
+import User from '@/models/User';
 
 export async function POST() {
   try {
@@ -13,11 +14,19 @@ export async function POST() {
     // Get categories to link desafios
     const categories = await Category.find({});
     
+    // Get mentors to assign as creators
+    const mentors = await User.find({ account_type: 'mentor' });
+    
     // Helper function to find category safely
     const findCategory = (searchTerm: string) => {
       return categories.find(c => 
         c.name.toLowerCase().includes(searchTerm.toLowerCase())
       ) || categories[0]; // Fallback to first category if not found
+    };
+    
+    // Helper function to get random mentor
+    const getRandomMentor = () => {
+      return mentors[Math.floor(Math.random() * mentors.length)];
     };
     
     const desafiosData = [
@@ -37,7 +46,8 @@ export async function POST() {
         status: "Ativo",
         start_date: new Date('2025-07-01'),
         end_date: new Date('2025-07-15'),
-        featured: true
+        featured: true,
+        created_by: getRandomMentor()?._id
       },
       {
         title: "Solução Tech Inovadora",
@@ -54,7 +64,8 @@ export async function POST() {
         status: "Ativo",
         start_date: new Date('2025-07-01'),
         end_date: new Date('2025-08-01'),
-        featured: true
+        featured: true,
+        created_by: getRandomMentor()?._id
       },
       {
         title: "Liderança em Equipe",
@@ -71,7 +82,8 @@ export async function POST() {
         status: "Ativo",
         start_date: new Date('2025-07-05'),
         end_date: new Date('2025-07-26'),
-        featured: true
+        featured: true,
+        created_by: getRandomMentor()?._id
       },
       {
         title: "Análise de Dados para Negócios",
@@ -88,7 +100,8 @@ export async function POST() {
         status: "Em Breve",
         start_date: new Date('2025-07-20'),
         end_date: new Date('2025-08-03'),
-        featured: false
+        featured: false,
+        created_by: getRandomMentor()?._id
       },
       {
         title: "Resiliência Empreendedora",
@@ -122,7 +135,8 @@ export async function POST() {
         status: "Em Breve",
         start_date: new Date('2025-07-25'),
         end_date: new Date('2025-08-15'),
-        featured: false
+        featured: false,
+        created_by: getRandomMentor()?._id
       }
     ];
 

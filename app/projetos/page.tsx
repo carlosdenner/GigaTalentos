@@ -2,14 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { useUserType } from '@/hooks/useUserType';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Eye, Users, Calendar, Target, Heart, Star, Plus, Settings } from 'lucide-react';
+import { Eye, Users, Calendar, Target, Heart, Star, Plus, Settings, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import ProjectFavoriteButton from '@/components/project-favorite-button';
 import ProjectParticipationRequest from '@/components/project-participation-request';
+import { toast } from '@/hooks/use-toast';
 
 interface Projeto {
   _id: string;
@@ -52,6 +54,7 @@ interface Projeto {
 
 export default function ProjetosPage() {
   const { data: session } = useSession();
+  const { userType, isLoading: userTypeLoading } = useUserType();
   const [projetos, setProjetos] = useState<Projeto[]>([]);
   const [loading, setLoading] = useState(true);
   const [filtroStatus, setFiltroStatus] = useState<string>('todos');
@@ -71,6 +74,40 @@ export default function ProjetosPage() {
       console.error('Erro ao buscar projetos:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDeleteProjeto = async (projetoId: string) => {
+    if (!confirm("Tem certeza que deseja deletar este projeto? Esta ação não pode ser desfeita.")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/projetos/${projetoId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setProjetos(prev => prev.filter(p => p._id !== projetoId));
+        toast({
+          title: "Sucesso",
+          description: "Projeto deletado com sucesso!",
+        });
+      } else {
+        const error = await response.json();
+        toast({
+          title: "Erro",
+          description: error.error || "Falha ao deletar projeto",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error deleting projeto:', error);
+      toast({
+        title: "Erro",
+        description: "Erro interno do servidor",
+        variant: "destructive",
+      });
     }
   };
 
@@ -114,7 +151,7 @@ export default function ProjetosPage() {
       <div className="text-center mb-8">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-3xl font-bold">Giga Projetos dos Talentos</h1>
-          {session && (
+          {session && ['talent', 'mentor'].includes(userType || '') && (
             <div className="flex gap-2">
               <Button asChild className="bg-[#10b981] hover:bg-[#10b981]/90">
                 <Link href="/projetos/create">
@@ -251,7 +288,7 @@ export default function ProjetosPage() {
                     </Badge>
                   )}
                 </div>
-                <div className="flex gap-1">
+                <div className="flex items-center gap-1">
                   {projeto.desafio_id && (
                     <Badge variant="outline" className="text-xs">
                       {projeto.desafio_aprovado ? '✓ Desafio' : '⏳ Desafio'}
@@ -261,6 +298,19 @@ export default function ProjetosPage() {
                     <Badge variant="secondary" className="text-xs">
                       Com Mentoria
                     </Badge>
+                  )}
+                  {session?.user?.id === projeto.criador_id?._id && (
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleDeleteProjeto(projeto._id);
+                      }}
+                      className="h-6 w-6 p-0 ml-1"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
                   )}
                 </div>
               </div>

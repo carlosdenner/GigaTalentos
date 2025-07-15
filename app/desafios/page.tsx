@@ -1,13 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
+import { useUserType } from "@/hooks/useUserType"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Trophy, Users, Calendar, Star, ArrowRight, Clock, Filter } from "lucide-react"
+import { Trophy, Users, Calendar, Star, ArrowRight, Clock, Filter, Trash2 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { toast } from "@/hooks/use-toast"
 
 interface Prize {
   position: string;
@@ -35,6 +38,11 @@ interface Desafio {
   popularityScore: number;
   daysRemaining: number;
   formattedPrizes: string;
+  created_by?: {
+    _id: string;
+    name: string;
+    avatar?: string;
+  };
 }
 
 interface FilterOptions {
@@ -45,6 +53,8 @@ interface FilterOptions {
 }
 
 export default function DesafiosPage() {
+  const { data: session } = useSession();
+  const { userType, isLoading: userTypeLoading } = useUserType();
   const [desafios, setDesafios] = useState<Desafio[]>([]);
   const [filterOptions, setFilterOptions] = useState<FilterOptions | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -128,6 +138,40 @@ export default function DesafiosPage() {
     if (days <= 7) return `${days} dias restantes`;
     if (days <= 30) return `${Math.ceil(days / 7)} semanas restantes`;
     return `${Math.ceil(days / 30)} meses restantes`;
+  };
+
+  const handleDeleteDesafio = async (desafioId: string) => {
+    if (!confirm("Tem certeza que deseja deletar este desafio? Esta ação não pode ser desfeita.")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/desafios/${desafioId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setDesafios(prev => prev.filter(d => d._id !== desafioId));
+        toast({
+          title: "Sucesso",
+          description: "Desafio deletado com sucesso!",
+        });
+      } else {
+        const error = await response.json();
+        toast({
+          title: "Erro",
+          description: error.error || "Falha ao deletar desafio",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error deleting desafio:', error);
+      toast({
+        title: "Erro",
+        description: "Erro interno do servidor",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -298,9 +342,24 @@ export default function DesafiosPage() {
                         </Badge>
                       )}
                     </div>
-                    <Badge variant="secondary" className={getDifficultyColor(desafio.difficulty)}>
-                      {desafio.difficulty}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary" className={getDifficultyColor(desafio.difficulty)}>
+                        {desafio.difficulty}
+                      </Badge>
+                      {session?.user?.id === desafio.created_by?._id && (
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleDeleteDesafio(desafio._id);
+                          }}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
                   </div>
                   <CardTitle className="text-white text-lg leading-tight group-hover:text-[#10b981] transition-colors">
                     {desafio.title}
@@ -376,17 +435,19 @@ export default function DesafiosPage() {
       )}
 
       {/* Call to Action */}
-      <div className="text-center space-y-4 py-8">
-        <h2 className="text-2xl font-bold text-white">Pronto para o Próximo Nível?</h2>
-        <p className="text-gray-400">
-          Crie seu próprio desafio e convide outros empreendedores para participar
-        </p>
-        <Link href="/desafios/criar">
-          <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">
-            Criar Novo Desafio
-          </Button>
-        </Link>
-      </div>
+      {userType === 'mentor' && (
+        <div className="text-center space-y-4 py-8">
+          <h2 className="text-2xl font-bold text-white">Pronto para o Próximo Nível?</h2>
+          <p className="text-gray-400">
+            Crie seu próprio desafio e convide outros empreendedores para participar
+          </p>
+          <Link href="/desafios/criar">
+            <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white">
+              Criar Novo Desafio
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

@@ -15,7 +15,7 @@ export interface UserPreferences {
     action: 'view' | 'like' | 'share' | 'follow';
     timestamp: Date;
   }[];
-  userType: 'talent' | 'sponsor' | 'fan' | 'other';
+  userType: 'talent' | 'mentor' | 'fan' | 'other';
 }
 
 /**
@@ -61,7 +61,7 @@ export function getUserTypeWeights(userType: string) {
       educational: 1.3,
       tutorial: 1.4
     },
-    sponsor: {
+    mentor: {
       projeto: 1.5,
       video: 1.2,
       desafio: 0.8,
@@ -144,7 +144,7 @@ export function generateRecommendationReasons(
           reasons.push('Oportunidade para talentos');
         }
         break;
-      case 'sponsor':
+      case 'mentor':
         if (content.type === 'projeto' && content.seguidores) {
           reasons.push('Projeto promissor para patrocínio');
         }

@@ -1,6 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
+import { useUserType } from "@/hooks/useUserType"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,8 +13,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Plus, X, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { toast } from "@/hooks/use-toast"
 
 export default function CreateChallengePage() {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const { userType, isLoading: userTypeLoading } = useUserType();
+  const [categories, setCategories] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -20,20 +29,36 @@ export default function CreateChallengePage() {
     duration: "",
     prize: "",
     objectives: [] as string[],
-    requirements: [] as string[]
+    requirements: [] as string[],
+    start_date: "",
+    end_date: ""
   })
 
   const [newObjective, setNewObjective] = useState("")
   const [newRequirement, setNewRequirement] = useState("")
 
-  const categories = [
-    "Habilidade Cognitiva & Técnica",
-    "Criatividade & Inovação",
-    "Motivação & Paixão",
-    "Liderança & Colaboração",
-    "Consciência Social & Integridade",
-    "Adaptabilidade & Resistência"
-  ]
+  // Redirect if not mentor
+  useEffect(() => {
+    if (!userTypeLoading && userType !== 'mentor') {
+      router.push('/desafios');
+    }
+  }, [userType, userTypeLoading, router]);
+
+  // Fetch categories
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await fetch('/api/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   const difficulties = ["Iniciante", "Intermediário", "Avançado"]
 
@@ -71,12 +96,68 @@ export default function CreateChallengePage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically send the data to your API
-    console.log("Challenge data:", formData)
-    alert("Desafio criado com sucesso!")
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!session?.user?.id) {
+      toast({
+        title: "Erro",
+        description: "Você precisa estar logado para criar um desafio",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!formData.title || !formData.description || !formData.category) {
+      toast({
+        title: "Erro",
+        description: "Preencha todos os campos obrigatórios",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/desafios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          requirements: formData.requirements,
+          start_date: formData.start_date || new Date().toISOString(),
+          end_date: formData.end_date || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Sucesso",
+          description: "Desafio criado com sucesso!",
+        });
+        router.push('/desafios');
+      } else {
+        const error = await response.json();
+        toast({
+          title: "Erro",
+          description: error.error || "Falha ao criar desafio",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error creating desafio:', error);
+      toast({
+        title: "Erro",
+        description: "Erro interno do servidor",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -144,7 +225,7 @@ export default function CreateChallengePage() {
                         </SelectTrigger>
                         <SelectContent>
                           {categories.map((category) => (
-                            <SelectItem key={category} value={category}>{category}</SelectItem>
+                            <SelectItem key={category._id} value={category._id}>{category.name}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -188,6 +269,31 @@ export default function CreateChallengePage() {
                         className="bg-[#0a192f] border-gray-700 text-white"
                         required
                       />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="start_date" className="text-gray-300">Data de Início</Label>
+                        <Input
+                          id="start_date"
+                          type="date"
+                          value={formData.start_date}
+                          onChange={(e) => setFormData(prev => ({ ...prev, start_date: e.target.value }))}
+                          className="bg-[#0a192f] border-gray-700 text-white"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="end_date" className="text-gray-300">Data de Término</Label>
+                        <Input
+                          id="end_date"
+                          type="date"
+                          value={formData.end_date}
+                          onChange={(e) => setFormData(prev => ({ ...prev, end_date: e.target.value }))}
+                          className="bg-[#0a192f] border-gray-700 text-white"
+                          required
+                        />
+                      </div>
                     </div>
                   </div>
                 </CardContent>

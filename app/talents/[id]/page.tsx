@@ -267,11 +267,11 @@ export default function TalentDetailsPage() {
       return;
     }
 
-    // Check if user is a sponsor
-    if (userType !== 'sponsor') {
+    // Check if user is a mentor
+    if (userType !== 'mentor') {
       toast({
         title: "Access Denied",
-        description: "Only sponsors can send messages to talents",
+        description: "Only mentors can send messages to talents",
         variant: "destructive"
       });
       return;

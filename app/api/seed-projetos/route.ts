@@ -5,6 +5,25 @@ import Channel from '@/models/Channel';
 import User from '@/models/User';
 import Desafio from '@/models/Desafio';
 
+export async function POST() {
+  try {
+    await connectDB();
+
+    // Clear existing projects
+    await Projeto.deleteMany({});
+
+    // Get users for assignment
+    const mentors = await User.find({ account_type: 'mentor' });
+    const talents = await User.find({ account_type: 'talent' });
+    const portfolios = await Channel.find({});
+    const desafios = await Desafio.find({});
+
+    // Helper functions
+    const getRandomMentor = () => mentors[Math.floor(Math.random() * mentors.length)];
+    const getRandomTalent = () => talents[Math.floor(Math.random() * talents.length)];
+    const getRandomPortfolio = () => portfolios[Math.floor(Math.random() * portfolios.length)];
+    const getRandomDesafio = () => desafios[Math.floor(Math.random() * desafios.length)];
+
 const projetosSeed = [
   {
     nome: "EcoTech - Monitoramento Ambiental IoT",
@@ -120,6 +139,33 @@ export async function POST() {
         ? [mentors[(i + 2) % mentors.length]._id, mentors[(i + 3) % mentors.length]._id] 
         : [];
 
+      // Generate random participation data
+      const randomParticipants = talents.filter(t => 
+        t._id.toString() !== lider._id.toString() && 
+        t._id.toString() !== criador._id.toString()
+      ).sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 3) + 1);
+
+      const approvedParticipants = randomParticipants.slice(0, Math.floor(randomParticipants.length / 2));
+      const pendingParticipants = randomParticipants.slice(approvedParticipants.length);
+
+      // Generate participation requests
+      const solicitacoesParticipacao = randomParticipants.map((participant, idx) => ({
+        usuario_id: participant._id,
+        mensagem: `Olá! Tenho interesse em participar do projeto ${dadosProjeto.nome}. Tenho experiência em ${participant.skills?.[0] || 'desenvolvimento'}.`,
+        status: idx < approvedParticipants.length ? 'aprovado' : 'pendente',
+        solicitado_em: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000),
+        respondido_em: idx < approvedParticipants.length ? new Date(Date.now() - Math.random() * 10 * 24 * 60 * 60 * 1000) : null,
+        resposta_mensagem: idx < approvedParticipants.length ? 'Bem-vindo(a) ao projeto! Vamos fazer algo incrível juntos.' : null
+      }));
+
+      // Generate likes
+      const likesCount = Math.floor(Math.random() * 50) + 10;
+      const likesUsers = [...talents, ...mentors]
+        .filter(u => u._id.toString() !== criador._id.toString())
+        .sort(() => 0.5 - Math.random())
+        .slice(0, likesCount)
+        .map(u => u._id);
+
       const projeto = await Projeto.create({
         nome: dadosProjeto.nome,
         descricao: dadosProjeto.descricao,
@@ -132,15 +178,17 @@ export async function POST() {
         talento_lider_id: lider._id,
         portfolio_id: channel._id,
         desafio_id: desafio?._id,
+        desafio_vinculacao_status: desafio ? 'aprovado' : null,
+        desafio_solicitado_em: desafio ? new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000) : null,
         mentor_aprovador_id: mentorAprovador?._id,
         desafio_aprovado: desafio ? true : false,
         sponsors: sponsors,
+        likes: likesUsers,
+        solicitacoes_participacao: solicitacoesParticipacao,
+        participantes_solicitados: pendingParticipants.map(p => p._id),
+        participantes_aprovados: approvedParticipants.map(p => p._id),
         seguidores: Math.floor(Math.random() * 500) + 50,
-        participantes_aprovados: dadosProjeto.tem_sponsors ? [talents[(i + 1) % talents.length]._id] : [],
-        favoritos: [
-          talents[(i + 2) % talents.length]._id,
-          talents[(i + 3) % talents.length]._id
-        ],
+        favoritos: talents.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 10) + 5).map(t => t._id),
         verificado: Math.random() > 0.5,
         criado_em: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000)
       });

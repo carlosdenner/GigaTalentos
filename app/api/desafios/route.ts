@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 import connectDB from '@/lib/mongodb';
-import { Desafio } from '@/models';
+import { Desafio, User } from '@/models';
+import { authOptions } from '../auth/[...nextauth]/route';
 
 export async function GET(request: Request) {
   try {
@@ -143,5 +145,61 @@ function formatPrizes(prizes: any[]): string {
     return mainPrize.value;
   } else {
     return `${mainPrize.value} + ${prizes.length - 1} outros prêmios`;
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const session = await getServerSession(authOptions);
+    
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: "Não autenticado" },
+        { status: 401 }
+      );
+    }
+
+    await connectDB();
+
+    // Check if user is a mentor
+    const user = await User.findById(session.user.id);
+    if (!user || user.account_type !== 'mentor') {
+      return NextResponse.json(
+        { error: "Apenas mentores podem criar desafios" },
+        { status: 403 }
+      );
+    }
+
+    const desafioData = await request.json();
+
+    // Validate required fields
+    if (!desafioData.title || !desafioData.description || !desafioData.category) {
+      return NextResponse.json(
+        { error: "Título, descrição e categoria são obrigatórios" },
+        { status: 400 }
+      );
+    }
+
+    // Create new desafio
+    const desafio = await Desafio.create({
+      ...desafioData,
+      created_by: session.user.id,
+      participants: 0,
+      status: 'Ativo',
+      created_at: new Date(),
+      updated_at: new Date()
+    });
+
+    const populatedDesafio = await Desafio.findById(desafio._id)
+      .populate('category', 'name')
+      .populate('created_by', 'name avatar');
+
+    return NextResponse.json(populatedDesafio, { status: 201 });
+  } catch (error: any) {
+    console.error('Error creating desafio:', error);
+    return NextResponse.json(
+      { error: error.message || "Falha ao criar desafio" },
+      { status: 500 }
+    );
   }
 }

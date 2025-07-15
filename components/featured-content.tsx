@@ -303,8 +303,8 @@ export default function FeaturedContent() {
     switch (userType) {
       case 'talent':
         return 'Desafios e projetos recomendados para talentos em ascensão';
-      case 'sponsor':
-        return 'Projetos e talentos promissores para patrocínio';
+      case 'mentor':
+        return 'Projetos e talentos promissores para mentoria';
       case 'fan':
         return 'Conteúdo popular e projetos em destaque';
       default:

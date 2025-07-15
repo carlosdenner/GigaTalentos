@@ -113,10 +113,10 @@ export async function DELETE(
     }
 
     await connectDB();
-
+    
     const { id } = await params;
-    // Find the project
     const projeto = await Projeto.findById(id);
+
     if (!projeto) {
       return NextResponse.json(
         { error: "Projeto não encontrado" },
@@ -124,10 +124,8 @@ export async function DELETE(
       );
     }
 
-    // Check if user is the creator of the project (only creator can delete)
-    const isCreator = projeto.criador_id && projeto.criador_id.toString() === session.user.id;
-
-    if (!isCreator) {
+    // Check if user is the creator of the project
+    if (projeto.criador_id.toString() !== session.user.id) {
       return NextResponse.json(
         { error: "Apenas o criador do projeto pode deletá-lo" },
         { status: 403 }
@@ -136,18 +134,14 @@ export async function DELETE(
 
     await Projeto.findByIdAndDelete(id);
 
-    // Note: You might want to also clean up related data like:
-    // - Participation requests for this project
-    // - Project favorites for this project
-    // This is left for future implementation if needed
-
-    return NextResponse.json({ 
-      message: "Projeto deletado com sucesso" 
-    });
-  } catch (error: any) {
+    return NextResponse.json(
+      { message: "Projeto deletado com sucesso" },
+      { status: 200 }
+    );
+  } catch (error) {
     console.error('Error deleting project:', error);
     return NextResponse.json(
-      { error: error.message || "Falha ao deletar projeto" },
+      { error: "Falha ao deletar projeto" },
       { status: 500 }
     );
   }

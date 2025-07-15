@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useUserType } from "@/hooks/useUserType";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,9 +16,17 @@ import { ArrowLeft, Plus, X } from "lucide-react";
 export default function CreateProjectPage() {
   const router = useRouter();
   const { data: session } = useSession();
+  const { userType, isLoading: userTypeLoading } = useUserType();
   const [isLoading, setIsLoading] = useState(false);
   const [portfolios, setPortfolios] = useState<any[]>([]);
   const [desafios, setDesafios] = useState<any[]>([]);
+
+  // Redirect if not talent or mentor
+  useEffect(() => {
+    if (!userTypeLoading && !['talent', 'mentor'].includes(userType || '')) {
+      router.push('/projetos');
+    }
+  }, [userType, userTypeLoading, router]);
 
   const [formData, setFormData] = useState({
     nome: "",

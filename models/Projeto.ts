@@ -18,11 +18,27 @@ const ProjetoSchema = new mongoose.Schema({
   criador_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Quem criou (pode ser mentor ou talent)
   portfolio_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel', required: true }, // Projeto pertence a um Portfólio
   desafio_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Desafio' }, // Vinculação opcional com Desafio
+  desafio_vinculacao_status: { type: String, enum: ['pendente', 'aprovado', 'rejeitado'], default: 'pendente' }, // Status da vinculação ao desafio
+  desafio_solicitado_em: { type: Date }, // Quando foi solicitada a vinculação
   mentor_aprovador_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Mentor que aprovou vinculação ao desafio
   desafio_aprovado: { type: Boolean, default: false }, // Se a vinculação ao desafio foi aprovada
-  sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Mentors que patrocinam o projeto
-  participantes_solicitados: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Talents que solicitaram participação
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Usuários que curtiram o projeto
+  sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Mentors que oferecem mentoria/apoio ao projeto
+  
+  // Sistema de participação detalhado
+  solicitacoes_participacao: [{
+    usuario_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    mensagem: { type: String }, // Mensagem opcional do solicitante
+    status: { type: String, enum: ['pendente', 'aprovado', 'rejeitado'], default: 'pendente' },
+    solicitado_em: { type: Date, default: Date.now },
+    respondido_em: { type: Date },
+    resposta_mensagem: { type: String } // Mensagem de resposta do líder
+  }],
+  
+  // Arrays simplificados para compatibilidade
+  participantes_solicitados: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Derived from solicitacoes_participacao
   participantes_aprovados: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Participantes aprovados pelo líder
+  
   favoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Usuários que favoritaram
   verificado: { type: Boolean, default: false },
   demo: { type: Boolean, default: false },

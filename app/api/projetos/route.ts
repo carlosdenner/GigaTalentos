@@ -63,8 +63,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const projetoData = await request.json();
     await connectDB();
+
+    // Get user to check account type
+    const { User } = require('@/models');
+    const user = await User.findById(session.user.id);
+    
+    if (!user || !['talent', 'mentor'].includes(user.account_type)) {
+      return NextResponse.json(
+        { error: "Apenas talentos e mentores podem criar projetos" },
+        { status: 403 }
+      );
+    }
+
+    const projetoData = await request.json();
 
     // Validate required fields
     if (!projetoData.nome || !projetoData.portfolio_id) {
