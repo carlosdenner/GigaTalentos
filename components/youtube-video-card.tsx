@@ -12,7 +12,7 @@ interface YouTubeVideoProps {
     _id: string;
     title: string;
     description?: string;
-    thumbnail: string;
+    thumbnail?: string;
     youtube_id: string;
     youtube_views?: number;
     youtube_likes?: number;
@@ -51,6 +51,14 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
     return `https://www.youtube.com/watch?v=${videoId}`;
   };
 
+  const getThumbnailUrl = (videoId: string, fallbackThumbnail?: string) => {
+    if (fallbackThumbnail && fallbackThumbnail.trim() !== '') {
+      return fallbackThumbnail;
+    }
+    // Generate YouTube thumbnail URL from video ID
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+
   const handlePlay = () => {
     setIsPlaying(true);
     if (onPlay) onPlay();
@@ -69,7 +77,7 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
         {isPlaying && showEmbed ? (
           <iframe
             src={getYouTubeEmbedUrl(video.youtube_id)}
-            title={video.title}
+            title={video.title || 'Vídeo do YouTube'}
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -77,11 +85,15 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
         ) : (
           <div className="relative w-full h-full cursor-pointer" onClick={handlePlay}>
             <Image
-              src={video.thumbnail}
-              alt={video.title}
+              src={getThumbnailUrl(video.youtube_id, video.thumbnail)}
+              alt={video.title || 'Thumbnail do vídeo'}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={(e) => {
+                // Fallback to a default placeholder if YouTube thumbnail fails
+                e.currentTarget.src = '/placeholder.jpg';
+              }}
             />
             
             {/* Play Button Overlay */}
@@ -112,7 +124,7 @@ export default function YouTubeVideoCard({ video, showEmbed = false, onPlay }: Y
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <CardTitle className="text-white text-lg leading-tight group-hover:text-[#10b981] transition-colors line-clamp-2">
-              {video.title}
+              {video.title || 'Título não disponível'}
             </CardTitle>
             <p className="text-gray-400 text-sm mt-1">
               {video.youtube_channel_title || 'Canal desconhecido'}
