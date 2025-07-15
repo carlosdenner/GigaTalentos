@@ -646,7 +646,7 @@ export async function POST() {
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numFavorites, userPool.length));
       
-      desafio.favorited_by = favoriters.map(u => u._id);
+      desafio.favoritos = favoriters.map(u => u._id);
       await desafio.save();
       totalDesafioFavorites += favoriters.length;
     }

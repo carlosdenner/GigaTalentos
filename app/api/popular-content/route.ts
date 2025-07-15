@@ -34,29 +34,30 @@ export async function GET(request: Request) {
 
     switch (userType) {
       case 'talent':
-        // For talents: Show desafios, successful projetos, and learning videos
+        // For talents: Show desafios they can participate in, successful projetos, and learning videos
         const talentDesafios = await Desafio.find({
+          status: 'Ativo', // Only active challenges
           $or: [
             { featured: true },
-            { participants: { $gte: 50 } },
+            { participants: { $gte: 10 } },
             ...(userCategories.length > 0 ? [{ category: { $in: userCategories } }] : [])
           ]
         })
         .populate('category', 'name')
+        .populate('created_by', 'name account_type') // Show mentor info
         .sort({ participants: -1, featured: -1 })
         .limit(2)
         .lean();
 
         const talentProjetos = await Projeto.find({
           $or: [
-            { seguidores: { $gte: 100 } },
-            { status: 'concluido' },
+            { likes: { $exists: true, $ne: [] } },
+            { status: 'ativo' },
             ...(userCategories.length > 0 ? [{ categoria: { $in: userCategories } }] : [])
           ]
         })
         .populate('talento_lider_id', 'name avatar')
         .populate('portfolio_id', 'name')
-        .sort({ seguidores: -1 })
         .limit(2)
         .lean();
 
@@ -79,51 +80,77 @@ export async function GET(request: Request) {
         ];
         break;
 
-      case 'sponsor':
-      case 'fan':
-        // For sponsors/fans: Show high-performing projetos, videos, and popular desafios
-        const sponsorProjetos = await Projeto.find({
+      case 'mentor':
+        // For mentors: Show their own desafios, high-potential projetos, and strategic content
+        const mentorDesafios = await Desafio.find({
           $or: [
-            { seguidores: { $gte: 50 } },
-            { sponsors: { $exists: true, $not: { $size: 0 } } },
-            ...(userCategories.length > 0 ? [{ categoria: { $in: userCategories } }] : [])
+            { featured: true },
+            { participants: { $gte: 20 } }
           ]
         })
-        .populate('talento_lider_id', 'name avatar')
-        .populate('sponsors', 'name avatar')
-        .populate('portfolio_id', 'name')
-        .sort({ seguidores: -1 })
+        .populate('category', 'name')
+        .populate('created_by', 'name account_type')
+        .sort({ participants: -1, featured: -1 })
         .limit(3)
         .lean();
 
-        const sponsorVideos = await Video.find({
-          $or: [
-            { views: { $gte: 200 } },
-            { likes: { $gte: 10 } },
-            ...(userCategories.length > 0 ? [{ category: { $in: userCategories } }] : [])
-          ]
+        const mentorProjetos = await Projeto.find({
+          status: 'ativo'
+        })
+        .populate('talento_lider_id', 'name avatar')
+        .populate('portfolio_id', 'name')
+        .limit(2)
+        .lean();
+
+        const mentorVideos = await Video.find({
+          views: { $gte: 200 }
+        })
+        .populate('channel_id', 'name avatar category')
+        .sort({ views: -1, likes: -1 })
+        .limit(1)
+        .lean();
+
+        popularContent = [
+          ...mentorDesafios.map(item => ({ ...item, type: 'desafio' })),
+          ...mentorProjetos.map(item => ({ ...item, type: 'projeto' })),
+          ...mentorVideos.map(item => ({ ...item, type: 'video' }))
+        ];
+        break;
+
+      case 'fan':
+        // For fans: Show popular content they can follow and engage with
+        const fanProjetos = await Projeto.find({
+          status: { $in: ['ativo', 'concluido'] }
+        })
+        .populate('talento_lider_id', 'name avatar')
+        .populate('portfolio_id', 'name')
+        .limit(3)
+        .lean();
+
+        const fanVideos = await Video.find({
+          views: { $gte: 100 }
         })
         .populate('channel_id', 'name avatar category')
         .sort({ views: -1, likes: -1 })
         .limit(2)
         .lean();
 
-        const sponsorDesafios = await Desafio.find({
+        const fanDesafios = await Desafio.find({
           $or: [
-            { participants: { $gte: 100 } },
-            { featured: true },
-            ...(userCategories.length > 0 ? [{ category: { $in: userCategories } }] : [])
+            { participants: { $gte: 20 } },
+            { featured: true }
           ]
         })
         .populate('category', 'name')
+        .populate('created_by', 'name account_type')
         .sort({ participants: -1 })
         .limit(1)
         .lean();
 
         popularContent = [
-          ...sponsorProjetos.map(item => ({ ...item, type: 'projeto' })),
-          ...sponsorVideos.map(item => ({ ...item, type: 'video' })),
-          ...sponsorDesafios.map(item => ({ ...item, type: 'desafio' }))
+          ...fanProjetos.map(item => ({ ...item, type: 'projeto' })),
+          ...fanVideos.map(item => ({ ...item, type: 'video' })),
+          ...fanDesafios.map(item => ({ ...item, type: 'desafio' }))
         ];
         break;
 
@@ -138,21 +165,24 @@ export async function GET(request: Request) {
         .lean();
 
         const generalProjetos = await Projeto.find({
-          seguidores: { $gte: 30 }
+          $or: [
+            { likes: { $exists: true, $ne: [] } },
+            { favoritos: { $exists: true, $ne: [] } }
+          ]
         })
         .populate('talento_lider_id', 'name avatar')
         .populate('portfolio_id', 'name')
-        .sort({ seguidores: -1 })
         .limit(2)
         .lean();
 
         const generalDesafios = await Desafio.find({
           $or: [
             { featured: true },
-            { participants: { $gte: 50 } }
+            { participants: { $gte: 20 } }
           ]
         })
         .populate('category', 'name')
+        .populate('created_by', 'name account_type')
         .sort({ participants: -1, featured: -1 })
         .limit(1)
         .lean();

@@ -7,10 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Trophy, Users, Calendar, Star, ArrowRight, Clock, Filter, Trash2 } from "lucide-react"
+import { Trophy, Users, Calendar, Star, ArrowRight, Clock, Filter, Trash2, Heart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { toast } from "@/hooks/use-toast"
+import DesafioFavoriteButton from "@/components/desafio-favorite-button"
 
 interface Prize {
   position: string;
@@ -38,6 +39,7 @@ interface Desafio {
   popularityScore: number;
   daysRemaining: number;
   formattedPrizes: string;
+  favoritesCount: number;
   created_by?: {
     _id: string;
     name: string;
@@ -346,6 +348,7 @@ export default function DesafiosPage() {
                       <Badge variant="secondary" className={getDifficultyColor(desafio.difficulty)}>
                         {desafio.difficulty}
                       </Badge>
+                      <DesafioFavoriteButton desafioId={desafio._id} showCount={true} />
                       {session?.user?.id === desafio.created_by?._id && (
                         <Button
                           variant="destructive"

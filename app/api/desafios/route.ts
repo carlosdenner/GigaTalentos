@@ -63,7 +63,8 @@ export async function GET(request: Request) {
       ...desafio,
       popularityScore: calculateDesafioPopularity(desafio),
       daysRemaining: calculateDaysRemaining(desafio.end_date),
-      formattedPrizes: formatPrizes(desafio.prizes)
+      formattedPrizes: formatPrizes(desafio.prizes),
+      favoritesCount: desafio.favoritos ? desafio.favoritos.length : 0
     }));
 
     return NextResponse.json({

@@ -22,11 +22,11 @@ export default function Sidebar() {
   const [popularDesafios, setPopularDesafios] = useState<Desafio[]>([])
 
   useEffect(() => {
-    fetch('/api/desafios')
+    fetch('/api/desafios?sortBy=popularity&limit=4')
       .then(res => res.json())
       .then(data => {
-        if (Array.isArray(data)) {
-          setPopularDesafios(data.slice(0, 4)) // Show top 4
+        if (data.data && Array.isArray(data.data)) {
+          setPopularDesafios(data.data.slice(0, 4)) // Show top 4
         }
       })
       .catch(err => console.error('Error fetching desafios:', err))
