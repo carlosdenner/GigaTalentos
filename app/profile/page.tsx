@@ -77,7 +77,11 @@ interface Desafio {
   _id: string;
   title: string;
   description: string;
-  category: string;
+  category: {
+    _id: string;
+    name: string;
+    thumbnail: string;
+  };
   difficulty: string;
   status: string;
   participants: number;
@@ -179,7 +183,7 @@ export default function ProfilePage() {
       <div className="h-48 bg-gradient-to-r from-[#10b981] to-[#3b82f6] relative">
         <div className="absolute -bottom-16 left-8 flex items-end">
           <Avatar className="h-32 w-32 border-4 border-[#0a192f]">
-            {/* <AvatarImage src={profile.avatar} alt={profile.name} /> */}
+            <AvatarImage src={profile.avatar} alt={profile.name} />
             <AvatarFallback>
                     {profile.name
                       .split(" ")
@@ -505,7 +509,7 @@ export default function ProfilePage() {
                       </p>
                       
                       <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span>{desafio.category}</span>
+                        <span>{desafio.category?.name || 'Categoria'}</span>
                         <span>{desafio.participants} participantes</span>
                       </div>
                     </div>

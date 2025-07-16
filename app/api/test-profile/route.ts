@@ -58,14 +58,14 @@ export async function GET() {
         desafios: desafios.length
       },
       channels: channels.map(ch => ({ name: ch.name, _id: ch._id })),
-      videos: videos.map(v => ({ title: v.title, channel: v.channel_id?.name })),
-      projetos: projetos.map(p => ({ nome: p.nome, criador: p.criador_id?.name })),
-      desafios: desafios.map(d => ({ title: d.title, category: d.category?.name }))
+      videos: videos.map(v => ({ title: v.title, channel: v.channel_id?.toString() })),
+      projetos: projetos.map(p => ({ nome: p.nome, criador: p.criador_id?.toString() })),
+      desafios: desafios.map(d => ({ title: d.title, category: d.category?.toString() }))
     });
   } catch (error) {
     console.error('Test profile error:', error);
     return NextResponse.json(
-      { error: "Failed to test profile", details: error.message },
+      { error: "Failed to test profile", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
