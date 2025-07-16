@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 import User from '@/models/User';
 import Channel from '@/models/Channel';
 import Category from '@/models/Category';
@@ -40,10 +41,10 @@ export async function POST() {
     for (const { model, name } of collections) {
       try {
         console.log(`Deleting ${name}...`);
-        await model.deleteMany({});
+        await (model as any).deleteMany({});
         console.log(`✅ ${name} cleared`);
       } catch (error) {
-        console.warn(`⚠️ Warning: Could not clear ${name}:`, error.message);
+        console.warn(`⚠️ Warning: Could not clear ${name}:`, error instanceof Error ? error.message : String(error));
         // Continue with other collections even if one fails
       }
     }
@@ -92,13 +93,32 @@ export async function POST() {
 
     console.log('👥 Creating users...');
     
+    // Hash passwords for all users
+    const hashedAdminPassword = await bcrypt.hash('carlosdenner', 12);
+    const hashedDefaultPassword = await bcrypt.hash('password123', 12);
+    
     // Create diverse users with different types
     const users = await User.insertMany([
+      // Admin (Platform Administrator)
+      {
+        name: 'Carlos Denner',
+        email: 'carlosdenner@gmail.com',
+        password: hashedAdminPassword,
+        avatar: '/placeholder-user.jpg',
+        account_type: 'admin',
+        bio: 'Fundador e administrador da plataforma Giga Talentos. Especialista em identificação e desenvolvimento de talentos empreendedores.',
+        location: 'Brasília, DF',
+        portfolio: 'https://carlosdenner.com',
+        experience: 'Expert',
+        skills: ['Platform Management', 'Talent Identification', 'Entrepreneurship', 'Innovation'],
+        verified: true
+      },
+
       // Fans
       {
         name: 'Ana Silva',
         email: 'ana.silva@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'fan',
         bio: 'Apaixonada por tecnologia e sempre em busca de novos aprendizados.',
@@ -109,7 +129,7 @@ export async function POST() {
       {
         name: 'Pedro Santos',
         email: 'pedro.santos@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'fan',
         bio: 'Estudante de design gráfico interessado em projetos criativos.',
@@ -119,7 +139,7 @@ export async function POST() {
       {
         name: 'Maria Oliveira',
         email: 'maria.oliveira@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'fan',
         bio: 'Entusiasta de marketing digital e tendências.',
@@ -131,7 +151,7 @@ export async function POST() {
       {
         name: 'João Desenvolvedor',
         email: 'joao.dev@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'talent',
         bio: 'Desenvolvedor Full Stack com 3 anos de experiência em React e Node.js.',
@@ -143,7 +163,7 @@ export async function POST() {
       {
         name: 'Carla Designer',
         email: 'carla.design@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'talent',
         bio: 'Designer UX/UI especializada em experiências digitais inovadoras.',
@@ -155,7 +175,7 @@ export async function POST() {
       {
         name: 'Lucas Frontend',
         email: 'lucas.frontend@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'talent',
         bio: 'Especialista em desenvolvimento frontend com foco em performance.',
@@ -167,7 +187,7 @@ export async function POST() {
       {
         name: 'Sofia Backend',
         email: 'sofia.backend@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'talent',
         bio: 'Desenvolvedora backend especializada em arquiteturas escaláveis.',
@@ -179,7 +199,7 @@ export async function POST() {
       {
         name: 'Rafael Mobile',
         email: 'rafael.mobile@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'talent',
         bio: 'Desenvolvedor mobile com experiência em React Native e Flutter.',
@@ -193,7 +213,7 @@ export async function POST() {
       {
         name: 'Dr. Carlos Tech',
         email: 'carlos.tech@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'mentor',
         bio: 'CTO com 15 anos de experiência em tecnologia. Mentor de startups e projetos inovadores.',
@@ -207,7 +227,7 @@ export async function POST() {
       {
         name: 'Prof. Marina UX',
         email: 'marina.ux@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'mentor',
         bio: 'Design Leader e professora universitária. Especialista em Design Thinking e UX Strategy.',
@@ -221,7 +241,7 @@ export async function POST() {
       {
         name: 'Eng. Roberto Sustentável',
         email: 'roberto.sustentavel@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'mentor',
         bio: 'Engenheiro ambiental e consultor em sustentabilidade. Mentor de projetos de impacto social.',
@@ -235,7 +255,7 @@ export async function POST() {
       {
         name: 'Dra. Juliana Marketing',
         email: 'juliana.marketing@email.com',
-        password: 'password123',
+        password: hashedDefaultPassword,
         avatar: '/placeholder-user.jpg',
         account_type: 'mentor',
         bio: 'VP de Marketing com vasta experiência em growth hacking e marketing digital.',
@@ -381,6 +401,76 @@ export async function POST() {
           'Documentar aprendizados com falhas',
           'Demonstrar evolução',
           'Reflexão sobre crescimento pessoal'
+        ]
+      },
+      // Additional desafios for more variety
+      {
+        title: 'FinTech Revolution: Soluções Financeiras Inovadoras',
+        description: 'Desenvolva uma solução FinTech que democratize o acesso a serviços financeiros, usando tecnologias emergentes como blockchain, AI ou IoT.',
+        difficulty: 'Avançado',
+        duration: '6 semanas',
+        category: 'Habilidade Cognitiva & Técnica',
+        prizes: [
+          { position: '1º Lugar', description: 'Investimento seed + R$ 25.000', value: 'R$ 25.000' },
+          { position: '2º Lugar', description: 'Aceleração em hub financeiro + R$ 15.000', value: 'R$ 15.000' },
+          { position: '3º Lugar', description: 'Mentoria especializada + R$ 8.000', value: 'R$ 8.000' }
+        ],
+        requirements: [
+          'Solução tecnológica robusta',
+          'Compliance regulatório',
+          'MVP funcional',
+          'Plano de negócios detalhado'
+        ]
+      },
+      {
+        title: 'Green Innovation Lab: Sustentabilidade em Ação',
+        description: 'Crie uma solução inovadora para enfrentar desafios ambientais urgentes. Foque em economia circular, energia renovável ou preservação ambiental.',
+        difficulty: 'Intermediário',
+        duration: '4 semanas',
+        category: 'Consciência Social & Integridade',
+        prizes: [
+          { position: '1º Lugar', description: 'Grant para implementação + R$ 20.000', value: 'R$ 20.000' },
+          { position: '2º Lugar', description: 'Parceria com ONGs + R$ 12.000', value: 'R$ 12.000' }
+        ],
+        requirements: [
+          'Impacto ambiental positivo',
+          'Viabilidade econômica',
+          'Escalabilidade da solução',
+          'Parcerias estratégicas'
+        ]
+      },
+      {
+        title: 'Digital Art & NFT: Criatividade no Metaverso',
+        description: 'Explore as fronteiras da arte digital e crie experiências imersivas usando NFTs, realidade virtual ou aumentada.',
+        difficulty: 'Intermediário',
+        duration: '5 semanas',
+        category: 'Criatividade & Inovação',
+        prizes: [
+          { position: '1º Lugar', description: 'Exposição digital + R$ 15.000', value: 'R$ 15.000' },
+          { position: '2º Lugar', description: 'Residência artística + R$ 10.000', value: 'R$ 10.000' }
+        ],
+        requirements: [
+          'Originalidade artística',
+          'Inovação tecnológica',
+          'Narrativa envolvente',
+          'Experiência do usuário'
+        ]
+      },
+      {
+        title: 'Youth Entrepreneurship: Jovens Transformadores',
+        description: 'Desenvolva um negócio de impacto social voltado para jovens. Demonstre como a paixão jovem pode transformar comunidades.',
+        difficulty: 'Iniciante',
+        duration: '4 semanas',
+        category: 'Motivação & Paixão',
+        prizes: [
+          { position: '1º Lugar', description: 'Bolsa de estudos + R$ 18.000', value: 'R$ 18.000' },
+          { position: '2º Lugar', description: 'Programa de mentoria + R$ 10.000', value: 'R$ 10.000' }
+        ],
+        requirements: [
+          'Foco em jovens (16-25 anos)',
+          'Impacto social claro',
+          'Paixão demonstrada',
+          'Plano de implementação'
         ]
       }
     ];
@@ -558,7 +648,7 @@ export async function POST() {
         .sort(() => 0.5 - Math.random())
         .slice(0, numLikes);
       
-      projeto.likes = likers.map(u => u._id);
+      (projeto as any).likes = likers.map(u => u._id);
 
       // Favorites
       const numFavorites = Math.floor(Math.random() * 6) + 1; // 1-7 favorites
@@ -567,7 +657,7 @@ export async function POST() {
         .sort(() => 0.5 - Math.random())
         .slice(0, numFavorites);
       
-      projeto.favoritos = favoriters.map(u => u._id);
+      (projeto as any).favoritos = favoriters.map(u => u._id);
       await projeto.save();
 
       // Participation requests (only for talents and mentors)
@@ -597,12 +687,12 @@ export async function POST() {
                             status === 'rejeitado' ? 'Obrigado pelo interesse, mas já temos a equipe completa.' : undefined
         };
 
-        projeto.solicitacoes_participacao.push(request);
+        (projeto as any).solicitacoes_participacao.push(request);
         
         if (status === 'aprovado') {
-          projeto.participantes_aprovados.push(requester._id);
+          (projeto as any).participantes_aprovados.push(requester._id);
         } else if (status === 'pendente') {
-          projeto.participantes_solicitados.push(requester._id);
+          (projeto as any).participantes_solicitados.push(requester._id);
         }
       }
 
@@ -621,10 +711,7 @@ export async function POST() {
           projeto_id: projeto._id,
           status,
           solicitado_em: new Date(Date.now() - Math.random() * 10 * 24 * 60 * 60 * 1000), // Last 10 days
-          aprovado_em: status === 'aprovado' ? new Date() : undefined,
-          mensagem: `Este projeto está alinhado com os objetivos do desafio ${desafio.title}.`,
-          resposta_mensagem: status === 'aprovado' ? 'Projeto aprovado! Parabéns!' : 
-                            status === 'rejeitado' ? 'Projeto não se adequa aos critérios do desafio.' : undefined
+          aprovado_em: status === 'aprovado' ? new Date() : undefined
         };
 
         desafio.projetos_vinculados.push(linkRequest);
@@ -659,12 +746,12 @@ export async function POST() {
     for (const projeto of createdProjetos) {
       // Add likes (more common than favorites) - ENHANCED NUMBERS
       const numLikes = Math.floor(Math.random() * 25) + 10; // 10-34 likes per projeto (much higher for demo)
-      const likerPool = allUsers.filter(u => u && u._id && !u._id.equals(projeto.created_by));
+      const likerPool = allUsers.filter(u => u && u._id && !u._id.equals(projeto.criador_id));
       const likers = likerPool
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numLikes, likerPool.length));
       
-      projeto.liked_by = likers.map(u => u._id);
+      (projeto as any).likes = likers.map(u => u._id);
       totalProjetoLikes += likers.length;
 
       // Add favorites (subset of likers typically) - ENHANCED NUMBERS
@@ -673,23 +760,23 @@ export async function POST() {
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numFavorites, likers.length));
       
-      projeto.favorited_by = favoriters.map(u => u._id);
+      (projeto as any).favoritos = favoriters.map(u => u._id);
       totalProjetoFavorites += favoriters.length;
 
       // Add participation requests (only talents can request to participate) - ENHANCED
-      const talentUsers = allUsers.filter(u => u && u._id && u.account_type === 'talent' && !u._id.equals(projeto.created_by));
+      const talentUsers = allUsers.filter(u => u && u._id && u.account_type === 'talent' && !u._id.equals(projeto.criador_id));
       const numRequests = Math.floor(Math.random() * 6) + 2; // 2-7 participation requests per projeto (increased)
       const requesters = talentUsers
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numRequests, talentUsers.length));
 
-      projeto.participation_requests = requesters.map(talent => ({
-        user_id: talent._id,
+      (projeto as any).solicitacoes_participacao = requesters.map(talent => ({
+        usuario_id: talent._id,
         status: Math.random() > 0.7 ? 'aprovado' : Math.random() > 0.4 ? 'pendente' : 'rejeitado', // 30% approved, 40% pending, 30% rejected
-        requested_at: new Date(Date.now() - Math.random() * 45 * 24 * 60 * 60 * 1000), // Last 45 days
-        responded_at: Math.random() > 0.3 ? new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000) : undefined, // 70% have responses
-        message: `Olá! Gostaria muito de participar do projeto "${projeto.title}". Tenho experiência em ${projeto.categoria} e posso contribuir significativamente com minha expertise.`,
-        response_message: Math.random() > 0.3 ? 
+        solicitado_em: new Date(Date.now() - Math.random() * 45 * 24 * 60 * 60 * 1000), // Last 45 days
+        respondido_em: Math.random() > 0.3 ? new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000) : undefined, // 70% have responses
+        mensagem: `Olá! Gostaria muito de participar do projeto "${projeto.nome}". Tenho experiência em ${projeto.categoria} e posso contribuir significativamente com minha expertise.`,
+        resposta_mensagem: Math.random() > 0.3 ? 
           (Math.random() > 0.5 ? 'Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!' : 
            'Obrigado pelo interesse, mas no momento o projeto já tem a equipe completa.') : undefined
       }));
@@ -775,8 +862,8 @@ export async function POST() {
     ];
 
     // Function to generate realistic metrics based on video ID
-    function generateRealisticMetrics(videoId) {
-      const hash = videoId.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+    function generateRealisticMetrics(videoId: string) {
+      const hash = videoId.split('').reduce((a: number, b: string) => a + b.charCodeAt(0), 0);
       const views = Math.floor((hash % 50000) + 15000); // 15K - 65K views
       const likes = Math.floor(views * (0.02 + (hash % 100) / 10000)); // 2-12% like rate
       const comments = Math.floor(likes * (0.05 + (hash % 50) / 10000)); // 5-10% comment rate
@@ -914,7 +1001,7 @@ export async function POST() {
     console.log('💬 Creating comprehensive comments and messages...');
 
     // Create comments on videos (ENHANCED - much more comprehensive)
-    const comments = [];
+    const comments: any[] = [];
     for (const video of createdVideos) {
       const numComments = Math.floor(Math.random() * 20) + 8; // 8-27 comments per video (much higher for demo)
       const commenters = allUsers
@@ -972,7 +1059,7 @@ export async function POST() {
     }
 
     // Create messages between users (ENHANCED - more realistic messaging system)
-    const messages = [];
+    const messages: any[] = [];
     
     // Messages from mentors to talents (mentorship offers)
     const mentorsForMessages = allUsers.filter(u => u.account_type === 'mentor');
@@ -1080,7 +1167,7 @@ export async function POST() {
 
     // Create subscriptions (followers) - ENHANCED to represent followers of channels/projects (COMPREHENSIVE)
     console.log('👥 Creating comprehensive subscription/follower relationships...');
-    const subscriptions = [];
+    const subscriptions: any[] = [];
     
     // Each user follows multiple channels based on their interests and account type
     for (const user of allUsers) {
@@ -1143,7 +1230,7 @@ export async function POST() {
     console.log('📊 Creating analytics and engagement data...');
     
     // Create video watch history for analytics (simulated data)
-    const videoWatchHistory = [];
+    const videoWatchHistory: any[] = [];
     for (const user of allUsers) {
       const watchedVideos = createdVideos
         .sort(() => 0.5 - Math.random())
@@ -1238,6 +1325,17 @@ export async function POST() {
       categories: categories.length,
       channels: createdChannels.length,
       desafios: createdDesafios.length,
+      desafiosByStatus: {
+        ativo: createdDesafios.filter(d => d.status === 'Ativo').length,
+        finalizado: createdDesafios.filter(d => d.status === 'Finalizado').length,
+        emBreve: createdDesafios.filter(d => d.status === 'Em Breve').length
+      },
+      desafiosByDifficulty: {
+        iniciante: createdDesafios.filter(d => d.difficulty === 'Iniciante').length,
+        intermediario: createdDesafios.filter(d => d.difficulty === 'Intermediário').length,
+        avancado: createdDesafios.filter(d => d.difficulty === 'Avançado').length
+      },
+      featuredDesafios: createdDesafios.filter(d => d.featured).length,
       projetos: createdProjetos.length,
       videos: createdVideos.length,
       playlists: playlists.length,
@@ -1270,6 +1368,8 @@ export async function POST() {
         contentCreators: users.filter(u => u.account_type !== 'fan').length,
         avgFollowersPerChannel: Math.floor(subscriptions.length / createdChannels.length),
         totalInteractionEvents: totalDesafioFavorites + totalProjetoLikes + totalProjetoFavorites + totalParticipationRequests + comments.length,
+        avgDesafioParticipants: Math.floor(createdDesafios.reduce((sum, d) => sum + d.participants, 0) / createdDesafios.length),
+        avgFavoritesPerDesafio: Math.floor(totalDesafioFavorites / createdDesafios.length),
         projectParticipationRate: Math.floor((totalParticipationRequests / (createdProjetos.length * users.filter(u => u.account_type === 'talent').length)) * 100),
         messageEngagementRate: Math.floor((messages.filter(m => m.read).length / messages.length) * 100),
         challengeFavoriteRate: Math.floor((totalDesafioFavorites / (createdDesafios.length * users.length)) * 100)
@@ -1289,7 +1389,7 @@ export async function POST() {
     console.error('Error seeding database:', error);
     return NextResponse.json({
       success: false,
-      error: error.message
+      error: error instanceof Error ? error.message : String(error)
     }, { status: 500 });
   }
 }

@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   avatar: { type: String },
-  account_type: { type: String, enum: ['fan', 'mentor', 'talent'], required: true },
-  user_type: { type: String, enum: ['fan', 'mentor', 'talent'] }, // Para compatibilidade
+  account_type: { type: String, enum: ['fan', 'mentor', 'talent', 'admin'], required: true },
+  user_type: { type: String, enum: ['fan', 'mentor', 'talent', 'admin'] }, // Para compatibilidade
   bio: { type: String },
   location: { type: String },
   skills: [{ type: String }],

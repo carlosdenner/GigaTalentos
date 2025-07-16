@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Trophy, Users, Calendar, Star, ArrowRight, Clock, Filter, Trash2, Heart } from "lucide-react"
+import { Trophy, Users, Calendar, Star, ArrowRight, Clock, Filter, Trash2, Heart, User } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { toast } from "@/hooks/use-toast"
@@ -40,10 +40,11 @@ interface Desafio {
   daysRemaining: number;
   formattedPrizes: string;
   favoritesCount: number;
-  created_by?: {
+  created_by: {
     _id: string;
     name: string;
     avatar?: string;
+    account_type?: string;
   };
 }
 
@@ -320,35 +321,40 @@ export default function DesafiosPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {desafios.map((desafio, index) => (
-              <Card key={desafio._id} className="bg-[#1a2942] border-gray-800 hover:border-[#10b981] transition-all duration-300 group h-full flex flex-col">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      {desafio.category.thumbnail ? (
-                        <div className="relative w-12 h-12 rounded-lg overflow-hidden">
-                          <Image
-                            src={desafio.category.thumbnail}
-                            alt={desafio.category.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      ) : (
-                        <div className={`w-12 h-12 rounded-lg ${getCategoryColor(index)} flex items-center justify-center`}>
-                          <Trophy className="h-6 w-6 text-white" />
-                        </div>
-                      )}
+              <Link key={desafio._id} href={`/desafios/${desafio._id}`}>
+                <Card className="bg-[#1a2942] border-gray-800 hover:border-[#10b981] transition-all duration-300 group h-full flex flex-col cursor-pointer overflow-hidden">
+                  {/* Header with category thumbnail and actions */}
+                  <div className="relative h-32 bg-gradient-to-br from-[#0a192f] to-[#1a2942]">
+                    {desafio.category.thumbnail ? (
+                      <div className="absolute inset-0">
+                        <Image
+                          src={desafio.category.thumbnail}
+                          alt={desafio.category.name}
+                          fill
+                          className="object-cover opacity-30"
+                        />
+                      </div>
+                    ) : (
+                      <div className={`absolute inset-0 ${getCategoryColor(index)} opacity-20`} />
+                    )}
+                    
+                    {/* Top badges */}
+                    <div className="absolute top-3 left-3 flex items-center gap-2">
                       {desafio.featured && (
-                        <Badge className="bg-yellow-500 text-yellow-900 border-yellow-600">
+                        <Badge className="bg-yellow-500/90 text-yellow-900 border-yellow-600 backdrop-blur-sm">
                           ⭐ Destaque
                         </Badge>
                       )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className={getDifficultyColor(desafio.difficulty)}>
+                      <Badge variant="secondary" className={`${getDifficultyColor(desafio.difficulty)} backdrop-blur-sm`}>
                         {desafio.difficulty}
                       </Badge>
-                      <DesafioFavoriteButton desafioId={desafio._id} showCount={true} />
+                    </div>
+
+                    {/* Top right actions */}
+                    <div className="absolute top-3 right-3 flex items-center gap-2">
+                      <div onClick={(e) => e.preventDefault()}>
+                        <DesafioFavoriteButton desafioId={desafio._id} showCount={true} variant="outline" />
+                      </div>
                       {session?.user?.id === desafio.created_by?._id && (
                         <Button
                           variant="destructive"
@@ -357,64 +363,82 @@ export default function DesafiosPage() {
                             e.preventDefault();
                             handleDeleteDesafio(desafio._id);
                           }}
-                          className="h-8 w-8 p-0"
+                          className="h-8 w-8 p-0 backdrop-blur-sm"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       )}
                     </div>
-                  </div>
-                  <CardTitle className="text-white text-lg leading-tight group-hover:text-[#10b981] transition-colors">
-                    {desafio.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-400 text-sm leading-relaxed">
-                    {desafio.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-4 pt-0 flex-grow flex flex-col">
-                  <div className="space-y-3 flex-grow">
-                    <div className="flex items-center justify-between text-sm text-gray-400">
-                      <div className="flex items-center gap-1">
-                        <Users className="h-4 w-4" />
-                        <span>{desafio.participants} participantes</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{desafio.duration}</span>
+
+                    {/* Category icon */}
+                    <div className="absolute bottom-3 left-3">
+                      <div className={`w-10 h-10 rounded-lg ${getCategoryColor(index)} flex items-center justify-center shadow-lg`}>
+                        <Trophy className="h-5 w-5 text-white" />
                       </div>
                     </div>
+                  </div>
 
-                    {desafio.daysRemaining > 0 && (
-                      <div className="flex items-center gap-1 text-sm text-orange-400">
-                        <Clock className="h-4 w-4" />
-                        <span>{formatDaysRemaining(desafio.daysRemaining)}</span>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-white text-lg leading-tight group-hover:text-[#10b981] transition-colors line-clamp-2">
+                      {desafio.title}
+                    </CardTitle>
+                    <CardDescription className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                      {desafio.description}
+                    </CardDescription>
+                    
+                    {/* Creator info */}
+                    {desafio.created_by && (
+                      <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-700">
+                        <div className="w-6 h-6 rounded-full bg-[#10b981] flex items-center justify-center">
+                          <User className="h-3 w-3 text-white" />
+                        </div>
+                        <span className="text-xs text-gray-400">
+                          Criado por <span className="text-[#10b981] font-medium">{desafio.created_by.name}</span>
+                        </span>
                       </div>
                     )}
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1 text-[#10b981]">
-                        <Star className="h-4 w-4" />
-                        <span className="font-semibold text-sm">{desafio.formattedPrizes}</span>
+                  </CardHeader>                  <CardContent className="space-y-4 pt-0 flex-grow flex flex-col px-6 pb-6">
+                    <div className="space-y-3 flex-grow">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-1 text-gray-400">
+                          <Users className="h-4 w-4" />
+                          <span>{desafio.participants} participantes</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-gray-400">
+                          <Calendar className="h-4 w-4" />
+                          <span>{desafio.duration}</span>
+                        </div>
                       </div>
-                      <Badge variant="outline" className={getStatusColor(desafio.status)}>
-                        {desafio.status}
-                      </Badge>
+
+                      {desafio.daysRemaining > 0 && (
+                        <div className="flex items-center gap-1 text-sm text-orange-400">
+                          <Clock className="h-4 w-4" />
+                          <span>{formatDaysRemaining(desafio.daysRemaining)}</span>
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-[#10b981]">
+                          <Star className="h-4 w-4" />
+                          <span className="font-semibold text-sm">{desafio.formattedPrizes}</span>
+                        </div>
+                        <Badge variant="outline" className={getStatusColor(desafio.status)}>
+                          {desafio.status}
+                        </Badge>
+                      </div>
+
+                      <div className="text-xs text-gray-500">
+                        Categoria: {desafio.category.name}
+                      </div>
                     </div>
 
-                    <div className="text-xs text-gray-500">
-                      Categoria: {desafio.category.name}
-                    </div>
-                  </div>
-
-                  <Link href={`/desafios/${desafio._id}`} className="mt-auto">
-                    <Button className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white group-hover:shadow-lg transition-all">
+                    <Button className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white group-hover:shadow-lg transition-all mt-auto">
                       Participar do Desafio
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 

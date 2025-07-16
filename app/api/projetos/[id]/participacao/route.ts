@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import mongoose from "mongoose";
 import connectDB from "@/lib/mongodb";
 import { Projeto, User } from "@/models";
 import { authOptions } from "../../../auth/[...nextauth]/route";
@@ -63,15 +64,15 @@ export async function POST(
 
     // Add participation request
     projeto.solicitacoes_participacao.push({
-      usuario_id: session.user.id,
+      usuario_id: new mongoose.Types.ObjectId(session.user.id),
       mensagem: mensagem || '',
       status: 'pendente',
       solicitado_em: new Date()
     });
 
     // Update simplified array for compatibility
-    if (!projeto.participantes_solicitados.includes(session.user.id)) {
-      projeto.participantes_solicitados.push(session.user.id);
+    if (!projeto.participantes_solicitados.includes(new mongoose.Types.ObjectId(session.user.id))) {
+      projeto.participantes_solicitados.push(new mongoose.Types.ObjectId(session.user.id));
     }
 
     await projeto.save();

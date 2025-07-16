@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import mongoose from "mongoose";
 import connectDB from "@/lib/mongodb";
 import { Desafio, Projeto } from "@/models";
 import { authOptions } from "../../../../auth/[...nextauth]/route";
@@ -72,7 +73,7 @@ export async function PUT(
       projeto.desafio_vinculacao_status = acao === 'aprovar' ? 'aprovado' : 'rejeitado';
       projeto.desafio_aprovado = acao === 'aprovar';
       if (acao === 'aprovar') {
-        projeto.mentor_aprovador_id = session.user.id;
+        projeto.mentor_aprovador_id = new mongoose.Types.ObjectId(session.user.id);
       } else {
         // If rejected, remove the desafio reference
         projeto.desafio_id = null;

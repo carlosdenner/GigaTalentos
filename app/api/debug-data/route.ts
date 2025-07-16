@@ -32,7 +32,7 @@ export async function GET() {
         total: channels.length,
         sample: channels.slice(0, 3).map(c => ({
           _id: c._id,
-          channel_name: c.channel_name
+          name: c.name
         }))
       },
       desafios: {

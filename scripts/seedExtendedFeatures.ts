@@ -110,8 +110,8 @@ async function seedExtendedData() {
         objetivo: "Ajudar pessoas e empresas a monitorar e melhorar suas práticas ambientais através de gamificação e analytics.",
         video_apresentacao: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         categoria: "Sustentabilidade",
-        avatar: "https://via.placeholder.com/150/00FF00/FFFFFF?text=ECO",
-        imagem_capa: "https://via.placeholder.com/800x400/00FF00/FFFFFF?text=EcoTracker",
+        avatar: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=150&h=150&fit=crop&crop=center",
+        imagem_capa: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop&crop=center",
         status: "ativo",
         demo: true
       },
@@ -121,8 +121,41 @@ async function seedExtendedData() {
         objetivo: "Democratizar o acesso à educação de qualidade através de uma plataforma colaborativa e interativa.",
         video_apresentacao: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         categoria: "Educação",
-        avatar: "https://via.placeholder.com/150/0066CC/FFFFFF?text=LEARN",
-        imagem_capa: "https://via.placeholder.com/800x400/0066CC/FFFFFF?text=LearnHub",
+        avatar: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=150&h=150&fit=crop&crop=center",
+        imagem_capa: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=400&fit=crop&crop=center",
+        status: "ativo",
+        demo: true
+      },
+      {
+        nome: "TechMentor - Sistema de Mentoria",
+        descricao: "Plataforma que conecta profissionais experientes com jovens talentos da tecnologia.",
+        objetivo: "Facilitar o desenvolvimento profissional através de conexões de mentoria personalizadas.",
+        video_apresentacao: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        categoria: "Tecnologia",
+        avatar: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=150&h=150&fit=crop&crop=center",
+        imagem_capa: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=400&fit=crop&crop=center",
+        status: "ativo",
+        demo: true
+      },
+      {
+        nome: "ArtFlow - Marketplace Criativo",
+        descricao: "Plataforma para artistas venderem suas obras e oferecerem serviços criativos.",
+        objetivo: "Empoderar artistas com ferramentas para monetizar seu talento e conectar com clientes.",
+        video_apresentacao: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        categoria: "Arte & Design",
+        avatar: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=150&h=150&fit=crop&crop=center",
+        imagem_capa: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&h=400&fit=crop&crop=center",
+        status: "ativo",
+        demo: true
+      },
+      {
+        nome: "HealthTrack - Monitoramento de Saúde",
+        descricao: "App para monitoramento de indicadores de saúde com integração IoT.",
+        objetivo: "Facilitar o acompanhamento de saúde pessoal através de tecnologia acessível.",
+        video_apresentacao: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        categoria: "Saúde",
+        avatar: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=150&h=150&fit=crop&crop=center",
+        imagem_capa: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop&crop=center",
         status: "ativo",
         demo: true
       }

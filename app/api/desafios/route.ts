@@ -53,6 +53,7 @@ export async function GET(request: Request) {
 
     const desafios = await Desafio.find(filter)
       .populate('category', 'name thumbnail')
+      .populate('created_by', 'name avatar account_type')
       .sort(sortObject)
       .limit(limit)
       .lean()

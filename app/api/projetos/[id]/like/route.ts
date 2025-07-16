@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import mongoose from "mongoose";
 import connectDB from "@/lib/mongodb";
 import { Projeto } from "@/models";
 import { authOptions } from "../../../auth/[...nextauth]/route";
@@ -30,12 +31,12 @@ export async function POST(
       );
     }
 
-    const userId = session.user.id;
-    const hasLiked = projeto.likes.includes(userId);
+    const userId = new mongoose.Types.ObjectId(session.user.id);
+    const hasLiked = projeto.likes.some((likeId: any) => likeId.toString() === session.user.id);
 
     if (hasLiked) {
       // Remove like
-      projeto.likes = projeto.likes.filter((likeId: string) => likeId.toString() !== userId);
+      projeto.likes = projeto.likes.filter((likeId: any) => likeId.toString() !== session.user.id);
     } else {
       // Add like
       projeto.likes.push(userId);
@@ -84,7 +85,7 @@ export async function GET(
     }
 
     const userId = session.user.id;
-    const hasLiked = projeto.likes.includes(userId);
+    const hasLiked = projeto.likes.some((likeId: any) => likeId.toString() === userId);
 
     return NextResponse.json({
       liked: hasLiked,

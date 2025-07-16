@@ -45,11 +45,11 @@ interface Video {
 interface Comment {
   _id: string;
   content: string;
-  user_id: {
+  user_id?: {
     name: string;
     avatar?: string;
-  };
-  likes: string[];
+  } | null;
+  likes?: string[];
   created_at: string;
   replies?: Comment[];
 }
@@ -732,7 +732,9 @@ export default function VideoCarouselPage() {
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-sm">{comment.user_id.name}</span>
+                              <span className="font-medium text-sm">
+                                {comment.user_id?.name || 'Usuário Anônimo'}
+                              </span>
                               <span className="text-xs text-muted-foreground">
                                 {new Date(comment.created_at).toLocaleDateString()}
                               </span>
@@ -745,7 +747,7 @@ export default function VideoCarouselPage() {
                               className="text-xs"
                             >
                               <ThumbsUp className="h-3 w-3 mr-1" />
-                              {comment.likes.length}
+                              {comment.likes?.length || 0}
                             </Button>
                           </div>
                         </div>
