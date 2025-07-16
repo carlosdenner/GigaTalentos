@@ -511,6 +511,72 @@ export async function POST() {
       });
     }
 
+    // Add specific desafios for admin user (Carlos Denner) before creating all desafios
+    const adminUser = users.find(u => u.account_type === 'admin');
+    if (adminUser) {
+      const adminDesafios = [
+        {
+          title: 'Concurso Nacional de Inovação Tecnológica',
+          description: 'Desenvolva uma solução tecnológica inovadora que resolva um problema real da sociedade brasileira. Este é o desafio oficial da plataforma Giga Talentos.',
+          objective: 'Revolucionar o ecossistema de inovação brasileiro',
+          difficulty: 'Avançado',
+          duration: '8 semanas',
+          category: categories.find(c => c.name === 'Habilidade Cognitiva & Técnica')?._id || categories[0]._id,
+          created_by: adminUser._id,
+          start_date: new Date(),
+          end_date: new Date(Date.now() + 56 * 24 * 60 * 60 * 1000), // 8 weeks from now
+          status: 'Ativo',
+          featured: true,
+          participants: 0,
+          prizes: [
+            { position: '1º Lugar', description: 'Incubação + R$ 50.000', value: 'R$ 50.000' },
+            { position: '2º Lugar', description: 'Mentoria + R$ 25.000', value: 'R$ 25.000' },
+            { position: '3º Lugar', description: 'Curso + R$ 10.000', value: 'R$ 10.000' }
+          ],
+          requirements: [
+            'Solução tecnológica funcional',
+            'Plano de negócio detalhado',
+            'Pitch de apresentação',
+            'Código fonte disponível'
+          ],
+          favoritos: [],
+          sponsors: [],
+          submissions: [],
+          projetos_vinculados: []
+        },
+        {
+          title: 'Hackathon Empreendedorismo Social',
+          description: 'Crie uma startup com impacto social positivo. Desenvolva um modelo de negócio sustentável que resolve problemas sociais.',
+          objective: 'Promover empreendedorismo social no Brasil',
+          difficulty: 'Intermediário',
+          duration: '6 semanas',
+          category: categories.find(c => c.name === 'Consciência Social & Integridade')?._id || categories[0]._id,
+          created_by: adminUser._id,
+          start_date: new Date(),
+          end_date: new Date(Date.now() + 42 * 24 * 60 * 60 * 1000), // 6 weeks from now
+          status: 'Ativo',
+          featured: true,
+          participants: 0,
+          prizes: [
+            { position: '1º Lugar', description: 'Investimento + R$ 30.000', value: 'R$ 30.000' },
+            { position: '2º Lugar', description: 'Aceleração + R$ 15.000', value: 'R$ 15.000' }
+          ],
+          requirements: [
+            'Impacto social mensurável',
+            'Modelo de negócio sustentável',
+            'Prototipo funcional',
+            'Apresentação executiva'
+          ],
+          favoritos: [],
+          sponsors: [],
+          submissions: [],
+          projetos_vinculados: []
+        }
+      ];
+      
+      desafios.push(...adminDesafios);
+    }
+
     const createdDesafios = await Desafio.insertMany(desafios);
 
     console.log('🚀 Creating projetos...');
@@ -621,6 +687,107 @@ export async function POST() {
         verificado: Math.random() > 0.6,
         demo: true
       });
+    }
+
+    // Add specific projetos for admin user (Carlos Denner) before creating all projetos
+    if (adminUser) {
+      // Find admin's channel to use as portfolio_id
+      const adminChannel = createdChannels.find(ch => ch.user_id.toString() === adminUser._id.toString());
+      
+      const adminProjetos = [
+        {
+          nome: 'Plataforma Giga Talentos - Sistema Completo',
+          descricao: 'Desenvolvimento da plataforma completa Giga Talentos usando Next.js, MongoDB e tecnologias modernas. Sistema de gestão de talentos, desafios e projetos.',
+          objetivo: 'Criar a melhor plataforma para desenvolvimento de talentos empreendedores',
+          categoria: categories.find(c => c.name === 'Habilidade Cognitiva & Técnica')?._id || categories[0]._id,
+          video_apresentacao: 'https://youtube.com/watch?v=giga-talentos-demo',
+          status: 'ativo',
+          avatar: '/giga-talentos-logo.svg',
+          imagem_capa: '/placeholder.jpg',
+          criador_id: adminUser._id,
+          talento_lider_id: adminUser._id,
+          portfolio_id: adminChannel?._id || createdChannels[0]._id,
+          tecnologias: ['Next.js', 'TypeScript', 'MongoDB', 'NextAuth', 'Tailwind CSS'],
+          repositorio_url: 'https://github.com/carlosdenner/GigaTalentos',
+          demo_url: 'https://giga-talentos.datasciencetech.ca',
+          visibilidade: 'Público',
+          colaboradores_max: 5,
+          duracao_estimada: '12 meses',
+          nivel_dificuldade: 'Avançado',
+          custo_estimado: 'R$ 100.000',
+          desafio_vinculacao_status: 'aprovado',
+          likes: [],
+          favoritos: [],
+          sponsors: [],
+          solicitacoes_participacao: [],
+          participantes_solicitados: [],
+          participantes_aprovados: [],
+          verificado: true,
+          demo: false
+        },
+        {
+          nome: 'IA para Identificação de Talentos',
+          descricao: 'Sistema de inteligência artificial para identificação automática de talentos baseado em análise comportamental e performance em desafios.',
+          objetivo: 'Automatizar descoberta de talentos usando machine learning',
+          categoria: categories.find(c => c.name === 'Habilidade Cognitiva & Técnica')?._id || categories[0]._id,
+          video_apresentacao: 'https://youtube.com/watch?v=ai-talent-demo',
+          status: 'ativo',
+          avatar: '/placeholder-logo.svg',
+          imagem_capa: '/placeholder.jpg',
+          criador_id: adminUser._id,
+          talento_lider_id: adminUser._id,
+          portfolio_id: adminChannel?._id || createdChannels[0]._id,
+          tecnologias: ['Python', 'TensorFlow', 'Machine Learning', 'API REST'],
+          repositorio_url: 'https://github.com/carlosdenner/AI-Talent-Identifier',
+          demo_url: 'https://ai-talent-demo.datasciencetech.ca',
+          visibilidade: 'Público',
+          colaboradores_max: 3,
+          duracao_estimada: '6 meses',
+          nivel_dificuldade: 'Avançado',
+          custo_estimado: 'R$ 50.000',
+          desafio_vinculacao_status: 'aprovado',
+          likes: [],
+          favoritos: [],
+          sponsors: [],
+          solicitacoes_participacao: [],
+          participantes_solicitados: [],
+          participantes_aprovados: [],
+          verificado: true,
+          demo: false
+        },
+        {
+          nome: 'Mentoria Digital Automatizada',
+          descricao: 'Plataforma de mentoria digital que conecta mentores e talentos usando algoritmos de matching inteligente.',
+          objetivo: 'Revolucionar o processo de mentoria usando tecnologia',
+          categoria: categories.find(c => c.name === 'Consciência Social & Integridade')?._id || categories[0]._id,
+          video_apresentacao: 'https://youtube.com/watch?v=mentoria-digital',
+          status: 'ativo',
+          avatar: '/placeholder-logo.svg',
+          imagem_capa: '/placeholder.jpg',
+          criador_id: adminUser._id,
+          talento_lider_id: adminUser._id,
+          portfolio_id: adminChannel?._id || createdChannels[0]._id,
+          tecnologias: ['React', 'Node.js', 'WebRTC', 'Socket.io'],
+          repositorio_url: 'https://github.com/carlosdenner/Digital-Mentorship',
+          demo_url: 'https://mentoria-digital.datasciencetech.ca',
+          visibilidade: 'Público',
+          colaboradores_max: 4,
+          duracao_estimada: '8 meses',
+          nivel_dificuldade: 'Intermediário',
+          custo_estimado: 'R$ 75.000',
+          desafio_vinculacao_status: 'pendente',
+          likes: [],
+          favoritos: [],
+          sponsors: [],
+          solicitacoes_participacao: [],
+          participantes_solicitados: [],
+          participantes_aprovados: [],
+          verificado: true,
+          demo: false
+        }
+      ];
+      
+      projetos.push(...adminProjetos);
     }
 
     const createdProjetos = await Projeto.insertMany(projetos);
@@ -1022,6 +1189,94 @@ export async function POST() {
     }
 
     const createdVideos = await Video.insertMany(videos);
+
+    // Add specific videos for admin user (Carlos Denner) - these will be in his channel
+    if (adminUser) {
+      const adminChannel = createdChannels.find(ch => ch.user_id.equals(adminUser._id));
+      if (adminChannel) {
+        const adminVideos = [
+          {
+            title: 'Visão da Plataforma Giga Talentos - Futuro do Empreendedorismo',
+            description: 'Carlos Denner apresenta a visão completa da plataforma Giga Talentos e como ela está revolucionando a identificação e desenvolvimento de talentos empreendedores no Brasil.',
+            video_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            youtube_id: 'dQw4w9WgXcQ', // Using a placeholder ID
+            channel_id: adminChannel._id,
+            category: 'Motivação & Paixão',
+            views: 15420,
+            likes: [], // Array of ObjectIds - will be populated later
+            youtube_likes: 1248,
+            youtube_views: 15420,
+            youtube_comments: 186,
+            duration: '18:45',
+            featured: true,
+            tags: ['empreendedorismo', 'inovação', 'talentos', 'visão'],
+            thumbnail: '/placeholder.jpg',
+            youtube_published_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 1 week ago
+            demo: false
+          },
+          {
+            title: 'Como Identificar e Desenvolver Talentos Empreendedores',
+            description: 'Metodologia exclusiva para identificação de talentos empreendedores desenvolvida por Carlos Denner. Aprenda as técnicas e frameworks utilizados na plataforma.',
+            video_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcR',
+            youtube_id: 'dQw4w9WgXcR', // Using a placeholder ID
+            channel_id: adminChannel._id,
+            category: 'Habilidade Cognitiva & Técnica',
+            views: 8750,
+            likes: [], // Array of ObjectIds - will be populated later
+            youtube_likes: 892,
+            youtube_views: 8750,
+            youtube_comments: 134,
+            duration: '24:12',
+            featured: true,
+            tags: ['metodologia', 'talentos', 'desenvolvimento', 'frameworks'],
+            thumbnail: '/placeholder.jpg',
+            youtube_published_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000), // 2 weeks ago
+            demo: false
+          },
+          {
+            title: 'Tecnologias por Trás da Giga Talentos',
+            description: 'Deep dive técnico nas tecnologias utilizadas para construir a plataforma Giga Talentos: Next.js, MongoDB, IA e mais.',
+            video_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcS',
+            youtube_id: 'dQw4w9WgXcS', // Using a placeholder ID
+            channel_id: adminChannel._id,
+            category: 'Habilidade Cognitiva & Técnica',
+            views: 5690,
+            likes: [], // Array of ObjectIds - will be populated later
+            youtube_likes: 567,
+            youtube_views: 5690,
+            youtube_comments: 89,
+            duration: '31:28',
+            featured: false,
+            tags: ['tecnologia', 'nextjs', 'mongodb', 'desenvolvimento'],
+            thumbnail: '/placeholder.jpg',
+            youtube_published_at: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000), // 3 weeks ago
+            demo: false
+          },
+          {
+            title: 'Construindo Ecossistemas de Inovação',
+            description: 'Como criar e gerenciar ecossistemas de inovação que conectam talentos, mentores, investidores e empresas de forma sustentável.',
+            video_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcT',
+            youtube_id: 'dQw4w9WgXcT', // Using a placeholder ID
+            channel_id: adminChannel._id,
+            category: 'Consciência Social & Integridade',
+            views: 12350,
+            likes: [], // Array of ObjectIds - will be populated later
+            youtube_likes: 1156,
+            youtube_views: 12350,
+            youtube_comments: 198,
+            duration: '28:33',
+            featured: true,
+            tags: ['ecossistema', 'inovação', 'sustentabilidade', 'networking'],
+            thumbnail: '/placeholder.jpg',
+            youtube_published_at: new Date(Date.now() - 28 * 24 * 60 * 60 * 1000), // 4 weeks ago
+            demo: false
+          }
+        ];
+
+        const adminVideosDocs = await Video.insertMany(adminVideos);
+        createdVideos.push(...adminVideosDocs);
+      }
+    }
 
     // Create playlists (ENHANCED - much more comprehensive)
     console.log('📋 Creating comprehensive playlists...');

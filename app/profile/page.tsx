@@ -97,29 +97,61 @@ export default function ProfilePage() {
   useEffect(() => {
     async function loadProfile() {
       try {
-        const [profileRes, videosRes, projetosRes, desafiosRes] = await Promise.all([
-          fetch('/api/profile'),
-          fetch('/api/profile/videos'),
-          fetch('/api/profile/projetos'), // Nova rota específica para projetos do usuário
-          fetch('/api/profile/desafios') // Busca desafios do usuário específico
-        ]);
+        setLoading(true);
         
-        const [profileData, videosData, projetosData, desafiosData] = await Promise.all([
-          profileRes.json(),
-          videosRes.json(),
-          projetosRes.json(),
-          desafiosRes.json()
-        ]);
+        let profileData, videosData, projetosData, desafiosData;
+        
+        if (session?.user?.email) {
+          // User is authenticated - load their own profile
+          const [profileRes, videosRes, projetosRes, desafiosRes] = await Promise.all([
+            fetch(`/api/profile`),
+            fetch(`/api/profile/videos`),
+            fetch(`/api/profile/projetos`),
+            fetch(`/api/profile/desafios`)
+          ]);
+          
+          [profileData, videosData, projetosData, desafiosData] = await Promise.all([
+            profileRes.json(),
+            videosRes.json(),
+            projetosRes.json(),
+            desafiosRes.json()
+          ]);
+        } else {
+          // Not authenticated - load Carlos Denner's profile as demo
+          const [profileRes, videosRes, projetosRes, desafiosRes] = await Promise.all([
+            fetch(`/api/profile?userId=carlosdenner`),
+            fetch(`/api/profile/videos?userId=carlosdenner`),
+            fetch(`/api/profile/projetos?userId=carlosdenner`),
+            fetch(`/api/profile/desafios?userId=carlosdenner`)
+          ]);
+          
+          [profileData, videosData, projetosData, desafiosData] = await Promise.all([
+            profileRes.json(),
+            videosRes.json(),
+            projetosRes.json(),
+            desafiosRes.json()
+          ]);
+        }
+
+        // Verify API responses
+        console.log('Profile data:', profileData);
+        console.log('Videos data:', videosData);
+        console.log('Projetos data:', projetosData);
+        console.log('Desafios data:', desafiosData);
+
+        if (profileData.error) {
+          console.error('Profile error:', profileData.error);
+          return;
+        }
 
         setProfile(profileData);
-        setVideos(videosData);
-        setProjetos(projetosData); // Projetos já filtrados pela API
+        setVideos(Array.isArray(videosData) ? videosData : []);
+        setProjetos(Array.isArray(projetosData) ? projetosData : []);
+        setDesafios(Array.isArray(desafiosData) ? desafiosData : []);
         
-        // Filtrar vídeos para o portfólio (pode ser uma seleção especial)
-        setPortfolioVideos(videosData.slice(0, 6)); // Primeiros 6 como showcase
+        // Set portfolio videos as first 6 videos
+        setPortfolioVideos(Array.isArray(videosData) ? videosData.slice(0, 6) : []);
         
-        // Now desafios come from /api/profile/desafios which returns an array directly
-        setDesafios(desafiosData.slice(0, 5)); // Últimos 5 desafios
       } catch (error) {
         console.error('Error loading profile:', error);
       } finally {
@@ -127,9 +159,7 @@ export default function ProfilePage() {
       }
     }
 
-    if (session) {
-      loadProfile();
-    }
+    loadProfile();
   }, [session]);
 
   if (loading) {

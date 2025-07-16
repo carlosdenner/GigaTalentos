@@ -4,15 +4,29 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    await connectDB();
+
+    // For testing - check if userId is provided in URL
+    const { searchParams } = new URL(request.url);
+    const userIdParam = searchParams.get('userId');
+    
+    let userEmail: string | undefined;
+    
+    if (userIdParam) {
+      // Testing mode - use the provided user identifier
+      userEmail = userIdParam.includes('@') ? userIdParam : `${userIdParam}@gmail.com`;
+    } else {
+      // Normal mode - get from session
+      const session = await getServerSession(authOptions);
+      if (!session?.user?.email) {
+        return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      }
+      userEmail = session.user.email;
     }
 
-    await connectDB();
-    const user = await User.findOne({ email: session.user.email }).select(
+    const user = await User.findOne({ email: userEmail }).select(
       "-password"
     );
 
@@ -20,7 +34,16 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json(user);
+    // Add some computed fields for the profile
+    const profileData = {
+      ...user.toObject(),
+      followersCount: user.followers?.length || 0,
+      followingCount: user.following?.length || 0,
+      videosCount: 0, // Will be populated by separate API call
+      projects_count: 0 // Will be populated by separate API call
+    };
+
+    return NextResponse.json(profileData);
   } catch (error) {
     console.error('Profile API error:', error);
     return NextResponse.json(

@@ -4,23 +4,36 @@ import connectDB from '@/lib/mongodb';
 import { Desafio, User } from '@/models';
 import { authOptions } from '../../auth/[...nextauth]/route';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user?.email) {
-      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
-    }
-
     await connectDB();
 
-    // Get current user
-    const currentUser = await User.findOne({ email: session.user.email });
-    if (!currentUser) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    // For testing - check if userId is provided in URL
+    const { searchParams } = new URL(request.url);
+    const userIdParam = searchParams.get('userId');
+    
+    let userEmail: string | undefined;
+    
+    if (userIdParam) {
+      // Testing mode - use the provided user identifier
+      userEmail = userIdParam.includes('@') ? userIdParam : `${userIdParam}@gmail.com`;
+    } else {
+      // Normal mode - get from session
+      const session = await getServerSession(authOptions);
+      if (!session?.user?.email) {
+        return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      }
+      userEmail = session.user.email;
     }
 
-    // Get desafios created by the current user
-    const userDesafios = await Desafio.find({ created_by: currentUser._id })
+    // Find the user by email to get their _id
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Get desafios created by the user
+    const userDesafios = await Desafio.find({ created_by: user._id })
       .populate('category', 'name thumbnail')
       .populate('created_by', 'name avatar account_type')
       .sort({ created_at: -1 })
@@ -33,7 +46,7 @@ export async function GET() {
       ...desafio,
       daysRemaining: calculateDaysRemaining(desafio.end_date),
       favoritesCount: desafio.favoritos ? desafio.favoritos.length : 0,
-      participantsCount: desafio.participants ? desafio.participants.length : 0
+      participantsCount: desafio.participants || 0
     }));
 
     return NextResponse.json(desafiosWithExtras);
