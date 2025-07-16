@@ -21,6 +21,11 @@ const UserSchema = new mongoose.Schema({
   projects_count: { type: Number, default: 0 },
   created_at: { type: Date, default: Date.now },
   password: { type: String, required: true },
+  
+  // Social features
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  
   // Recommendation system fields
   preferences: {
     categories: [{ type: String }],

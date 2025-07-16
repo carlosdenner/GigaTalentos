@@ -62,11 +62,11 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async session({ session, token }) {
-      if (token) {
-        if (session.user) {
-          session.user.id = token.id as string;
-        }
+      if (token && session.user) {
+        session.user.id = token.id as string;
         session.user.accountType = token.accountType as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
       }
       return session;
     },
@@ -74,6 +74,8 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id;
         token.accountType = (user as any).accountType;
+        token.name = user.name;
+        token.email = user.email;
       }
       return token;
     },

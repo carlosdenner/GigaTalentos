@@ -22,7 +22,7 @@ interface UserProfile {
   followersCount: number;
   followingCount: number;
   bio?: string;
-  account_type: 'talent' | 'mentor' | 'fan';
+  account_type: 'talent' | 'mentor' | 'fan' | 'admin';
   channels?: string[]; // Add channels array
   email?: string; // Add email property
   skills?: string[]; // Add skills property
@@ -101,7 +101,7 @@ export default function ProfilePage() {
           fetch('/api/profile'),
           fetch('/api/profile/videos'),
           fetch('/api/profile/projetos'), // Nova rota específica para projetos do usuário
-          fetch('/api/desafios') // Busca desafios participados
+          fetch('/api/profile/desafios') // Busca desafios do usuário específico
         ]);
         
         const [profileData, videosData, projetosData, desafiosData] = await Promise.all([
@@ -118,6 +118,7 @@ export default function ProfilePage() {
         // Filtrar vídeos para o portfólio (pode ser uma seleção especial)
         setPortfolioVideos(videosData.slice(0, 6)); // Primeiros 6 como showcase
         
+        // Now desafios come from /api/profile/desafios which returns an array directly
         setDesafios(desafiosData.slice(0, 5)); // Últimos 5 desafios
       } catch (error) {
         console.error('Error loading profile:', error);
@@ -171,7 +172,7 @@ export default function ProfilePage() {
           <Link href="/talents/add">
             <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white">
               <Upload className="h-4 w-4 mr-2" />
-              Enviar
+              Salvar
             </Button>
           </Link>
         </div>
@@ -217,10 +218,13 @@ export default function ProfilePage() {
                 ? 'bg-blue-100 text-blue-800' 
                 : profile.account_type === 'talent'
                 ? 'bg-green-100 text-green-800'
+                : profile.account_type === 'admin'
+                ? 'bg-red-100 text-red-800'
                 : 'bg-purple-100 text-purple-800'
             }`}>
               {profile.account_type === 'mentor' ? '🎓 Mentor' : 
-               profile.account_type === 'talent' ? '⭐ Talento' : '❤️ Admirador'}
+               profile.account_type === 'talent' ? '⭐ Talento' : 
+               profile.account_type === 'admin' ? '👑 Admin' : '❤️ Fan'}
             </div>
             {profile.verified && (
               <div className="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">

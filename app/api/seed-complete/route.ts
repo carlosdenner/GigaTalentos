@@ -104,7 +104,7 @@ export async function POST() {
         name: 'Carlos Denner',
         email: 'carlosdenner@gmail.com',
         password: hashedAdminPassword,
-        avatar: '/placeholder-user.jpg',
+        avatar: '/carlos denner.jpg',
         account_type: 'admin',
         bio: 'Fundador e administrador da plataforma Giga Talentos. Especialista em identificação e desenvolvimento de talentos empreendedores.',
         location: 'Brasília, DF',
@@ -270,10 +270,11 @@ export async function POST() {
 
     console.log('📺 Creating channels...');
 
-    // Create channels for talents and mentors
+    // Create channels for talents, mentors, and admin
     const talentUsers = users.filter(u => u.account_type === 'talent');
     const mentorUsers = users.filter(u => u.account_type === 'mentor');
-    const allCreators = [...talentUsers, ...mentorUsers];
+    const adminUsers = users.filter(u => u.account_type === 'admin');
+    const allCreators = [...talentUsers, ...mentorUsers, ...adminUsers];
 
     const channels = [];
     for (const user of allCreators) {
@@ -295,9 +296,9 @@ export async function POST() {
 
     console.log('🎯 Creating desafios...');
 
-    // Create desafios (only mentors can create)
+    // Create desafios (mentors and admin can create)
     const desafios = [];
-    const mentors = users.filter(u => u.account_type === 'mentor');
+    const mentors = users.filter(u => u.account_type === 'mentor' || u.account_type === 'admin');
     
     const desafioTemplates = [
       {
@@ -514,9 +515,9 @@ export async function POST() {
 
     console.log('🚀 Creating projetos...');
 
-    // Create projetos (talents and mentors can create)
+    // Create projetos (talents, mentors, and admin can create)
     const projetos = [];
-    const creatorsForProjects = [...talentUsers, ...mentorUsers];
+    const creatorsForProjects = [...talentUsers, ...mentorUsers, ...adminUsers];
     
     const projetoTemplates = [
       {
@@ -785,7 +786,110 @@ export async function POST() {
       await projeto.save();
     }
 
-    console.log('📹 Creating real YouTube videos...');
+    console.log('� Creating user-to-user following relationships...');
+
+    // Create realistic following relationships
+    let totalFollowingRelationships = 0;
+    
+    // Mentors are likely to be followed by talents and fans
+    const mentorsForFollowing = allUsers.filter(u => u.account_type === 'mentor');
+    const talentsForFollowing = allUsers.filter(u => u.account_type === 'talent');
+    const fansForFollowing = allUsers.filter(u => u.account_type === 'fan');
+    
+    // Fans follow mentors and talents
+    for (const fan of fansForFollowing) {
+      const numMentorsToFollow = Math.floor(Math.random() * 3) + 1; // 1-3 mentors
+      const numTalentsToFollow = Math.floor(Math.random() * 4) + 2; // 2-5 talents
+      
+      const mentorsToFollow = mentorsForFollowing
+        .sort(() => 0.5 - Math.random())
+        .slice(0, numMentorsToFollow);
+      
+      const talentsToFollow = talentsForFollowing
+        .sort(() => 0.5 - Math.random())
+        .slice(0, numTalentsToFollow);
+      
+      const allToFollow = [...mentorsToFollow, ...talentsToFollow];
+      
+      for (const userToFollow of allToFollow) {
+        fan.following = fan.following || [];
+        userToFollow.followers = userToFollow.followers || [];
+        
+        if (!fan.following.includes(userToFollow._id)) {
+          fan.following.push(userToFollow._id);
+          userToFollow.followers.push(fan._id);
+          totalFollowingRelationships++;
+        }
+      }
+      
+      await fan.save();
+      for (const user of allToFollow) {
+        await user.save();
+      }
+    }
+    
+    // Talents follow mentors and some other talents
+    for (const talent of talentsForFollowing) {
+      const numMentorsToFollow = Math.floor(Math.random() * 2) + 1; // 1-2 mentors
+      const numTalentsToFollow = Math.floor(Math.random() * 3) + 1; // 1-3 other talents
+      
+      const mentorsToFollow = mentorsForFollowing
+        .sort(() => 0.5 - Math.random())
+        .slice(0, numMentorsToFollow);
+      
+      const otherTalents = talentsForFollowing
+        .filter(t => t._id.toString() !== talent._id.toString())
+        .sort(() => 0.5 - Math.random())
+        .slice(0, numTalentsToFollow);
+      
+      const allToFollow = [...mentorsToFollow, ...otherTalents];
+      
+      for (const userToFollow of allToFollow) {
+        talent.following = talent.following || [];
+        userToFollow.followers = userToFollow.followers || [];
+        
+        if (!talent.following.includes(userToFollow._id)) {
+          talent.following.push(userToFollow._id);
+          userToFollow.followers.push(talent._id);
+          totalFollowingRelationships++;
+        }
+      }
+      
+      await talent.save();
+      for (const user of allToFollow) {
+        await user.save();
+      }
+    }
+    
+    // Some mentors follow other mentors (mutual professional respect)
+    for (const mentor of mentorsForFollowing) {
+      const numMentorsToFollow = Math.floor(Math.random() * 2); // 0-1 other mentors
+      
+      if (numMentorsToFollow > 0) {
+        const otherMentors = mentorsForFollowing
+          .filter(m => m._id.toString() !== mentor._id.toString())
+          .sort(() => 0.5 - Math.random())
+          .slice(0, numMentorsToFollow);
+        
+        for (const mentorToFollow of otherMentors) {
+          mentor.following = mentor.following || [];
+          mentorToFollow.followers = mentorToFollow.followers || [];
+          
+          if (!mentor.following.includes(mentorToFollow._id)) {
+            mentor.following.push(mentorToFollow._id);
+            mentorToFollow.followers.push(mentor._id);
+            totalFollowingRelationships++;
+          }
+        }
+        
+        await mentor.save();
+        for (const user of otherMentors) {
+          await user.save();
+        }
+      }
+    }
+
+    console.log('�📹 Creating real YouTube videos...');
 
     // Real YouTube videos for the 6 skill categories with their carefully selected content
     const realYouTubeVideos = [
@@ -1345,6 +1449,7 @@ export async function POST() {
         projetoFavorites: totalProjetoFavorites,
         participationRequests: totalParticipationRequests,
         projetoDesafioLinks: totalProjetoDesafioLinks,
+        userFollowingRelationships: totalFollowingRelationships,
         comments: comments.length,
         messages: messages.length,
         subscriptions: subscriptions.length
@@ -1362,17 +1467,23 @@ export async function POST() {
           return currentEngagement > prevEngagement ? current : prev;
         }).account_type,
         highestEngagementScore: Math.max(...userEngagementMetrics.map(u => u.engagement_score)),
-        totalPlatformActivity: comments.length + messages.length + subscriptions.length + videoWatchHistory.length
+        avgFollowersPerUser: Math.floor(users.reduce((sum, u) => sum + u.followers.length, 0) / users.length),
+        mostFollowedUserType: users.reduce((prev, current) => {
+          return current.followers.length > prev.followers.length ? current : prev;
+        }).account_type,
+        totalPlatformActivity: comments.length + messages.length + subscriptions.length + videoWatchHistory.length + totalFollowingRelationships
       },
       businessMetrics: {
         contentCreators: users.filter(u => u.account_type !== 'fan').length,
         avgFollowersPerChannel: Math.floor(subscriptions.length / createdChannels.length),
-        totalInteractionEvents: totalDesafioFavorites + totalProjetoLikes + totalProjetoFavorites + totalParticipationRequests + comments.length,
+        avgUserFollowersCount: Math.floor(users.reduce((sum, u) => sum + u.followers.length, 0) / users.length),
+        totalInteractionEvents: totalDesafioFavorites + totalProjetoLikes + totalProjetoFavorites + totalParticipationRequests + comments.length + totalFollowingRelationships,
         avgDesafioParticipants: Math.floor(createdDesafios.reduce((sum, d) => sum + d.participants, 0) / createdDesafios.length),
         avgFavoritesPerDesafio: Math.floor(totalDesafioFavorites / createdDesafios.length),
         projectParticipationRate: Math.floor((totalParticipationRequests / (createdProjetos.length * users.filter(u => u.account_type === 'talent').length)) * 100),
         messageEngagementRate: Math.floor((messages.filter(m => m.read).length / messages.length) * 100),
-        challengeFavoriteRate: Math.floor((totalDesafioFavorites / (createdDesafios.length * users.length)) * 100)
+        challengeFavoriteRate: Math.floor((totalDesafioFavorites / (createdDesafios.length * users.length)) * 100),
+        userFollowRate: Math.floor((totalFollowingRelationships / (users.length * (users.length - 1))) * 100)
       }
     };
 
