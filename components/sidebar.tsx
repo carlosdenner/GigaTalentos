@@ -77,11 +77,11 @@ export default function Sidebar() {
             </Link>
             <Link href="/featured-channels" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
               <PlayCircle className="h-5 w-5 text-gray-400" />
-              <span>Projetos em Destaque</span>
+              <span>Giga Canais</span>
             </Link>
             <Link href="/talents" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
               <Users className="h-5 w-5 text-gray-400" />
-              <span>Talentos da Comunidade</span>
+              <span>Giga Talentos</span>
             </Link>
           </nav>
         </div>

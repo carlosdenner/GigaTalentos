@@ -24,6 +24,10 @@ interface UserProfile {
   experience?: string;
   portfolio?: string;
   verified: boolean;
+  followersCount?: number;
+  followingCount?: number;
+  followers?: string[];
+  following?: string[];
 }
 
 interface Projeto {
@@ -47,13 +51,78 @@ export default function UserProfilePage() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [projetos, setProjetos] = useState<Projeto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followLoading, setFollowLoading] = useState(false);
 
   useEffect(() => {
     if (userId) {
       fetchUserProfile();
       fetchUserProjects();
+      checkFollowStatus();
     }
   }, [userId]);
+
+  const checkFollowStatus = async () => {
+    if (!session?.user) return;
+    
+    try {
+      const response = await fetch(`/api/users/${userId}/follow`);
+      if (response.ok) {
+        const data = await response.json();
+        setIsFollowing(data.isFollowing);
+      }
+    } catch (error) {
+      console.error('Error checking follow status:', error);
+    }
+  };
+
+  const handleFollowToggle = async () => {
+    if (!session?.user) {
+      toast({
+        title: "Login necessário",
+        description: "Você precisa estar logado para seguir usuários",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setFollowLoading(true);
+    try {
+      const response = await fetch(`/api/users/${userId}/follow`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setIsFollowing(data.isFollowing);
+        toast({
+          title: data.isFollowing ? "Usuário seguido!" : "Deixou de seguir",
+          description: data.isFollowing 
+            ? `Você agora está seguindo ${userProfile?.name}`
+            : `Você deixou de seguir ${userProfile?.name}`,
+        });
+      } else {
+        const errorData = await response.json();
+        toast({
+          title: "Erro",
+          description: errorData.error || "Erro ao seguir/deixar de seguir usuário",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error toggling follow:', error);
+      toast({
+        title: "Erro",
+        description: "Erro ao seguir/deixar de seguir usuário",
+        variant: "destructive",
+      });
+    } finally {
+      setFollowLoading(false);
+    }
+  };
 
   const fetchUserProfile = async () => {
     try {
@@ -173,13 +242,30 @@ export default function UserProfilePage() {
                 </div>
               )}
             </div>
+            
+            {/* Follower/Following Stats */}
+            <div className="flex gap-6 mt-4 justify-center md:justify-start">
+              <div className="text-center">
+                <div className="text-2xl font-bold">{userProfile.followersCount || 0}</div>
+                <div className="text-sm opacity-75">Seguidores</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold">{userProfile.followingCount || 0}</div>
+                <div className="text-sm opacity-75">Seguindo</div>
+              </div>
+            </div>
           </div>
           
           <div className="flex gap-2">
             {!isOwnProfile && (
-              <Button variant="secondary" className="bg-white/20 text-white hover:bg-white/30">
+              <Button 
+                variant="secondary" 
+                className="bg-white/20 text-white hover:bg-white/30"
+                onClick={handleFollowToggle}
+                disabled={followLoading}
+              >
                 <UserPlus className="h-4 w-4 mr-2" />
-                Seguir
+                {followLoading ? 'Carregando...' : (isFollowing ? 'Seguindo' : 'Seguir')}
               </Button>
             )}
             <Button variant="secondary" className="bg-white/20 text-white hover:bg-white/30">

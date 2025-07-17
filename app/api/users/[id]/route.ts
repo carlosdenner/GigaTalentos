@@ -5,17 +5,25 @@ import User from "@/models/User";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const user = await User.findById(params.id).select("-password");
+    const { id } = await params;
+    const user = await User.findById(id).select("-password");
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json(user);
+    // Add follower and following counts
+    const userResponse = {
+      ...user.toObject(),
+      followersCount: user.followers?.length || 0,
+      followingCount: user.following?.length || 0
+    };
+
+    return NextResponse.json(userResponse);
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch user" },

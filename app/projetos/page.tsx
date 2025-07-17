@@ -227,7 +227,7 @@ export default function ProjetosPage() {
           <ul className="text-sm text-blue-800 space-y-1 text-left">
             <li>• <strong>Projetos podem ser criados</strong> por talentos ou mentores</li>
             <li>• <strong>Sempre são liderados</strong> por um talento</li>
-            <li>• <strong>Portfólio:</strong> cada projeto faz parte do portfólio do talento líder</li>
+            <li>• <strong>Canal do Líder:</strong> cada projeto faz parte do canal do talento líder</li>
             <li>• <strong>Mentores podem ser sponsors</strong> oferecendo suporte e recursos</li>
             <li>• <strong>Desafios requerem aprovação</strong> de mentor para serem associados</li>
           </ul>
@@ -396,6 +396,11 @@ export default function ProjetosPage() {
                       {projeto.desafio_aprovado ? '✓ Desafio' : '⏳ Desafio'}
                     </Badge>
                   )}
+                  {projeto.lideranca_status === 'buscando_lider' && (
+                    <Badge variant="default" className="text-xs bg-orange-500 hover:bg-orange-600">
+                      🔍 Procura Líder
+                    </Badge>
+                  )}
                   {projeto.sponsors && projeto.sponsors.length > 0 && (
                     <Badge variant="secondary" className="text-xs">
                       Com Mentoria
@@ -441,23 +446,39 @@ export default function ProjetosPage() {
                 )}
 
                 {/* Líder do Projeto */}
-                <div className="flex items-center gap-2">
-                  <Avatar className="h-6 w-6">
-                    <AvatarImage src={projeto.talento_lider_id?.avatar} />
-                    <AvatarFallback>
-                      {projeto.talento_lider_id?.name?.[0] || 'T'}
-                    </AvatarFallback>
-                  </Avatar>
-                  <Link 
-                    href={`/profile/${projeto.talento_lider_id?._id}`}
-                    className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
-                  >
-                    {projeto.talento_lider_id?.name || 'Líder'}
-                  </Link>
-                  <Badge variant="outline" className="text-xs">
-                    Líder
-                  </Badge>
-                </div>
+                {projeto.talento_lider_id ? (
+                  <div className="flex items-center gap-2">
+                    <Avatar className="h-6 w-6">
+                      <AvatarImage src={projeto.talento_lider_id?.avatar} />
+                      <AvatarFallback>
+                        {projeto.talento_lider_id?.name?.[0] || 'T'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <Link 
+                      href={`/profile/${projeto.talento_lider_id._id}`}
+                      className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                    >
+                      {projeto.talento_lider_id.name}
+                    </Link>
+                    <Badge variant="outline" className="text-xs">
+                      Líder
+                    </Badge>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Avatar className="h-6 w-6">
+                      <AvatarFallback>
+                        ?
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm font-medium text-gray-500">
+                      Buscando Líder
+                    </span>
+                    <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
+                      Aberto
+                    </Badge>
+                  </div>
+                )}
 
                 {/* Criador (se diferente do líder) */}
                 {projeto.criador_id && projeto.talento_lider_id && 
@@ -545,9 +566,9 @@ export default function ProjetosPage() {
                   </Button>
                   
                   {projeto.portfolio_id && (
-                    <Button asChild variant="outline" size="sm" title={`Ver portfólio de ${projeto.talento_lider_id?.name}`}>
+                    <Button asChild variant="outline" size="sm" title={`Ver canal de ${projeto.talento_lider_id?.name}`}>
                       <Link href={`/channels/${projeto.portfolio_id._id}`}>
-                        📁 Portfólio
+                        � Canal do Líder
                       </Link>
                     </Button>
                   )}

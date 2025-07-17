@@ -294,16 +294,38 @@ export async function POST() {
 
     const channels = [];
     for (const user of allCreators) {
+      // Generate appropriate cover images based on user type and skills
+      const coverImages = [
+        'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1600&h=400&fit=crop', // Technology
+        'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1600&h=400&fit=crop', // Entrepreneurship
+        'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=400&fit=crop', // Business meeting
+        'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1600&h=400&fit=crop', // Digital workspace
+        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=400&fit=crop', // Collaboration
+        'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&h=400&fit=crop', // Innovation
+        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1600&h=400&fit=crop', // Tech startup
+        'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1600&h=400&fit=crop', // Creative workspace
+      ];
+
+      // Better descriptions based on user account type
+      let channelDescription = '';
+      if (user.account_type === 'mentor') {
+        channelDescription = `Canal oficial de ${user.name} - Mentor especializado em desenvolvimento de talentos empreendedores. Compartilho conhecimentos, estratégias e insights para acelerar seu crescimento profissional.`;
+      } else if (user.account_type === 'admin') {
+        channelDescription = `Canal oficial de ${user.name} - Fundador e administrador da plataforma GigaTalentos. Conteúdos sobre empreendedorismo, tecnologia e desenvolvimento de ecossistemas de inovação.`;
+      } else {
+        channelDescription = `Canal oficial de ${user.name} - ${user.bio || 'Talento empreendedor compartilhando experiências, projetos e aprendizados na jornada de inovação e desenvolvimento.'}.`;
+      }
+
       const channel = {
         name: `Canal do ${user.name.split(' ')[0]}`,
-        description: `Canal oficial de ${user.name} - ${user.bio}`,
+        description: channelDescription,
         user_id: user._id, // Fixed: use user_id instead of owner_id
         category: categories[Math.floor(Math.random() * categories.length)].name, // Use category name string
         subscribers: Math.floor(Math.random() * 10000) + 100,
         avatar: user.avatar,
-        cover_image: '/placeholder.jpg',
-        verified: user.account_type === 'mentor' || Math.random() > 0.5,
-        demo: true
+        cover_image: coverImages[Math.floor(Math.random() * coverImages.length)],
+        verified: user.account_type === 'mentor' || user.account_type === 'admin' || Math.random() > 0.7,
+        demo: false
       };
       channels.push(channel);
     }
@@ -2072,6 +2094,19 @@ Obrigado!`,
 
     if (subscriptions.length > 0) {
       await Subscription.insertMany(subscriptions);
+      
+      // Update channel subscriber counts based on actual subscription records
+      console.log('📊 Updating channel subscriber counts based on actual subscriptions...');
+      for (const channel of createdChannels) {
+        const realSubscriberCount = await Subscription.countDocuments({ 
+          channel_id: channel._id 
+        });
+        
+        channel.subscribers = realSubscriberCount;
+        await channel.save();
+      }
+      
+      console.log(`✅ Updated subscriber counts for ${createdChannels.length} channels`);
     }
 
     console.log('📊 Creating analytics and engagement data...');

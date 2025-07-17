@@ -7,79 +7,204 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
-import { PlayCircle, Eye, Heart, Users, Star, TrendingUp } from "lucide-react";
+import { PlayCircle, Users, Star, TrendingUp, ExternalLink, UserPlus, UserMinus } from "lucide-react";
+import { useSession } from "next-auth/react";
 
-interface Projeto {
+interface Channel {
   _id: string;
-  nome: string;
-  descricao: string;
-  objetivo: string;
-  seguidores: number;
+  name: string;
+  description: string;
+  subscribers: number;
   avatar: string;
-  imagem_capa: string;
-  categoria: string;
-  status: 'ativo' | 'concluido' | 'pausado';
-  talento_lider_id?: {
-    _id: string;
-    name: string;
-    avatar: string;
-  };
-  criador_id?: {
+  cover_image: string;
+  category: string;
+  verified: boolean;
+  user_id: {
     _id: string;
     name: string;
     avatar: string;
     account_type: string;
+    portfolio?: string;
   };
-  favoritos: string[];
-  verificado: boolean;
   demo: boolean;
-  criado_em: string;
+  created_at: string;
 }
 
-export default function FeaturedProjectsPage() {
-  const [projects, setProjects] = useState<Projeto[]>([]);
+interface ChannelWithFollowState extends Channel {
+  isFollowing?: boolean;
+  isOwnChannel?: boolean;
+}
+
+function FollowButton({ channel, onFollowChange }: { 
+  channel: ChannelWithFollowState;
+  onFollowChange: (channelId: string, isFollowing: boolean) => void;
+}) {
+  const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFollowToggle = async () => {
+    if (!session) {
+      // Redirect to login or show login modal
+      window.location.href = '/auth/signin';
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+    try {
+      console.log('Attempting to toggle follow for channel:', channel._id);
+      console.log('Session user ID:', session.user?.id);
+      
+      const response = await fetch(`/api/channels/${channel._id}/subscription`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Follow toggle response status:', response.status);
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Follow toggle response:', data);
+        onFollowChange(channel._id, data.isSubscribed);
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to toggle follow:', response.status, errorData);
+        setError(errorData.error || 'Erro ao seguir canal');
+      }
+    } catch (error) {
+      console.error('Error toggling follow:', error);
+      setError('Erro de conexão');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (channel.isOwnChannel) {
+    return null; // Don't show follow button for own channel
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <Button
+        onClick={handleFollowToggle}
+        disabled={isLoading}
+        variant={channel.isFollowing ? "outline" : "default"}
+        size="sm"
+        className={`${
+          channel.isFollowing 
+            ? "border-gray-600 text-gray-300 hover:bg-red-500 hover:text-white hover:border-red-500" 
+            : "bg-[#10b981] hover:bg-[#10b981]/90 text-white"
+        }`}
+      >
+        {isLoading ? (
+          <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+        ) : channel.isFollowing ? (
+          <UserMinus className="h-3 w-3 mr-1" />
+        ) : (
+          <UserPlus className="h-3 w-3 mr-1" />
+        )}
+        {channel.isFollowing ? "Deixar de seguir" : "Seguir"}
+      </Button>
+      {error && (
+        <p className="text-red-400 text-xs">{error}</p>
+      )}
+    </div>
+  );
+}
+
+export default function FeaturedChannelsPage() {
+  const [channels, setChannels] = useState<ChannelWithFollowState[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { data: session } = useSession();
 
   useEffect(() => {
-    async function fetchFeaturedProjects() {
+    async function fetchFeaturedChannels() {
       try {
-        const response = await fetch('/api/projetos');
+        const response = await fetch('/api/channels/featured');
         if (!response.ok) {
-          throw new Error('Failed to fetch projects');
+          throw new Error('Failed to fetch channels');
         }
         
-        const allProjects = await response.json();
+        const data = await response.json();
         
-        // Ordenar projetos por popularidade (combinação de seguidores e favoritos)
-        const sortedProjects = allProjects
-          .filter((project: Projeto) => project.status === 'ativo') // Apenas projetos ativos
-          .sort((a: Projeto, b: Projeto) => {
-            const scoreA = (a.seguidores || 0) + (a.favoritos?.length || 0) * 2 + (a.verificado ? 10 : 0);
-            const scoreB = (b.seguidores || 0) + (b.favoritos?.length || 0) * 2 + (b.verificado ? 10 : 0);
+        // Sort channels by subscribers and verification status for "featured" display
+        const featuredChannels = data
+          .sort((a: Channel, b: Channel) => {
+            const scoreA = (a.subscribers || 0) + (a.verified ? 1000 : 0);
+            const scoreB = (b.subscribers || 0) + (b.verified ? 1000 : 0);
             return scoreB - scoreA;
-          })
-          .slice(0, 12); // Pegar apenas os 12 mais populares
+          });
         
-        setProjects(sortedProjects);
+        // Add follow state for each channel
+        const channelsWithFollowState = await Promise.all(
+          featuredChannels.map(async (channel: Channel) => {
+            let isFollowing = false;
+            let isOwnChannel = false;
+
+            if (session?.user?.id) {
+              isOwnChannel = channel.user_id?._id === session.user.id;
+              
+              if (!isOwnChannel) {
+                try {
+                  const followResponse = await fetch(`/api/channels/${channel._id}/subscription`);
+                  if (followResponse.ok) {
+                    const followData = await followResponse.json();
+                    isFollowing = followData.isSubscribed;
+                  }
+                } catch (err) {
+                  console.error('Error checking follow status:', err);
+                }
+              }
+            }
+
+            return {
+              ...channel,
+              isFollowing,
+              isOwnChannel
+            };
+          })
+        );
+
+        setChannels(channelsWithFollowState);
       } catch (err) {
-        setError('Erro ao carregar projetos em destaque');
-        console.error('Error fetching featured projects:', err);
+        console.error('Error fetching channels:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch channels');
       } finally {
         setLoading(false);
       }
     }
 
-    fetchFeaturedProjects();
-  }, []);
+    fetchFeaturedChannels();
+  }, [session]);
+
+  const handleFollowChange = (channelId: string, isFollowing: boolean) => {
+    setChannels(prevChannels =>
+      prevChannels.map(channel =>
+        channel._id === channelId
+          ? { 
+              ...channel, 
+              isFollowing,
+              subscribers: channel.subscribers + (isFollowing ? 1 : -1)
+            }
+          : channel
+      )
+    );
+  };
 
   if (loading) {
     return (
       <div className="space-y-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">🌟 Projetos em Destaque</h1>
+          <h1 className="text-4xl font-bold text-white mb-4 flex items-center gap-3">
+            <TrendingUp className="h-10 w-10 text-[#10b981]" />
+            Canais em Destaque
+          </h1>
           <p className="text-gray-400 text-lg">
-            Descubra os projetos mais populares e inovadores da nossa comunidade
+            Descubra os canais mais populares da nossa comunidade de talentos e mentores
           </p>
         </div>
         <div className="flex justify-center py-12">
@@ -93,10 +218,19 @@ export default function FeaturedProjectsPage() {
     return (
       <div className="space-y-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">🌟 Projetos em Destaque</h1>
+          <h1 className="text-4xl font-bold text-white mb-4 flex items-center gap-3">
+            <TrendingUp className="h-10 w-10 text-[#10b981]" />
+            Canais em Destaque
+          </h1>
         </div>
         <div className="text-center py-12">
           <p className="text-red-400">{error}</p>
+          <Button 
+            onClick={() => window.location.reload()} 
+            className="mt-4 bg-[#10b981] hover:bg-[#10b981]/90"
+          >
+            Tentar Novamente
+          </Button>
         </div>
       </div>
     );
@@ -107,130 +241,129 @@ export default function FeaturedProjectsPage() {
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-white mb-4 flex items-center gap-3">
           <TrendingUp className="h-10 w-10 text-[#10b981]" />
-          Projetos em Destaque
+          Canais em Destaque
         </h1>
         <p className="text-gray-400 text-lg">
-          Descubra os projetos mais populares e inovadores criados por talentos empreendedores da nossa comunidade
+          Descubra os canais mais populares da nossa comunidade de talentos e mentores. 
+          Conecte-se com criadores inspiradores e acompanhe seus portfólios.
         </p>
         <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
           <Star className="h-4 w-4 text-yellow-500" />
-          <span>Ordenados por popularidade (seguidores + favoritos + verificação)</span>
+          <span>Ordenados por popularidade (seguidores + verificação)</span>
         </div>
       </div>
+
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project, index) => (
-          <Card key={project._id} className="bg-[#1a2942] border-gray-800 hover:border-[#10b981] transition-colors group relative">
-            {/* Badge de posição para os top 3 */}
-            {index < 3 && (
-              <div className="absolute top-3 right-3 z-10">
-                <Badge className={`
-                  ${index === 0 ? 'bg-yellow-500 text-black' : ''}
-                  ${index === 1 ? 'bg-gray-400 text-black' : ''}
-                  ${index === 2 ? 'bg-amber-600 text-white' : ''}
-                `}>
-                  #{index + 1}
-                </Badge>
-              </div>
-            )}
-            
-            <CardContent className="p-0">
-              <div className="relative h-48 rounded-t-lg overflow-hidden">
-                <Image
-                  src={project.imagem_capa || project.avatar || "/placeholder.jpg"}
-                  alt={project.nome}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                  <PlayCircle className="h-12 w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <div className="absolute top-3 left-3">
-                  <Badge className="bg-[#10b981] text-white">
-                    {project.categoria || 'Geral'}
-                  </Badge>
-                </div>
-                {project.verificado && (
-                  <div className="absolute bottom-3 left-3">
-                    <Badge className="bg-blue-600 text-white flex items-center gap-1">
-                      <Star className="h-3 w-3" />
-                      Verificado
-                    </Badge>
-                  </div>
-                )}
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-center mb-3">
-                  <Avatar className="h-8 w-8 mr-3">
-                    <AvatarImage src={project.talento_lider_id?.avatar || project.criador_id?.avatar} alt={project.talento_lider_id?.name || project.criador_id?.name} />
-                    <AvatarFallback className="bg-[#3b82f6] text-white text-xs">
-                      {(project.talento_lider_id?.name || project.criador_id?.name || 'T')
-                        .split(" ")
-                        .map((n: string) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="text-sm text-[#10b981] font-medium">
-                      {project.talento_lider_id?.name || project.criador_id?.name || 'Talento'}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {project.criador_id?.account_type === 'mentor' ? 'Mentor' : 'Talento Empreendedor'}
-                    </p>
-                  </div>
-                </div>
-                
-                <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2 group-hover:text-[#10b981] transition-colors">
-                  {project.nome}
-                </h3>
-                
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                  {project.descricao || project.objetivo}
-                </p>
-                
-                <div className="flex items-center justify-between text-gray-500 text-sm mb-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Users className="h-4 w-4" />
-                      <span>{project.seguidores || 0}</span>
+        {channels.length === 0 ? (
+          <div className="col-span-full text-center py-12">
+            <Star className="h-16 w-16 text-gray-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-400 mb-2">Nenhum canal encontrado</h3>
+            <p className="text-gray-500">Os canais em destaque aparecerão aqui em breve.</p>
+          </div>
+        ) : (
+          channels.map((channel) => (
+            <Card key={channel._id} className="bg-[#1a2942] border-gray-800 hover:border-[#10b981] transition-colors group">
+              <CardContent className="p-0">
+                {/* Cover Image */}
+                <div className="relative h-32 bg-gradient-to-r from-[#10b981] to-[#3b82f6] overflow-hidden rounded-t-lg">
+                  {channel.cover_image && channel.cover_image !== '/placeholder.jpg' ? (
+                    <Image
+                      src={channel.cover_image}
+                      alt={`Capa do ${channel.name}`}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  ) : null}
+                  <div className="absolute inset-0 bg-black/20" />
+                  
+                  {/* Verification Badge */}
+                  {channel.verified && (
+                    <div className="absolute top-3 right-3">
+                      <Badge className="bg-blue-600 text-white">
+                        <Star className="h-3 w-3 mr-1" />
+                        Verificado
+                      </Badge>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Heart className="h-4 w-4" />
-                      <span>{project.favoritos?.length || 0}</span>
+                  )}
+                </div>
+
+                <div className="p-6">
+                  {/* Channel Avatar & Info */}
+                  <div className="flex items-start gap-4 mb-4">
+                    <Avatar className="h-16 w-16 border-2 border-[#10b981]">
+                      <AvatarImage src={channel.avatar || '/placeholder-user.jpg'} alt={channel.name} />
+                      <AvatarFallback className="bg-[#10b981] text-white text-lg font-bold">
+                        {channel.name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-xl font-bold text-white mb-1 truncate">
+                        {channel.name}
+                      </h3>
+                      <p className="text-sm text-gray-400 mb-2">
+                        por {channel.user_id?.name || 'Usuário'}
+                      </p>
+                      <Badge variant="outline" className="text-xs border-[#10b981] text-[#10b981]">
+                        {channel.category}
+                      </Badge>
                     </div>
                   </div>
-                  <span>{new Date(project.criado_em).toLocaleDateString('pt-BR')}</span>
+
+                  {/* Description */}
+                  <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                    {channel.description || 'Canal focado em conteúdo de qualidade para empreendedores e talentos.'}
+                  </p>
+
+                  {/* Stats */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-4 text-sm text-gray-400">
+                      <div className="flex items-center gap-1">
+                        <Users className="h-4 w-4" />
+                        <span>{channel.subscribers.toLocaleString()} seguidores</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-2 mb-3">
+                    <Link href={`/channels/${channel._id}`} className="flex-1">
+                      <Button className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white">
+                        <PlayCircle className="h-4 w-4 mr-2" />
+                        Visitar Canal
+                      </Button>
+                    </Link>
+                    
+                    <FollowButton channel={channel} onFollowChange={handleFollowChange} />
+                  </div>
+
+                  {/* Additional Links */}
+                  <div className="flex gap-2">
+                    {channel.user_id?._id && (
+                      <Link href={`/profile/${channel.user_id._id}`} className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full border-gray-600 text-gray-300 hover:bg-gray-700">
+                          Perfil
+                        </Button>
+                      </Link>
+                    )}
+                    
+                    {channel.user_id?.portfolio && (
+                      <Link href={channel.user_id.portfolio} target="_blank" rel="noopener noreferrer" className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full border-gray-600 text-gray-300 hover:bg-gray-700">
+                          <ExternalLink className="h-4 w-4 mr-1" />
+                          Portfólio
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
                 </div>
-                
-                <div className="flex gap-2">
-                  <Link href={`/projetos/${project._id}`} className="flex-1">
-                    <Button className="w-full bg-gradient-to-r from-[#10b981] to-[#3b82f6] hover:from-[#059669] hover:to-[#2563eb] text-white">
-                      Ver Projeto
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))
+        )}
       </div>
-      
-      {projects.length === 0 && (
-        <div className="text-center py-12">
-          <TrendingUp className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-400 mb-2">Nenhum projeto em destaque ainda</h3>
-          <p className="text-gray-500">
-            Os projetos mais inovadores da nossa comunidade aparecerão aqui em breve!
-          </p>
-          <Link href="/projetos">
-            <Button className="mt-4 bg-[#10b981] hover:bg-[#059669] text-white">
-              Explorar Todos os Projetos
-            </Button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 }
-
