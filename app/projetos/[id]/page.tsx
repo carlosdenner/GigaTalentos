@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowLeft, Users, Calendar, Target, Trophy } from 'lucide-react';
 import Link from 'next/link';
+import ProjectDelegationManager from '@/components/project-delegation-manager';
 
 interface Projeto {
   _id: string;
@@ -19,11 +21,17 @@ interface Projeto {
   imagem_capa: string;
   categoria: string;
   status: 'ativo' | 'concluido' | 'pausado';
-  talento_lider_id: {
+  lideranca_status: 'ativo' | 'buscando_lider' | 'delegacao_pendente';
+  talento_lider_id?: {
     _id: string;
     name: string;
     avatar: string;
     bio: string;
+  };
+  criador_id: {
+    _id: string;
+    name: string;
+    account_type: string;
   };
   portfolio_id: {
     _id: string;
@@ -34,12 +42,23 @@ interface Projeto {
     title: string;
     description: string;
   };
+  solicitacao_lideranca?: {
+    status: 'pendente' | 'aprovado' | 'rejeitado';
+    candidato_id?: {
+      _id: string;
+      name: string;
+      avatar: string;
+    };
+    mensagem?: string;
+    solicitado_em?: string;
+  };
   criado_em: string;
   atualizado_em: string;
 }
 
 export default function ProjetoPage() {
   const params = useParams();
+  const { data: session } = useSession();
   const [projeto, setProjeto] = useState<Projeto | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -68,6 +87,7 @@ export default function ProjetoPage() {
       case 'ativo': return 'bg-green-100 text-green-800';
       case 'concluido': return 'bg-blue-100 text-blue-800';
       case 'pausado': return 'bg-yellow-100 text-yellow-800';
+      case 'pendente_lideranca': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -124,13 +144,23 @@ export default function ProjetoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Conteúdo Principal */}
         <div className="lg:col-span-2">
+          {/* Project Delegation Manager */}
+          {session?.user && (
+            <ProjectDelegationManager
+              projeto={projeto}
+              currentUserId={session.user.id}
+              currentUserType={(session.user as any).account_type || 'talent'}
+              onUpdate={setProjeto}
+            />
+          )}
+
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <CardTitle className="text-2xl">{projeto.nome}</CardTitle>
                   <Badge className={getStatusColor(projeto.status)}>
-                    {projeto.status}
+                    {projeto.lideranca_status === 'buscando_lider' ? 'Buscando Líder' : projeto.status}
                   </Badge>
                 </div>
                 {projeto.desafio_id && (
@@ -191,35 +221,50 @@ export default function ProjetoPage() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Talento Líder */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Talento Líder</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-3 mb-4">
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src={projeto.talento_lider_id.avatar} />
-                  <AvatarFallback>
-                    {projeto.talento_lider_id.name[0]}
-                  </AvatarFallback>
-                </Avatar>
-                <div>
-                  <h4 className="font-medium">{projeto.talento_lider_id.name}</h4>
-                  <p className="text-sm text-gray-600">Líder do Projeto</p>
+          {projeto.talento_lider_id ? (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Talento Líder</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-3 mb-4">
+                  <Avatar className="h-12 w-12">
+                    <AvatarImage src={projeto.talento_lider_id.avatar} />
+                    <AvatarFallback>
+                      {projeto.talento_lider_id.name[0]}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h4 className="font-medium">{projeto.talento_lider_id.name}</h4>
+                    <p className="text-sm text-gray-600">Líder do Projeto</p>
+                  </div>
                 </div>
-              </div>
-              {projeto.talento_lider_id.bio && (
-                <p className="text-sm text-gray-600 mb-4">
-                  {projeto.talento_lider_id.bio}
-                </p>
-              )}
-              <Button asChild variant="outline" className="w-full">
-                <Link href={`/talentos/${projeto.talento_lider_id._id}`}>
-                  Ver Perfil
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
+                {projeto.talento_lider_id.bio && (
+                  <p className="text-sm text-gray-600 mb-4">
+                    {projeto.talento_lider_id.bio}
+                  </p>
+                )}
+                <Button asChild variant="outline" className="w-full">
+                  <Link href={`/talentos/${projeto.talento_lider_id._id}`}>
+                    Ver Perfil
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Liderança</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                  <p className="text-sm text-orange-800">
+                    Este projeto ainda não tem um líder definido.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Portfólio */}
           <Card>

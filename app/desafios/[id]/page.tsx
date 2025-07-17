@@ -33,7 +33,7 @@ interface Desafio {
   };
   difficulty: string;
   duration: string;
-  participants: number;
+  approvedProjects: number; // Number of approved projects
   prizes: Prize[];
   requirements: string[];
   status: string;
@@ -44,6 +44,12 @@ interface Desafio {
   daysRemaining: number;
   formattedPrizes: string;
   favoritesCount: number;
+  projetos_vinculados?: Array<{
+    projeto_id: string;
+    status: 'pendente' | 'aprovado' | 'rejeitado';
+    solicitado_em: string;
+    aprovado_em?: string;
+  }>;
   created_by: {
     _id: string;
     name: string;
@@ -67,6 +73,32 @@ export default function DesafioDetailPage() {
     duration: '',
     status: ''
   })
+
+  const handleParticipate = () => {
+    if (!session) {
+      toast({
+        title: "Login necessário",
+        description: "Você precisa estar logado para participar do desafio.",
+        variant: "destructive"
+      })
+      return
+    }
+
+    // Show options to either create new project or join existing one
+    const userChoice = confirm(
+      "Como você gostaria de participar?\n\n" +
+      "OK = Criar um novo projeto\n" +
+      "Cancelar = Ver projetos existentes para participar"
+    )
+
+    if (userChoice) {
+      // Create new project
+      router.push(`/projetos/create?desafio=${params.id}&title=${encodeURIComponent(desafio?.title || '')}`)
+    } else {
+      // Browse existing projects for this challenge
+      router.push(`/projetos?desafio=${params.id}`)
+    }
+  }
 
   useEffect(() => {
     async function fetchDesafio() {
@@ -162,7 +194,8 @@ export default function DesafioDetailPage() {
     })
   }
 
-  const isOwner = session?.user?.id === desafio?.created_by._id
+  const isOwner = session?.user?.id && desafio?.created_by._id && 
+                  session.user.id.toString() === desafio.created_by._id.toString()
 
   if (isLoading) {
     return (
@@ -298,8 +331,8 @@ export default function DesafioDetailPage() {
               <Card className="bg-[#1a2942] border-gray-800">
                 <CardContent className="p-4 text-center">
                   <Users className="h-6 w-6 text-[#10b981] mx-auto mb-2" />
-                  <div className="text-xl font-bold text-white">{desafio.participants}</div>
-                  <div className="text-xs text-gray-400">Participantes</div>
+                  <div className="text-xl font-bold text-white">{desafio.approvedProjects || 0}</div>
+                  <div className="text-xs text-gray-400">Projetos Aprovados</div>
                 </CardContent>
               </Card>
               
@@ -381,15 +414,17 @@ export default function DesafioDetailPage() {
                 <CardTitle className="text-white text-sm">Criado por</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-[#10b981] flex items-center justify-center">
-                    <User className="h-6 w-6 text-white" />
+                <Link href={`/profile/${desafio.created_by._id}`} className="block">
+                  <div className="flex items-center gap-3 hover:bg-[#0a192f] p-2 rounded-lg transition-colors cursor-pointer">
+                    <div className="w-12 h-12 rounded-full bg-[#10b981] flex items-center justify-center">
+                      <User className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-white hover:text-[#10b981] transition-colors">{desafio.created_by.name}</div>
+                      <div className="text-sm text-gray-400 capitalize">{desafio.created_by.account_type}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-semibold text-white">{desafio.created_by.name}</div>
-                    <div className="text-sm text-gray-400 capitalize">{desafio.created_by.account_type}</div>
-                  </div>
-                </div>
+                </Link>
               </CardContent>
             </Card>
 
@@ -421,10 +456,47 @@ export default function DesafioDetailPage() {
             </Card>
 
             {/* Action Button */}
-            {!isOwner && (
-              <Button className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white">
+            {!isOwner && desafio.status === 'Ativo' && (
+              <Button 
+                onClick={handleParticipate}
+                className="w-full bg-[#10b981] hover:bg-[#10b981]/90 text-white"
+              >
                 Participar do Desafio
               </Button>
+            )}
+
+            {/* Linked Projects */}
+            {desafio.projetos_vinculados && desafio.projetos_vinculados.length > 0 && (
+              <Card className="bg-[#1a2942] border-gray-800">
+                <CardHeader>
+                  <CardTitle className="text-white text-sm flex items-center justify-between">
+                    Projetos Participando
+                    <span className="text-xs text-gray-400">
+                      {desafio.projetos_vinculados.filter((p: any) => p.status === 'aprovado').length} aprovados
+                    </span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 max-h-48 overflow-y-auto">
+                    {desafio.projetos_vinculados
+                      .filter((p: any) => p.status === 'aprovado')
+                      .slice(0, 5)
+                      .map((projeto: any, index: number) => (
+                        <div key={index} className="p-2 bg-[#0a192f] rounded text-sm">
+                          <div className="text-white font-medium">Projeto #{index + 1}</div>
+                          <div className="text-xs text-gray-400">
+                            Aprovado em {new Date(projeto.aprovado_em || projeto.solicitado_em).toLocaleDateString('pt-BR')}
+                          </div>
+                        </div>
+                      ))}
+                    {desafio.projetos_vinculados.filter((p: any) => p.status === 'aprovado').length > 5 && (
+                      <div className="text-xs text-gray-400 text-center pt-2">
+                        +{desafio.projetos_vinculados.filter((p: any) => p.status === 'aprovado').length - 5} mais projetos
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             )}
           </div>
         </div>

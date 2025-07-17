@@ -33,68 +33,57 @@ interface User {
 
 interface ProjectDelegationProps {
   projectId: string;
-  currentLeaderId: string;
+  currentUserId: string;
   isProjectCreator: boolean;
-  participants: User[];
+  hasLeader: boolean;
+  liderancaStatus: 'ativo' | 'buscando_lider' | 'delegacao_pendente';
   onDelegationSuccess?: () => void;
 }
 
 export default function ProjectDelegation({
   projectId,
-  currentLeaderId,
+  currentUserId,
   isProjectCreator,
-  participants,
+  hasLeader,
+  liderancaStatus,
   onDelegationSuccess
 }: ProjectDelegationProps) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedTalentId, setSelectedTalentId] = useState<string>("");
 
-  // Filter only talents from participants (excluding current leader)
-  const availableTalents = participants.filter(
-    p => p.account_type === 'talent' && p._id !== currentLeaderId
-  );
+  // Show button to set project as "looking for leader" if mentor created it but no talent leader yet
+  const canSetLookingForLeader = isProjectCreator && !hasLeader && liderancaStatus !== 'buscando_lider';
+  const isAlreadyLookingForLeader = liderancaStatus === 'buscando_lider';
 
-  const handleDelegation = async () => {
-    if (!selectedTalentId) {
-      toast({
-        title: "Erro",
-        description: "Por favor, selecione um talento para delegar a liderança",
-        variant: "destructive",
-      });
-      return;
-    }
-
+  const handleSetLookingForLeader = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/projetos/${projectId}/delegate`, {
-        method: "PATCH",
+      const response = await fetch(`/api/projetos/${projectId}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          new_leader_id: selectedTalentId
+          lideranca_status: 'buscando_lider'
         }),
       });
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Falha ao delegar liderança");
+        throw new Error(error.error || "Falha ao atualizar status do projeto");
       }
 
-      const selectedTalent = availableTalents.find(t => t._id === selectedTalentId);
       toast({
-        title: "Liderança delegada!",
-        description: `${selectedTalent?.name} agora é o líder do projeto`,
+        title: "Projeto em busca de líder!",
+        description: "O projeto agora está aberto para candidaturas de liderança de talentos",
       });
 
       setIsOpen(false);
-      setSelectedTalentId("");
       onDelegationSuccess?.();
     } catch (error: any) {
-      console.error("Error delegating project:", error);
+      console.error("Error setting project status:", error);
       toast({
         title: "Erro",
-        description: error.message || "Falha ao delegar liderança",
+        description: error.message || "Falha ao atualizar status do projeto",
         variant: "destructive",
       });
     } finally {
@@ -102,9 +91,19 @@ export default function ProjectDelegation({
     }
   };
 
-  // Only show for project creators and if there are available talents
-  if (!isProjectCreator || availableTalents.length === 0) {
+  // Only show for project creators who don't have a leader yet
+  if (!canSetLookingForLeader && !isAlreadyLookingForLeader) {
     return null;
+  }
+
+  // If already looking for leader, show status badge
+  if (isAlreadyLookingForLeader) {
+    return (
+      <Badge variant="outline" className="text-orange-600 border-orange-600">
+        <Crown className="h-3 w-3 mr-1" />
+        Buscando Líder
+      </Badge>
+    );
   }
 
   return (
@@ -112,52 +111,24 @@ export default function ProjectDelegation({
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="text-blue-400 border-blue-400 hover:bg-blue-400/10">
           <Crown className="h-4 w-4 mr-2" />
-          Delegar Liderança
+          Buscar Líder
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delegar Liderança do Projeto</DialogTitle>
+          <DialogTitle>Buscar Líder para o Projeto</DialogTitle>
           <DialogDescription>
-            Selecione um talento participante para se tornar o novo líder do projeto.
-            Apenas talentos podem ser líderes de projetos.
+            Definir o projeto como "em busca de líder" permite que talentos se candidatem
+            para liderar este projeto. Apenas talentos podem liderar projetos.
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
-          <div>
-            <label className="text-sm font-medium mb-2 block">
-              Selecionar Novo Líder
-            </label>
-            <Select value={selectedTalentId} onValueChange={setSelectedTalentId}>
-              <SelectTrigger>
-                <SelectValue placeholder="Escolha um talento..." />
-              </SelectTrigger>
-              <SelectContent>
-                {availableTalents.map((talent) => (
-                  <SelectItem key={talent._id} value={talent._id}>
-                    <div className="flex items-center gap-2">
-                      <Avatar className="h-6 w-6">
-                        <AvatarImage src={talent.avatar} />
-                        <AvatarFallback>
-                          {talent.name?.[0]?.toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <div className="font-medium">{talent.name}</div>
-                        <div className="text-xs text-gray-500">{talent.bio || 'Talento'}</div>
-                      </div>
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-            <p className="text-sm text-yellow-800">
-              <strong>Atenção:</strong> Ao delegar a liderança, você transferirá o controle total 
-              do projeto para o talento selecionado. Esta ação não pode ser desfeita.
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <p className="text-sm text-blue-800">
+              <strong>Como funciona:</strong> Após definir como "buscando líder", talentos 
+              poderão se candidatar para liderar o projeto. Você poderá revisar e aprovar 
+              as candidaturas.
             </p>
           </div>
 
@@ -166,11 +137,11 @@ export default function ProjectDelegation({
               Cancelar
             </Button>
             <Button 
-              onClick={handleDelegation}
-              disabled={isLoading || !selectedTalentId}
+              onClick={handleSetLookingForLeader}
+              disabled={isLoading}
               className="bg-blue-600 hover:bg-blue-700"
             >
-              {isLoading ? "Delegando..." : "Confirmar Delegação"}
+              {isLoading ? "Atualizando..." : "Buscar Líder"}
             </Button>
           </div>
         </div>

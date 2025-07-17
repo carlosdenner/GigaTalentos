@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 export function useUserType() {
-  const [userType, setUserType] = useState<'fan' | 'mentor' | 'talent' | null>(null);
+  const [userType, setUserType] = useState<'fan' | 'mentor' | 'talent' | 'admin' | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { data: session } = useSession();
 

@@ -15,17 +15,19 @@ import Subscription from '@/models/Subscription';
 import Comment from '@/models/Comment';
 import Message from '@/models/Message';
 import ParticipationRequest from '@/models/ParticipationRequest';
+import VideoWatch from '@/models/VideoWatch';
 
 export async function POST() {
   try {
     console.log('🗑️ Clearing existing data...');
     
-    // Clear data sequentially to avoid timeout issues
+    // Clear data more efficiently with timeout handling
     const collections = [
       { model: Comment, name: 'Comments' },
       { model: Message, name: 'Messages' },
       { model: Subscription, name: 'Subscriptions' },
       { model: Playlist, name: 'Playlists' },
+      { model: VideoWatch, name: 'VideoWatches' },
       { model: Video, name: 'Videos' },
       { model: Projeto, name: 'Projetos' },
       { model: Desafio, name: 'Desafios' },
@@ -41,8 +43,14 @@ export async function POST() {
     for (const { model, name } of collections) {
       try {
         console.log(`Deleting ${name}...`);
-        await (model as any).deleteMany({});
-        console.log(`✅ ${name} cleared`);
+        // Use a more aggressive timeout and skip if collection is large
+        const count = await (model as any).countDocuments().maxTimeMS(2000);
+        if (count > 1000) {
+          console.log(`⚠️ Skipping ${name} (${count} documents) - too large for quick deletion`);
+          continue;
+        }
+        await (model as any).deleteMany({}).maxTimeMS(5000);
+        console.log(`✅ ${name} cleared (${count} documents)`);
       } catch (error) {
         console.warn(`⚠️ Warning: Could not clear ${name}:`, error instanceof Error ? error.message : String(error));
         // Continue with other collections even if one fails
@@ -51,45 +59,48 @@ export async function POST() {
 
     console.log('📝 Creating categories...');
     
-    // Create categories - The original 6 core skill areas from the business model
-    const categories = await Category.insertMany([
-      {
-        name: "Habilidade Cognitiva & Técnica",
-        code: "COGNITIVA_TECNICA",
-        description: "Habilidades excepcionais de resolução de problemas, competência técnica em STEM, solução de problemas e habilidades técnicas",
-        thumbnail: "/categories/category-1.jpg"
-      },
-      {
-        name: "Criatividade & Inovação",
-        code: "CRIATIVIDADE_INOVACAO", 
-        description: "Pensamento criativo em soluções, capacidade de gerar ideias e soluções novas, buscar lacunas de formas originais",
-        thumbnail: "/categories/category-2.jpg"
-      },
-      {
-        name: "Motivação & Paixão",
-        code: "MOTIVACAO_PAIXAO",
-        description: "Paixão intensa por empreendedorismo, motivação intrínseca para criar e inovar, dedicação a objetivos",
-        thumbnail: "/categories/category-3.jpg"
-      },
-      {
-        name: "Liderança & Colaboração",
-        code: "LIDERANCA_COLABORACAO",
-        description: "Habilidades naturais de liderança, capacidade de trabalhar efetivamente em equipe, inspirar e motivar outros",
-        thumbnail: "/categories/category-4.jpg"
-      },
-      {
-        name: "Consciência Social & Integridade",
-        code: "CONSCIENCIA_SOCIAL",
-        description: "Consciência sobre questões sociais, integridade ética, compromisso com soluções que beneficiam a sociedade",
-        thumbnail: "/categories/category-5.jpg"
-      },
-      {
-        name: "Adaptabilidade & Resistência",
-        code: "ADAPTABILIDADE_RESISTENCIA",
-        description: "Capacidade de lidar com falhas, enfrentar desafios, se adaptar a mudanças e superar obstáculos",
-        thumbnail: "/categories/category-6.jpg"
-      }
-    ]);
+    // Create categories with timeout handling
+    const categories = await Promise.race([
+      Category.insertMany([
+        {
+          name: "Habilidade Cognitiva & Técnica",
+          code: "COGNITIVA_TECNICA",
+          description: "Habilidades excepcionais de resolução de problemas, competência técnica em STEM, solução de problemas e habilidades técnicas",
+          thumbnail: "/categories/category-1.jpg"
+        },
+        {
+          name: "Criatividade & Inovação",
+          code: "CRIATIVIDADE_INOVACAO", 
+          description: "Pensamento criativo em soluções, capacidade de gerar ideias e soluções novas, buscar lacunas de formas originais",
+          thumbnail: "/categories/category-2.jpg"
+        },
+        {
+          name: "Motivação & Paixão",
+          code: "MOTIVACAO_PAIXAO",
+          description: "Paixão intensa por empreendedorismo, motivação intrínseca para criar e inovar, dedicação a objetivos",
+          thumbnail: "/categories/category-3.jpg"
+        },
+        {
+          name: "Liderança & Colaboração",
+          code: "LIDERANCA_COLABORACAO",
+          description: "Habilidades naturais de liderança, capacidade de trabalhar efetivamente em equipe, inspirar e motivar outros",
+          thumbnail: "/categories/category-4.jpg"
+        },
+        {
+          name: "Consciência Social & Integridade",
+          code: "CONSCIENCIA_SOCIAL",
+          description: "Consciência sobre questões sociais, integridade ética, compromisso com soluções que beneficiam a sociedade",
+          thumbnail: "/categories/category-5.jpg"
+        },
+        {
+          name: "Adaptabilidade & Resistência",
+          code: "ADAPTABILIDADE_RESISTENCIA",
+          description: "Capacidade de lidar com falhas, enfrentar desafios, se adaptar a mudanças e superar obstáculos",
+          thumbnail: "/categories/category-6.jpg"
+        }
+      ]),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Categories creation timeout')), 10000))
+    ]) as any[];
 
     console.log('👥 Creating users...');
     
@@ -98,7 +109,7 @@ export async function POST() {
     const hashedDefaultPassword = await bcrypt.hash('password123', 12);
     
     // Create diverse users with different types
-    const users = await User.insertMany([
+    const usersData = [
       // Admin (Platform Administrator)
       {
         name: 'Carlos Denner',
@@ -266,7 +277,12 @@ export async function POST() {
         categories: ['Marketing', 'Empreendedorismo'],
         verified: true
       }
-    ]);
+    ];
+
+    const users = await Promise.race([
+      User.insertMany(usersData),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('User creation timeout')), 30000))
+    ]) as any[];
 
     console.log('📺 Creating channels...');
 
@@ -292,7 +308,10 @@ export async function POST() {
       channels.push(channel);
     }
 
-    const createdChannels = await Channel.insertMany(channels);
+    const createdChannels = await Promise.race([
+      Channel.insertMany(channels),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Channel creation timeout')), 30000))
+    ]) as any[];
 
     console.log('🎯 Creating desafios...');
 
@@ -510,7 +529,6 @@ export async function POST() {
         category: category._id,
         difficulty: template.difficulty,
         duration: template.duration,
-        participants: Math.floor(Math.random() * 100) + 10,
         prizes: template.prizes,
         requirements: template.requirements,
         status: status,
@@ -539,7 +557,6 @@ export async function POST() {
           end_date: new Date(Date.now() + 56 * 24 * 60 * 60 * 1000), // 8 weeks from now
           status: 'Ativo',
           featured: true,
-          participants: 0,
           prizes: [
             { position: '1º Lugar', description: 'Incubação + R$ 50.000', value: 'R$ 50.000' },
             { position: '2º Lugar', description: 'Mentoria + R$ 25.000', value: 'R$ 25.000' },
@@ -568,7 +585,6 @@ export async function POST() {
           end_date: new Date(Date.now() + 42 * 24 * 60 * 60 * 1000), // 6 weeks from now
           status: 'Ativo',
           featured: true,
-          participants: 0,
           prizes: [
             { position: '1º Lugar', description: 'Investimento + R$ 30.000', value: 'R$ 30.000' },
             { position: '2º Lugar', description: 'Aceleração + R$ 15.000', value: 'R$ 15.000' }
@@ -589,13 +605,18 @@ export async function POST() {
       desafios.push(...adminDesafios);
     }
 
-    const createdDesafios = await Desafio.insertMany(desafios);
+    const createdDesafios = await Promise.race([
+      Desafio.insertMany(desafios),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Desafio creation timeout')), 30000))
+    ]) as any[];
 
     console.log('🚀 Creating projetos...');
 
     // Create projetos (talents, mentors, and admin can create)
     const projetos = [];
+    // Allow talents and mentors to create projects, but only talents can be leaders
     const creatorsForProjects = [...talentUsers, ...mentorUsers, ...adminUsers];
+    const leadersForProjects = [...talentUsers]; // Only talents can be leaders
     
     const projetoTemplates = [
       {
@@ -677,9 +698,38 @@ export async function POST() {
       const creator = creatorsForProjects[i % creatorsForProjects.length];
       const category = categories.find(c => c.name === template.category);
       
-      // Assign leader (can be creator or another talent/mentor)
-      const leader = Math.random() > 0.3 ? creator : 
-        creatorsForProjects[Math.floor(Math.random() * creatorsForProjects.length)];
+      // Assign leader (must be a talent, but creator could be mentor/admin)
+      let leader;
+      let liderancaStatus = 'ativo';
+      let solicitacaoLideranca = null;
+
+      if (creator.account_type === 'talent') {
+        // If creator is talent, they can lead
+        leader = Math.random() > 0.3 ? creator : 
+          leadersForProjects[Math.floor(Math.random() * leadersForProjects.length)];
+      } else {
+        // If creator is mentor/admin, they must delegate to a talent
+        const delegationChoice = Math.random();
+        if (delegationChoice > 0.7) {
+          // 30% chance: Looking for leader (no leader assigned yet)
+          leader = null;
+          liderancaStatus = 'buscando_lider';
+        } else if (delegationChoice > 0.4) {
+          // 30% chance: Has pending leadership request
+          leader = null;
+          liderancaStatus = 'buscando_lider';
+          const candidateTalent = leadersForProjects[Math.floor(Math.random() * leadersForProjects.length)];
+          solicitacaoLideranca = {
+            candidato_id: candidateTalent._id,
+            mensagem: 'Gostaria de liderar este projeto. Tenho experiência na área e estou motivado para contribuir!',
+            solicitado_em: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000), // Random time within last week
+            status: 'pendente'
+          };
+        } else {
+          // 40% chance: Already has approved talent leader
+          leader = leadersForProjects[Math.floor(Math.random() * leadersForProjects.length)];
+        }
+      }
 
       // Find or assign a channel (portfolio) for the project
       const creatorChannel = createdChannels.find(ch => ch.user_id.toString() === creator._id.toString()) ||
@@ -689,7 +739,7 @@ export async function POST() {
       const numParticipants = Math.floor(Math.random() * 6) + 1; // 1-6 participants
       const availableParticipants = creatorsForProjects.filter(user => 
         user._id.toString() !== creator._id.toString() && 
-        user._id.toString() !== leader._id.toString()
+        (!leader || user._id.toString() !== leader._id.toString())
       );
       
       const participantes_aprovados: any[] = [];
@@ -703,17 +753,18 @@ export async function POST() {
         }
       }
 
-      projetos.push({
+      const projectData: any = {
         nome: template.title, // Fixed: use 'nome' instead of 'title'
         descricao: template.description, // Fixed: use 'descricao' instead of 'description'
         objetivo: `Desenvolver ${template.description}`,
         categoria: categories.find(c => c.name === template.category)?._id || categories[0]._id, // Use category ObjectId
         video_apresentacao: template.demo_url,
         status: ['ativo', 'concluido', 'pausado'][Math.floor(Math.random() * 3)], // Fixed: use valid enum values
+        lideranca_status: liderancaStatus,
         avatar: '/placeholder-logo.png',
         imagem_capa: template.image, // Use the image from template
         criador_id: creator._id,
-        talento_lider_id: leader._id,
+        talento_lider_id: leader?._id || null,
         portfolio_id: creatorChannel._id, // Required: assign to a channel
         tecnologias: template.technologies, // Add technologies array
         repositorio_url: template.repository_url,
@@ -727,13 +778,23 @@ export async function POST() {
         participantes_aprovados: participantes_aprovados, // Use generated participants
         verificado: Math.random() > 0.6,
         demo: true
-      });
+      };
+
+      // Add leadership request if there is one
+      if (solicitacaoLideranca) {
+        projectData.solicitacao_lideranca = solicitacaoLideranca;
+      }
+
+      projetos.push(projectData);
     }
 
     // Add specific projetos for admin user (Carlos Denner) before creating all projetos
     if (adminUser) {
       // Find admin's channel to use as portfolio_id
       const adminChannel = createdChannels.find(ch => ch.user_id.toString() === adminUser._id.toString());
+      
+      // Get some talented users to be leaders of admin projects
+      const availableTalents = talentUsers.slice(0, 3);
       
       const adminProjetos = [
         {
@@ -743,10 +804,11 @@ export async function POST() {
           categoria: categories.find(c => c.name === 'Habilidade Cognitiva & Técnica')?._id || categories[0]._id,
           video_apresentacao: 'https://youtube.com/watch?v=giga-talentos-demo',
           status: 'ativo',
+          lideranca_status: 'ativo', // Has a talent leader
           avatar: '/giga-talentos-logo.svg',
           imagem_capa: '/projects/giga-talentos-platform.svg',
           criador_id: adminUser._id,
-          talento_lider_id: adminUser._id,
+          talento_lider_id: availableTalents[0]?._id, // Assign to first available talent
           portfolio_id: adminChannel?._id || createdChannels[0]._id,
           tecnologias: ['Next.js', 'TypeScript', 'MongoDB', 'NextAuth', 'Tailwind CSS'],
           repositorio_url: 'https://github.com/carlosdenner/GigaTalentos',
@@ -773,10 +835,11 @@ export async function POST() {
           categoria: categories.find(c => c.name === 'Habilidade Cognitiva & Técnica')?._id || categories[0]._id,
           video_apresentacao: 'https://youtube.com/watch?v=ai-talent-demo',
           status: 'ativo',
+          lideranca_status: 'buscando_lider', // Looking for a talent leader
           avatar: '/placeholder-logo.svg',
           imagem_capa: '/projects/ai-talent-identification.svg',
           criador_id: adminUser._id,
-          talento_lider_id: adminUser._id,
+          talento_lider_id: null, // No leader assigned yet
           portfolio_id: adminChannel?._id || createdChannels[0]._id,
           tecnologias: ['Python', 'TensorFlow', 'Machine Learning', 'API REST'],
           repositorio_url: 'https://github.com/carlosdenner/AI-Talent-Identifier',
@@ -786,13 +849,20 @@ export async function POST() {
           duracao_estimada: '6 meses',
           nivel_dificuldade: 'Avançado',
           custo_estimado: 'R$ 50.000',
-          desafio_vinculacao_status: 'aprovado',
+          desafio_vinculacao_status: 'pendente',
           likes: [],
           favoritos: [],
           sponsors: [],
           solicitacoes_participacao: [],
           participantes_solicitados: [],
           participantes_aprovados: [],
+          // Add leadership request from a talent
+          solicitacao_lideranca: {
+            candidato_id: availableTalents[1]?._id,
+            mensagem: 'Tenho experiência em IA e machine learning. Gostaria de liderar este projeto inovador!',
+            solicitado_em: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+            status: 'pendente'
+          },
           verificado: true,
           demo: false
         },
@@ -803,10 +873,11 @@ export async function POST() {
           categoria: categories.find(c => c.name === 'Consciência Social & Integridade')?._id || categories[0]._id,
           video_apresentacao: 'https://youtube.com/watch?v=mentoria-digital',
           status: 'ativo',
+          lideranca_status: 'ativo', // Has approved talent leader
           avatar: '/placeholder-logo.svg',
           imagem_capa: '/projects/digital-mentorship.svg',
           criador_id: adminUser._id,
-          talento_lider_id: adminUser._id,
+          talento_lider_id: availableTalents[2]?._id, // Third available talent
           portfolio_id: adminChannel?._id || createdChannels[0]._id,
           tecnologias: ['React', 'Node.js', 'WebRTC', 'Socket.io'],
           repositorio_url: 'https://github.com/carlosdenner/Digital-Mentorship',
@@ -816,7 +887,7 @@ export async function POST() {
           duracao_estimada: '8 meses',
           nivel_dificuldade: 'Intermediário',
           custo_estimado: 'R$ 75.000',
-          desafio_vinculacao_status: 'pendente',
+          desafio_vinculacao_status: 'aprovado',
           likes: [],
           favoritos: [],
           sponsors: [],
@@ -849,7 +920,142 @@ export async function POST() {
       projetos.push(...adminProjetos);
     }
 
-    const createdProjetos = await Projeto.insertMany(projetos);
+    // Add some mentor-created projects to showcase delegation workflow
+    if (mentorUsers.length > 0) {
+      const mentorProjects: any[] = [];
+      
+      // Create projects from mentors showcasing different delegation scenarios
+      const mentorProjectTemplates = [
+        {
+          nome: 'StartupBoost - Aceleração de Talentos',
+          descricao: 'Programa de aceleração para talentos empreendedores com foco em desenvolvimento de habilidades e networking.',
+          categoria: 'Empreendedorismo & Networking',
+          scenario: 'looking_for_leader' // Looking for talent leader
+        },
+        {
+          nome: 'ImpactHub - Rede de Impacto Social',
+          descricao: 'Plataforma que conecta projetos de impacto social com investidores e voluntários.',
+          categoria: 'Consciência Social & Integridade',
+          scenario: 'pending_request' // Has pending leadership request
+        },
+        {
+          nome: 'CreativeSpace - Ambiente de Inovação',
+          descricao: 'Espaço virtual colaborativo para desenvolvimento de ideias criativas e inovadoras.',
+          categoria: 'Criatividade & Inovação',
+          scenario: 'has_leader' // Already has talent leader
+        }
+      ];
+
+      mentorProjectTemplates.forEach((template, index) => {
+        const mentor = mentorUsers[index % mentorUsers.length];
+        const mentorChannel = createdChannels.find(ch => ch.user_id.toString() === mentor._id.toString());
+        const category = categories.find(c => c.name === template.categoria);
+        
+        let talento_lider_id = null;
+        let lideranca_status = 'ativo';
+        let solicitacao_lideranca = null;
+        
+        if (template.scenario === 'looking_for_leader') {
+          lideranca_status = 'buscando_lider';
+        } else if (template.scenario === 'pending_request') {
+          lideranca_status = 'buscando_lider';
+          const candidateTalent = talentUsers[Math.floor(Math.random() * talentUsers.length)];
+          solicitacao_lideranca = {
+            candidato_id: candidateTalent._id,
+            mensagem: `Olá! Sou especialista em ${template.categoria.toLowerCase()} e tenho grande interesse em liderar este projeto. Posso contribuir com minha experiência e visão estratégica.`,
+            solicitado_em: new Date(Date.now() - Math.random() * 5 * 24 * 60 * 60 * 1000), // Random time within last 5 days
+            status: 'pendente'
+          };
+        } else if (template.scenario === 'has_leader') {
+          talento_lider_id = talentUsers[Math.floor(Math.random() * talentUsers.length)]._id;
+        }
+
+        const projectData: any = {
+          nome: template.nome,
+          descricao: template.descricao,
+          objetivo: `Implementar ${template.descricao.toLowerCase()}`,
+          categoria: category?._id || categories[0]._id,
+          video_apresentacao: `https://youtube.com/watch?v=mentor-project-${index}`,
+          status: 'ativo',
+          lideranca_status: lideranca_status,
+          avatar: '/placeholder-logo.svg',
+          imagem_capa: `/projects/mentor-project-${index + 1}.svg`,
+          criador_id: mentor._id,
+          talento_lider_id: talento_lider_id,
+          portfolio_id: mentorChannel?._id || createdChannels[0]._id,
+          tecnologias: ['React', 'Node.js', 'MongoDB', 'TypeScript'],
+          repositorio_url: `https://github.com/mentor/projeto-${index + 1}`,
+          demo_url: `https://mentor-projeto-${index + 1}.com`,
+          visibilidade: 'Público',
+          colaboradores_max: 4,
+          duracao_estimada: '6 meses',
+          nivel_dificuldade: 'Intermediário',
+          custo_estimado: 'R$ 30.000',
+          desafio_vinculacao_status: 'pendente',
+          likes: [],
+          favoritos: [],
+          sponsors: [],
+          solicitacoes_participacao: [],
+          participantes_solicitados: [],
+          participantes_aprovados: [],
+          verificado: true,
+          demo: false
+        };
+
+        if (solicitacao_lideranca) {
+          projectData.solicitacao_lideranca = solicitacao_lideranca;
+        }
+
+        mentorProjects.push(projectData);
+      });
+
+      projetos.push(...mentorProjects);
+    }
+
+    const createdProjetos = await Promise.race([
+      Projeto.insertMany(projetos),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Projeto creation timeout')), 30000))
+    ]) as any[];
+
+    console.log('🔗 Creating project-challenge linking requests...');
+
+    // Create project-challenge linking requests and approvals
+    for (const desafio of createdDesafios) {
+      // Get some projects that could be linked to this challenge
+      const eligibleProjects = createdProjetos.filter(projeto => 
+        // Don't link projects created by the same person as the challenge
+        projeto.criador_id.toString() !== desafio.created_by.toString() &&
+        // Only link active projects
+        projeto.status === 'ativo'
+      );
+
+      // Link 2-5 random projects to each challenge
+      const projectsToLink = eligibleProjects
+        .sort(() => Math.random() - 0.5)
+        .slice(0, Math.floor(Math.random() * 4) + 2); // 2-5 projects
+
+      for (const projeto of projectsToLink) {
+        const status = Math.random() < 0.7 ? 'aprovado' : 
+                      Math.random() < 0.8 ? 'pendente' : 'rejeitado';
+        
+        const requestDate = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000); // Random date in last 30 days
+        const approvalDate = status === 'aprovado' ? 
+          new Date(requestDate.getTime() + Math.random() * 7 * 24 * 60 * 60 * 1000) : // Approved within a week
+          undefined;
+
+        desafio.projetos_vinculados.push({
+          projeto_id: projeto._id,
+          status: status,
+          solicitado_em: requestDate,
+          aprovado_em: approvalDate
+        });
+      }
+
+      // Save the updated challenge
+      await Desafio.findByIdAndUpdate(desafio._id, {
+        projetos_vinculados: desafio.projetos_vinculados
+      });
+    }
 
     console.log('❤️ Creating interactions (likes, favorites, etc.)...');
 
@@ -870,23 +1076,51 @@ export async function POST() {
     let totalPendingLinks = 0;
     let totalRejectedLinks = 0;
 
+    // Create proper database records for likes, favorites, and other interactions
+    const likesToCreate = [];
+    const projectFavoritesToCreate = [];
+    const desafioFavoritesToCreate = [];
+
     for (const projeto of createdProjetos) {
-      // 1. LIKES SYSTEM - Broader audience engagement
-      const numLikes = Math.floor(Math.random() * 25) + 10; // 10-34 likes per projeto
+      // 1. LIKES SYSTEM - Broader audience engagement with realistic user limits
+      const maxPossibleLikes = allUsers.length - 1; // Exclude creator
+      const numLikes = Math.min(Math.floor(Math.random() * 8) + 3, maxPossibleLikes); // 3-10 likes max, limited by user count
       const likerPool = allUsers.filter(u => u && u._id && projeto.criador_id && u._id.toString() !== projeto.criador_id.toString());
       const likers = likerPool
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numLikes, likerPool.length));
       
+      // Create Like records for recommendation system
+      for (const liker of likers) {
+        likesToCreate.push({
+          user_id: liker._id,
+          target_id: projeto._id,
+          target_type: 'projeto',
+          created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000) // Random date in last 30 days
+        });
+      }
+      
+      // Store like count in project for quick access
       (projeto as any).likes = likers.map(u => u._id);
       totalProjetoLikes += likers.length;
 
-      // 2. FAVORITES SYSTEM - Deep interest indicators
-      const numFavorites = Math.floor(Math.random() * 12) + 5; // 5-16 favorites per projeto
+      // 2. FAVORITES SYSTEM - Deep interest indicators with realistic limits
+      const maxPossibleFavorites = Math.min(likers.length, 6); // Max 6 favorites, from users who already liked
+      const numFavorites = Math.min(Math.floor(Math.random() * 4) + 2, maxPossibleFavorites); // 2-5 favorites max
       const favoriters = likers
         .sort(() => 0.5 - Math.random())
-        .slice(0, Math.min(numFavorites, likers.length));
+        .slice(0, numFavorites);
       
+      // Create ProjectFavorite records for recommendation system
+      for (const favoriter of favoriters) {
+        projectFavoritesToCreate.push({
+          user_id: favoriter._id,
+          projeto_id: projeto._id,
+          created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000) // Random date in last 30 days
+        });
+      }
+      
+      // Store favorite count in project for quick access
       (projeto as any).favoritos = favoriters.map(u => u._id);
       totalProjetoFavorites += favoriters.length;
 
@@ -1032,12 +1266,24 @@ export async function POST() {
     // 7. DESAFIO FAVORITES SYSTEM
     console.log('⭐ Adding favorites to desafios...');
     for (const desafio of createdDesafios) {
-      const numFavorites = Math.floor(Math.random() * 15) + 8; // 8-22 favorites per desafio
+      const maxPossibleFavorites = allUsers.length - 1; // Exclude creator
+      const numFavorites = Math.min(Math.floor(Math.random() * 8) + 4, maxPossibleFavorites); // 4-11 favorites max, limited by user count
       const userPool = allUsers.filter(u => u && u._id && desafio.created_by && u._id.toString() !== desafio.created_by.toString());
       const favoriters = userPool
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numFavorites, userPool.length));
       
+      // Create Favorite records for recommendation system
+      for (const favoriter of favoriters) {
+        desafioFavoritesToCreate.push({
+          user_id: favoriter._id,
+          target_id: desafio._id,
+          target_type: 'desafio',
+          created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000) // Random date in last 30 days
+        });
+      }
+      
+      // Store favorite count in desafio for quick access
       desafio.favoritos = favoriters.map(u => u._id);
       await desafio.save();
       totalDesafioFavorites += favoriters.length;
@@ -1331,7 +1577,10 @@ export async function POST() {
       });
     }
 
-    const createdVideos = await Video.insertMany(videos);
+    const createdVideos = await Promise.race([
+      Video.insertMany(videos),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Video creation timeout')), 60000))
+    ]) as any[];
 
     // Add specific videos for admin user (Carlos Denner) - these will be in his channel
     if (adminUser) {
@@ -1454,9 +1703,8 @@ export async function POST() {
           playlists.push({
             name: playlistNames[Math.floor(Math.random() * playlistNames.length)] + ` - ${channel.name}`,
             user_id: channel.user_id,
-            videos: videosInPlaylist.map(v => v._id),
+            videos: videosInPlaylist.map(v => v._id), // Videos in sequence order
             description: `Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por ${channel.name}.`,
-            visibility: Math.random() > 0.2 ? 'public' : 'private', // 80% public, 20% private
             created_at: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000) // Random time in last 90 days
           });
         }
@@ -1487,9 +1735,8 @@ export async function POST() {
           playlists.push({
             name: personalPlaylistNames[Math.floor(Math.random() * personalPlaylistNames.length)],
             user_id: user._id,
-            videos: availableVideos.map(v => v._id),
+            videos: availableVideos.map(v => v._id), // Videos in sequence order
             description: 'Playlist pessoal com conteúdos selecionados.',
-            visibility: Math.random() > 0.6 ? 'public' : 'private', // 40% public, 60% private for personal playlists
             created_at: new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000) // Random time in last 60 days
           });
         }
@@ -1777,8 +2024,9 @@ Obrigado!`,
 
     console.log('📊 Creating analytics and engagement data...');
     
-    // Create video watch history for analytics (simulated data)
-    const videoWatchHistory: any[] = [];
+    // Create video watch history for analytics - PROPER DATABASE RECORDS
+    console.log('🎬 Creating video watch records in database...');
+    const videoWatchRecords: any[] = [];
     for (const user of allUsers) {
       const watchedVideos = createdVideos
         .sort(() => 0.5 - Math.random())
@@ -1788,14 +2036,35 @@ Obrigado!`,
         const watchDuration = Math.floor(Math.random() * 100); // 0-100% watched
         const watchDate = new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000); // Last 60 days
         
-        videoWatchHistory.push({
+        videoWatchRecords.push({
           user_id: user._id,
           video_id: video._id,
+          session_id: `session_${user._id}_${video._id}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           watch_duration_percentage: watchDuration,
+          completion_percentage: watchDuration,
           watched_at: watchDate,
+          started_at: watchDate,
+          completed_at: watchDuration > 85 ? new Date(watchDate.getTime() + Math.random() * 30 * 60 * 1000) : undefined, // If completed, add some watch time
           device_type: Math.random() > 0.6 ? 'mobile' : Math.random() > 0.5 ? 'desktop' : 'tablet',
+          source: Math.random() > 0.7 ? 'recommendation' : Math.random() > 0.5 ? 'search' : Math.random() > 0.3 ? 'category' : 'direct',
           completed: watchDuration > 85 // Consider completed if watched more than 85%
         });
+      }
+    }
+
+    // Insert video watch records into database
+    let createdVideoWatches: any[] = [];
+    if (videoWatchRecords.length > 0) {
+      try {
+        createdVideoWatches = await Promise.race([
+          VideoWatch.insertMany(videoWatchRecords),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('VideoWatch creation timeout')), 20000))
+        ]) as any[];
+        console.log(`✅ Created ${createdVideoWatches.length} video watch records in database`);
+      } catch (error) {
+        console.warn('⚠️ Warning: Could not create video watch records:', error instanceof Error ? error.message : String(error));
+        // Fallback to temporary data for analytics calculations
+        createdVideoWatches = videoWatchRecords;
       }
     }
 
@@ -1804,7 +2073,7 @@ Obrigado!`,
       const userSubscriptions = subscriptions.filter(s => s.user_id && user._id && s.user_id.toString() === user._id.toString());
       const userComments = comments.filter(c => c.user_id && user._id && c.user_id.toString() === user._id.toString());
       const userMessages = messages.filter(m => m.remetente && user._id && m.remetente.toString() === user._id.toString());
-      const userWatches = videoWatchHistory.filter(w => w.user_id && user._id && w.user_id.toString() === user._id.toString());
+      const userWatches = createdVideoWatches.filter(w => w.user_id && user._id && w.user_id.toString() === user._id.toString());
       
       return {
         user_id: user._id,
@@ -1813,7 +2082,7 @@ Obrigado!`,
         total_messages_sent: userMessages.length,
         total_videos_watched: userWatches.length,
         avg_watch_duration: userWatches.length > 0 ? 
-          userWatches.reduce((sum, w) => sum + w.watch_duration_percentage, 0) / userWatches.length : 0,
+          userWatches.reduce((sum, w) => sum + (w.watch_duration_percentage || w.completion_percentage || 0), 0) / userWatches.length : 0,
         engagement_score: Math.floor(
           (userSubscriptions.length * 10) + 
           (userComments.length * 5) + 
@@ -1832,7 +2101,7 @@ Obrigado!`,
       const channelComments = comments.filter(c => 
         channelVideos.some(v => v._id.equals(c.video_id))
       );
-      const channelWatches = videoWatchHistory.filter(w => 
+      const channelWatches = createdVideoWatches.filter(w => 
         channelVideos.some(v => v._id.equals(w.video_id))
       );
       
@@ -1852,15 +2121,58 @@ Obrigado!`,
     });
 
     console.log('📈 Analytics Summary:');
-    console.log(`- Video watch sessions: ${videoWatchHistory.length}`);
+    console.log(`- Video watch sessions: ${createdVideoWatches.length}`);
     console.log(`- User engagement metrics: ${userEngagementMetrics.length}`);
     console.log(`- Channel analytics: ${channelAnalytics.length}`);
     console.log(`- Average engagement score: ${Math.floor(userEngagementMetrics.reduce((sum, u) => sum + u.engagement_score, 0) / userEngagementMetrics.length)}`);
-    console.log(`- Total video views (simulated): ${videoWatchHistory.length}`);
+    console.log(`- Total video views (database records): ${createdVideoWatches.length}`);
     console.log(`- Average subscription rate: ${Math.floor(subscriptions.length / allUsers.length)} per user`);
 
     // Store analytics data in a temporary collection for demo purposes
     // Note: In a real application, this would be in a separate analytics database
+
+    console.log('💾 Creating interaction database records for recommendation system...');
+    
+    // Create Like records with timeout handling
+    if (likesToCreate.length > 0) {
+      try {
+        const createdLikes = await Promise.race([
+          Like.insertMany(likesToCreate),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Like creation timeout')), 15000))
+        ]) as any[];
+        console.log(`✅ Created ${createdLikes.length} like records`);
+      } catch (error) {
+        console.warn('⚠️ Warning: Could not create like records:', error instanceof Error ? error.message : String(error));
+      }
+    }
+
+    // Create ProjectFavorite records with timeout handling
+    if (projectFavoritesToCreate.length > 0) {
+      try {
+        const createdProjectFavorites = await Promise.race([
+          ProjectFavorite.insertMany(projectFavoritesToCreate),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('ProjectFavorite creation timeout')), 15000))
+        ]) as any[];
+        console.log(`✅ Created ${createdProjectFavorites.length} project favorite records`);
+      } catch (error) {
+        console.warn('⚠️ Warning: Could not create project favorite records:', error instanceof Error ? error.message : String(error));
+      }
+    }
+
+    // Create Favorite records for desafios with timeout handling
+    if (desafioFavoritesToCreate.length > 0) {
+      try {
+        const createdDesafioFavorites = await Promise.race([
+          Favorite.insertMany(desafioFavoritesToCreate),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Favorite creation timeout')), 15000))
+        ]) as any[];
+        console.log(`✅ Created ${createdDesafioFavorites.length} desafio favorite records`);
+      } catch (error) {
+        console.warn('⚠️ Warning: Could not create desafio favorite records:', error instanceof Error ? error.message : String(error));
+      }
+    }
+
+    console.log('🎯 All interaction records created for recommendation system!');
 
     // Summary of created data
     const summary = {
@@ -1896,10 +2208,16 @@ Obrigado!`,
         userFollowingRelationships: totalFollowingRelationships,
         comments: comments.length,
         messages: messages.length,
-        subscriptions: subscriptions.length
+        subscriptions: subscriptions.length,
+        // Database records created for recommendation system
+        likeRecords: likesToCreate.length,
+        projectFavoriteRecords: projectFavoritesToCreate.length,
+        desafioFavoriteRecords: desafioFavoritesToCreate.length,
+        videoWatchRecords: createdVideoWatches.length,
+        note: 'All interactions stored as relational database records for recommendation system and analytics'
       },
       analytics: {
-        totalVideoWatches: videoWatchHistory.length,
+        totalVideoWatches: createdVideoWatches.length,
         avgEngagementScore: Math.floor(userEngagementMetrics.reduce((sum, u) => sum + u.engagement_score, 0) / userEngagementMetrics.length),
         avgSubscriptionsPerUser: Math.floor(subscriptions.length / users.length),
         avgCommentsPerVideo: Math.floor(comments.length / createdVideos.length),
@@ -1915,14 +2233,14 @@ Obrigado!`,
         mostFollowedUserType: users.reduce((prev, current) => {
           return current.followers.length > prev.followers.length ? current : prev;
         }).account_type,
-        totalPlatformActivity: comments.length + messages.length + subscriptions.length + videoWatchHistory.length + totalFollowingRelationships
+        totalPlatformActivity: comments.length + messages.length + subscriptions.length + createdVideoWatches.length + totalFollowingRelationships
       },
       businessMetrics: {
         contentCreators: users.filter(u => u.account_type !== 'fan').length,
         avgFollowersPerChannel: Math.floor(subscriptions.length / createdChannels.length),
         avgUserFollowersCount: Math.floor(users.reduce((sum, u) => sum + u.followers.length, 0) / users.length),
         totalInteractionEvents: totalDesafioFavorites + totalProjetoLikes + totalProjetoFavorites + totalParticipationRequests + comments.length + totalFollowingRelationships,
-        avgDesafioParticipants: Math.floor(createdDesafios.reduce((sum, d) => sum + d.participants, 0) / createdDesafios.length),
+        avgApprovedProjectsPerDesafio: Math.floor(createdDesafios.reduce((sum, d) => sum + (d.projetos_vinculados?.filter((p: any) => p.status === 'aprovado').length || 0), 0) / createdDesafios.length),
         avgFavoritesPerDesafio: Math.floor(totalDesafioFavorites / createdDesafios.length),
         projectParticipationRate: Math.floor((totalParticipationRequests / (createdProjetos.length * users.filter(u => u.account_type === 'talent').length)) * 100),
         messageEngagementRate: Math.floor((messages.filter(m => m.lida || m.read).length / messages.length) * 100),

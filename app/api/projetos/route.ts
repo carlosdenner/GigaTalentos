@@ -92,17 +92,34 @@ export async function POST(request: Request) {
       );
     }
 
-    // Criar novo projeto
-    const projeto = await Projeto.create({
+    // Criar novo projeto com lógica de liderança
+    let projetoCreateData: any = {
       ...projetoData,
-      talento_lider_id: session.user.id,
-      criador_id: session.user.id, // The creator is the current user
+      criador_id: session.user.id,
       seguidores: 0,
-      status: 'ativo',
       favoritos: [],
       participantes_solicitados: [],
       participantes_aprovados: []
-    });
+    };
+
+    // Definir liderança baseado no tipo de conta
+    if (user.account_type === 'talent') {
+      // Talents can directly lead projects
+      projetoCreateData.talento_lider_id = session.user.id;
+      projetoCreateData.lideranca_status = 'ativo';
+      projetoCreateData.status = 'ativo';
+    } else if (user.account_type === 'mentor') {
+      // Mentors create projects but need to delegate leadership
+      projetoCreateData.talento_lider_id = null;
+      projetoCreateData.lideranca_status = 'procurando_lider';
+      projetoCreateData.status = 'pendente_lideranca';
+      projetoCreateData.solicitacao_lideranca = {
+        status: 'aberta',
+        criado_em: new Date()
+      };
+    }
+
+    const projeto = await Projeto.create(projetoCreateData);
 
     const populatedProjeto = await Projeto.findById(projeto._id)
       .populate('talento_lider_id', 'name avatar')

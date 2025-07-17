@@ -10,7 +10,8 @@ async function getPlaylist() {
     // For now, return sample videos from our MongoDB API
     const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
     const response = await fetch(`${baseUrl}/api/videos?featured=true&limit=10`, {
-      cache: 'no-store'
+      cache: 'force-cache',
+      next: { revalidate: 3600 } // Revalidate every hour
     });
     
     if (!response.ok) {

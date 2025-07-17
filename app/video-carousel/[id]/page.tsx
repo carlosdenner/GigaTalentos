@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -61,6 +61,14 @@ interface WatchSession {
 }
 
 export default function VideoCarouselPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VideoCarouselComponent />
+    </Suspense>
+  );
+}
+
+function VideoCarouselComponent() {
   const params = useParams()
   const searchParams = useSearchParams()
   const router = useRouter()

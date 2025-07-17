@@ -30,7 +30,7 @@ interface Desafio {
   };
   difficulty: string;
   duration: string;
-  participants: number;
+  approvedProjects: number; // Number of approved projects
   prizes: Prize[];
   status: string;
   featured: boolean;
@@ -402,7 +402,7 @@ export default function DesafiosPage() {
                       <div className="flex items-center justify-between text-sm">
                         <div className="flex items-center gap-1 text-gray-400">
                           <Users className="h-4 w-4" />
-                          <span>{desafio.participants} participantes</span>
+                          <span>{desafio.approvedProjects || 0} projetos aprovados</span>
                         </div>
                         <div className="flex items-center gap-1 text-gray-400">
                           <Calendar className="h-4 w-4" />
@@ -462,7 +462,7 @@ export default function DesafiosPage() {
       )}
 
       {/* Call to Action */}
-      {userType === 'mentor' && (
+      {(userType === 'mentor' || userType === 'admin') && (
         <div className="text-center space-y-4 py-8">
           <h2 className="text-2xl font-bold text-white">Pronto para o Próximo Nível?</h2>
           <p className="text-gray-400">

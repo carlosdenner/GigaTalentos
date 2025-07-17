@@ -40,8 +40,12 @@ export async function GET(
     // Count favorites
     const favoritesCount = typedDesafio.favoritos ? typedDesafio.favoritos.length : 0
 
+    // Calculate actual projects linked and approved for this challenge
+    const approvedProjects = (typedDesafio.projetos_vinculados || []).filter((p: any) => p.status === 'aprovado').length;
+
     const desafioWithStats = {
       ...typedDesafio,
+      approvedProjects, // New field for approved projects count
       daysRemaining,
       formattedPrizes,
       favoritesCount
@@ -84,7 +88,7 @@ export async function DELETE(
     }
 
     // Check if user is the creator of the desafio
-    if (desafio.created_by.toString() !== session.user.id) {
+    if (desafio.created_by.toString() !== session.user.id.toString()) {
       return NextResponse.json(
         { error: "Apenas o criador do desafio pode deletá-lo" },
         { status: 403 }
@@ -133,7 +137,7 @@ export async function PUT(
     }
 
     // Check if user is the creator of the desafio
-    if (desafio.created_by.toString() !== session.user.id) {
+    if (desafio.created_by.toString() !== session.user.id.toString()) {
       return NextResponse.json(
         { error: "Apenas o criador do desafio pode editá-lo" },
         { status: 403 }
@@ -173,8 +177,12 @@ export async function PUT(
 
     const favoritesCount = typedUpdatedDesafio.favoritos ? typedUpdatedDesafio.favoritos.length : 0
 
+    // Calculate actual projects linked and approved for this challenge
+    const approvedProjects = (typedUpdatedDesafio.projetos_vinculados || []).filter((p: any) => p.status === 'aprovado').length;
+
     const desafioWithStats = {
       ...typedUpdatedDesafio,
+      approvedProjects, // New field for approved projects count
       daysRemaining,
       formattedPrizes,
       favoritesCount

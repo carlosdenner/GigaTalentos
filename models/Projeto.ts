@@ -17,8 +17,15 @@ const ProjetoSchema = new mongoose.Schema({
   tecnologias: [{ type: String }], // Array of technologies used in the project
   repositorio_url: { type: String }, // GitHub repository URL
   demo_url: { type: String }, // Live demo URL
-  talento_lider_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  talento_lider_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Current project leader (must be talent)
   criador_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Quem criou (pode ser mentor ou talent)
+  lideranca_status: { type: String, enum: ['ativo', 'buscando_lider', 'delegacao_pendente'], default: 'ativo' }, // Status da liderança
+  solicitacao_lideranca: {
+    candidato_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Talent candidato à liderança
+    mensagem: { type: String }, // Mensagem do candidato
+    solicitado_em: { type: Date },
+    status: { type: String, enum: ['pendente', 'aprovado', 'rejeitado'], default: 'pendente' }
+  },
   portfolio_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel', required: true }, // Projeto pertence a um Portfólio
   desafio_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Desafio' }, // Vinculação opcional com Desafio
   desafio_vinculacao_status: { type: String, enum: ['pendente', 'aprovado', 'rejeitado'], default: 'pendente' }, // Status da vinculação ao desafio

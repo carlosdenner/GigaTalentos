@@ -29,6 +29,7 @@ interface Projeto {
     name: string;
   } | string; // Support both populated and unpopulated formats
   status: 'ativo' | 'concluido' | 'pausado';
+  lideranca_status: 'ativo' | 'buscando_lider' | 'delegacao_pendente';
   tecnologias?: string[];
   talento_lider_id?: {
     _id: string;
@@ -584,9 +585,10 @@ export default function ProjetosPage() {
                     (!projeto.talento_lider_id || projeto.talento_lider_id._id === projeto.criador_id._id) && (
                     <ProjectDelegation
                       projectId={projeto._id}
-                      currentLeaderId={projeto.talento_lider_id?._id || ''}
+                      currentUserId={session.user.id}
                       isProjectCreator={true}
-                      participants={projeto.participantes_aprovados || []}
+                      hasLeader={!!projeto.talento_lider_id}
+                      liderancaStatus={projeto.lideranca_status}
                       onDelegationSuccess={() => {
                         fetchProjetos(); // Refresh projects after delegation
                       }}

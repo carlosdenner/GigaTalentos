@@ -37,9 +37,9 @@ export default function CreateChallengePage() {
   const [newObjective, setNewObjective] = useState("")
   const [newRequirement, setNewRequirement] = useState("")
 
-  // Redirect if not mentor
+  // Redirect if not mentor or admin
   useEffect(() => {
-    if (!userTypeLoading && userType !== 'mentor') {
+    if (!userTypeLoading && !['mentor', 'admin'].includes(userType || '')) {
       router.push('/desafios');
     }
   }, [userType, userTypeLoading, router]);

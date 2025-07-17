@@ -23,10 +23,7 @@ const DesafioSchema = new mongoose.Schema({
     type: String, // e.g., "2 semanas", "1 mês"
     required: true,
   },
-  participants: {
-    type: Number,
-    default: 0,
-  },
+  // Removed static participants field - will be calculated dynamically from projetos_vinculados
   prizes: [{
     position: String, // "1º Lugar", "2º Lugar", etc.
     description: String,

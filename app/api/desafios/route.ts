@@ -34,8 +34,8 @@ export async function GET(request: Request) {
     let sortObject: any = {};
     switch (sortBy) {
       case 'popularity':
-        // Sort by participants (popularity), then featured status
-        sortObject = { participants: -1, featured: -1, created_at: -1 };
+        // Sort by featured status first, then creation date (will be re-sorted after calculating approved projects)
+        sortObject = { featured: -1, created_at: -1 };
         break;
       case 'newest':
         sortObject = { created_at: -1 };
@@ -44,11 +44,11 @@ export async function GET(request: Request) {
         sortObject = { end_date: 1 }; // Earliest deadline first
         break;
       case 'prize':
-        // Sort by featured first (usually higher prizes), then participants
-        sortObject = { featured: -1, participants: -1 };
+        // Sort by featured first, then creation date
+        sortObject = { featured: -1, created_at: -1 };
         break;
       default:
-        sortObject = { participants: -1, featured: -1, created_at: -1 };
+        sortObject = { featured: -1, created_at: -1 };
     }
 
     const desafios = await Desafio.find(filter)
@@ -60,13 +60,38 @@ export async function GET(request: Request) {
       .exec();
 
     // Add popularity scoring for consistent ranking
-    const desafiosWithScores = desafios.map(desafio => ({
-      ...desafio,
-      popularityScore: calculateDesafioPopularity(desafio),
-      daysRemaining: calculateDaysRemaining(desafio.end_date),
-      formattedPrizes: formatPrizes(desafio.prizes),
-      favoritesCount: desafio.favoritos ? desafio.favoritos.length : 0
-    }));
+    const desafiosWithScores = desafios.map(desafio => {
+      // Type assertion for the desafio object
+      const typedDesafio = desafio as any;
+      
+      // Calculate actual projects linked and approved for this challenge
+      const approvedProjects = (typedDesafio.projetos_vinculados || []).filter((p: any) => p.status === 'aprovado').length;
+      
+      return {
+        ...typedDesafio,
+        approvedProjects, // New field for approved projects count
+        popularityScore: calculateDesafioPopularity({...typedDesafio, participants: approvedProjects}),
+        daysRemaining: calculateDaysRemaining(typedDesafio.end_date),
+        formattedPrizes: formatPrizes(typedDesafio.prizes),
+        favoritesCount: typedDesafio.favoritos ? typedDesafio.favoritos.length : 0
+      };
+    });
+
+    // Apply final sorting based on calculated values
+    if (sortBy === 'popularity') {
+      desafiosWithScores.sort((a, b) => {
+        // Sort by approved projects count (popularity), then featured status, then creation date
+        if (b.approvedProjects !== a.approvedProjects) return b.approvedProjects - a.approvedProjects;
+        if ((b as any).featured !== (a as any).featured) return (b as any).featured ? 1 : -1;
+        return new Date((b as any).created_at).getTime() - new Date((a as any).created_at).getTime();
+      });
+    } else if (sortBy === 'prize') {
+      desafiosWithScores.sort((a, b) => {
+        // Sort by featured first, then approved projects
+        if ((b as any).featured !== (a as any).featured) return (b as any).featured ? 1 : -1;
+        return b.approvedProjects - a.approvedProjects;
+      });
+    }
 
     return NextResponse.json({
       data: desafiosWithScores,
@@ -163,11 +188,11 @@ export async function POST(request: Request) {
 
     await connectDB();
 
-    // Check if user is a mentor
+    // Check if user is a mentor or admin
     const user = await User.findById(session.user.id);
-    if (!user || user.account_type !== 'mentor') {
+    if (!user || !['mentor', 'admin'].includes(user.account_type)) {
       return NextResponse.json(
-        { error: "Apenas mentores podem criar desafios" },
+        { error: "Apenas mentores e administradores podem criar desafios" },
         { status: 403 }
       );
     }

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useUserType } from "@/hooks/useUserType";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,8 +13,9 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Plus, X } from "lucide-react";
 
-export default function CreateProjectPage() {
+function CreateProjectForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { data: session } = useSession();
   const { userType, isLoading: userTypeLoading } = useUserType();
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +66,20 @@ export default function CreateProjectPage() {
   useEffect(() => {
     fetchPortfoliosAndChallenges();
   }, [session]);
+
+  // Handle URL parameters for desafio pre-selection
+  useEffect(() => {
+    const desafioId = searchParams.get('desafio');
+    const desafioTitle = searchParams.get('title');
+    
+    if (desafioId) {
+      setFormData(prev => ({ 
+        ...prev, 
+        desafio_id: desafioId,
+        nome: desafioTitle ? `Projeto para: ${decodeURIComponent(desafioTitle)}` : prev.nome
+      }));
+    }
+  }, [searchParams]);
 
   const fetchPortfoliosAndChallenges = async () => {
     try {
@@ -348,5 +363,13 @@ export default function CreateProjectPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function CreateProjectPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateProjectForm />
+    </Suspense>
   );
 }
