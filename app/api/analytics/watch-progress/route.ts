@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import connectDB from '@/lib/mongodb';
 import { VideoWatch } from '@/models';
 
@@ -69,7 +69,8 @@ export async function POST(request: NextRequest) {
       watchRecord.replay_count = replay_count || watchRecord.replay_count;
       
       if (speed_changes) {
-        watchRecord.speed_changes = [...(watchRecord.speed_changes || []), ...speed_changes];
+        const currentSpeedChanges = watchRecord.speed_changes || [];
+        watchRecord.speed_changes.push(...speed_changes);
       }
       
       watchRecord.updated_at = new Date();
@@ -115,7 +116,7 @@ export async function POST(request: NextRequest) {
       watchQuality = 'poor';
     }
 
-    watchRecord.watch_quality = watchQuality;
+    watchRecord.watch_quality = watchQuality as 'poor' | 'average' | 'good' | 'excellent';
     await watchRecord.save();
 
     console.log(`📹 Updated watch progress: ${watch_duration}s for video ${video_id} (${completion_percentage}%)`);

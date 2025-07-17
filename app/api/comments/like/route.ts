@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import connectDB from '@/lib/mongodb';
 import { Comment, UserInteraction } from '@/models';
+import mongoose from 'mongoose';
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,11 +36,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already liked this comment
-    const hasLiked = comment.likes.includes(user_id);
+    const hasLiked = comment.likes.some((id) => id.toString() === user_id);
 
     if (hasLiked) {
       // Remove like
-      comment.likes = comment.likes.filter((id: string) => id.toString() !== user_id);
+      comment.likes = comment.likes.filter((id) => id.toString() !== user_id);
       await comment.save();
 
       // Track unlike interaction
@@ -59,7 +60,7 @@ export async function POST(request: NextRequest) {
       });
     } else {
       // Add like
-      comment.likes.push(user_id);
+      comment.likes.push(new mongoose.Types.ObjectId(user_id));
       await comment.save();
 
       // Track like interaction

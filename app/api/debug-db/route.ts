@@ -33,7 +33,7 @@ export async function GET() {
   } catch (error) {
     console.error('Database debug error:', error);
     return NextResponse.json({
-      error: error.message,
+      error: error instanceof Error ? error.message : 'Unknown error',
       database_status: 'error'
     }, { status: 500 });
   }

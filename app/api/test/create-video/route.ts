@@ -70,7 +70,7 @@ export async function POST() {
   } catch (error) {
     console.error('Error creating test video:', error);
     return NextResponse.json(
-      { error: `Erro ao criar vídeo de teste: ${error.message}` },
+      { error: `Erro ao criar vídeo de teste: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }

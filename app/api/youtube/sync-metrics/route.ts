@@ -125,7 +125,7 @@ export async function POST() {
             id: video._id,
             youtube_id: video.youtube_id,
             title: video.title,
-            error: error.message,
+            error: error instanceof Error ? error.message : 'Unknown error',
             updated: false
           };
         }
