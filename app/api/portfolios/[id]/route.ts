@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import connectDB from "@/lib/mongodb";
 import Channel from "@/models/Channel"; // Portfolio usa o modelo Channel
 import Projeto from "@/models/Projeto";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export async function GET(
   request: Request,

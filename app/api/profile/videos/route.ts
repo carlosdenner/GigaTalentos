@@ -4,7 +4,7 @@ import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import Channel from "@/models/Channel";
 import Video from "@/models/Video";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export async function GET(request: Request) {
   try {
