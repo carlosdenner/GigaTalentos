@@ -11,12 +11,15 @@
 | **👥 Usuários** | ✅ **FINALIZADO** | MongoDB via `/api/users` | **12 personas completas** |
 | **📹 Vídeos** | ✅ **FINALIZADO** | MongoDB via `/api/videos` | **7 vídeos YouTube reais** |
 | **📝 Categorias** | ✅ **FINALIZADO** | MongoDB via `/api/categories` | **6 dimensões científicas** |
-| **❤️ Favoritos** | ✅ **FINALIZADO** | MongoDB (embedded) | **200+ favoritos totais** |
-| **👍 Likes** | ✅ **FINALIZADO** | MongoDB (embedded) | **150+ likes projetos** |
+| **❤️ Favoritos** | ✅ **FINALIZADO** | MongoDB (relational records) | **175+ favoritos totais** |
+| **👍 Likes** | ✅ **FINALIZADO** | MongoDB (relational records) | **90+ likes projetos** |
 | **🤝 Participações** | ✅ **FINALIZADO** | MongoDB + API dedicada | **100+ solicitações** |
 | **👑 Delegação** | ✅ **FINALIZADO** | API `/api/projetos/[id]/delegate` | **Sistema completo** |
-| **⭐ Mentoria** | ✅ **FINALIZADO** | API `/api/mentorship-requests` | **Sistema de messages** |
-| **📋 Playlists** | ✅ **FINALIZADO** | MongoDB via `/api/playlists` | **50+ playlists curadas** |
+| **📊 Interações** | ✅ **FINALIZADO** | MongoDB (relational records) | **493+ interações totais** |
+| **📹 Visualizações** | ✅ **FINALIZADO** | MongoDB (VideoWatch model) | **117+ view records** |
+| **💬 Comentários** | ✅ **FINALIZADO** | MongoDB (Comment model) | **141+ comentários** |
+| **📩 Mensagens** | ✅ **FINALIZADO** | MongoDB (Message model) | **40+ mensagens** |
+| **� Seguindo** | ✅ **FINALIZADO** | MongoDB (User following) | **79+ subscriptions** |
 
 ---
 

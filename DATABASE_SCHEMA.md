@@ -350,3 +350,56 @@ When adapting this schema:
 - **Internationalization**: Currently English, ready for Portuguese localization
 
 This schema provides a solid foundation that can be adapted to various use cases while maintaining the core social platform functionality.
+
+## 📊 **Interaction Models - Production Ready**
+
+### ✅ **Like Model (`models/Like.ts`)**
+```typescript
+{
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  target_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+  target_type: { type: String, enum: ['projeto', 'desafio', 'video'], required: true },
+  created_at: { type: Date, default: Date.now }
+}
+```
+
+### ✅ **Favorite Models (Specialized)**
+```typescript
+// ProjectFavorite.ts
+{
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  projeto_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Projeto', required: true },
+  created_at: { type: Date, default: Date.now }
+}
+
+// Favorite.ts (Generic - for videos and desafios)
+{
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  target_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+  target_type: { type: String, enum: ['desafio', 'video'], required: true },
+  video_id?: { type: mongoose.Schema.Types.ObjectId, ref: 'Video' }, // For videos
+  created_at: { type: Date, default: Date.now }
+}
+```
+
+### ✅ **VideoWatch Model (`models/VideoWatch.ts`)**
+```typescript
+{
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  video_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Video', required: true },
+  watched_at: { type: Date, default: Date.now },
+  watch_duration: { type: Number }, // seconds watched
+  completed: { type: Boolean, default: false }
+}
+```
+
+### ✅ **Subscription Model (`models/Subscription.ts`)**
+```typescript
+{
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  channel_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel', required: true },
+  subscribed_at: { type: Date, default: Date.now }
+}
+```
+
+---
