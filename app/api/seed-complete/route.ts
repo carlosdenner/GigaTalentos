@@ -1700,11 +1700,23 @@ export async function POST() {
             .sort(() => 0.5 - Math.random())
             .slice(0, Math.floor(Math.random() * 6) + 2); // 2-7 videos per playlist
 
+          // Calculate total duration
+          const totalDuration = videosInPlaylist.reduce((total, video) => {
+            if (video.duration) {
+              const [minutes, seconds] = video.duration.split(':').map(Number);
+              return total + (minutes * 60) + seconds;
+            }
+            return total + Math.floor(Math.random() * 300) + 120; // 2-7 minutes if no duration
+          }, 0);
+
           playlists.push({
             name: playlistNames[Math.floor(Math.random() * playlistNames.length)] + ` - ${channel.name}`,
             user_id: channel.user_id,
             videos: videosInPlaylist.map(v => v._id), // Videos in sequence order
             description: `Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por ${channel.name}.`,
+            is_public: Math.random() > 0.1, // 90% public playlists
+            total_duration: totalDuration,
+            followers: [], // Will be populated later
             created_at: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000) // Random time in last 90 days
           });
         }
@@ -1732,11 +1744,23 @@ export async function POST() {
             .sort(() => 0.5 - Math.random())
             .slice(0, Math.floor(Math.random() * 8) + 3); // 3-10 videos per personal playlist
 
+          // Calculate total duration
+          const totalDuration = availableVideos.reduce((total, video) => {
+            if (video.duration) {
+              const [minutes, seconds] = video.duration.split(':').map(Number);
+              return total + (minutes * 60) + seconds;
+            }
+            return total + Math.floor(Math.random() * 300) + 120; // 2-7 minutes if no duration
+          }, 0);
+
           playlists.push({
             name: personalPlaylistNames[Math.floor(Math.random() * personalPlaylistNames.length)],
             user_id: user._id,
             videos: availableVideos.map(v => v._id), // Videos in sequence order
             description: 'Playlist pessoal com conteúdos selecionados.',
+            is_public: Math.random() > 0.3, // 70% public personal playlists
+            total_duration: totalDuration,
+            followers: [], // Will be populated later
             created_at: new Date(Date.now() - Math.random() * 60 * 24 * 60 * 60 * 1000) // Random time in last 60 days
           });
         }
@@ -1744,7 +1768,35 @@ export async function POST() {
     }
 
     if (playlists.length > 0) {
-      await Playlist.insertMany(playlists);
+      const createdPlaylists = await Playlist.insertMany(playlists);
+      
+      // Add followers to playlists
+      console.log('👥 Adding followers to playlists...');
+      for (const playlist of createdPlaylists) {
+        if (playlist.is_public) {
+          // Determine number of followers based on playlist type and creator
+          const creator = allUsers.find(u => u._id.toString() === playlist.user_id.toString());
+          let maxFollowers = 5; // Base followers
+          
+          // More followers for mentor-created playlists
+          if (creator?.account_type === 'mentor') maxFollowers = 12;
+          // Even more for admin playlists
+          if (creator?._id.toString() === adminUser?._id.toString()) maxFollowers = 20;
+          
+          const numFollowers = Math.floor(Math.random() * maxFollowers) + 1; // 1-maxFollowers
+          const possibleFollowers = allUsers.filter(u => 
+            u._id.toString() !== playlist.user_id.toString()
+          );
+          
+          const followers = possibleFollowers
+            .sort(() => 0.5 - Math.random())
+            .slice(0, Math.min(numFollowers, possibleFollowers.length))
+            .map(f => f._id);
+          
+          playlist.followers = followers;
+          await playlist.save();
+        }
+      }
     }
 
     console.log('💬 Creating comprehensive comments and messages...');

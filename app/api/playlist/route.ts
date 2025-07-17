@@ -13,13 +13,18 @@ export async function GET(request: Request) {
     await connectDB();
     const playlists = await Playlist.find({
       user_id: session.user.id,
-    }).populate({
-      path: "videos",
-      populate: {
-        path: "channel_id",
-        select: "name avatar",
-      },
-    });
+    })
+      .populate({
+        path: "videos",
+        populate: {
+          path: "channel_id",
+          select: "name avatar",
+        },
+      })
+      .populate({
+        path: "user_id",
+        select: "name avatar account_type"
+      });
 
     return NextResponse.json(playlists);
   } catch (error) {

@@ -89,9 +89,9 @@ export default function Sidebar() {
         <div className="mt-8 px-4">
           <h3 className="text-[#3b82f6] mb-4 text-sm font-semibold">BIBLIOTECA PESSOAL</h3>
           <nav className="flex flex-col gap-2">
-            <Link href="/playlist" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
+            <Link href="/playlists" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
               <ListMusic className="h-5 w-5 text-gray-400" />
-              <span>{isAuthenticated ? "Minha Playlist" : "Playlists Inspiradoras"}</span>
+              <span>{isAuthenticated ? "Minhas Playlists" : "Playlists da Comunidade"}</span>
             </Link>
             <Link href="/favorites" className="flex items-center gap-3 text-gray-300 hover:text-white py-2">
               <Heart className="h-5 w-5 text-gray-400" />

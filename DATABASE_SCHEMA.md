@@ -210,6 +210,9 @@ Giga Talentos utiliza MongoDB como database principal com Mongoose ODM para defi
   description: { type: String },
   user_id: { type: ObjectId, ref: 'User', required: true },
   videos: [{ type: ObjectId, ref: 'Video' }],
+  is_public: { type: Boolean, default: true },
+  total_duration: { type: Number, default: 0 }, // in seconds
+  followers: [{ type: ObjectId, ref: 'User' }],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 }
