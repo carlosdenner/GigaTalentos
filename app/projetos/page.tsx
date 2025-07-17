@@ -12,6 +12,8 @@ import { Eye, Users, Calendar, Target, Heart, Star, Plus, Settings, Trash2 } fro
 import Link from 'next/link';
 import ProjectFavoriteButton from '@/components/project-favorite-button';
 import ProjectParticipationRequest from '@/components/project-participation-request';
+import ProjectDelegation from '@/components/project-delegation';
+import MentorshipRequest from '@/components/mentorship-request';
 import { toast } from '@/hooks/use-toast';
 
 interface Projeto {
@@ -574,6 +576,36 @@ export default function ProjetosPage() {
                     projectName={projeto.nome}
                     isLeader={session?.user?.id === projeto.talento_lider_id?._id}
                   />
+
+                  {/* Project Delegation Button (only for creators who are not talents) */}
+                  {session && 
+                    session.user.id === projeto.criador_id?._id && 
+                    projeto.criador_id?.account_type === 'mentor' &&
+                    (!projeto.talento_lider_id || projeto.talento_lider_id._id === projeto.criador_id._id) && (
+                    <ProjectDelegation
+                      projectId={projeto._id}
+                      currentLeaderId={projeto.talento_lider_id?._id || ''}
+                      isProjectCreator={true}
+                      participants={projeto.participantes_aprovados || []}
+                      onDelegationSuccess={() => {
+                        fetchProjetos(); // Refresh projects after delegation
+                      }}
+                    />
+                  )}
+
+                  {/* Mentorship Request Button (only for project leaders) */}
+                  {session && 
+                    session.user.id === projeto.talento_lider_id?._id && (
+                    <MentorshipRequest
+                      projectId={projeto._id}
+                      projectName={projeto.nome}
+                      isProjectLeader={true}
+                      currentSponsors={projeto.sponsors || []}
+                      onMentorshipSuccess={() => {
+                        fetchProjetos(); // Refresh projects after mentorship request
+                      }}
+                    />
+                  )}
 
                   {/* Edit button for creators/leaders */}
                   {session && (

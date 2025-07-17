@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/lib/mongodb";
-import Channel from "@/models/Channel";
+import connectDB from "../../../../../lib/mongodb";
+import Channel from "../../../../../models/Channel";
 
 export async function GET(
   request: Request,
-  { params }: { params: { userId: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await connectDB();
-    const channel = await Channel.findOne({ user_id: params.userId })
+    const channel = await Channel.findOne({ user_id: params.id })
       .populate('user_id', 'name avatar');
 
     if (!channel) {

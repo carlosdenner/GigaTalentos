@@ -481,16 +481,28 @@ export async function POST() {
       const mentor = mentors[i % mentors.length];
       const category = categories.find(c => c.name === template.category);
       
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() + Math.floor(Math.random() * 30) - 15); // -15 to +15 days
+      // Create more varied date ranges to ensure different statuses
+      const now = new Date();
+      let startDate, endDate, status;
       
-      const endDate = new Date(startDate);
-      const durationDays = template.duration.includes('semana') ? 
-        parseInt(template.duration) * 7 : 
-        template.duration.includes('mês') ? 
-          parseInt(template.duration) * 30 : 
-          parseInt(template.duration);
-      endDate.setDate(endDate.getDate() + durationDays);
+      // 30% completed challenges (past)
+      if (i < desafioTemplates.length * 0.3) {
+        startDate = new Date(now.getTime() - Math.random() * 60 * 24 * 60 * 60 * 1000); // 0-60 days ago
+        endDate = new Date(startDate.getTime() + Math.random() * 30 * 24 * 60 * 60 * 1000); // ended 0-30 days ago
+        status = 'Finalizado';
+      }
+      // 20% upcoming challenges (future)
+      else if (i < desafioTemplates.length * 0.5) {
+        startDate = new Date(now.getTime() + Math.random() * 30 * 24 * 60 * 60 * 1000); // 0-30 days from now
+        endDate = new Date(startDate.getTime() + Math.random() * 45 * 24 * 60 * 60 * 1000); // duration 0-45 days
+        status = 'Em Breve';
+      }
+      // 50% active challenges
+      else {
+        startDate = new Date(now.getTime() - Math.random() * 30 * 24 * 60 * 60 * 1000); // started 0-30 days ago
+        endDate = new Date(now.getTime() + Math.random() * 30 * 24 * 60 * 60 * 1000); // ends 0-30 days from now
+        status = 'Ativo';
+      }
 
       desafios.push({
         title: template.title,
@@ -501,7 +513,7 @@ export async function POST() {
         participants: Math.floor(Math.random() * 100) + 10,
         prizes: template.prizes,
         requirements: template.requirements,
-        status: endDate > new Date() ? 'Ativo' : Math.random() > 0.5 ? 'Finalizado' : 'Em Breve',
+        status: status,
         start_date: startDate,
         end_date: endDate,
         featured: Math.random() > 0.6,
@@ -861,7 +873,7 @@ export async function POST() {
     for (const projeto of createdProjetos) {
       // 1. LIKES SYSTEM - Broader audience engagement
       const numLikes = Math.floor(Math.random() * 25) + 10; // 10-34 likes per projeto
-      const likerPool = allUsers.filter(u => u && u._id && !u._id.equals(projeto.criador_id));
+      const likerPool = allUsers.filter(u => u && u._id && projeto.criador_id && u._id.toString() !== projeto.criador_id.toString());
       const likers = likerPool
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numLikes, likerPool.length));
@@ -883,9 +895,9 @@ export async function POST() {
       const eligibleParticipants = allUsers.filter(u => 
         u && u._id && 
         (u.account_type === 'talent' || u.account_type === 'mentor') && 
-        !u._id.equals(projeto.criador_id) && 
-        !u._id.equals(projeto.talento_lider_id) &&
-        !(projeto as any).participantes_aprovados.some((p: any) => p.equals(u._id))
+        projeto.criador_id && u._id.toString() !== projeto.criador_id.toString() && 
+        (!projeto.talento_lider_id || u._id.toString() !== projeto.talento_lider_id.toString()) &&
+        !(projeto as any).participantes_aprovados.some((p: any) => p.toString() === u._id.toString())
       );
 
       const numRequests = Math.floor(Math.random() * 8) + 4; // 4-11 participation requests per projeto
@@ -983,8 +995,8 @@ export async function POST() {
       // 5. SPONSORS SYSTEM - Mentors can sponsor projects
       const potentialSponsors = allUsers.filter(u => 
         u && u._id && u.account_type === 'mentor' && 
-        !u._id.equals(projeto.criador_id) && 
-        !u._id.equals(projeto.talento_lider_id)
+        projeto.criador_id && u._id.toString() !== projeto.criador_id.toString() && 
+        (!projeto.talento_lider_id || u._id.toString() !== projeto.talento_lider_id.toString())
       );
 
       if (Math.random() > 0.6 && potentialSponsors.length > 0) { // 40% chance of having sponsors
@@ -1021,7 +1033,7 @@ export async function POST() {
     console.log('⭐ Adding favorites to desafios...');
     for (const desafio of createdDesafios) {
       const numFavorites = Math.floor(Math.random() * 15) + 8; // 8-22 favorites per desafio
-      const userPool = allUsers.filter(u => u && u._id && !u._id.equals(desafio.created_by));
+      const userPool = allUsers.filter(u => u && u._id && desafio.created_by && u._id.toString() !== desafio.created_by.toString());
       const favoriters = userPool
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numFavorites, userPool.length));
@@ -1323,7 +1335,7 @@ export async function POST() {
 
     // Add specific videos for admin user (Carlos Denner) - these will be in his channel
     if (adminUser) {
-      const adminChannel = createdChannels.find(ch => ch.user_id.equals(adminUser._id));
+      const adminChannel = createdChannels.find(ch => ch.user_id && adminUser._id && ch.user_id.toString() === adminUser._id.toString());
       if (adminChannel) {
         const adminVideos = [
           {
@@ -1415,7 +1427,7 @@ export async function POST() {
     
     // Create playlists for channel owners
     for (const channel of createdChannels) {
-      const channelVideos = createdVideos.filter(v => v && v.channel_id && channel && channel._id && v.channel_id.equals(channel._id));
+      const channelVideos = createdVideos.filter(v => v && v.channel_id && channel && channel._id && v.channel_id.toString() === channel._id.toString());
       if (channelVideos.length >= 2) { // Reduced requirement for more playlists
         const numPlaylists = Math.floor(Math.random() * 4) + 2; // 2-5 playlists per channel (increased)
         
@@ -1530,7 +1542,7 @@ export async function POST() {
         // Generate random likes for this comment from other users (ENHANCED)
         const numLikes = Math.floor(Math.random() * 15) + 1; // 1-15 likes per comment (increased)
         const likers = allUsers
-          .filter(u => u && u._id && commenter && commenter._id && !u._id.equals(commenter._id)) // Don't like your own comment
+          .filter(u => u && u._id && commenter && commenter._id && u._id.toString() !== commenter._id.toString()) // Don't like your own comment
           .sort(() => 0.5 - Math.random())
           .slice(0, Math.min(numLikes, allUsers.length - 1));
 
@@ -1561,7 +1573,7 @@ export async function POST() {
       const sender = mentorsForMessages[Math.floor(Math.random() * mentorsForMessages.length)];
       const receiver = talents[Math.floor(Math.random() * talents.length)];
       
-      if (!receiver || (sender && receiver && sender._id && receiver._id && sender._id.equals(receiver._id))) continue;
+      if (!receiver || !sender || !receiver._id || !sender._id || sender._id.toString() === receiver._id.toString()) continue;
 
       const mentorMessageTexts = [
         'Olá! Vi seu projeto e gostaria de oferecer mentoria.',
@@ -1577,12 +1589,13 @@ export async function POST() {
       ];
 
       messages.push({
-        sender_id: sender._id,
-        receiver_id: receiver._id,
-        content: mentorMessageTexts[Math.floor(Math.random() * mentorMessageTexts.length)],
-        sender_type: 'mentor',
-        read: Math.random() > 0.2, // 80% read rate
-        created_at: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000) // Random time in last 20 days
+        remetente: sender._id,
+        destinatario: receiver._id,
+        assunto: 'Oferta de Mentoria',
+        mensagem: mentorMessageTexts[Math.floor(Math.random() * mentorMessageTexts.length)],
+        tipo: 'general',
+        data_envio: new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000), // Random time in last 20 days
+        lida: Math.random() > 0.2 // 80% read rate
       });
     }
 
@@ -1591,7 +1604,7 @@ export async function POST() {
       if (talents.length < 2) break;
       
       const sender = talents[Math.floor(Math.random() * talents.length)];
-      const receiver = talents.filter(t => t && t._id && sender && sender._id && !t._id.equals(sender._id))[Math.floor(Math.random() * Math.max(1, talents.length - 1))];
+      const receiver = talents.filter(t => t && t._id && sender && sender._id && t._id.toString() !== sender._id.toString())[Math.floor(Math.random() * Math.max(1, talents.length - 1))];
       
       if (!receiver) continue;
 
@@ -1607,12 +1620,13 @@ export async function POST() {
       ];
 
       messages.push({
-        sender_id: sender._id,
-        receiver_id: receiver._id,
-        content: collaborationMessages[Math.floor(Math.random() * collaborationMessages.length)],
-        sender_type: 'talent',
-        read: Math.random() > 0.25, // 75% read rate
-        created_at: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000) // Random time in last 15 days
+        remetente: sender._id,
+        destinatario: receiver._id,
+        assunto: 'Proposta de Colaboração',
+        mensagem: collaborationMessages[Math.floor(Math.random() * collaborationMessages.length)],
+        tipo: 'general',
+        data_envio: new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000), // Random time in last 15 days
+        lida: Math.random() > 0.25 // 75% read rate
       });
     }
 
@@ -1626,7 +1640,7 @@ export async function POST() {
       const sender = fans[Math.floor(Math.random() * fans.length)];
       const receiver = contentCreators[Math.floor(Math.random() * contentCreators.length)];
       
-      if (!receiver || (sender && receiver && sender._id && receiver._id && sender._id.equals(receiver._id))) continue;
+      if (!receiver || !sender || !receiver._id || !sender._id || sender._id.toString() === receiver._id.toString()) continue;
 
       const fanMessages = [
         'Adorei seu conteúdo! Muito inspirador.',
@@ -1642,14 +1656,58 @@ export async function POST() {
       ];
 
       messages.push({
-        sender_id: sender._id,
-        receiver_id: receiver._id,
-        content: fanMessages[Math.floor(Math.random() * fanMessages.length)],
-        sender_type: 'fan',
-        read: Math.random() > 0.35, // 65% read rate
-        created_at: new Date(Date.now() - Math.random() * 25 * 24 * 60 * 60 * 1000) // Random time in last 25 days
+        remetente: sender._id,
+        destinatario: receiver._id,
+        assunto: 'Mensagem de Apoio',
+        mensagem: fanMessages[Math.floor(Math.random() * fanMessages.length)],
+        tipo: 'general',
+        data_envio: new Date(Date.now() - Math.random() * 25 * 24 * 60 * 60 * 1000), // Random time in last 25 days
+        lida: Math.random() > 0.35 // 65% read rate
       });
     }
+
+    // Add some mentorship request messages
+    const mentorshipRequestMessages = [];
+    const projectsWithoutSponsors = createdProjetos.filter((p: any) => !p.sponsors || p.sponsors.length === 0);
+    
+    for (let i = 0; i < Math.min(5, projectsWithoutSponsors.length); i++) {
+      const projeto = projectsWithoutSponsors[i];
+      const availableMentors = mentorsForMessages.filter(m => 
+        !projeto.sponsors?.some((sponsorId: any) => sponsorId.toString() === m._id.toString())
+      );
+      
+      if (availableMentors.length > 0) {
+        const randomMentor = availableMentors[Math.floor(Math.random() * availableMentors.length)];
+        const projectLeader = projeto.talento_lider_id || projeto.criador_id;
+        
+        if (projectLeader && randomMentor) {
+          mentorshipRequestMessages.push({
+            remetente: projectLeader._id || projectLeader,
+            destinatario: randomMentor._id,
+            assunto: `Solicitação de Mentoria - Projeto: ${projeto.nome}`,
+            mensagem: `Olá ${randomMentor.name},
+
+Gostaria de convidá-lo para ser mentor/sponsor do projeto "${projeto.nome}".
+
+O projeto é focado em ${projeto.categoria} e usamos tecnologias como ${projeto.tecnologias?.slice(0, 2).join(', ') || 'diversas tecnologias'}.
+
+Seria uma honra ter sua orientação e experiência para ajudar no desenvolvimento deste projeto.
+
+Obrigado!`,
+            tipo: 'mentorship_request',
+            metadata: {
+              projeto_id: projeto._id,
+              tipo_solicitacao: 'mentorship',
+              status: 'pending'
+            },
+            data_envio: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
+            lida: Math.random() > 0.7
+          });
+        }
+      }
+    }
+
+    messages.push(...mentorshipRequestMessages);
 
     if (messages.length > 0) {
       await Message.insertMany(messages);
@@ -1679,7 +1737,7 @@ export async function POST() {
       }
       
       const subscribableChannels = createdChannels
-        .filter(c => c && c.user_id && user && user._id && !c.user_id.equals(user._id)) // Can't follow own channel
+        .filter(c => c && c.user_id && user && user._id && c.user_id.toString() !== user._id.toString()) // Can't follow own channel
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numSubscriptions, createdChannels.length - 1));
 
@@ -1700,8 +1758,8 @@ export async function POST() {
       const randomChannel = createdChannels[Math.floor(Math.random() * createdChannels.length)];
       
       if (randomUser && randomChannel && randomUser._id && randomChannel.user_id && 
-          !randomUser._id.equals(randomChannel.user_id) && 
-          !subscriptions.some(s => s.user_id.equals(randomUser._id) && s.channel_id.equals(randomChannel._id))) {
+          randomUser._id.toString() !== randomChannel.user_id.toString() && 
+          !subscriptions.some(s => s.user_id.toString() === randomUser._id.toString() && s.channel_id.toString() === randomChannel._id.toString())) {
         
         subscriptions.push({
           user_id: randomUser._id,
@@ -1743,10 +1801,10 @@ export async function POST() {
 
     // Create user engagement metrics (simulated analytics data)
     const userEngagementMetrics = allUsers.map(user => {
-      const userSubscriptions = subscriptions.filter(s => s.user_id.equals(user._id));
-      const userComments = comments.filter(c => c.user_id.equals(user._id));
-      const userMessages = messages.filter(m => m.sender_id.equals(user._id));
-      const userWatches = videoWatchHistory.filter(w => w.user_id.equals(user._id));
+      const userSubscriptions = subscriptions.filter(s => s.user_id && user._id && s.user_id.toString() === user._id.toString());
+      const userComments = comments.filter(c => c.user_id && user._id && c.user_id.toString() === user._id.toString());
+      const userMessages = messages.filter(m => m.remetente && user._id && m.remetente.toString() === user._id.toString());
+      const userWatches = videoWatchHistory.filter(w => w.user_id && user._id && w.user_id.toString() === user._id.toString());
       
       return {
         user_id: user._id,
@@ -1867,7 +1925,7 @@ export async function POST() {
         avgDesafioParticipants: Math.floor(createdDesafios.reduce((sum, d) => sum + d.participants, 0) / createdDesafios.length),
         avgFavoritesPerDesafio: Math.floor(totalDesafioFavorites / createdDesafios.length),
         projectParticipationRate: Math.floor((totalParticipationRequests / (createdProjetos.length * users.filter(u => u.account_type === 'talent').length)) * 100),
-        messageEngagementRate: Math.floor((messages.filter(m => m.read).length / messages.length) * 100),
+        messageEngagementRate: Math.floor((messages.filter(m => m.lida || m.read).length / messages.length) * 100),
         challengeFavoriteRate: Math.floor((totalDesafioFavorites / (createdDesafios.length * users.length)) * 100),
         userFollowRate: Math.floor((totalFollowingRelationships / (users.length * (users.length - 1))) * 100)
       }
