@@ -590,65 +590,73 @@ export async function POST() {
         title: 'AI Problem Solver - Sistema Inteligente',
         description: 'Sistema de IA que resolve problemas complexos de otimização usando algoritmos avançados de machine learning.',
         category: 'Habilidade Cognitiva & Técnica',
-        technologies: ['Python', 'TensorFlow', 'React', 'FastAPI'],
+        technologies: ['Python', 'TensorFlow', 'React', 'FastAPI', 'PostgreSQL', 'Docker'],
         demo_url: 'https://ai-solver-demo.vercel.app',
-        repository_url: 'https://github.com/exemplo/ai-solver'
+        repository_url: 'https://github.com/exemplo/ai-solver',
+        image: '/projects/ai-problem-solver.svg'
       },
       {
         title: 'Creative Studio Platform',
         description: 'Plataforma colaborativa para artistas e designers criarem projetos inovadores usando ferramentas digitais avançadas.',
         category: 'Criatividade & Inovação',
-        technologies: ['Figma API', 'React', 'WebRTC', 'Canvas'],
+        technologies: ['React', 'TypeScript', 'Figma API', 'WebRTC', 'Canvas', 'Node.js'],
         demo_url: 'https://creative-studio.netlify.app',
-        repository_url: 'https://github.com/exemplo/creative-studio'
+        repository_url: 'https://github.com/exemplo/creative-studio',
+        image: '/projects/creative-studio.svg'
       },
       {
         title: 'StartupHub - Ecossistema Empreendedor',
         description: 'Plataforma que conecta empreendedores apaixonados com recursos, mentores e oportunidades de investimento.',
         category: 'Motivação & Paixão',
-        technologies: ['Next.js', 'Supabase', 'Stripe', 'Socket.io'],
+        technologies: ['Next.js', 'TypeScript', 'Supabase', 'Stripe', 'Socket.io', 'Tailwind CSS'],
         demo_url: 'https://startup-hub.vercel.app',
-        repository_url: 'https://github.com/exemplo/startup-hub'
+        repository_url: 'https://github.com/exemplo/startup-hub',
+        image: '/projects/startup-hub.svg'
       },
       {
         title: 'TeamSync - Gestão Colaborativa',
         description: 'Ferramenta de gestão de equipes que promove liderança distribuída e colaboração efetiva em projetos.',
         category: 'Liderança & Colaboração',
-        technologies: ['Vue.js', 'Node.js', 'MongoDB', 'WebSocket'],
+        technologies: ['Vue.js', 'Node.js', 'MongoDB', 'WebSocket', 'Express', 'JWT'],
         demo_url: 'https://teamsync-app.com',
-        repository_url: 'https://github.com/exemplo/teamsync'
+        repository_url: 'https://github.com/exemplo/teamsync',
+        image: '/projects/team-sync.svg'
       },
       {
         title: 'ImpactTracker - Medição Social',
         description: 'Plataforma para organizações medirem e reportarem seu impacto social e ambiental de forma transparente.',
         category: 'Consciência Social & Integridade',
-        technologies: ['React', 'D3.js', 'PostgreSQL', 'GraphQL'],
+        technologies: ['React', 'TypeScript', 'D3.js', 'PostgreSQL', 'GraphQL', 'Chart.js'],
         demo_url: 'https://impact-tracker.org',
-        repository_url: 'https://github.com/exemplo/impact-tracker'
+        repository_url: 'https://github.com/exemplo/impact-tracker',
+        image: '/projects/impact-tracker.svg'
       },
       {
         title: 'AdaptLearn - Aprendizado Resiliente',
         description: 'Sistema educacional que se adapta aos desafios e falhas dos usuários, promovendo crescimento através da superação.',
         category: 'Adaptabilidade & Resistência',
-        technologies: ['React Native', 'Python', 'TensorFlow', 'Firebase'],
+        technologies: ['React Native', 'Python', 'TensorFlow', 'Firebase', 'Flask', 'SQLite'],
         demo_url: 'https://adaptlearn.app',
-        repository_url: 'https://github.com/exemplo/adaptlearn'
+        repository_url: 'https://github.com/exemplo/adaptlearn',
+        image: '/projects/adapt-learn.svg'
       },
       {
         title: 'TechInnovate - Hub de Inovação',
         description: 'Plataforma para desenvolvedores colaborarem em soluções técnicas inovadoras para problemas complexos.',
         category: 'Habilidade Cognitiva & Técnica',
-        technologies: ['Docker', 'Kubernetes', 'React', 'PostgreSQL'],
+        technologies: ['Docker', 'Kubernetes', 'React', 'PostgreSQL', 'Redis', 'GraphQL'],
         demo_url: 'https://tech-innovate.com',
-        repository_url: 'https://github.com/exemplo/tech-innovate'
+        repository_url: 'https://github.com/exemplo/tech-innovate',
+        image: '/projects/tech-innovate.svg'
       },
       {
         title: 'CreativeCollab - Rede Criativa',
         description: 'Rede social para criativos compartilharem ideias disruptivas e colaborarem em projetos inovadores.',
         category: 'Criatividade & Inovação',
-        technologies: ['React', 'Express', 'MongoDB', 'Cloudinary'],
+        technologies: ['React', 'Express', 'MongoDB', 'Cloudinary', 'Socket.io', 'Styled Components'],
         demo_url: 'https://creative-collab.net',
-        repository_url: 'https://github.com/exemplo/creative-collab'
+        repository_url: 'https://github.com/exemplo/creative-collab',
+        image: '/projects/creative-collab.svg'
       }
     ];
 
@@ -665,25 +673,46 @@ export async function POST() {
       const creatorChannel = createdChannels.find(ch => ch.user_id.toString() === creator._id.toString()) ||
                            createdChannels[Math.floor(Math.random() * createdChannels.length)];
 
+      // Generate participants for the project
+      const numParticipants = Math.floor(Math.random() * 6) + 1; // 1-6 participants
+      const availableParticipants = creatorsForProjects.filter(user => 
+        user._id.toString() !== creator._id.toString() && 
+        user._id.toString() !== leader._id.toString()
+      );
+      
+      const participantes_aprovados: any[] = [];
+      for (let j = 0; j < Math.min(numParticipants, availableParticipants.length); j++) {
+        const randomIndex = Math.floor(Math.random() * availableParticipants.length);
+        const participant = availableParticipants[randomIndex];
+        if (!participantes_aprovados.find(p => p.toString() === participant._id.toString())) {
+          participantes_aprovados.push(participant._id);
+          // Remove from available to avoid duplicates
+          availableParticipants.splice(randomIndex, 1);
+        }
+      }
+
       projetos.push({
         nome: template.title, // Fixed: use 'nome' instead of 'title'
         descricao: template.description, // Fixed: use 'descricao' instead of 'description'
         objetivo: `Desenvolver ${template.description}`,
-        categoria: template.category, // Use category name as string
+        categoria: categories.find(c => c.name === template.category)?._id || categories[0]._id, // Use category ObjectId
         video_apresentacao: template.demo_url,
         status: ['ativo', 'concluido', 'pausado'][Math.floor(Math.random() * 3)], // Fixed: use valid enum values
         avatar: '/placeholder-logo.png',
-        imagem_capa: '/placeholder.jpg',
+        imagem_capa: template.image, // Use the image from template
         criador_id: creator._id,
         talento_lider_id: leader._id,
         portfolio_id: creatorChannel._id, // Required: assign to a channel
+        tecnologias: template.technologies, // Add technologies array
+        repositorio_url: template.repository_url,
+        demo_url: template.demo_url,
         desafio_vinculacao_status: 'pendente',
         likes: [], // Will be populated later
         favoritos: [], // Will be populated later
         sponsors: [], // Will be populated later
         solicitacoes_participacao: [], // Will be populated later
         participantes_solicitados: [], // Will be populated later
-        participantes_aprovados: [], // Will be populated later
+        participantes_aprovados: participantes_aprovados, // Use generated participants
         verificado: Math.random() > 0.6,
         demo: true
       });
@@ -703,7 +732,7 @@ export async function POST() {
           video_apresentacao: 'https://youtube.com/watch?v=giga-talentos-demo',
           status: 'ativo',
           avatar: '/giga-talentos-logo.svg',
-          imagem_capa: '/placeholder.jpg',
+          imagem_capa: '/projects/giga-talentos-platform.svg',
           criador_id: adminUser._id,
           talento_lider_id: adminUser._id,
           portfolio_id: adminChannel?._id || createdChannels[0]._id,
@@ -733,7 +762,7 @@ export async function POST() {
           video_apresentacao: 'https://youtube.com/watch?v=ai-talent-demo',
           status: 'ativo',
           avatar: '/placeholder-logo.svg',
-          imagem_capa: '/placeholder.jpg',
+          imagem_capa: '/projects/ai-talent-identification.svg',
           criador_id: adminUser._id,
           talento_lider_id: adminUser._id,
           portfolio_id: adminChannel?._id || createdChannels[0]._id,
@@ -763,7 +792,7 @@ export async function POST() {
           video_apresentacao: 'https://youtube.com/watch?v=mentoria-digital',
           status: 'ativo',
           avatar: '/placeholder-logo.svg',
-          imagem_capa: '/placeholder.jpg',
+          imagem_capa: '/projects/digital-mentorship.svg',
           criador_id: adminUser._id,
           talento_lider_id: adminUser._id,
           portfolio_id: adminChannel?._id || createdChannels[0]._id,
@@ -787,6 +816,24 @@ export async function POST() {
         }
       ];
       
+      // Add participants to admin projects
+      const nonAdminUsers = creatorsForProjects.filter(user => user._id.toString() !== adminUser._id.toString());
+      
+      adminProjetos.forEach(projeto => {
+        const numParticipants = Math.floor(Math.random() * 4) + 2; // 2-5 participants for admin projects
+        const participantes_aprovados: any[] = [];
+        
+        for (let j = 0; j < Math.min(numParticipants, nonAdminUsers.length); j++) {
+          const randomIndex = Math.floor(Math.random() * nonAdminUsers.length);
+          const participant = nonAdminUsers[randomIndex];
+          if (!participantes_aprovados.find(p => p.toString() === participant._id.toString())) {
+            participantes_aprovados.push(participant._id);
+          }
+        }
+        
+        projeto.participantes_aprovados = participantes_aprovados as any;
+      });
+      
       projetos.push(...adminProjetos);
     }
 
@@ -797,105 +844,183 @@ export async function POST() {
     // Create interactions between users and content
     const allUsers = users;
 
-    // Add favorites to desafios
-    for (const desafio of createdDesafios) {
-      const numFavorites = Math.floor(Math.random() * 8) + 2; // 2-10 favorites
-      const favoriters = allUsers
-        .sort(() => 0.5 - Math.random())
-        .slice(0, numFavorites);
-      
-      desafio.favoritos = favoriters.map(u => u._id);
-      await desafio.save();
-    }
+    // COMPREHENSIVE PROJECT-PARTICIPANT DYNAMICS - Full Business Model Implementation
+    let totalProjetoLikes = 0;
+    let totalProjetoFavorites = 0;
+    let totalParticipationRequests = 0;
+    let totalApprovedParticipants = 0;
+    let totalPendingParticipants = 0;
+    let totalRejectedParticipants = 0;
+    let totalFollowingRelationships = 0;
+    let totalDesafioFavorites = 0;
+    let totalProjetoDesafioLinks = 0;
+    let totalApprovedLinks = 0;
+    let totalPendingLinks = 0;
+    let totalRejectedLinks = 0;
 
-    // Add likes and favorites to projetos
     for (const projeto of createdProjetos) {
-      // Likes
-      const numLikes = Math.floor(Math.random() * 15) + 3; // 3-18 likes
-      const likers = allUsers
+      // 1. LIKES SYSTEM - Broader audience engagement
+      const numLikes = Math.floor(Math.random() * 25) + 10; // 10-34 likes per projeto
+      const likerPool = allUsers.filter(u => u && u._id && !u._id.equals(projeto.criador_id));
+      const likers = likerPool
         .sort(() => 0.5 - Math.random())
-        .slice(0, numLikes);
+        .slice(0, Math.min(numLikes, likerPool.length));
       
       (projeto as any).likes = likers.map(u => u._id);
+      totalProjetoLikes += likers.length;
 
-      // Favorites
-      const numFavorites = Math.floor(Math.random() * 6) + 1; // 1-7 favorites
-      const favoriters = allUsers
-        .filter(u => !likers.includes(u)) // Different from likers
+      // 2. FAVORITES SYSTEM - Deep interest indicators
+      const numFavorites = Math.floor(Math.random() * 12) + 5; // 5-16 favorites per projeto
+      const favoriters = likers
         .sort(() => 0.5 - Math.random())
-        .slice(0, numFavorites);
+        .slice(0, Math.min(numFavorites, likers.length));
       
       (projeto as any).favoritos = favoriters.map(u => u._id);
-      await projeto.save();
+      totalProjetoFavorites += favoriters.length;
 
-      // Participation requests (only for talents and mentors)
+      // 3. PARTICIPATION REQUEST SYSTEM - Core Business Model
+      // Only talents and mentors can request participation (not fans)
       const eligibleParticipants = allUsers.filter(u => 
-        u && u._id && u.account_type !== 'fan' && 
-        projeto.criador_id && !u._id.equals(projeto.criador_id) && 
-        projeto.talento_lider_id && !u._id.equals(projeto.talento_lider_id)
+        u && u._id && 
+        (u.account_type === 'talent' || u.account_type === 'mentor') && 
+        !u._id.equals(projeto.criador_id) && 
+        !u._id.equals(projeto.talento_lider_id) &&
+        !(projeto as any).participantes_aprovados.some((p: any) => p.equals(u._id))
       );
 
-      const numRequests = Math.floor(Math.random() * 4) + 1; // 1-5 requests
+      const numRequests = Math.floor(Math.random() * 8) + 4; // 4-11 participation requests per projeto
       const requesters = eligibleParticipants
         .sort(() => 0.5 - Math.random())
         .slice(0, Math.min(numRequests, eligibleParticipants.length));
 
-      for (let j = 0; j < requesters.length; j++) {
-        const requester = requesters[j];
-        const isApproved = Math.random() > 0.4; // 60% approval rate
-        const status = isApproved ? 'aprovado' : Math.random() > 0.7 ? 'rejeitado' : 'pendente';
-
-        const request = {
-          usuario_id: requester._id, // Fixed: use 'usuario_id' to match schema
-          status,
-          mensagem: `Olá! Gostaria de participar deste projeto. Tenho experiência em ${requester.skills?.slice(0, 2).join(' e ') || 'desenvolvimento'}.`,
-          solicitado_em: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000), // Last 7 days
-          respondido_em: status !== 'pendente' ? new Date() : undefined,
-          resposta_mensagem: status === 'aprovado' ? 'Bem-vindo ao projeto!' : 
-                            status === 'rejeitado' ? 'Obrigado pelo interesse, mas já temos a equipe completa.' : undefined
-        };
-
-        (projeto as any).solicitacoes_participacao.push(request);
+      // Create comprehensive participation requests with realistic workflow
+      const participationRequests = requesters.map((requester, index) => {
+        const daysAgo = Math.floor(Math.random() * 30) + 1; // 1-30 days ago
+        const solicitadoEm = new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000);
         
-        if (status === 'aprovado') {
-          (projeto as any).participantes_aprovados.push(requester._id);
-        } else if (status === 'pendente') {
-          (projeto as any).participantes_solicitados.push(requester._id);
+        // Realistic approval rates based on project needs and requester profile
+        let approvalChance = 0.4; // Base 40% approval rate
+        
+        // Increase chances for mentors
+        if (requester.account_type === 'mentor') approvalChance += 0.3;
+        
+        // Increase chances for experienced talents
+        if (requester.account_type === 'talent' && requester.experience === 'Avançado') approvalChance += 0.2;
+        if (requester.account_type === 'talent' && requester.experience === 'Expert') approvalChance += 0.25;
+        
+        // Early requesters have higher chances
+        if (index < 3) approvalChance += 0.15;
+        
+        const random = Math.random();
+        let status: string;
+        let respondidoEm: Date | undefined;
+        let respostaMensagem: string | undefined;
+
+        if (random < approvalChance) {
+          status = 'aprovado';
+          respondidoEm = new Date(solicitadoEm.getTime() + Math.random() * 5 * 24 * 60 * 60 * 1000); // Responded within 5 days
+          respostaMensagem = [
+            'Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!',
+            'Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!',
+            'Aprovado! Sua expertise complementa muito bem nossa equipe.',
+            'Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.'
+          ][Math.floor(Math.random() * 4)];
+          totalApprovedParticipants++;
+        } else if (random < approvalChance + 0.25) {
+          status = 'pendente';
+          // Pending requests don't have responses yet
+          totalPendingParticipants++;
+        } else {
+          status = 'rejeitado';
+          respondidoEm = new Date(solicitadoEm.getTime() + Math.random() * 7 * 24 * 60 * 60 * 1000); // Responded within 7 days
+          respostaMensagem = [
+            'Obrigado pelo interesse! No momento já temos a equipe completa para esta função.',
+            'Agradecemos sua candidatura. O perfil não se encaixa no momento, mas fique à vontade para se candidatar a outros projetos.',
+            'Infelizmente não podemos aprová-lo neste momento, mas valorizamos seu interesse.',
+            'Obrigado pela candidatura. Buscamos um perfil mais específico para esta vaga.'
+          ][Math.floor(Math.random() * 4)];
+          totalRejectedParticipants++;
         }
+
+        return {
+          usuario_id: requester._id,
+          status,
+          mensagem: [
+            `Olá! Gostaria muito de participar do projeto "${projeto.nome}". Tenho experiência em ${projeto.categoria} e acredito que posso contribuir significativamente.`,
+            `Oi! Seu projeto me chamou muito a atenção. Tenho experiência com ${requester.skills?.slice(0, 2).join(' e ') || 'desenvolvimento'} e adoraria fazer parte da equipe.`,
+            `Excelente projeto! Minha experiência em ${requester.experience} pode agregar muito valor. Gostaria de participar.`,
+            `Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.`,
+            `Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.`
+          ][Math.floor(Math.random() * 5)],
+          solicitado_em: solicitadoEm,
+          respondido_em: respondidoEm,
+          resposta_mensagem: respostaMensagem
+        };
+      });
+
+      (projeto as any).solicitacoes_participacao = participationRequests;
+      totalParticipationRequests += participationRequests.length;
+
+      // 4. UPDATE PARTICIPANT LISTS BASED ON REQUESTS
+      const approvedRequesters = requesters.filter((_, index) => 
+        participationRequests[index].status === 'aprovado'
+      );
+      const pendingRequesters = requesters.filter((_, index) => 
+        participationRequests[index].status === 'pendente'
+      );
+
+      // Add approved requesters to participantes_aprovados (merge with existing)
+      const existingApproved = (projeto as any).participantes_aprovados || [];
+      const newApprovedIds = approvedRequesters.map(r => r._id);
+      const allApprovedIds = [...existingApproved, ...newApprovedIds];
+      (projeto as any).participantes_aprovados = [...new Set(allApprovedIds.map(id => id.toString()))].map(id => 
+        allApprovedIds.find(originalId => originalId.toString() === id)
+      );
+
+      // Add pending requesters to participantes_solicitados
+      (projeto as any).participantes_solicitados = pendingRequesters.map(r => r._id);
+
+      // 5. SPONSORS SYSTEM - Mentors can sponsor projects
+      const potentialSponsors = allUsers.filter(u => 
+        u && u._id && u.account_type === 'mentor' && 
+        !u._id.equals(projeto.criador_id) && 
+        !u._id.equals(projeto.talento_lider_id)
+      );
+
+      if (Math.random() > 0.6 && potentialSponsors.length > 0) { // 40% chance of having sponsors
+        const numSponsors = Math.floor(Math.random() * 2) + 1; // 1-2 sponsors
+        const sponsors = potentialSponsors
+          .sort(() => 0.5 - Math.random())
+          .slice(0, Math.min(numSponsors, potentialSponsors.length));
+        
+        (projeto as any).sponsors = sponsors.map(s => s._id);
+      } else {
+        (projeto as any).sponsors = [];
+      }
+
+      // 6. REALISTIC METRICS BASED ON ENGAGEMENT
+      const totalEngagement = (projeto as any).likes.length + (projeto as any).favoritos.length + 
+                             (projeto as any).participantes_aprovados.length + 
+                             (projeto as any).sponsors.length;
+      
+      // Followers = base engagement + organic growth
+      (projeto as any).seguidores = totalEngagement + Math.floor(Math.random() * 50) + 20;
+
+      // Update project status based on team size and engagement
+      const teamSize = (projeto as any).participantes_aprovados.length;
+      if (teamSize >= 5 && Math.random() > 0.7) {
+        (projeto as any).status = 'ativo'; // Large teams are more likely to be active
+      } else if (teamSize >= 8 && Math.random() > 0.8) {
+        (projeto as any).status = 'concluido'; // Very large teams might have completed
       }
 
       await projeto.save();
     }
 
-    // Create project-desafio linking requests
-    let totalProjetoDesafioLinks = 0;
-    for (let i = 0; i < Math.min(createdProjetos.length, createdDesafios.length); i++) {
-      if (Math.random() > 0.4) { // 60% chance of linking
-        const projeto = createdProjetos[i];
-        const desafio = createdDesafios[i % createdDesafios.length];
-        const status = ['pendente', 'aprovado', 'rejeitado'][Math.floor(Math.random() * 3)];
-
-        const linkRequest = {
-          projeto_id: projeto._id,
-          status,
-          solicitado_em: new Date(Date.now() - Math.random() * 10 * 24 * 60 * 60 * 1000), // Last 10 days
-          aprovado_em: status === 'aprovado' ? new Date() : undefined
-        };
-
-        desafio.projetos_vinculados.push(linkRequest);
-        await desafio.save();
-        totalProjetoDesafioLinks++;
-      }
-    }
-
-    // All interactions are now stored directly in the models (likes in projetos, favorites in desafios/projetos, participation requests in projetos)
-    
-    console.log('❤️ Creating comprehensive interactions (favorites, likes, participation requests)...');
-
-    // Add favorites to desafios (ENHANCED - much more comprehensive)
-    let totalDesafioFavorites = 0;
+    // 7. DESAFIO FAVORITES SYSTEM
+    console.log('⭐ Adding favorites to desafios...');
     for (const desafio of createdDesafios) {
-      const numFavorites = Math.floor(Math.random() * 15) + 8; // 8-22 favorites per desafio (much higher for demo)
+      const numFavorites = Math.floor(Math.random() * 15) + 8; // 8-22 favorites per desafio
       const userPool = allUsers.filter(u => u && u._id && !u._id.equals(desafio.created_by));
       const favoriters = userPool
         .sort(() => 0.5 - Math.random())
@@ -906,57 +1031,63 @@ export async function POST() {
       totalDesafioFavorites += favoriters.length;
     }
 
-    // Add likes and favorites to projetos, plus participation requests (ENHANCED - much more comprehensive)
-    let totalProjetoLikes = 0;
-    let totalProjetoFavorites = 0;
-    let totalParticipationRequests = 0;
+    // 8. PROJECT-DESAFIO LINKING SYSTEM
+    console.log('🔗 Creating project-desafio linking requests...');
+    for (let i = 0; i < createdProjetos.length; i++) {
+      if (Math.random() > 0.3) { // 70% chance of linking to a desafio
+        const projeto = createdProjetos[i];
+        const desafio = createdDesafios[i % createdDesafios.length];
+        
+        // Realistic linking approval based on project quality and category match
+        let approvalChance = 0.5; // Base 50% approval rate
+        
+        // Higher chance if categories match
+        if (projeto.categoria === desafio.category) approvalChance += 0.3;
+        
+        // Higher chance if project is verified
+        if ((projeto as any).verificado) approvalChance += 0.2;
+        
+        // Higher chance if project has sponsors
+        if ((projeto as any).sponsors && (projeto as any).sponsors.length > 0) approvalChance += 0.15;
 
-    for (const projeto of createdProjetos) {
-      // Add likes (more common than favorites) - ENHANCED NUMBERS
-      const numLikes = Math.floor(Math.random() * 25) + 10; // 10-34 likes per projeto (much higher for demo)
-      const likerPool = allUsers.filter(u => u && u._id && !u._id.equals(projeto.criador_id));
-      const likers = likerPool
-        .sort(() => 0.5 - Math.random())
-        .slice(0, Math.min(numLikes, likerPool.length));
-      
-      (projeto as any).likes = likers.map(u => u._id);
-      totalProjetoLikes += likers.length;
+        const random = Math.random();
+        let status: string;
+        let aprovadoEm: Date | undefined;
 
-      // Add favorites (subset of likers typically) - ENHANCED NUMBERS
-      const numFavorites = Math.floor(Math.random() * 12) + 5; // 5-16 favorites per projeto (much higher for demo)
-      const favoriters = likers
-        .sort(() => 0.5 - Math.random())
-        .slice(0, Math.min(numFavorites, likers.length));
-      
-      (projeto as any).favoritos = favoriters.map(u => u._id);
-      totalProjetoFavorites += favoriters.length;
+        if (random < approvalChance) {
+          status = 'aprovado';
+          aprovadoEm = new Date(Date.now() - Math.random() * 15 * 24 * 60 * 60 * 1000); // Approved within last 15 days
+          totalApprovedLinks++;
+        } else if (random < approvalChance + 0.25) {
+          status = 'pendente';
+          totalPendingLinks++;
+        } else {
+          status = 'rejeitado';
+          totalRejectedLinks++;
+        }
 
-      // Add participation requests (only talents can request to participate) - ENHANCED
-      const talentUsers = allUsers.filter(u => u && u._id && u.account_type === 'talent' && !u._id.equals(projeto.criador_id));
-      const numRequests = Math.floor(Math.random() * 6) + 2; // 2-7 participation requests per projeto (increased)
-      const requesters = talentUsers
-        .sort(() => 0.5 - Math.random())
-        .slice(0, Math.min(numRequests, talentUsers.length));
+        const linkRequest = {
+          projeto_id: projeto._id,
+          status,
+          solicitado_em: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000), // Last 30 days
+          aprovado_em: aprovadoEm,
+          observacoes: status === 'rejeitado' ? 
+            'Projeto não se encaixa completamente com os objetivos do desafio no momento.' : 
+            status === 'aprovado' ? 
+              'Projeto aprovado! Excelente alinhamento com os objetivos do desafio.' : 
+              undefined
+        };
 
-      (projeto as any).solicitacoes_participacao = requesters.map(talent => ({
-        usuario_id: talent._id,
-        status: Math.random() > 0.7 ? 'aprovado' : Math.random() > 0.4 ? 'pendente' : 'rejeitado', // 30% approved, 40% pending, 30% rejected
-        solicitado_em: new Date(Date.now() - Math.random() * 45 * 24 * 60 * 60 * 1000), // Last 45 days
-        respondido_em: Math.random() > 0.3 ? new Date(Date.now() - Math.random() * 20 * 24 * 60 * 60 * 1000) : undefined, // 70% have responses
-        mensagem: `Olá! Gostaria muito de participar do projeto "${projeto.nome}". Tenho experiência em ${projeto.categoria} e posso contribuir significativamente com minha expertise.`,
-        resposta_mensagem: Math.random() > 0.3 ? 
-          (Math.random() > 0.5 ? 'Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!' : 
-           'Obrigado pelo interesse, mas no momento o projeto já tem a equipe completa.') : undefined
-      }));
-      totalParticipationRequests += requesters.length;
-
-      await projeto.save();
+        desafio.projetos_vinculados.push(linkRequest);
+        await desafio.save();
+        totalProjetoDesafioLinks++;
+      }
     }
 
     console.log('� Creating user-to-user following relationships...');
 
     // Create realistic following relationships
-    let totalFollowingRelationships = 0;
+    // (totalFollowingRelationships already declared above)
     
     // Mentors are likely to be followed by talents and fans
     const mentorsForFollowing = allUsers.filter(u => u.account_type === 'mentor');

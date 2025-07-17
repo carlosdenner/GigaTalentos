@@ -1,0 +1,27 @@
+<!-- ImpactTracker Project Image -->
+<svg width="350" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="impact-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="350" height="200" fill="url(#impact-gradient)"/>
+  <g transform="translate(50, 50)">
+    <!-- Earth/Globe -->
+    <circle cx="105" cy="60" r="30" fill="white" opacity="0.9"/>
+    <path d="M85,60 Q95,50 105,60 Q115,50 125,60" stroke="#43e97b" stroke-width="2" fill="none"/>
+    <path d="M85,60 Q95,70 105,60 Q115,70 125,60" stroke="#43e97b" stroke-width="2" fill="none"/>
+    <circle cx="95" cy="50" r="3" fill="#43e97b"/>
+    <circle cx="115" cy="70" r="3" fill="#43e97b"/>
+    <!-- Measuring/tracking elements -->
+    <rect x="50" y="30" width="20" height="3" fill="white" opacity="0.8"/>
+    <rect x="50" y="35" width="15" height="3" fill="white" opacity="0.8"/>
+    <rect x="50" y="40" width="25" height="3" fill="white" opacity="0.8"/>
+    <!-- Arrow pointing up (growth) -->
+    <polygon points="150,70 155,60 160,70 155,65" fill="white" opacity="0.8"/>
+    <line x1="155" y1="65" x2="155" y2="80" stroke="white" stroke-width="2" opacity="0.8"/>
+  </g>
+  <text x="175" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">ImpactTracker</text>
+  <text x="175" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Medição Social</text>
+</svg>

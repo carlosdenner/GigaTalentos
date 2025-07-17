@@ -21,6 +21,11 @@ export default function ProjectFavoriteButton({
   const [isFavorited, setIsFavorited] = useState(initialFavorited);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Update state when initialFavorited changes
+  useEffect(() => {
+    setIsFavorited(initialFavorited);
+  }, [initialFavorited]);
+
   const toggleFavorite = async () => {
     if (!session) {
       toast({
@@ -59,6 +64,16 @@ export default function ProjectFavoriteButton({
 
         if (!response.ok) {
           const error = await response.json();
+          if (error.error === "Project already favorited") {
+            // If already favorited, just update the state
+            setIsFavorited(true);
+            onFavoriteChange?.(true);
+            toast({
+              title: "Já favoritado",
+              description: "Este projeto já está nos seus favoritos",
+            });
+            return;
+          }
           throw new Error(error.error || "Failed to add favorite");
         }
 
@@ -71,9 +86,24 @@ export default function ProjectFavoriteButton({
       }
     } catch (error: any) {
       console.error("Error toggling favorite:", error);
+      
+      // Translate common error messages
+      let errorMessage = error.message || "Falha ao atualizar favoritos";
+      if (error.message === "Project already favorited") {
+        errorMessage = "Projeto já está nos favoritos";
+      } else if (error.message === "Failed to add favorite") {
+        errorMessage = "Falha ao adicionar aos favoritos";
+      } else if (error.message === "Failed to remove favorite") {
+        errorMessage = "Falha ao remover dos favoritos";
+      } else if (error.message === "Project not found") {
+        errorMessage = "Projeto não encontrado";
+      } else if (error.message === "Not authenticated") {
+        errorMessage = "É necessário fazer login";
+      }
+      
       toast({
         title: "Erro",
-        description: error.message || "Falha ao atualizar favoritos",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

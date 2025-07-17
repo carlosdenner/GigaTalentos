@@ -17,7 +17,9 @@ export async function GET(request: Request) {
       const portfolioProjetos = await Projeto.find({ portfolio_id: portfolioId })
         .populate('talento_lider_id', 'name avatar')
         .populate('criador_id', 'name avatar account_type')
+        .populate('categoria', 'name')
         .populate('sponsors', 'name avatar')
+        .populate('participantes_aprovados', 'name avatar account_type')
         .populate('portfolio_id', 'name')
         .populate('desafio_id', 'title')
         .sort({ criado_em: -1 });
@@ -28,7 +30,9 @@ export async function GET(request: Request) {
       const userProjetos = await Projeto.find({ talento_lider_id: userId })
         .populate('talento_lider_id', 'name avatar')
         .populate('criador_id', 'name avatar account_type')
+        .populate('categoria', 'name')
         .populate('sponsors', 'name avatar')
+        .populate('participantes_aprovados', 'name avatar account_type')
         .populate('portfolio_id', 'name')
         .populate('desafio_id', 'title')
         .sort({ criado_em: -1 });
@@ -38,7 +42,9 @@ export async function GET(request: Request) {
     const projetos = await Projeto.find()
       .populate('talento_lider_id', 'name avatar')
       .populate('criador_id', 'name avatar account_type')
+      .populate('categoria', 'name')
       .populate('sponsors', 'name avatar')
+      .populate('participantes_aprovados', 'name avatar account_type')
       .populate('portfolio_id', 'name')
       .populate('desafio_id', 'title')
       .sort({ seguidores: -1 });

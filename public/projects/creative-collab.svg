@@ -1,0 +1,38 @@
+<!-- CreativeCollab Project Image -->
+<svg width="350" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="collab-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="350" height="200" fill="url(#collab-gradient)"/>
+  <g transform="translate(50, 50)">
+    <!-- Network of creative nodes -->
+    <g fill="white" opacity="0.9">
+      <circle cx="60" cy="40" r="8"/>
+      <circle cx="100" cy="30" r="8"/>
+      <circle cx="140" cy="40" r="8"/>
+      <circle cx="80" cy="70" r="8"/>
+      <circle cx="120" cy="70" r="8"/>
+    </g>
+    <!-- Connection lines -->
+    <g stroke="white" stroke-width="2" opacity="0.6">
+      <line x1="68" y1="40" x2="92" y2="30"/>
+      <line x1="108" y1="30" x2="132" y2="40"/>
+      <line x1="60" y1="48" x2="80" y2="62"/>
+      <line x1="100" y1="38" x2="80" y2="62"/>
+      <line x1="100" y1="38" x2="120" y2="62"/>
+      <line x1="140" y1="48" x2="120" y2="62"/>
+      <line x1="88" y1="70" x2="112" y2="70"/>
+    </g>
+    <!-- Creative elements -->
+    <polygon points="60,35 55,40 60,45 65,40" fill="#f5576c" opacity="0.8"/>
+    <rect x="96" y="26" width="8" height="8" fill="#f5576c" opacity="0.8"/>
+    <polygon points="140,32 138,38 142,42 146,38 144,32 140,30" fill="#f5576c" opacity="0.8"/>
+    <circle cx="80" cy="70" r="3" fill="#f5576c"/>
+    <polygon points="120,65 118,70 120,75 122,70" fill="#f5576c" opacity="0.8"/>
+  </g>
+  <text x="175" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">CreativeCollab</text>
+  <text x="175" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Rede Criativa</text>
+</svg>

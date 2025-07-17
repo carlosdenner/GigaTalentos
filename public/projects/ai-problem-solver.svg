@@ -1,0 +1,23 @@
+<!-- AI Problem Solver Project Image -->
+<svg width="350" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ai-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="350" height="200" fill="url(#ai-gradient)"/>
+  <g transform="translate(50, 50)">
+    <!-- Brain icon -->
+    <path d="M75 40C85 30 95 30 105 40C115 35 125 35 135 40C145 50 145 60 135 70C125 75 115 75 105 70C95 75 85 75 75 70C65 60 65 50 75 40Z" fill="white" opacity="0.9"/>
+    <!-- Circuit lines -->
+    <line x1="20" y1="60" x2="60" y2="60" stroke="white" stroke-width="2" opacity="0.6"/>
+    <line x1="150" y1="60" x2="190" y2="60" stroke="white" stroke-width="2" opacity="0.6"/>
+    <line x1="105" y1="20" x2="105" y2="40" stroke="white" stroke-width="2" opacity="0.6"/>
+    <circle cx="105" cy="15" r="4" fill="white" opacity="0.8"/>
+    <circle cx="15" cy="60" r="4" fill="white" opacity="0.8"/>
+    <circle cx="195" cy="60" r="4" fill="white" opacity="0.8"/>
+  </g>
+  <text x="175" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">AI Problem Solver</text>
+  <text x="175" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Sistema Inteligente</text>
+</svg>

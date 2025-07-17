@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
     }
 
     await connectDB();
@@ -44,13 +44,13 @@ export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
     }
 
     const { projeto_id } = await request.json();
 
     if (!projeto_id) {
-      return NextResponse.json({ error: "Project ID is required" }, { status: 400 });
+      return NextResponse.json({ error: "ID do projeto é obrigatório" }, { status: 400 });
     }
 
     await connectDB();
@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     // Check if project exists
     const projeto = await Projeto.findById(projeto_id);
     if (!projeto) {
-      return NextResponse.json({ error: "Project not found" }, { status: 404 });
+      return NextResponse.json({ error: "Projeto não encontrado" }, { status: 404 });
     }
 
     // Check if already favorited
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     });
 
     if (existingFavorite) {
-      return NextResponse.json({ error: "Project already favorited" }, { status: 400 });
+      return NextResponse.json({ error: "Projeto já está nos favoritos" }, { status: 400 });
     }
 
     // Create favorite
@@ -78,15 +78,15 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ 
-      message: "Project favorited successfully",
+      message: "Projeto favoritado com sucesso",
       favorite 
     }, { status: 201 });
   } catch (error: any) {
     console.error('Error favoriting project:', error);
     if (error.code === 11000) {
-      return NextResponse.json({ error: "Project already favorited" }, { status: 400 });
+      return NextResponse.json({ error: "Projeto já está nos favoritos" }, { status: 400 });
     }
-    return NextResponse.json({ error: "Failed to favorite project" }, { status: 500 });
+    return NextResponse.json({ error: "Falha ao favoritar projeto" }, { status: 500 });
   }
 }
 
@@ -94,14 +94,14 @@ export async function DELETE(request: Request) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
     const projeto_id = searchParams.get('projeto_id');
 
     if (!projeto_id) {
-      return NextResponse.json({ error: "Project ID is required" }, { status: 400 });
+      return NextResponse.json({ error: "ID do projeto é obrigatório" }, { status: 400 });
     }
 
     await connectDB();
@@ -112,12 +112,12 @@ export async function DELETE(request: Request) {
     });
 
     if (!deleted) {
-      return NextResponse.json({ error: "Favorite not found" }, { status: 404 });
+      return NextResponse.json({ error: "Favorito não encontrado" }, { status: 404 });
     }
 
-    return NextResponse.json({ message: "Project unfavorited successfully" });
+    return NextResponse.json({ message: "Projeto removido dos favoritos com sucesso" });
   } catch (error) {
     console.error('Error unfavoriting project:', error);
-    return NextResponse.json({ error: "Failed to unfavorite project" }, { status: 500 });
+    return NextResponse.json({ error: "Falha ao remover favorito" }, { status: 500 });
   }
 }

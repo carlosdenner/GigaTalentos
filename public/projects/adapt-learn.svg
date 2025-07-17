@@ -1,0 +1,28 @@
+<!-- AdaptLearn Project Image -->
+<svg width="350" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="adapt-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="350" height="200" fill="url(#adapt-gradient)"/>
+  <g transform="translate(50, 50)">
+    <!-- Book/learning -->
+    <rect x="80" y="40" width="40" height="50" fill="white" opacity="0.9" rx="2"/>
+    <line x1="85" y1="50" x2="115" y2="50" stroke="#fcb69f" stroke-width="2"/>
+    <line x1="85" y1="55" x2="110" y2="55" stroke="#fcb69f" stroke-width="2"/>
+    <line x1="85" y1="60" x2="115" y2="60" stroke="#fcb69f" stroke-width="2"/>
+    <line x1="85" y1="65" x2="105" y2="65" stroke="#fcb69f" stroke-width="2"/>
+    <!-- Adaptive arrows -->
+    <path d="M50,60 Q60,50 70,60" stroke="white" stroke-width="3" fill="none" opacity="0.8"/>
+    <polygon points="65,58 70,60 65,62" fill="white" opacity="0.8"/>
+    <path d="M130,60 Q140,70 150,60" stroke="white" stroke-width="3" fill="none" opacity="0.8"/>
+    <polygon points="145,62 150,60 145,58" fill="white" opacity="0.8"/>
+    <!-- Growth/resilience symbol -->
+    <circle cx="100" cy="25" r="8" fill="white" opacity="0.8"/>
+    <polygon points="100,17 95,23 105,23" fill="#fcb69f"/>
+  </g>
+  <text x="175" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">AdaptLearn</text>
+  <text x="175" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Aprendizado Resiliente</text>
+</svg>

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Eye, Users, Calendar, Target, Heart, Star, Plus, Settings, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import ProjectFavoriteButton from '@/components/project-favorite-button';
@@ -21,8 +22,12 @@ interface Projeto {
   seguidores: number;
   avatar: string;
   imagem_capa: string;
-  categoria: string;
+  categoria: {
+    _id: string;
+    name: string;
+  } | string; // Support both populated and unpopulated formats
   status: 'ativo' | 'concluido' | 'pausado';
+  tecnologias?: string[];
   talento_lider_id?: {
     _id: string;
     name: string;
@@ -47,8 +52,15 @@ interface Projeto {
     name: string;
     avatar: string;
   }>;
+  participantes_aprovados?: Array<{
+    _id: string;
+    name: string;
+    avatar: string;
+    account_type: string;
+  }>;
   desafio_aprovado: boolean;
   favoritos: string[];
+  likes: string[];
   criado_em: string;
 }
 
@@ -56,14 +68,19 @@ export default function ProjetosPage() {
   const { data: session } = useSession();
   const { userType, isLoading: userTypeLoading } = useUserType();
   const [projetos, setProjetos] = useState<Projeto[]>([]);
+  const [userFavorites, setUserFavorites] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [filtroStatus, setFiltroStatus] = useState<string>('todos');
   const [filtroCriador, setFiltroCriador] = useState<string>('todos');
   const [filtroCategoria, setFiltroCategoria] = useState<string>('todas');
+  const [filtroTecnologia, setFiltroTecnologia] = useState<string>('todas');
 
   useEffect(() => {
     fetchProjetos();
-  }, []);
+    if (session?.user?.id) {
+      fetchUserFavorites();
+    }
+  }, [session]);
 
   const fetchProjetos = async () => {
     try {
@@ -74,6 +91,21 @@ export default function ProjetosPage() {
       console.error('Erro ao buscar projetos:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchUserFavorites = async () => {
+    try {
+      const response = await fetch('/api/project-favorites');
+      if (response.ok) {
+        const favoritedProjects = await response.json();
+        console.log('Fetched favorites:', favoritedProjects); // Debug log
+        const favoriteIds = favoritedProjects.map((p: any) => p._id);
+        console.log('Favorite IDs:', favoriteIds); // Debug log
+        setUserFavorites(favoriteIds);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar favoritos:', error);
     }
   };
 
@@ -120,12 +152,28 @@ export default function ProjetosPage() {
     if (filtroCriador === 'talents' && projeto.criador_id?.account_type !== 'talent') return false;
     
     // Filtro por categoria
-    if (filtroCategoria !== 'todas' && projeto.categoria !== filtroCategoria) return false;
+    if (filtroCategoria !== 'todas' && getCategoryName(projeto.categoria) !== filtroCategoria) return false;
+    
+    // Filtro por tecnologia
+    if (filtroTecnologia !== 'todas' && projeto.tecnologias && !projeto.tecnologias.includes(filtroTecnologia)) return false;
     
     return true;
   });
 
-  const categorias = [...new Set(projetos.filter(p => p && p.categoria).map(p => p.categoria))].sort();
+  // Helper function to get category name
+  const getCategoryName = (categoria: any) => {
+    if (typeof categoria === 'string') return categoria;
+    return categoria?.name || '';
+  };
+
+  const categorias = [...new Set(projetos.filter(p => p && p.categoria).map(p => getCategoryName(p.categoria)))].sort();
+  
+  // Extract all unique technologies
+  const tecnologias = [...new Set(
+    projetos
+      .filter(p => p && p.tecnologias)
+      .flatMap(p => p.tecnologias || [])
+  )].sort();
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -262,6 +310,28 @@ export default function ProjetosPage() {
               </Button>
             ))}
           </div>
+
+          {/* Filtros de Tecnologia */}
+          <div className="flex justify-center gap-2 flex-wrap">
+            <Button
+              variant={filtroTecnologia === 'todas' ? 'default' : 'outline'}
+              onClick={() => setFiltroTecnologia('todas')}
+              size="sm"
+            >
+              Todas Tecnologias
+            </Button>
+            {tecnologias.map((tecnologia) => (
+              <Button
+                key={tecnologia}
+                variant={filtroTecnologia === tecnologia ? 'default' : 'outline'}
+                onClick={() => setFiltroTecnologia(tecnologia)}
+                size="sm"
+                className="text-xs"
+              >
+                {tecnologia}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -270,11 +340,7 @@ export default function ProjetosPage() {
         {projetosFiltrados.map((projeto) => (
           <Card 
             key={projeto._id} 
-            className={`hover:shadow-lg transition-shadow ${
-              projeto.criador_id?.account_type === 'mentor' 
-                ? 'border-2 border-blue-300 bg-blue-50/30' 
-                : ''
-            }`}
+            className="hover:shadow-lg transition-shadow"
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
@@ -282,10 +348,43 @@ export default function ProjetosPage() {
                   <Badge className={getStatusColor(projeto.status)}>
                     {projeto.status}
                   </Badge>
-                  {projeto.criador_id?.account_type === 'mentor' && (
-                    <Badge variant="default" className="bg-blue-600 text-white">
-                      Criado por Mentor
-                    </Badge>
+                  {projeto.participantes_aprovados && projeto.participantes_aprovados.length > 0 && (
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Badge variant="secondary" className="text-xs cursor-pointer hover:bg-blue-200 transition-colors">
+                          <Users className="h-3 w-3 mr-1" />
+                          {projeto.participantes_aprovados.length} participante{projeto.participantes_aprovados.length > 1 ? 's' : ''}
+                        </Badge>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Participantes do Projeto</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3">
+                          {projeto.participantes_aprovados.map((participante) => (
+                            <div key={participante._id} className="flex items-center gap-3 p-2 rounded-lg border">
+                              <Avatar className="h-8 w-8">
+                                <AvatarImage src={participante.avatar} />
+                                <AvatarFallback>
+                                  {participante.name?.[0] || 'P'}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1">
+                                <Link 
+                                  href={`/profile/${participante._id}`}
+                                  className="font-medium hover:text-blue-600 transition-colors"
+                                >
+                                  {participante.name}
+                                </Link>
+                                <p className="text-xs text-gray-500 capitalize">
+                                  {participante.account_type}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   )}
                 </div>
                 <div className="flex items-center gap-1">
@@ -346,9 +445,12 @@ export default function ProjetosPage() {
                       {projeto.talento_lider_id?.name?.[0] || 'T'}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="text-sm font-medium">
+                  <Link 
+                    href={`/profile/${projeto.talento_lider_id?._id}`}
+                    className="text-sm font-medium hover:text-blue-600 transition-colors cursor-pointer"
+                  >
                     {projeto.talento_lider_id?.name || 'Líder'}
-                  </span>
+                  </Link>
                   <Badge variant="outline" className="text-xs">
                     Líder
                   </Badge>
@@ -365,7 +467,13 @@ export default function ProjetosPage() {
                       </AvatarFallback>
                     </Avatar>
                     <span className="text-xs text-gray-500">
-                      Criado por {projeto.criador_id?.name || 'Usuário'}
+                      Criado por{' '}
+                      <Link 
+                        href={`/profile/${projeto.criador_id._id}`}
+                        className="hover:text-blue-600 transition-colors font-medium"
+                      >
+                        {projeto.criador_id?.name || 'Usuário'}
+                      </Link>
                     </span>
                     <Badge variant="secondary" className="text-xs">
                       {projeto.criador_id?.account_type === 'mentor' ? 'Mentor' : 'Talent'}
@@ -383,13 +491,40 @@ export default function ProjetosPage() {
                   </div>
                 )}
 
+                {/* Technologies */}
+                {projeto.tecnologias && projeto.tecnologias.length > 0 && (
+                  <div className="space-y-2">
+                    <span className="text-xs font-medium text-gray-700">Tecnologias:</span>
+                    <div className="flex flex-wrap gap-1">
+                      {projeto.tecnologias.slice(0, 4).map((tech, index) => (
+                        <Badge 
+                          key={index} 
+                          variant="secondary" 
+                          className="text-xs px-2 py-1 bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                      {projeto.tecnologias.length > 4 && (
+                        <Badge variant="secondary" className="text-xs px-2 py-1 bg-gray-100 text-gray-700 border-gray-200">
+                          +{projeto.tecnologias.length - 4}
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between text-sm text-gray-500">
                   <div className="flex items-center gap-1">
-                    <Users className="h-4 w-4" />
+                    <Eye className="h-4 w-4" />
                     <span>{projeto.seguidores}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Heart className="h-4 w-4" />
+                    <span>{projeto.likes?.length || 0}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Star className="h-4 w-4" />
                     <span>{projeto.favoritos?.length || 0}</span>
                   </div>
                   <div className="flex items-center gap-1">
@@ -417,7 +552,20 @@ export default function ProjetosPage() {
                   {/* Favorite Button */}
                   <ProjectFavoriteButton 
                     projectId={projeto._id}
-                    initialFavorited={false} // TODO: Check if user has favorited this project
+                    initialFavorited={userFavorites.includes(projeto._id)}
+                    onFavoriteChange={(favorited) => {
+                      if (favorited) {
+                        setUserFavorites(prev => [...prev, projeto._id]);
+                      } else {
+                        setUserFavorites(prev => prev.filter(id => id !== projeto._id));
+                      }
+                      // Refresh favorites from server to ensure consistency
+                      setTimeout(() => {
+                        if (session?.user?.id) {
+                          fetchUserFavorites();
+                        }
+                      }, 500);
+                    }}
                   />
 
                   {/* Participation Request Button */}

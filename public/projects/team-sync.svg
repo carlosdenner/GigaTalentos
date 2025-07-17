@@ -1,0 +1,33 @@
+<!-- TeamSync Project Image -->
+<svg width="350" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="team-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="350" height="200" fill="url(#team-gradient)"/>
+  <g transform="translate(50, 50)">
+    <!-- People icons -->
+    <g fill="white" opacity="0.9">
+      <circle cx="70" cy="45" r="12"/>
+      <ellipse cx="70" cy="70" rx="15" ry="18"/>
+      
+      <circle cx="105" cy="45" r="12"/>
+      <ellipse cx="105" cy="70" rx="15" ry="18"/>
+      
+      <circle cx="140" cy="45" r="12"/>
+      <ellipse cx="140" cy="70" rx="15" ry="18"/>
+    </g>
+    <!-- Connection lines -->
+    <line x1="82" y1="55" x2="93" y2="55" stroke="white" stroke-width="3" opacity="0.7"/>
+    <line x1="117" y1="55" x2="128" y2="55" stroke="white" stroke-width="3" opacity="0.7"/>
+    <!-- Network nodes -->
+    <circle cx="105" cy="25" r="4" fill="white" opacity="0.8"/>
+    <line x1="105" y1="33" x2="105" y2="29" stroke="white" stroke-width="2" opacity="0.6"/>
+    <line x1="82" y1="40" x2="101" y2="29" stroke="white" stroke-width="2" opacity="0.6"/>
+    <line x1="128" y1="40" x2="109" y2="29" stroke="white" stroke-width="2" opacity="0.6"/>
+  </g>
+  <text x="175" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">TeamSync</text>
+  <text x="175" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Gestão Colaborativa</text>
+</svg>

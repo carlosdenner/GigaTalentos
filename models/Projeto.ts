@@ -13,7 +13,10 @@ const ProjetoSchema = new mongoose.Schema({
   seguidores: { type: Number, default: 0 },
   avatar: { type: String },
   imagem_capa: { type: String },
-  categoria: { type: String },
+  categoria: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+  tecnologias: [{ type: String }], // Array of technologies used in the project
+  repositorio_url: { type: String }, // GitHub repository URL
+  demo_url: { type: String }, // Live demo URL
   talento_lider_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   criador_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Quem criou (pode ser mentor ou talent)
   portfolio_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Channel', required: true }, // Projeto pertence a um Portfólio

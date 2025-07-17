@@ -1,0 +1,27 @@
+<!-- Creative Studio Platform Image -->
+<svg width="350" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="creative-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="350" height="200" fill="url(#creative-gradient)"/>
+  <g transform="translate(50, 50)">
+    <!-- Palette -->
+    <ellipse cx="100" cy="60" rx="40" ry="25" fill="white" opacity="0.9"/>
+    <circle cx="85" cy="55" r="8" fill="#ff6b6b"/>
+    <circle cx="100" cy="50" r="8" fill="#4ecdc4"/>
+    <circle cx="115" cy="55" r="8" fill="#45b7d1"/>
+    <circle cx="100" cy="70" r="8" fill="#f9ca24"/>
+    <!-- Brush -->
+    <line x1="120" y1="40" x2="140" y2="20" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="140,20 145,15 150,20 145,25" fill="white"/>
+    <!-- Paint splashes -->
+    <circle cx="60" cy="30" r="6" fill="white" opacity="0.7"/>
+    <circle cx="160" cy="80" r="8" fill="white" opacity="0.6"/>
+    <circle cx="40" cy="90" r="5" fill="white" opacity="0.8"/>
+  </g>
+  <text x="175" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Creative Studio</text>
+  <text x="175" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Plataforma Colaborativa</text>
+</svg>
