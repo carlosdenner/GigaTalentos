@@ -1102,6 +1102,7 @@ export async function POST() {
     const likesToCreate = [];
     const projectFavoritesToCreate = [];
     const desafioFavoritesToCreate = [];
+    const videoFavoritesToCreate = [];
 
     for (const projeto of createdProjetos) {
       // 1. LIKES SYSTEM - Broader audience engagement with realistic user limits
@@ -1692,6 +1693,42 @@ export async function POST() {
       }
     }
 
+    // 9. VIDEO FAVORITES SYSTEM - Users favoriting videos from channels they follow
+    console.log('❤️ Creating video favorites...');
+    for (const video of createdVideos) {
+      if (!video || !video._id || !video.channel_id) continue;
+      
+      // Get users who are subscribed to this video's channel or have interacted with similar content
+      const eligibleFavoriters = allUsers.filter(u => 
+        u && u._id && 
+        video.channel_id && u._id.toString() !== video.channel_id.toString() // Don't let channel owner favorite their own videos
+      );
+      
+      // Create a realistic favoriting pattern
+      const maxPossibleFavorites = Math.min(eligibleFavoriters.length, 8);
+      const numFavorites = Math.min(Math.floor(Math.random() * 5) + 1, maxPossibleFavorites); // 1-5 favorites per video
+      const favoriters = eligibleFavoriters
+        .sort(() => 0.5 - Math.random())
+        .slice(0, numFavorites);
+      
+      // Create Favorite records for videos
+      for (const favoriter of favoriters) {
+        videoFavoritesToCreate.push({
+          user_id: favoriter._id,
+          video_id: video._id,
+          created_at: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000) // Random date in last 30 days
+        });
+      }
+      
+      // Store favorite count in video for quick access (add to likes array as proxy)
+      video.likes = video.likes || [];
+      favoriters.forEach(f => {
+        if (!video.likes.includes(f._id)) {
+          video.likes.push(f._id);
+        }
+      });
+    }
+
     // Create playlists (ENHANCED - much more comprehensive)
     console.log('📋 Creating comprehensive playlists...');
     const playlists = [];
@@ -2259,6 +2296,19 @@ Obrigado!`,
       }
     }
 
+    // Create Favorite records for videos with timeout handling
+    if (videoFavoritesToCreate.length > 0) {
+      try {
+        const createdVideoFavorites = await Promise.race([
+          Favorite.insertMany(videoFavoritesToCreate),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Video favorite creation timeout')), 15000))
+        ]) as any[];
+        console.log(`✅ Created ${createdVideoFavorites.length} video favorite records`);
+      } catch (error) {
+        console.warn('⚠️ Warning: Could not create video favorite records:', error instanceof Error ? error.message : String(error));
+      }
+    }
+
     console.log('🎯 All interaction records created for recommendation system!');
 
     // Summary of created data
@@ -2300,6 +2350,7 @@ Obrigado!`,
         likeRecords: likesToCreate.length,
         projectFavoriteRecords: projectFavoritesToCreate.length,
         desafioFavoriteRecords: desafioFavoritesToCreate.length,
+        videoFavoriteRecords: videoFavoritesToCreate.length,
         videoWatchRecords: createdVideoWatches.length,
         note: 'All interactions stored as relational database records for recommendation system and analytics'
       },
