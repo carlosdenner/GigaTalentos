@@ -1,8 +1,8 @@
 # 📊 Giga Talentos Database Schema & Content Structure - IMPLEMENTADO ✅
 
-## 🎉 **Status: ESQUEMA 100% IMPLEMENTADO E FUNCIONAL**
+## 🎉 **Status: ESQUEMA 100% IMPLEMENTADO E FUNCIONAL + FLUXOS DE NEGÓCIO**
 
-Giga Talentos utiliza MongoDB como database principal com Mongoose ODM para definições de schema. A aplicação segue um modelo baseado em documentos projetado para uma plataforma de descoberta de talentos conectando empreendedores brasileiros com mentores e oportunidades em inovação e negócios.
+Giga Talentos utiliza MongoDB como database principal com Mongoose ODM para definições de schema. A aplicação segue um modelo baseado em documentos projetado para uma plataforma de descoberta de talentos conectando empreendedores brasileiros com mentores e oportunidades em inovação e negócios. **Todos os fluxos de negócio foram implementados e validados**.
 
 ## 🏗️ **Arquitetura do Database - FINAL**
 
@@ -11,6 +11,12 @@ Giga Talentos utiliza MongoDB como database principal com Mongoose ODM para defi
 - **ODM**: Mongoose
 - **String de Conexão**: `MONGODB_URI` environment variable
 - **Status**: ✅ **Conectado e funcional**
+
+### **Novos Schemas de Negócio**
+- **ParticipationRequest**: Sistema completo de solicitações de participação
+- **Message**: Sistema de comunicação para mentoria
+- **Enhanced Project**: Campos para delegação e sponsors
+- **Business Logic**: Validações e regras de negócio implementadas
 
 ---
 
@@ -26,10 +32,12 @@ Giga Talentos utiliza MongoDB como database principal com Mongoose ODM para defi
   account_type: { 
     type: String, 
     required: true,
-    enum: ['mentor', 'talent', 'sponsor', 'fan'] // ATUALIZADO: mentor adicionado
+    enum: ['mentor', 'talent', 'sponsor', 'fan'] // Business rules implemented
   },
   avatar: { type: String }, // Profile picture URL
   bio: { type: String },
+  skills: [{ type: String }], // Technical and soft skills
+  experience: { type: String }, // Professional experience
   preferred_categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   social_links: {
     linkedin: String,
@@ -37,12 +45,15 @@ Giga Talentos utiliza MongoDB como database principal com Mongoose ODM para defi
     instagram: String,
     website: String
   },
+  // New fields for business flows
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 }
 ```
 
-**✅ Demo Data**: 12 usuários criados com personas completas
+**✅ Demo Data**: 12 usuários criados com personas completas e habilidades
   location: { type: String },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
