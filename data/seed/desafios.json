@@ -1,0 +1,264 @@
+[
+  {
+    "title": "TechSolve Challenge: Solução Inovadora",
+    "description": "Desenvolva uma solução tecnológica inovadora para um problema complexo real. Use suas habilidades técnicas e analíticas para criar algo que realmente faça a diferença.",
+    "difficulty": "Avançado",
+    "duration": "6 semanas",
+    "category": "Habilidade Cognitiva & Técnica",
+    "creator": "carlosdenner@gmail.com",
+    "start_date": "2024-12-01",
+    "end_date": "2025-01-12",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Mentoria especializada + R$ 15.000",
+        "value": "R$ 15.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Curso avançado + R$ 8.000",
+        "value": "R$ 8.000"
+      },
+      {
+        "position": "3º Lugar",
+        "description": "Certificação + R$ 3.000",
+        "value": "R$ 3.000"
+      }
+    ],
+    "requirements": [
+      "Solução técnica funcional",
+      "Documentação completa",
+      "Apresentação em vídeo",
+      "Código fonte disponível"
+    ]
+  },
+  {
+    "title": "Innovation Lab: Criatividade sem Limites",
+    "description": "Libere sua criatividade para desenvolver ideias disruptivas. Este desafio busca soluções originais e inovadoras para problemas do dia a dia.",
+    "difficulty": "Intermediário",
+    "duration": "4 semanas",
+    "category": "Criatividade & Inovação",
+    "creator": "carla.design@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Workshop de design thinking + R$ 12.000",
+        "value": "R$ 12.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Kit completo de prototipagem + R$ 6.000",
+        "value": "R$ 6.000"
+      }
+    ],
+    "requirements": [
+      "Ideia original e inovadora",
+      "Prototipo funcional",
+      "Estudo de viabilidade",
+      "Apresentação criativa"
+    ],
+    "start_date": "2024-12-15",
+    "end_date": "2025-01-12"
+  },
+  {
+    "title": "Passion Project: Transforme sua Paixão",
+    "description": "Desenvolva um projeto que combine sua paixão pessoal com potencial empreendedor. Demonstre motivação intrínseca e dedicação excepcional.",
+    "difficulty": "Intermediário",
+    "duration": "5 semanas",
+    "category": "Motivação & Paixão",
+    "creator": "patricia.inovacao@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Mentoria + investimento inicial R$ 20.000",
+        "value": "R$ 20.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Aceleração em startup + R$ 10.000",
+        "value": "R$ 10.000"
+      }
+    ],
+    "requirements": [
+      "Conexão clara com paixão pessoal",
+      "Potencial empreendedor demonstrado",
+      "Plano de execução detalhado",
+      "Comprometimento de longo prazo"
+    ],
+    "start_date": "2024-12-29",
+    "end_date": "2025-02-02"
+  },
+  {
+    "title": "Leadership Challenge: Inspire e Lidere",
+    "description": "Demonstre suas habilidades de liderança criando e executando um projeto colaborativo. Foque em inspirar, motivar e alcançar resultados através de equipe.",
+    "difficulty": "Avançado",
+    "duration": "4 semanas",
+    "category": "Liderança & Colaboração",
+    "creator": "roberto.mentor@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Programa de liderança + R$ 10.000",
+        "value": "R$ 10.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Workshop de gestão + R$ 5.000",
+        "value": "R$ 5.000"
+      }
+    ],
+    "requirements": [
+      "Formar equipe de pelo menos 4 pessoas",
+      "Demonstrar liderança efetiva",
+      "Resultado colaborativo excepcional",
+      "Feedback positivo da equipe"
+    ],
+    "start_date": "2025-01-12",
+    "end_date": "2025-02-09"
+  },
+  {
+    "title": "Social Impact: Mudança Real",
+    "description": "Desenvolva um projeto que gere impacto social positivo real e mensurável. Foque em ética, transparência e benefício para a sociedade.",
+    "difficulty": "Intermediário",
+    "duration": "5 semanas",
+    "category": "Consciência Social & Integridade",
+    "creator": "eduardo.sustentabilidade@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Fundo para implementação + R$ 18.000",
+        "value": "R$ 18.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Mentoria em impacto social + R$ 9.000",
+        "value": "R$ 9.000"
+      }
+    ],
+    "requirements": [
+      "Impacto social mensurável",
+      "Transparência total",
+      "Sustentabilidade do projeto",
+      "Relatório de impacto"
+    ],
+    "start_date": "2025-01-26",
+    "end_date": "2025-03-02"
+  },
+  {
+    "title": "Resilience Challenge: Supere os Obstáculos",
+    "description": "Enfrente uma série de desafios progressivamente mais difíceis. Demonstre capacidade de adaptação, aprendizado com falhas e superação.",
+    "difficulty": "Avançado",
+    "duration": "3 semanas intensivas",
+    "category": "Adaptabilidade & Resistência",
+    "creator": "joao.dev@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Programa de desenvolvimento + R$ 8.000",
+        "value": "R$ 8.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Coaching pessoal + R$ 4.000",
+        "value": "R$ 4.000"
+      }
+    ],
+    "requirements": [
+      "Completar todos os módulos",
+      "Documentar aprendizados com falhas",
+      "Demonstrar evolução",
+      "Reflexão sobre crescimento pessoal"
+    ],
+    "start_date": "2025-02-09",
+    "end_date": "2025-03-02"
+  },
+  {
+    "title": "FinTech Revolution: Soluções Financeiras Inovadoras",
+    "description": "Desenvolva uma solução FinTech que democratize o acesso a serviços financeiros, usando tecnologias emergentes como blockchain, AI ou IoT.",
+    "difficulty": "Avançado",
+    "duration": "6 semanas",
+    "category": "Habilidade Cognitiva & Técnica",
+    "creator": "lucas.frontend@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Investimento seed + R$ 25.000",
+        "value": "R$ 25.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Aceleração em hub financeiro + R$ 15.000",
+        "value": "R$ 15.000"
+      },
+      {
+        "position": "3º Lugar",
+        "description": "Mentoria especializada + R$ 8.000",
+        "value": "R$ 8.000"
+      }
+    ],
+    "requirements": [
+      "Solução tecnológica robusta",
+      "Compliance regulatório",
+      "MVP funcional",
+      "Plano de negócios detalhado"
+    ],
+    "start_date": "2025-02-23",
+    "end_date": "2025-04-05"
+  },
+  {
+    "title": "Green Innovation Lab: Sustentabilidade em Ação",
+    "description": "Crie uma solução inovadora para enfrentar desafios ambientais urgentes. Foque em economia circular, energia renovável ou preservação ambiental.",
+    "difficulty": "Intermediário",
+    "duration": "4 semanas",
+    "category": "Consciência Social & Integridade",
+    "creator": "investidor.angel@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Grant para implementação + R$ 20.000",
+        "value": "R$ 20.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Parceria com ONGs + R$ 12.000",
+        "value": "R$ 12.000"
+      }
+    ],
+    "requirements": [
+      "Impacto ambiental positivo",
+      "Viabilidade econômica",
+      "Escalabilidade da solução",
+      "Parcerias estratégicas"
+    ],
+    "start_date": "2025-03-09",
+    "end_date": "2025-04-05"
+  },
+  {
+    "title": "Digital Art & NFT: Criatividade no Metaverso",
+    "description": "Explore as fronteiras da arte digital e crie experiências imersivas usando NFTs, realidade virtual ou aumentada.",
+    "difficulty": "Intermediário",
+    "duration": "5 semanas",
+    "category": "Criatividade & Inovação",
+    "creator": "sofia.backend@email.com",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Exposição digital + R$ 15.000",
+        "value": "R$ 15.000"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Residência artística + R$ 10.000",
+        "value": "R$ 10.000"
+      }
+    ],
+    "requirements": [
+      "Originalidade artística",
+      "Inovação tecnológica",
+      "Narrativa envolvente",
+      "Experiência do usuário"
+    ],
+    "start_date": "2025-03-22",
+    "end_date": "2025-04-26"
+  }
+]

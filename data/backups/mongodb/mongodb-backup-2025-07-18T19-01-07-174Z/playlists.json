@@ -1,0 +1,618 @@
+[
+  {
+    "_id": "68797770b5562806180d86ed",
+    "user_id": "6879776cb5562806180d8578",
+    "name": "Inspiração e Motivação - Canal do Prof.",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Prof..",
+    "videos": [
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e4"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 1850,
+    "created_at": "2025-06-25T16:28:29.189Z",
+    "updated_at": "2025-07-17T22:21:36.632Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86ee",
+    "user_id": "6879776cb5562806180d8578",
+    "name": "Projetos Práticos e Cases - Canal do Prof.",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Prof..",
+    "videos": [
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e4"
+    ],
+    "followers": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8572"
+    ],
+    "is_public": true,
+    "total_duration": 1850,
+    "created_at": "2025-06-30T17:15:49.629Z",
+    "updated_at": "2025-07-17T22:21:36.632Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86ef",
+    "user_id": "6879776cb5562806180d856e",
+    "name": "Dicas Essenciais Para Iniciantes - Canal do Carlos",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Carlos.",
+    "videos": [
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86e8"
+    ],
+    "followers": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8577"
+    ],
+    "is_public": true,
+    "total_duration": 6178,
+    "created_at": "2025-05-29T19:33:53.465Z",
+    "updated_at": "2025-07-17T22:21:36.633Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f0",
+    "user_id": "6879776cb5562806180d856e",
+    "name": "Ferramentas e Técnicas - Canal do Carlos",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Carlos.",
+    "videos": [
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86eb"
+    ],
+    "followers": [
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8575"
+    ],
+    "is_public": true,
+    "total_duration": 3601,
+    "created_at": "2025-06-18T16:15:17.943Z",
+    "updated_at": "2025-07-17T22:21:36.633Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f1",
+    "user_id": "6879776cb5562806180d856e",
+    "name": "Histórias de Sucesso - Canal do Carlos",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Carlos.",
+    "videos": [
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86ea"
+    ],
+    "followers": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8572"
+    ],
+    "is_public": true,
+    "total_duration": 6178,
+    "created_at": "2025-06-25T13:24:06.182Z",
+    "updated_at": "2025-07-17T22:21:36.633Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f2",
+    "user_id": "6879776cb5562806180d856e",
+    "name": "Série Desenvolvimento Pessoal - Canal do Carlos",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Carlos.",
+    "videos": [
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86eb"
+    ],
+    "followers": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f"
+    ],
+    "is_public": true,
+    "total_duration": 6178,
+    "created_at": "2025-06-12T20:29:04.751Z",
+    "updated_at": "2025-07-17T22:21:36.633Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f3",
+    "user_id": "6879776cb5562806180d856e",
+    "name": "Análises de Mercado - Canal do Carlos",
+    "description": "Uma coleção curada de vídeos sobre empreendedorismo e desenvolvimento, organizada por Canal do Carlos.",
+    "videos": [
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86eb"
+    ],
+    "followers": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8571"
+    ],
+    "is_public": true,
+    "total_duration": 6178,
+    "created_at": "2025-06-27T06:51:13.634Z",
+    "updated_at": "2025-07-17T22:21:36.633Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f4",
+    "user_id": "6879776cb5562806180d856e",
+    "name": "Networking",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e5"
+    ],
+    "followers": [
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d857a"
+    ],
+    "is_public": true,
+    "total_duration": 4984,
+    "created_at": "2025-07-14T16:16:43.207Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f5",
+    "user_id": "6879776cb5562806180d856f",
+    "name": "Desenvolvimento Pessoal",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e8"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 8128,
+    "created_at": "2025-06-18T06:28:52.094Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86f6",
+    "user_id": "6879776cb5562806180d856f",
+    "name": "Inspiração Diária",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e3"
+    ],
+    "followers": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8576"
+    ],
+    "is_public": true,
+    "total_duration": 8656,
+    "created_at": "2025-07-08T16:47:23.402Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f7",
+    "user_id": "6879776cb5562806180d856f",
+    "name": "Ideias de Projetos",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e0"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 7968,
+    "created_at": "2025-06-21T01:25:13.924Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86f8",
+    "user_id": "6879776cb5562806180d8573",
+    "name": "Ideias de Projetos",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86eb"
+    ],
+    "followers": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8578"
+    ],
+    "is_public": true,
+    "total_duration": 5654,
+    "created_at": "2025-06-14T16:43:29.643Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86f9",
+    "user_id": "6879776cb5562806180d8573",
+    "name": "Inspiração Diária",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86ea"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 7467,
+    "created_at": "2025-06-05T04:41:32.605Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86fa",
+    "user_id": "6879776cb5562806180d8575",
+    "name": "Desenvolvimento Pessoal",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e9"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 11408,
+    "created_at": "2025-06-12T19:56:56.061Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86fb",
+    "user_id": "6879776cb5562806180d8575",
+    "name": "Desenvolvimento Pessoal",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86ea"
+    ],
+    "followers": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8570"
+    ],
+    "is_public": true,
+    "total_duration": 11996,
+    "created_at": "2025-05-25T04:46:33.976Z",
+    "updated_at": "2025-07-17T22:21:36.634Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86fc",
+    "user_id": "6879776cb5562806180d8575",
+    "name": "Desenvolvimento Pessoal",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86eb"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 7849,
+    "created_at": "2025-05-24T02:38:56.149Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86fd",
+    "user_id": "6879776cb5562806180d8576",
+    "name": "Meus Favoritos",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e9"
+    ],
+    "followers": [
+      "6879776cb5562806180d8575"
+    ],
+    "is_public": true,
+    "total_duration": 3500,
+    "created_at": "2025-06-02T04:12:36.248Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d86fe",
+    "user_id": "6879776cb5562806180d8576",
+    "name": "Meus Favoritos",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e5"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 7371,
+    "created_at": "2025-06-09T21:25:46.246Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d86ff",
+    "user_id": "6879776cb5562806180d8578",
+    "name": "Inspiração Diária",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e6"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 10926,
+    "created_at": "2025-06-10T20:11:44.742Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d8700",
+    "user_id": "6879776cb5562806180d8578",
+    "name": "Inspiração Diária",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86ea"
+    ],
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8574"
+    ],
+    "is_public": true,
+    "total_duration": 11408,
+    "created_at": "2025-06-28T15:39:07.257Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d8701",
+    "user_id": "6879776cb5562806180d8579",
+    "name": "Assistir Mais Tarde",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e5",
+      "68797770b5562806180d86e9",
+      "68797770b5562806180d86e4",
+      "68797770b5562806180d86e1"
+    ],
+    "followers": [
+      "6879776cb5562806180d856f"
+    ],
+    "is_public": true,
+    "total_duration": 8960,
+    "created_at": "2025-05-20T14:24:07.472Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d8702",
+    "user_id": "6879776cb5562806180d8579",
+    "name": "Ideias de Projetos",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e0",
+      "68797770b5562806180d86ea",
+      "68797770b5562806180d86eb"
+    ],
+    "followers": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8577"
+    ],
+    "is_public": true,
+    "total_duration": 4533,
+    "created_at": "2025-06-10T17:30:47.550Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d8703",
+    "user_id": "6879776cb5562806180d857a",
+    "name": "Aprendizado Contínuo",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86eb",
+      "68797770b5562806180d86e3",
+      "68797770b5562806180d86e2",
+      "68797770b5562806180d86e6"
+    ],
+    "followers": [],
+    "is_public": false,
+    "total_duration": 4749,
+    "created_at": "2025-05-30T18:25:09.310Z",
+    "updated_at": "2025-07-17T22:21:36.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "68797770b5562806180d8704",
+    "user_id": "6879776cb5562806180d857a",
+    "name": "Assistir Mais Tarde",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e2"
+    ],
+    "followers": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8577"
+    ],
+    "is_public": true,
+    "total_duration": 3009,
+    "created_at": "2025-07-13T14:38:32.049Z",
+    "updated_at": "2025-07-17T22:21:36.636Z",
+    "__v": 1
+  },
+  {
+    "_id": "68797770b5562806180d8705",
+    "user_id": "6879776cb5562806180d857a",
+    "name": "Ideias de Projetos",
+    "description": "Playlist pessoal com conteúdos selecionados.",
+    "videos": [
+      "68797770b5562806180d86e8",
+      "68797770b5562806180d86e6",
+      "68797770b5562806180d86e1",
+      "68797770b5562806180d86e2"
+    ],
+    "followers": [
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8574"
+    ],
+    "is_public": true,
+    "total_duration": 4134,
+    "created_at": "2025-06-07T01:19:47.135Z",
+    "updated_at": "2025-07-17T22:21:36.636Z",
+    "__v": 1
+  }
+]

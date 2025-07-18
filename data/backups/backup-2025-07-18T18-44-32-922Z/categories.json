@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Habilidade Cognitiva & Técnica",
+    "code": "COGNITIVA_TECNICA",
+    "description": "Habilidades excepcionais de resolução de problemas, competência técnica em STEM, solução de problemas e habilidades técnicas",
+    "thumbnail": "/categories/category-1.jpg"
+  },
+  {
+    "name": "Criatividade & Inovação",
+    "code": "CRIATIVIDADE_INOVACAO",
+    "description": "Pensamento criativo em soluções, capacidade de gerar ideias e soluções novas, buscar lacunas de formas originais",
+    "thumbnail": "/categories/category-2.jpg"
+  },
+  {
+    "name": "Motivação & Paixão",
+    "code": "MOTIVACAO_PAIXAO",
+    "description": "Paixão intensa por empreendedorismo, motivação intrínseca para criar e inovar, dedicação a objetivos",
+    "thumbnail": "/categories/category-3.jpg"
+  },
+  {
+    "name": "Liderança & Colaboração",
+    "code": "LIDERANCA_COLABORACAO",
+    "description": "Habilidades naturais de liderança, capacidade de trabalhar efetivamente em equipe, inspirar e motivar outros",
+    "thumbnail": "/categories/category-4.jpg"
+  },
+  {
+    "name": "Consciência Social & Integridade",
+    "code": "CONSCIENCIA_SOCIAL",
+    "description": "Consciência sobre questões sociais, integridade ética, compromisso com soluções que beneficiam a sociedade",
+    "thumbnail": "/categories/category-5.jpg"
+  },
+  {
+    "name": "Adaptabilidade & Resistência",
+    "code": "ADAPTABILIDADE_RESISTENCIA",
+    "description": "Capacidade de lidar com falhas, enfrentar desafios, se adaptar a mudanças e superar obstáculos",
+    "thumbnail": "/categories/category-6.jpg"
+  }
+]

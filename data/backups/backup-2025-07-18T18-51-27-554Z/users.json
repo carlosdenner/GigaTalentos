@@ -1,0 +1,164 @@
+{
+  "admin": [
+    {
+      "name": "Carlos Denner",
+      "email": "carlosdenner@gmail.com",
+      "password": "carlosdenner",
+      "avatar": "/carlos denner.jpg",
+      "account_type": "admin",
+      "bio": "Fundador e administrador da plataforma Giga Talentos. Especialista em identificação e desenvolvimento de talentos empreendedores.",
+      "location": "Brasília, DF",
+      "portfolio": "https://carlosdenner.com",
+      "experience": "Expert",
+      "skills": ["Platform Management", "Talent Identification", "Entrepreneurship", "Innovation"],
+      "verified": true
+    }
+  ],
+  "fans": [
+    {
+      "name": "Ana Silva",
+      "email": "ana.silva@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "fan",
+      "bio": "Apaixonada por tecnologia e sempre em busca de novos aprendizados.",
+      "location": "São Paulo, SP",
+      "portfolio": "https://ana-silva.dev",
+      "experience": "Iniciante"
+    },
+    {
+      "name": "Pedro Santos",
+      "email": "pedro.santos@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "fan",
+      "bio": "Estudante de design gráfico interessado em projetos criativos.",
+      "location": "Rio de Janeiro, RJ",
+      "experience": "Iniciante"
+    },
+    {
+      "name": "Maria Oliveira",
+      "email": "maria.oliveira@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "fan",
+      "bio": "Entusiasta de marketing digital e tendências.",
+      "location": "Belo Horizonte, MG",
+      "experience": "Intermediário"
+    }
+  ],
+  "talents": [
+    {
+      "name": "João Desenvolvedor",
+      "email": "joao.dev@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "talent",
+      "bio": "Desenvolvedor Full Stack com 3 anos de experiência em React e Node.js.",
+      "location": "São Paulo, SP",
+      "portfolio": "https://joao-dev.com",
+      "experience": "Intermediário",
+      "skills": ["React", "Node.js", "TypeScript", "MongoDB"]
+    },
+    {
+      "name": "Carla Designer",
+      "email": "carla.design@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "talent",
+      "bio": "Designer UX/UI especializada em experiências digitais inovadoras.",
+      "location": "Rio de Janeiro, RJ",
+      "portfolio": "https://carla-design.com",
+      "experience": "Avançado",
+      "skills": ["Figma", "Adobe XD", "Prototyping", "User Research"]
+    },
+    {
+      "name": "Lucas Frontend",
+      "email": "lucas.frontend@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "talent",
+      "bio": "Especialista em desenvolvimento frontend com foco em performance.",
+      "location": "Florianópolis, SC",
+      "portfolio": "https://lucas-frontend.dev",
+      "experience": "Avançado",
+      "skills": ["Vue.js", "React", "CSS", "JavaScript", "Performance"]
+    },
+    {
+      "name": "Sofia Backend",
+      "email": "sofia.backend@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "talent",
+      "bio": "Engenheira de software especializada em arquitetura de sistemas e APIs.",
+      "location": "Porto Alegre, RS",
+      "portfolio": "https://sofia-backend.com",
+      "experience": "Avançado",
+      "skills": ["Python", "Django", "PostgreSQL", "Docker", "AWS"]
+    }
+  ],
+  "mentors": [
+    {
+      "name": "Roberto Mentor",
+      "email": "roberto.mentor@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "mentor",
+      "bio": "CTO com 15 anos de experiência em tecnologia. Mentor de startups e projetos inovadores.",
+      "location": "São Paulo, SP",
+      "portfolio": "https://roberto-mentor.com",
+      "experience": "Expert",
+      "skills": ["Leadership", "System Architecture", "Team Management", "Strategic Planning"]
+    },
+    {
+      "name": "Patricia Inovação",
+      "email": "patricia.inovacao@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "mentor",
+      "bio": "Consultora em inovação e empreendedorismo. Especialista em desenvolvimento de negócios.",
+      "location": "Rio de Janeiro, RJ",
+      "portfolio": "https://patricia-inovacao.com",
+      "experience": "Expert",
+      "skills": ["Innovation", "Business Development", "Strategic Consulting", "Market Analysis"]
+    },
+    {
+      "name": "Eduardo Sustentabilidade",
+      "email": "eduardo.sustentabilidade@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "mentor",
+      "bio": "Engenheiro ambiental e consultor em sustentabilidade. Mentor de projetos de impacto social.",
+      "location": "Curitiba, PR",
+      "portfolio": "https://eduardo-sustentabilidade.com",
+      "experience": "Expert",
+      "skills": ["Environmental Engineering", "Sustainability", "Social Impact", "ESG"]
+    }
+  ],
+  "sponsors": [
+    {
+      "name": "Investidor Angel",
+      "email": "investidor.angel@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "sponsor",
+      "bio": "Investidor anjo com foco em startups de tecnologia e impacto social.",
+      "location": "São Paulo, SP",
+      "portfolio": "https://investidor-angel.com",
+      "experience": "Expert",
+      "skills": ["Angel Investment", "Due Diligence", "Portfolio Management", "Mentorship"]
+    },
+    {
+      "name": "Corporação Tech",
+      "email": "corporacao.tech@email.com",
+      "password": "password123",
+      "avatar": "/placeholder-user.jpg",
+      "account_type": "sponsor",
+      "bio": "Representante corporativo interessado em inovação aberta e parcerias estratégicas.",
+      "location": "São Paulo, SP",
+      "portfolio": "https://corporacao-tech.com",
+      "experience": "Expert",
+      "skills": ["Corporate Innovation", "Strategic Partnerships", "Open Innovation", "Technology Scouting"]
+    }
+  ]
+}

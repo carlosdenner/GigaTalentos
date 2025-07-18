@@ -1,0 +1,1168 @@
+[
+  {
+    "_id": "6879776cb5562806180d8587",
+    "title": "Hackathon: Algoritmos Inteligentes",
+    "description": "Desenvolva algoritmos avançados para resolver problemas complexos de otimização em tempo real. Use técnicas de machine learning e análise de dados.",
+    "category": "6879776ab5562806180d8567",
+    "difficulty": "Avançado",
+    "duration": "4 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Mentorias em AI/ML + R$ 12.000",
+        "value": "R$ 12.000",
+        "_id": "6879776cb5562806180d8588"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Curso avançado + R$ 6.000",
+        "value": "R$ 6.000",
+        "_id": "6879776cb5562806180d8589"
+      },
+      {
+        "position": "3º Lugar",
+        "description": "Kit técnico + R$ 3.000",
+        "value": "R$ 3.000",
+        "_id": "6879776cb5562806180d858a"
+      }
+    ],
+    "requirements": [
+      "Solução técnica inovadora",
+      "Algoritmos otimizados",
+      "Documentação técnica completa",
+      "Código disponível no GitHub"
+    ],
+    "status": "Finalizado",
+    "start_date": "2025-06-14T04:34:07.050Z",
+    "end_date": "2025-07-01T11:17:04.269Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d856e",
+    "favoritos": [
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8576"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-06-21T16:25:08.572Z",
+        "_id": "6879776cb5562806180d85be"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "pendente",
+        "solicitado_em": "2025-06-20T11:44:04.832Z",
+        "_id": "6879776cb5562806180d85bf"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-09T11:19:02.388Z",
+        "aprovado_em": "2025-07-13T08:55:00.698Z",
+        "_id": "6879776cb5562806180d85c0"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-06-21T16:25:08.572Z",
+        "_id": "6879776cb5562806180d85be"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "pendente",
+        "solicitado_em": "2025-06-20T11:44:04.832Z",
+        "_id": "6879776cb5562806180d85bf"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-09T11:19:02.388Z",
+        "aprovado_em": "2025-07-13T08:55:00.698Z",
+        "_id": "6879776cb5562806180d85c0"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85af",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T11:14:52.989Z",
+        "aprovado_em": "2025-07-08T00:58:16.904Z",
+        "_id": "6879776eb5562806180d869d"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.511Z",
+    "updated_at": "2025-07-17T22:21:32.511Z",
+    "__v": 2
+  },
+  {
+    "_id": "6879776cb5562806180d858b",
+    "title": "Innovation Lab: Soluções Disruptivas",
+    "description": "Crie uma solução completamente inovadora para um problema que ainda não foi resolvido. Pense fora da caixa e use criatividade extrema.",
+    "category": "6879776ab5562806180d8568",
+    "difficulty": "Avançado",
+    "duration": "5 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Incubação de ideia + R$ 15.000",
+        "value": "R$ 15.000",
+        "_id": "6879776cb5562806180d858c"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Mentoria em inovação + R$ 8.000",
+        "value": "R$ 8.000",
+        "_id": "6879776cb5562806180d858d"
+      }
+    ],
+    "requirements": [
+      "Solução totalmente original",
+      "Prototipagem criativa",
+      "Potencial de impacto disruptivo",
+      "Apresentação inovadora"
+    ],
+    "status": "Finalizado",
+    "start_date": "2025-06-09T04:25:10.922Z",
+    "end_date": "2025-06-23T19:07:19.783Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d8577",
+    "favoritos": [
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d856f"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-23T04:02:37.264Z",
+        "aprovado_em": "2025-06-26T04:53:33.792Z",
+        "_id": "6879776cb5562806180d85c8"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "pendente",
+        "solicitado_em": "2025-07-02T14:49:00.669Z",
+        "_id": "6879776cb5562806180d85c9"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-18T04:00:53.746Z",
+        "aprovado_em": "2025-06-23T13:39:25.825Z",
+        "_id": "6879776cb5562806180d85ca"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T04:46:49.549Z",
+        "aprovado_em": "2025-07-17T04:51:26.699Z",
+        "_id": "6879776cb5562806180d85cb"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-23T04:02:37.264Z",
+        "aprovado_em": "2025-06-26T04:53:33.792Z",
+        "_id": "6879776cb5562806180d85c8"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "pendente",
+        "solicitado_em": "2025-07-02T14:49:00.669Z",
+        "_id": "6879776cb5562806180d85c9"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-18T04:00:53.746Z",
+        "aprovado_em": "2025-06-23T13:39:25.825Z",
+        "_id": "6879776cb5562806180d85ca"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T04:46:49.549Z",
+        "aprovado_em": "2025-07-17T04:51:26.699Z",
+        "_id": "6879776cb5562806180d85cb"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-20T14:35:27.779Z",
+        "aprovado_em": "2025-07-03T14:08:59.196Z",
+        "_id": "6879776eb5562806180d86ab"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.511Z",
+    "updated_at": "2025-07-17T22:21:32.511Z",
+    "__v": 2
+  },
+  {
+    "_id": "6879776cb5562806180d858e",
+    "title": "Startup Challenge: Do Sonho ao MVP",
+    "description": "Transforme sua paixão em um negócio real. Desenvolva um MVP completo de uma startup que resolve um problema que você realmente se importa.",
+    "category": "6879776ab5562806180d8569",
+    "difficulty": "Intermediário",
+    "duration": "6 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Seed funding + R$ 20.000",
+        "value": "R$ 20.000",
+        "_id": "6879776cb5562806180d858f"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Aceleração + R$ 10.000",
+        "value": "R$ 10.000",
+        "_id": "6879776cb5562806180d8590"
+      }
+    ],
+    "requirements": [
+      "Demonstrar paixão autêntica",
+      "MVP funcional",
+      "Plano de crescimento",
+      "Pitch apaixonante"
+    ],
+    "status": "Finalizado",
+    "start_date": "2025-07-17T03:12:13.586Z",
+    "end_date": "2025-07-22T21:04:51.016Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d8578",
+    "favoritos": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8570"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "pendente",
+        "solicitado_em": "2025-06-30T07:54:26.816Z",
+        "_id": "6879776cb5562806180d85d3"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-12T19:20:18.518Z",
+        "aprovado_em": "2025-07-13T02:19:50.411Z",
+        "_id": "6879776cb5562806180d85d4"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "rejeitado",
+        "solicitado_em": "2025-07-12T08:31:49.731Z",
+        "_id": "6879776cb5562806180d85d5"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "pendente",
+        "solicitado_em": "2025-06-30T07:54:26.816Z",
+        "_id": "6879776cb5562806180d85d3"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-12T19:20:18.518Z",
+        "aprovado_em": "2025-07-13T02:19:50.411Z",
+        "_id": "6879776cb5562806180d85d4"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "rejeitado",
+        "solicitado_em": "2025-07-12T08:31:49.731Z",
+        "_id": "6879776cb5562806180d85d5"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.512Z",
+    "updated_at": "2025-07-17T22:21:32.512Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d8591",
+    "title": "Leadership Summit: Lidere uma Equipe",
+    "description": "Monte e lidere uma equipe multidisciplinar para resolver um desafio complexo. Demonstre habilidades de liderança e colaboração efetiva.",
+    "category": "6879776ab5562806180d856a",
+    "difficulty": "Avançado",
+    "duration": "4 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Programa de liderança + R$ 10.000",
+        "value": "R$ 10.000",
+        "_id": "6879776cb5562806180d8592"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Workshop de gestão + R$ 5.000",
+        "value": "R$ 5.000",
+        "_id": "6879776cb5562806180d8593"
+      }
+    ],
+    "requirements": [
+      "Formar equipe de pelo menos 4 pessoas",
+      "Demonstrar liderança efetiva",
+      "Resultado colaborativo excepcional",
+      "Feedback positivo da equipe"
+    ],
+    "status": "Em Breve",
+    "start_date": "2025-07-21T15:44:14.821Z",
+    "end_date": "2025-08-08T07:56:44.234Z",
+    "featured": true,
+    "created_by": "6879776cb5562806180d8579",
+    "favoritos": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8574",
+      "6879333d8230fadd055093b8"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T10:41:02.812Z",
+        "aprovado_em": "2025-07-17T15:53:27.688Z",
+        "_id": "6879776db5562806180d85dc"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T19:19:40.415Z",
+        "aprovado_em": "2025-07-09T01:23:18.914Z",
+        "_id": "6879776db5562806180d85dd"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-19T13:28:45.172Z",
+        "aprovado_em": "2025-06-20T14:17:09.120Z",
+        "_id": "6879776db5562806180d85de"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-25T12:03:51.501Z",
+        "aprovado_em": "2025-06-27T17:32:05.127Z",
+        "_id": "6879776db5562806180d85df"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-06T02:05:02.200Z",
+        "aprovado_em": "2025-07-10T10:39:16.404Z",
+        "_id": "6879776db5562806180d85e0"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T10:41:02.812Z",
+        "aprovado_em": "2025-07-17T15:53:27.688Z",
+        "_id": "6879776db5562806180d85dc"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T19:19:40.415Z",
+        "aprovado_em": "2025-07-09T01:23:18.914Z",
+        "_id": "6879776db5562806180d85dd"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-19T13:28:45.172Z",
+        "aprovado_em": "2025-06-20T14:17:09.120Z",
+        "_id": "6879776db5562806180d85de"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-25T12:03:51.501Z",
+        "aprovado_em": "2025-06-27T17:32:05.127Z",
+        "_id": "6879776db5562806180d85df"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-06T02:05:02.200Z",
+        "aprovado_em": "2025-07-10T10:39:16.404Z",
+        "_id": "6879776db5562806180d85e0"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b2",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-17T05:06:02.839Z",
+        "aprovado_em": "2025-07-17T18:04:22.825Z",
+        "_id": "6879776eb5562806180d869f"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.512Z",
+    "updated_at": "2025-07-17T22:21:32.512Z",
+    "__v": 3
+  },
+  {
+    "_id": "6879776cb5562806180d8594",
+    "title": "Social Impact: Mudança Real",
+    "description": "Desenvolva um projeto que gere impacto social positivo real e mensurável. Foque em ética, transparência e benefício para a sociedade.",
+    "category": "6879776ab5562806180d856b",
+    "difficulty": "Intermediário",
+    "duration": "5 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Fundo para implementação + R$ 18.000",
+        "value": "R$ 18.000",
+        "_id": "6879776cb5562806180d8595"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Mentoria em impacto social + R$ 9.000",
+        "value": "R$ 9.000",
+        "_id": "6879776cb5562806180d8596"
+      }
+    ],
+    "requirements": [
+      "Impacto social mensurável",
+      "Transparência total",
+      "Sustentabilidade do projeto",
+      "Relatório de impacto"
+    ],
+    "status": "Em Breve",
+    "start_date": "2025-08-04T13:12:33.694Z",
+    "end_date": "2025-08-28T20:02:51.394Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d857a",
+    "favoritos": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8576"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-19T19:36:50.511Z",
+        "_id": "6879776db5562806180d85e9"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-20T11:56:46.915Z",
+        "aprovado_em": "2025-06-20T15:27:41.995Z",
+        "_id": "6879776db5562806180d85ea"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-16T03:52:00.643Z",
+        "aprovado_em": "2025-07-17T04:59:09.477Z",
+        "_id": "6879776db5562806180d85eb"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-19T19:36:50.511Z",
+        "_id": "6879776db5562806180d85e9"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-20T11:56:46.915Z",
+        "aprovado_em": "2025-06-20T15:27:41.995Z",
+        "_id": "6879776db5562806180d85ea"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-16T03:52:00.643Z",
+        "aprovado_em": "2025-07-17T04:59:09.477Z",
+        "_id": "6879776db5562806180d85eb"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b3",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-29T22:56:39.186Z",
+        "aprovado_em": "2025-07-05T02:04:17.958Z",
+        "_id": "6879776eb5562806180d86a1"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.512Z",
+    "updated_at": "2025-07-17T22:21:32.512Z",
+    "__v": 2
+  },
+  {
+    "_id": "6879776cb5562806180d8597",
+    "title": "Resilience Challenge: Supere os Obstáculos",
+    "description": "Enfrente uma série de desafios progressivamente mais difíceis. Demonstre capacidade de adaptação, aprendizado com falhas e superação.",
+    "category": "6879776ab5562806180d856c",
+    "difficulty": "Avançado",
+    "duration": "3 semanas intensivas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Programa de desenvolvimento + R$ 8.000",
+        "value": "R$ 8.000",
+        "_id": "6879776cb5562806180d8598"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Coaching pessoal + R$ 4.000",
+        "value": "R$ 4.000",
+        "_id": "6879776cb5562806180d8599"
+      }
+    ],
+    "requirements": [
+      "Completar todos os módulos",
+      "Documentar aprendizados com falhas",
+      "Demonstrar evolução",
+      "Reflexão sobre crescimento pessoal"
+    ],
+    "status": "Ativo",
+    "start_date": "2025-06-28T19:51:30.572Z",
+    "end_date": "2025-07-26T22:39:50.447Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d856e",
+    "favoritos": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8574"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-28T05:18:10.157Z",
+        "aprovado_em": "2025-07-04T12:56:07.381Z",
+        "_id": "6879776db5562806180d85f2"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-07-03T00:00:07.673Z",
+        "_id": "6879776db5562806180d85f3"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-02T18:48:31.460Z",
+        "aprovado_em": "2025-07-05T14:33:58.711Z",
+        "_id": "6879776db5562806180d85f4"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-28T05:18:10.157Z",
+        "aprovado_em": "2025-07-04T12:56:07.381Z",
+        "_id": "6879776db5562806180d85f2"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-07-03T00:00:07.673Z",
+        "_id": "6879776db5562806180d85f3"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-02T18:48:31.460Z",
+        "aprovado_em": "2025-07-05T14:33:58.711Z",
+        "_id": "6879776db5562806180d85f4"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.512Z",
+    "updated_at": "2025-07-17T22:21:32.512Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d859a",
+    "title": "FinTech Revolution: Soluções Financeiras Inovadoras",
+    "description": "Desenvolva uma solução FinTech que democratize o acesso a serviços financeiros, usando tecnologias emergentes como blockchain, AI ou IoT.",
+    "category": "6879776ab5562806180d8567",
+    "difficulty": "Avançado",
+    "duration": "6 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Investimento seed + R$ 25.000",
+        "value": "R$ 25.000",
+        "_id": "6879776cb5562806180d859b"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Aceleração em hub financeiro + R$ 15.000",
+        "value": "R$ 15.000",
+        "_id": "6879776cb5562806180d859c"
+      },
+      {
+        "position": "3º Lugar",
+        "description": "Mentoria especializada + R$ 8.000",
+        "value": "R$ 8.000",
+        "_id": "6879776cb5562806180d859d"
+      }
+    ],
+    "requirements": [
+      "Solução tecnológica robusta",
+      "Compliance regulatório",
+      "MVP funcional",
+      "Plano de negócios detalhado"
+    ],
+    "status": "Ativo",
+    "start_date": "2025-07-03T05:52:28.805Z",
+    "end_date": "2025-07-31T23:12:29.824Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d8577",
+    "favoritos": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8571"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "pendente",
+        "solicitado_em": "2025-07-16T11:20:55.779Z",
+        "_id": "6879776db5562806180d85fb"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T07:18:10.034Z",
+        "aprovado_em": "2025-06-25T22:37:02.764Z",
+        "_id": "6879776db5562806180d85fc"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "pendente",
+        "solicitado_em": "2025-07-16T11:20:55.779Z",
+        "_id": "6879776db5562806180d85fb"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T07:18:10.034Z",
+        "aprovado_em": "2025-06-25T22:37:02.764Z",
+        "_id": "6879776db5562806180d85fc"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.513Z",
+    "updated_at": "2025-07-17T22:21:32.513Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d859e",
+    "title": "Green Innovation Lab: Sustentabilidade em Ação",
+    "description": "Crie uma solução inovadora para enfrentar desafios ambientais urgentes. Foque em economia circular, energia renovável ou preservação ambiental.",
+    "category": "6879776ab5562806180d856b",
+    "difficulty": "Intermediário",
+    "duration": "4 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Grant para implementação + R$ 20.000",
+        "value": "R$ 20.000",
+        "_id": "6879776cb5562806180d859f"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Parceria com ONGs + R$ 12.000",
+        "value": "R$ 12.000",
+        "_id": "6879776cb5562806180d85a0"
+      }
+    ],
+    "requirements": [
+      "Impacto ambiental positivo",
+      "Viabilidade econômica",
+      "Escalabilidade da solução",
+      "Parcerias estratégicas"
+    ],
+    "status": "Ativo",
+    "start_date": "2025-06-25T08:31:59.224Z",
+    "end_date": "2025-08-03T19:41:52.321Z",
+    "featured": true,
+    "created_by": "6879776cb5562806180d8578",
+    "favoritos": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8571"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-05T10:12:30.516Z",
+        "aprovado_em": "2025-07-11T04:53:01.333Z",
+        "_id": "6879776db5562806180d8603"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-15T10:38:23.638Z",
+        "aprovado_em": "2025-07-20T10:39:22.332Z",
+        "_id": "6879776db5562806180d8604"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T21:09:11.304Z",
+        "aprovado_em": "2025-06-27T01:33:23.860Z",
+        "_id": "6879776db5562806180d8605"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-23T22:13:59.874Z",
+        "aprovado_em": "2025-06-28T08:06:34.108Z",
+        "_id": "6879776db5562806180d8606"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-05T10:12:30.516Z",
+        "aprovado_em": "2025-07-11T04:53:01.333Z",
+        "_id": "6879776db5562806180d8603"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-15T10:38:23.638Z",
+        "aprovado_em": "2025-07-20T10:39:22.332Z",
+        "_id": "6879776db5562806180d8604"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T21:09:11.304Z",
+        "aprovado_em": "2025-06-27T01:33:23.860Z",
+        "_id": "6879776db5562806180d8605"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-23T22:13:59.874Z",
+        "aprovado_em": "2025-06-28T08:06:34.108Z",
+        "_id": "6879776db5562806180d8606"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.513Z",
+    "updated_at": "2025-07-17T22:21:32.513Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85a1",
+    "title": "Digital Art & NFT: Criatividade no Metaverso",
+    "description": "Explore as fronteiras da arte digital e crie experiências imersivas usando NFTs, realidade virtual ou aumentada.",
+    "category": "6879776ab5562806180d8568",
+    "difficulty": "Intermediário",
+    "duration": "5 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Exposição digital + R$ 15.000",
+        "value": "R$ 15.000",
+        "_id": "6879776cb5562806180d85a2"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Residência artística + R$ 10.000",
+        "value": "R$ 10.000",
+        "_id": "6879776cb5562806180d85a3"
+      }
+    ],
+    "requirements": [
+      "Originalidade artística",
+      "Inovação tecnológica",
+      "Narrativa envolvente",
+      "Experiência do usuário"
+    ],
+    "status": "Ativo",
+    "start_date": "2025-06-29T13:17:52.998Z",
+    "end_date": "2025-08-13T10:51:47.386Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d8579",
+    "favoritos": [
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d856e"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T02:26:26.983Z",
+        "aprovado_em": "2025-07-12T02:03:44.821Z",
+        "_id": "6879776db5562806180d860e"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-16T16:22:02.009Z",
+        "aprovado_em": "2025-07-20T17:51:28.911Z",
+        "_id": "6879776db5562806180d860f"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T11:55:23.869Z",
+        "aprovado_em": "2025-07-10T19:05:19.312Z",
+        "_id": "6879776db5562806180d8610"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-13T04:38:09.608Z",
+        "aprovado_em": "2025-07-15T07:02:41.378Z",
+        "_id": "6879776db5562806180d8611"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T02:26:26.983Z",
+        "aprovado_em": "2025-07-12T02:03:44.821Z",
+        "_id": "6879776db5562806180d860e"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-16T16:22:02.009Z",
+        "aprovado_em": "2025-07-20T17:51:28.911Z",
+        "_id": "6879776db5562806180d860f"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T11:55:23.869Z",
+        "aprovado_em": "2025-07-10T19:05:19.312Z",
+        "_id": "6879776db5562806180d8610"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-13T04:38:09.608Z",
+        "aprovado_em": "2025-07-15T07:02:41.378Z",
+        "_id": "6879776db5562806180d8611"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b7",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-29T05:25:08.115Z",
+        "aprovado_em": "2025-07-05T12:11:31.256Z",
+        "_id": "6879776eb5562806180d86a3"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.513Z",
+    "updated_at": "2025-07-17T22:21:32.513Z",
+    "__v": 2
+  },
+  {
+    "_id": "6879776cb5562806180d85a4",
+    "title": "Youth Entrepreneurship: Jovens Transformadores",
+    "description": "Desenvolva um negócio de impacto social voltado para jovens. Demonstre como a paixão jovem pode transformar comunidades.",
+    "category": "6879776ab5562806180d8569",
+    "difficulty": "Iniciante",
+    "duration": "4 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Bolsa de estudos + R$ 18.000",
+        "value": "R$ 18.000",
+        "_id": "6879776cb5562806180d85a5"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Programa de mentoria + R$ 10.000",
+        "value": "R$ 10.000",
+        "_id": "6879776cb5562806180d85a6"
+      }
+    ],
+    "requirements": [
+      "Foco em jovens (16-25 anos)",
+      "Impacto social claro",
+      "Paixão demonstrada",
+      "Plano de implementação"
+    ],
+    "status": "Ativo",
+    "start_date": "2025-06-19T04:40:14.208Z",
+    "end_date": "2025-08-07T02:15:10.754Z",
+    "featured": false,
+    "created_by": "6879776cb5562806180d857a",
+    "favoritos": [
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8578"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-03T22:10:15.509Z",
+        "aprovado_em": "2025-07-06T12:31:46.528Z",
+        "_id": "6879776db5562806180d8619"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-09T09:30:01.196Z",
+        "aprovado_em": "2025-07-10T19:10:56.550Z",
+        "_id": "6879776db5562806180d861a"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-03T22:10:15.509Z",
+        "aprovado_em": "2025-07-06T12:31:46.528Z",
+        "_id": "6879776db5562806180d8619"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-09T09:30:01.196Z",
+        "aprovado_em": "2025-07-10T19:10:56.550Z",
+        "_id": "6879776db5562806180d861a"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b8",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-10T18:08:51.180Z",
+        "aprovado_em": "2025-07-10T01:40:03.483Z",
+        "_id": "6879776eb5562806180d86a5"
+      }
+    ],
+    "submissions": [],
+    "created_at": "2025-07-17T22:21:32.514Z",
+    "updated_at": "2025-07-17T22:21:32.514Z",
+    "__v": 2
+  },
+  {
+    "_id": "6879776cb5562806180d85a7",
+    "title": "Concurso Nacional de Inovação Tecnológica",
+    "description": "Desenvolva uma solução tecnológica inovadora que resolva um problema real da sociedade brasileira. Este é o desafio oficial da plataforma Giga Talentos.",
+    "category": "6879776ab5562806180d8567",
+    "difficulty": "Avançado",
+    "duration": "8 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Incubação + R$ 50.000",
+        "value": "R$ 50.000",
+        "_id": "6879776cb5562806180d85a8"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Mentoria + R$ 25.000",
+        "value": "R$ 25.000",
+        "_id": "6879776cb5562806180d85a9"
+      },
+      {
+        "position": "3º Lugar",
+        "description": "Curso + R$ 10.000",
+        "value": "R$ 10.000",
+        "_id": "6879776cb5562806180d85aa"
+      }
+    ],
+    "requirements": [
+      "Solução tecnológica funcional",
+      "Plano de negócio detalhado",
+      "Pitch de apresentação",
+      "Código fonte disponível"
+    ],
+    "submissions": [],
+    "status": "Ativo",
+    "start_date": "2025-07-17T22:21:32.510Z",
+    "end_date": "2025-09-11T22:21:32.510Z",
+    "featured": true,
+    "created_by": "6879776cb5562806180d856e",
+    "favoritos": [
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8577"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "pendente",
+        "solicitado_em": "2025-06-19T07:30:20.306Z",
+        "_id": "6879776db5562806180d8620"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-07-08T10:25:40.013Z",
+        "_id": "6879776db5562806180d8621"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T08:09:34.839Z",
+        "aprovado_em": "2025-07-08T08:05:08.754Z",
+        "_id": "6879776db5562806180d8622"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bc",
+        "status": "pendente",
+        "solicitado_em": "2025-06-19T07:30:20.306Z",
+        "_id": "6879776db5562806180d8620"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-07-08T10:25:40.013Z",
+        "_id": "6879776db5562806180d8621"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T08:09:34.839Z",
+        "aprovado_em": "2025-07-08T08:05:08.754Z",
+        "_id": "6879776db5562806180d8622"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85b9",
+        "status": "pendente",
+        "solicitado_em": "2025-07-11T09:00:20.969Z",
+        "_id": "6879776eb5562806180d86a7"
+      }
+    ],
+    "created_at": "2025-07-17T22:21:32.514Z",
+    "updated_at": "2025-07-17T22:21:32.514Z",
+    "__v": 2
+  },
+  {
+    "_id": "6879776cb5562806180d85ab",
+    "title": "Hackathon Empreendedorismo Social",
+    "description": "Crie uma startup com impacto social positivo. Desenvolva um modelo de negócio sustentável que resolve problemas sociais.",
+    "category": "6879776ab5562806180d856b",
+    "difficulty": "Intermediário",
+    "duration": "6 semanas",
+    "prizes": [
+      {
+        "position": "1º Lugar",
+        "description": "Investimento + R$ 30.000",
+        "value": "R$ 30.000",
+        "_id": "6879776cb5562806180d85ac"
+      },
+      {
+        "position": "2º Lugar",
+        "description": "Aceleração + R$ 15.000",
+        "value": "R$ 15.000",
+        "_id": "6879776cb5562806180d85ad"
+      }
+    ],
+    "requirements": [
+      "Impacto social mensurável",
+      "Modelo de negócio sustentável",
+      "Prototipo funcional",
+      "Apresentação executiva"
+    ],
+    "submissions": [],
+    "status": "Ativo",
+    "start_date": "2025-07-17T22:21:32.510Z",
+    "end_date": "2025-08-28T22:21:32.510Z",
+    "featured": true,
+    "created_by": "6879776cb5562806180d856e",
+    "favoritos": [
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d857a"
+    ],
+    "projetos_vinculados": [
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-06-28T22:53:50.067Z",
+        "_id": "6879776db5562806180d862a"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "pendente",
+        "solicitado_em": "2025-07-04T04:31:41.560Z",
+        "_id": "6879776db5562806180d862b"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "pendente",
+        "solicitado_em": "2025-06-28T22:53:50.067Z",
+        "_id": "6879776db5562806180d862a"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85bb",
+        "status": "pendente",
+        "solicitado_em": "2025-07-04T04:31:41.560Z",
+        "_id": "6879776db5562806180d862b"
+      },
+      {
+        "projeto_id": "6879776cb5562806180d85ba",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T21:54:38.162Z",
+        "aprovado_em": "2025-07-14T06:01:47.800Z",
+        "_id": "6879776eb5562806180d86a9"
+      }
+    ],
+    "created_at": "2025-07-17T22:21:32.514Z",
+    "updated_at": "2025-07-17T22:21:32.514Z",
+    "__v": 2
+  }
+]

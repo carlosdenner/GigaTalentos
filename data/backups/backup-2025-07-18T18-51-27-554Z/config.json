@@ -1,0 +1,41 @@
+{
+  "database": {
+    "clearExisting": true,
+    "timeout": {
+      "categoryCreation": 10000,
+      "userCreation": 15000,
+      "desafioCreation": 30000,
+      "projectCreation": 25000,
+      "videoCreation": 20000
+    }
+  },
+  "generation": {
+    "maxParticipantsPerProject": 6,
+    "projectLeadershipChance": {
+      "hasLeader": 0.4,
+      "pendingRequest": 0.3,
+      "lookingForLeader": 0.3
+    },
+    "videoMetrics": {
+      "minViews": 15000,
+      "maxViews": 65000,
+      "likeRateMin": 0.02,
+      "likeRateMax": 0.12,
+      "commentRateMin": 0.05,
+      "commentRateMax": 0.10
+    }
+  },
+  "demo": {
+    "createDemoContent": true,
+    "realYouTubeVideos": true,
+    "generateInteractions": true
+  },
+  "files": {
+    "categories": "/data/seed/categories.json",
+    "users": "/data/seed/users.json",
+    "desafios": "/data/seed/desafios.json",
+    "projectTemplates": "/data/seed/project-templates.json",
+    "adminProjects": "/data/seed/admin-projects.json",
+    "youtubeVideos": "/data/seed/youtube-videos.json"
+  }
+}

@@ -1,0 +1,3237 @@
+[
+  {
+    "_id": "6879776cb5562806180d856e",
+    "email": "carlosdenner@gmail.com",
+    "name": "Carlos Denner",
+    "avatar": "/carlos denner.jpg",
+    "account_type": "admin",
+    "bio": "Fundador e administrador da plataforma Giga Talentos. Especialista em identificação e desenvolvimento de talentos empreendedores.",
+    "location": "Brasília, DF",
+    "skills": [
+      "Platform Management",
+      "Talent Identification",
+      "Entrepreneurship",
+      "Innovation"
+    ],
+    "experience": "Expert",
+    "portfolio": "https://carlosdenner.com",
+    "categories": [],
+    "verified": true,
+    "projects_count": 0,
+    "password": "$2b$12$6rjblDG87pxNtL42gu16OOIFqcMyN53WrAzAYkWzKTILg9QcuFB6y",
+    "followers": [],
+    "following": [],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.319Z",
+    "interactionHistory": [
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T16:44:40.017Z",
+        "_id": "687a79f8f9789b7bb443e807"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T16:44:40.047Z",
+        "_id": "687a79f8dfe2eba758ed34b9"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T16:44:40.091Z",
+        "_id": "687a79f872820a28b6f86cd1"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T16:44:40.118Z",
+        "_id": "687a79f8d0b18351e48e302d"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T16:44:40.117Z",
+        "_id": "687a79f82272f687d56689cd"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T16:44:40.132Z",
+        "_id": "687a79f8930082a65310ad68"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T16:44:40.245Z",
+        "_id": "687a79f8b6763375d7247644"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T16:44:40.252Z",
+        "_id": "687a79f8e58fb7ae03d83dd2"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T16:44:40.318Z",
+        "_id": "687a79f8c5cebaedff63f85c"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T16:44:40.299Z",
+        "_id": "687a79f8934fbbbd18b06b5a"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T16:44:41.151Z",
+        "_id": "687a79f98142d9da93bbf791"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T16:44:41.474Z",
+        "_id": "687a79f9d01a915574005807"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T17:16:40.459Z",
+        "_id": "687a8178da57c6dcd27cd303"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T17:16:40.460Z",
+        "_id": "687a81787adbcd7dc970dc1f"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:16:40.539Z",
+        "_id": "687a8178da57c6dcd27cd314"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:16:40.541Z",
+        "_id": "687a81787adbcd7dc970dc30"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:16:40.534Z",
+        "_id": "687a817853bb95bfdc5592b3"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T17:16:42.605Z",
+        "_id": "687a817a2e687ee73da3bc7a"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:16:42.770Z",
+        "_id": "687a817a82e6bc2a9042e9ac"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T17:16:43.694Z",
+        "_id": "687a817bd191befd3b690e84"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:16:43.694Z",
+        "_id": "687a817bfcad10f9313ed706"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:16:43.605Z",
+        "_id": "687a817be9cf87c1a447f77e"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T17:16:43.605Z",
+        "_id": "687a817bf22126b4660f47a0"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T17:16:44.717Z",
+        "_id": "687a817cd8cc5f04c948c6de"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T17:32:46.718Z",
+        "_id": "687a853e1f9e0f59e8441d96"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:32:49.712Z",
+        "_id": "687a8541f3a15ba98d1c3249"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:32:49.654Z",
+        "_id": "687a8541e4bc1f381f1f2e74"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T17:32:49.713Z",
+        "_id": "687a854137178e49ed4b66a3"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:32:50.657Z",
+        "_id": "687a85424958762864529b64"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:32:50.882Z",
+        "_id": "687a85423310de0093c3361d"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:32:50.665Z",
+        "_id": "687a854275254bd7fc5bc2a7"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T17:32:50.661Z",
+        "_id": "687a8542cd241bb129328fb0"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T17:32:50.740Z",
+        "_id": "687a85423a5b1744a9c81507"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T17:32:49.714Z",
+        "_id": "687a85412c0d3b0e77f0295b"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:32:52.652Z",
+        "_id": "687a85444a560c6f737d734f"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T17:32:52.653Z",
+        "_id": "687a8544f0dd539e85432cc7"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:04.455Z",
+        "_id": "687a85c84a560c6f737d737f"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T17:35:04.479Z",
+        "_id": "687a85c8e4bc1f381f1f2ea3"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:04.510Z",
+        "_id": "687a85c82c0d3b0e77f0298d"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T17:35:04.522Z",
+        "_id": "687a85c83a5b1744a9c81536"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T17:35:04.555Z",
+        "_id": "687a85c83310de0093c3364a"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T17:35:04.541Z",
+        "_id": "687a85c837178e49ed4b66d6"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:04.546Z",
+        "_id": "687a85c8cd241bb129328fe4"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:04.553Z",
+        "_id": "687a85c84958762864529b95"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T17:35:04.539Z",
+        "_id": "687a85c8f0dd539e85432cf6"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T17:35:04.560Z",
+        "_id": "687a85c8f3a15ba98d1c327b"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:05.456Z",
+        "_id": "687a85c9cd241bb129329018"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:05.468Z",
+        "_id": "687a85c9cd241bb129329047"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T17:35:31.145Z",
+        "_id": "687a85e3cd241bb12932907c"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T17:35:31.166Z",
+        "_id": "687a85e337178e49ed4b670d"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T17:35:31.258Z",
+        "_id": "687a85e3cd241bb1293290b1"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:31.270Z",
+        "_id": "687a85e33310de0093c33684"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:31.272Z",
+        "_id": "687a85e34958762864529bd0"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T17:35:31.275Z",
+        "_id": "687a85e3f3a15ba98d1c32b5"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T17:35:31.260Z",
+        "_id": "687a85e337178e49ed4b6742"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:31.272Z",
+        "_id": "687a85e3f0dd539e85432d30"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:31.314Z",
+        "_id": "687a85e33a5b1744a9c81572"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T17:35:31.309Z",
+        "_id": "687a85e34a560c6f737d73b4"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:31.342Z",
+        "_id": "687a85e3e4bc1f381f1f2ee3"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:35:31.341Z",
+        "_id": "687a85e375254bd7fc5bc318"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T17:40:01.293Z",
+        "_id": "687a86f1257f9252d3ced323"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T17:40:01.348Z",
+        "_id": "687a86f1257f9252d3ced362"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T17:40:01.381Z",
+        "_id": "687a86f1257f9252d3ced3a0"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T17:40:01.401Z",
+        "_id": "687a86f1257f9252d3ced3de"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T17:40:01.428Z",
+        "_id": "687a86f1257f9252d3ced41c"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T17:40:01.460Z",
+        "_id": "687a86f1257f9252d3ced45a"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:40:01.761Z",
+        "_id": "687a86f1257f9252d3ced4a6"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:40:01.855Z",
+        "_id": "687a86f1257f9252d3ced4f4"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:40:01.870Z",
+        "_id": "687a86f1257f9252d3ced539"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:40:01.886Z",
+        "_id": "687a86f1257f9252d3ced57e"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:40:01.904Z",
+        "_id": "687a86f1257f9252d3ced5c3"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T17:40:01.923Z",
+        "_id": "687a86f1257f9252d3ced608"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:05:04.703Z",
+        "_id": "687a8cd0257f9252d3cedacb"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:05:05.443Z",
+        "_id": "687a8cd1257f9252d3cedb15"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:05:05.464Z",
+        "_id": "687a8cd1257f9252d3cedb5f"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:05:05.685Z",
+        "_id": "687a8cd1257f9252d3cedba9"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:05:05.703Z",
+        "_id": "687a8cd1257f9252d3cedbf4"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:05:05.721Z",
+        "_id": "687a8cd1257f9252d3cedc3e"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:05:06.153Z",
+        "_id": "687a8cd2257f9252d3cedc9f"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:05:06.192Z",
+        "_id": "687a8cd2257f9252d3cedcef"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:05:06.211Z",
+        "_id": "687a8cd2257f9252d3cedd3f"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:05:06.225Z",
+        "_id": "687a8cd2257f9252d3cedd8f"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:05:06.380Z",
+        "_id": "687a8cd2257f9252d3cedddf"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:05:06.460Z",
+        "_id": "687a8cd2257f9252d3cede2f"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:06:48.596Z",
+        "_id": "687a8d38257f9252d3cede8b"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:06:48.623Z",
+        "_id": "687a8d38257f9252d3cedee1"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:06:48.637Z",
+        "_id": "687a8d38257f9252d3cedf37"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:06:48.650Z",
+        "_id": "687a8d38257f9252d3cedf8d"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:06:48.667Z",
+        "_id": "687a8d38257f9252d3cedfe3"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:06:48.860Z",
+        "_id": "687a8d38257f9252d3cee098"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:06:48.880Z",
+        "_id": "687a8d38257f9252d3cee0f3"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:06:48.893Z",
+        "_id": "687a8d38257f9252d3cee14e"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:06:48.924Z",
+        "_id": "687a8d38257f9252d3cee1a9"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:06:48.935Z",
+        "_id": "687a8d38257f9252d3cee204"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:06:48.948Z",
+        "_id": "687a8d38257f9252d3cee25f"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:06:49.062Z",
+        "_id": "687a8d39257f9252d3cee2c1"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:08:09.223Z",
+        "_id": "687a8d89257f9252d3cee471"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:08:09.254Z",
+        "_id": "687a8d89257f9252d3cee4d3"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:08:09.296Z",
+        "_id": "687a8d89257f9252d3cee535"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:08:09.313Z",
+        "_id": "687a8d89257f9252d3cee597"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:08:09.326Z",
+        "_id": "687a8d89257f9252d3cee5f9"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:08:09.342Z",
+        "_id": "687a8d89257f9252d3cee65b"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:08:09.551Z",
+        "_id": "687a8d89257f9252d3cee6d5"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:08:09.568Z",
+        "_id": "687a8d89257f9252d3cee73d"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:08:09.586Z",
+        "_id": "687a8d89257f9252d3cee7a5"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:08:09.606Z",
+        "_id": "687a8d89257f9252d3cee80d"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:08:09.666Z",
+        "_id": "687a8d89257f9252d3cee875"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:08:09.739Z",
+        "_id": "687a8d89257f9252d3cee8dd"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:10:29.684Z",
+        "_id": "687a8e15257f9252d3cee9c7"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:10:29.726Z",
+        "_id": "687a8e15257f9252d3ceea35"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:10:29.749Z",
+        "_id": "687a8e15257f9252d3ceeaa3"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:10:29.771Z",
+        "_id": "687a8e15257f9252d3ceeb11"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:10:29.792Z",
+        "_id": "687a8e15257f9252d3ceeb7f"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:10:29.954Z",
+        "_id": "687a8e15257f9252d3ceec02"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:10:29.967Z",
+        "_id": "687a8e15257f9252d3ceec75"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:10:29.990Z",
+        "_id": "687a8e15257f9252d3ceece8"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:10:30.024Z",
+        "_id": "687a8e16257f9252d3ceed5b"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:10:30.059Z",
+        "_id": "687a8e16257f9252d3ceedce"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:10:30.077Z",
+        "_id": "687a8e16257f9252d3ceee41"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:10:30.265Z",
+        "_id": "687a8e16257f9252d3ceeebb"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:12:16.363Z",
+        "_id": "687a8e80046a1f4ad7e3737b"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:16.453Z",
+        "_id": "687a8e80046a1f4ad7e373f7"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:12:16.494Z",
+        "_id": "687a8e809634157c7b7caa8f"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:12:19.599Z",
+        "_id": "687a8e83bc3d79fa48555d15"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:19.600Z",
+        "_id": "687a8e83b6989e6a8b850ee6"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:12:19.599Z",
+        "_id": "687a8e8310293c1643ccc20a"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:12:20.435Z",
+        "_id": "687a8e84257f9252d3ceef3f"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:12:20.456Z",
+        "_id": "687a8e84257f9252d3ceefbc"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:12:20.478Z",
+        "_id": "687a8e84257f9252d3cef03b"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:12:20.497Z",
+        "_id": "687a8e84257f9252d3cef0b9"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:12:20.515Z",
+        "_id": "687a8e84257f9252d3cef139"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:19.806Z",
+        "_id": "687a8e83b75a826060e56044"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:12:20.534Z",
+        "_id": "687a8e84257f9252d3cef1b9"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:12:19.785Z",
+        "_id": "687a8e833f834a764fb0502e"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:20.712Z",
+        "_id": "687a8e84257f9252d3cef241"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:20.608Z",
+        "_id": "687a8e84d49173bd1b00c898"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:20.620Z",
+        "_id": "687a8e8489134dc7deecac45"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:12:20.607Z",
+        "_id": "687a8e84014e10a91239991a"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:19.758Z",
+        "_id": "687a8e8363c2593b95b5b8df"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:21.434Z",
+        "_id": "687a8e85257f9252d3cef2d0"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:21.452Z",
+        "_id": "687a8e85257f9252d3cef35c"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:21.478Z",
+        "_id": "687a8e85257f9252d3cef471"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:21.507Z",
+        "_id": "687a8e85257f9252d3cef4fb"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:21.652Z",
+        "_id": "687a8e85257f9252d3cef58d"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:12:53.163Z",
+        "_id": "687a8ea5046a1f4ad7e3748a"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:12:53.130Z",
+        "_id": "687a8ea563c2593b95b5b981"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:12:53.202Z",
+        "_id": "687a8ea5014e10a9123999b6"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:12:53.224Z",
+        "_id": "687a8ea53f834a764fb050ca"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:12:53.240Z",
+        "_id": "687a8ea5b75a826060e560e1"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:53.220Z",
+        "_id": "687a8ea5b6989e6a8b850f82"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:53.249Z",
+        "_id": "687a8ea5bc3d79fa48555db2"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:12:53.210Z",
+        "_id": "687a8ea510293c1643ccc2a7"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:53.224Z",
+        "_id": "687a8ea5d49173bd1b00c934"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:53.177Z",
+        "_id": "687a8ea589134dc7deecace0"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:54.877Z",
+        "_id": "687a8ea619567a83aaa4e67e"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:12:54.866Z",
+        "_id": "687a8ea66e67a6d4d56df4eb"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:13:35.007Z",
+        "_id": "687a8ecf257f9252d3cef62c"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:13:35.094Z",
+        "_id": "687a8ecf257f9252d3cef6d0"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:13:35.111Z",
+        "_id": "687a8ecf257f9252d3cef76f"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:13:35.128Z",
+        "_id": "687a8ecf257f9252d3cef80e"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:13:35.142Z",
+        "_id": "687a8ecf257f9252d3cef8ad"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:13:35.229Z",
+        "_id": "687a8ecf257f9252d3cef9ee"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:13:35.391Z",
+        "_id": "687a8ecf257f9252d3cefa93"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:13:35.689Z",
+        "_id": "687a8ecf257f9252d3cefb3c"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:13:35.715Z",
+        "_id": "687a8ecf257f9252d3cefbe1"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:13:35.730Z",
+        "_id": "687a8ecf257f9252d3cefc86"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:13:35.744Z",
+        "_id": "687a8ecf257f9252d3cefd2b"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:13:35.834Z",
+        "_id": "687a8ecf257f9252d3cefdd5"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "anonymous",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:19:20.133Z",
+        "_id": "687a9028257f9252d3ceff55"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "anonymous",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:19:20.216Z",
+        "_id": "687a9028257f9252d3cf0000"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "anonymous",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:19:20.240Z",
+        "_id": "687a9028257f9252d3cf00aa"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "anonymous",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:19:20.255Z",
+        "_id": "687a9028257f9252d3cf0154"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "anonymous",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:19:20.268Z",
+        "_id": "687a9028257f9252d3cf01fe"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "anonymous",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:19:20.556Z",
+        "_id": "687a9028257f9252d3cf0365"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "anonymous"
+        },
+        "timestamp": "2025-07-18T18:19:20.654Z",
+        "_id": "687a9028257f9252d3cf0414"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "anonymous"
+        },
+        "timestamp": "2025-07-18T18:19:20.678Z",
+        "_id": "687a9028257f9252d3cf04c3"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "anonymous"
+        },
+        "timestamp": "2025-07-18T18:19:20.798Z",
+        "_id": "687a9028257f9252d3cf0572"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "anonymous"
+        },
+        "timestamp": "2025-07-18T18:19:21.200Z",
+        "_id": "687a9029257f9252d3cf0621"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "anonymous"
+        },
+        "timestamp": "2025-07-18T18:19:21.280Z",
+        "_id": "687a9029257f9252d3cf06d0"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:19:21.533Z",
+        "_id": "687a9029257f9252d3cf078a"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:19:21.571Z",
+        "_id": "687a9029257f9252d3cf0840"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "anonymous"
+        },
+        "timestamp": "2025-07-18T18:19:21.583Z",
+        "_id": "687a9029257f9252d3cf08f5"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:19:21.644Z",
+        "_id": "687a9029257f9252d3cf09aa"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:19:21.658Z",
+        "_id": "687a9029257f9252d3cf0a5f"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:19:21.796Z",
+        "_id": "687a9029257f9252d3cf0bd6"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:19:21.811Z",
+        "_id": "687a9029257f9252d3cf0c90"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:21.824Z",
+        "_id": "687a9029257f9252d3cf0d4a"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:21.946Z",
+        "_id": "687a9029257f9252d3cf0e05"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:21.964Z",
+        "_id": "687a9029257f9252d3cf0ebf"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.100Z",
+        "_id": "687a902a257f9252d3cf0f83"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.119Z",
+        "_id": "687a902a257f9252d3cf1042"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.134Z",
+        "_id": "687a902a257f9252d3cf1101"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:19:22.217Z",
+        "_id": "687a902a257f9252d3cf11c6"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:19:22.232Z",
+        "_id": "687a902a257f9252d3cf1288"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:19:22.249Z",
+        "_id": "687a902a257f9252d3cf134a"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:19:22.308Z",
+        "_id": "687a902a257f9252d3cf1411"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:19:22.323Z",
+        "_id": "687a902a257f9252d3cf14d7"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:19:22.352Z",
+        "_id": "687a902a257f9252d3cf159d"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.550Z",
+        "_id": "687a902a257f9252d3cf1668"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.567Z",
+        "_id": "687a902a257f9252d3cf1730"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.584Z",
+        "_id": "687a902a257f9252d3cf17f8"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.663Z",
+        "_id": "687a902a257f9252d3cf18c6"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.678Z",
+        "_id": "687a902a257f9252d3cf1991"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:19:22.695Z",
+        "_id": "687a902a257f9252d3cf1a5c"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:20:58.658Z",
+        "_id": "687a908a257f9252d3cf1b37"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:20:58.692Z",
+        "_id": "687a908a257f9252d3cf1c05"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:20:58.727Z",
+        "_id": "687a908a257f9252d3cf1cd6"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:20:58.771Z",
+        "_id": "687a908a257f9252d3cf1e70"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:20:58.793Z",
+        "_id": "687a908a257f9252d3cf1f3e"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:20:58.976Z",
+        "_id": "687a908a257f9252d3cf2020"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:20:58.998Z",
+        "_id": "687a908a257f9252d3cf20f3"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:20:59.100Z",
+        "_id": "687a908b257f9252d3cf21c6"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:20:59.128Z",
+        "_id": "687a908b257f9252d3cf2299"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:20:59.155Z",
+        "_id": "687a908b257f9252d3cf236c"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:20:59.177Z",
+        "_id": "687a908b257f9252d3cf243f"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:20:59.285Z",
+        "_id": "687a908b257f9252d3cf2519"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 1
+        },
+        "timestamp": "2025-07-18T18:50:59.353Z",
+        "_id": "687a9793257f9252d3cf2604"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 2
+        },
+        "timestamp": "2025-07-18T18:51:00.190Z",
+        "_id": "687a9794257f9252d3cf26e1"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 0
+        },
+        "timestamp": "2025-07-18T18:51:00.872Z",
+        "_id": "687a9794257f9252d3cf2893"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 3
+        },
+        "timestamp": "2025-07-18T18:51:01.656Z",
+        "_id": "687a9795257f9252d3cf296d"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 4
+        },
+        "timestamp": "2025-07-18T18:51:03.409Z",
+        "_id": "687a9797257f9252d3cf2a51"
+      },
+      {
+        "contentId": "6879776cb5562806180d8591",
+        "contentType": "desafio",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 1,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:51:03.518Z",
+        "_id": "687a9797257f9252d3cf2b35"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "userType": "admin",
+          "position": 5
+        },
+        "timestamp": "2025-07-18T18:51:03.536Z",
+        "_id": "687a9797257f9252d3cf2c14"
+      },
+      {
+        "contentId": "6879776cb5562806180d85af",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 0,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:51:03.564Z",
+        "_id": "687a9797257f9252d3cf2cf3"
+      },
+      {
+        "contentId": "68797770b5562806180d86eb",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 3,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:51:03.585Z",
+        "_id": "687a9797257f9252d3cf2dd2"
+      },
+      {
+        "contentId": "68797770b5562806180d86e8",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 2,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:51:03.602Z",
+        "_id": "687a9797257f9252d3cf2eb1"
+      },
+      {
+        "contentId": "68797770b5562806180d86e9",
+        "contentType": "video",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 4,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:51:04.899Z",
+        "_id": "687a9798257f9252d3cf2f96"
+      },
+      {
+        "contentId": "6879776cb5562806180d85b0",
+        "contentType": "projeto",
+        "action": "view",
+        "metadata": {
+          "source": "featured-section",
+          "position": 5,
+          "userType": "admin"
+        },
+        "timestamp": "2025-07-18T18:51:04.992Z",
+        "_id": "687a9798257f9252d3cf307c"
+      }
+    ],
+    "__v": 228
+  },
+  {
+    "_id": "6879776cb5562806180d856f",
+    "email": "ana.silva@email.com",
+    "name": "Ana Silva",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "fan",
+    "bio": "Apaixonada por tecnologia e sempre em busca de novos aprendizados.",
+    "location": "São Paulo, SP",
+    "skills": [],
+    "experience": "Iniciante",
+    "portfolio": "https://ana-silva.dev",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [],
+    "following": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8576"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.320Z",
+    "interactionHistory": [],
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d8570",
+    "email": "pedro.santos@email.com",
+    "name": "Pedro Santos",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "fan",
+    "bio": "Estudante de design gráfico interessado em projetos criativos.",
+    "location": "Rio de Janeiro, RJ",
+    "skills": [],
+    "experience": "Iniciante",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [],
+    "following": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8575"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.320Z",
+    "interactionHistory": [],
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d8571",
+    "email": "maria.oliveira@email.com",
+    "name": "Maria Oliveira",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "fan",
+    "bio": "Entusiasta de marketing digital e tendências.",
+    "location": "Belo Horizonte, MG",
+    "skills": [],
+    "experience": "Intermediário",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [],
+    "following": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8574"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.320Z",
+    "interactionHistory": [],
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d8572",
+    "email": "joao.dev@email.com",
+    "name": "João Desenvolvedor",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "talent",
+    "bio": "Desenvolvedor Full Stack com 3 anos de experiência em React e Node.js.",
+    "location": "São Paulo, SP",
+    "skills": [
+      "React",
+      "Node.js",
+      "TypeScript",
+      "MongoDB"
+    ],
+    "experience": "Intermediário",
+    "portfolio": "https://joao-dev.com",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8574"
+    ],
+    "following": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8573"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.320Z",
+    "interactionHistory": [],
+    "__v": 6
+  },
+  {
+    "_id": "6879776cb5562806180d8573",
+    "email": "carla.design@email.com",
+    "name": "Carla Designer",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "talent",
+    "bio": "Designer UX/UI especializada em experiências digitais inovadoras.",
+    "location": "Rio de Janeiro, RJ",
+    "skills": [
+      "Figma",
+      "Adobe XD",
+      "Prototyping",
+      "User Research"
+    ],
+    "experience": "Avançado",
+    "portfolio": "https://carla-design.com",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8575"
+    ],
+    "following": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8574"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.320Z",
+    "interactionHistory": [],
+    "__v": 7
+  },
+  {
+    "_id": "6879776cb5562806180d8574",
+    "email": "lucas.frontend@email.com",
+    "name": "Lucas Frontend",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "talent",
+    "bio": "Especialista em desenvolvimento frontend com foco em performance.",
+    "location": "Florianópolis, SC",
+    "skills": [
+      "Vue.js",
+      "React",
+      "CSS",
+      "JavaScript",
+      "Performance"
+    ],
+    "experience": "Avançado",
+    "portfolio": "https://lucas-frontend.dev",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8573"
+    ],
+    "following": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8572"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.320Z",
+    "interactionHistory": [],
+    "__v": 5
+  },
+  {
+    "_id": "6879776cb5562806180d8575",
+    "email": "sofia.backend@email.com",
+    "name": "Sofia Backend",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "talent",
+    "bio": "Desenvolvedora backend especializada em arquiteturas escaláveis.",
+    "location": "Brasília, DF",
+    "skills": [
+      "Python",
+      "Django",
+      "PostgreSQL",
+      "AWS",
+      "Docker"
+    ],
+    "experience": "Avançado",
+    "portfolio": "https://sofia-backend.dev",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8573"
+    ],
+    "following": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.321Z",
+    "interactionHistory": [],
+    "__v": 4
+  },
+  {
+    "_id": "6879776cb5562806180d8576",
+    "email": "rafael.mobile@email.com",
+    "name": "Rafael Mobile",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "talent",
+    "bio": "Desenvolvedor mobile com experiência em React Native e Flutter.",
+    "location": "Curitiba, PR",
+    "skills": [
+      "React Native",
+      "Flutter",
+      "iOS",
+      "Android"
+    ],
+    "experience": "Intermediário",
+    "portfolio": "https://rafael-mobile.dev",
+    "categories": [],
+    "verified": false,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575"
+    ],
+    "following": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8572"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.321Z",
+    "interactionHistory": [],
+    "__v": 6
+  },
+  {
+    "_id": "6879776cb5562806180d8577",
+    "email": "carlos.tech@email.com",
+    "name": "Dr. Carlos Tech",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "mentor",
+    "bio": "CTO com 15 anos de experiência em tecnologia. Mentor de startups e projetos inovadores.",
+    "location": "São Paulo, SP",
+    "skills": [
+      "Leadership",
+      "Architecture",
+      "Strategy",
+      "Mentoring"
+    ],
+    "experience": "Expert",
+    "portfolio": "https://carlos-tech.com",
+    "categories": [
+      "Tecnologia",
+      "Empreendedorismo"
+    ],
+    "verified": true,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8576"
+    ],
+    "following": [],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.321Z",
+    "interactionHistory": [],
+    "__v": 3
+  },
+  {
+    "_id": "6879776cb5562806180d8578",
+    "email": "marina.ux@email.com",
+    "name": "Prof. Marina UX",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "mentor",
+    "bio": "Design Leader e professora universitária. Especialista em Design Thinking e UX Strategy.",
+    "location": "Rio de Janeiro, RJ",
+    "skills": [
+      "Design Thinking",
+      "UX Strategy",
+      "Team Leadership"
+    ],
+    "experience": "Expert",
+    "portfolio": "https://marina-ux.com",
+    "categories": [
+      "Design",
+      "Educação"
+    ],
+    "verified": true,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8579"
+    ],
+    "following": [
+      "6879776cb5562806180d857a"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.321Z",
+    "interactionHistory": [],
+    "__v": 7
+  },
+  {
+    "_id": "6879776cb5562806180d8579",
+    "email": "roberto.sustentavel@email.com",
+    "name": "Eng. Roberto Sustentável",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "mentor",
+    "bio": "Engenheiro ambiental e consultor em sustentabilidade. Mentor de projetos de impacto social.",
+    "location": "Porto Alegre, RS",
+    "skills": [
+      "Sustainability",
+      "Environmental Engineering",
+      "Impact Assessment"
+    ],
+    "experience": "Expert",
+    "portfolio": "https://roberto-sustentavel.com",
+    "categories": [
+      "Sustentabilidade",
+      "Empreendedorismo"
+    ],
+    "verified": true,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8572"
+    ],
+    "following": [
+      "6879776cb5562806180d8578"
+    ],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.321Z",
+    "interactionHistory": [],
+    "__v": 6
+  },
+  {
+    "_id": "6879776cb5562806180d857a",
+    "email": "juliana.marketing@email.com",
+    "name": "Dra. Juliana Marketing",
+    "avatar": "/placeholder-user.jpg",
+    "account_type": "mentor",
+    "bio": "VP de Marketing com vasta experiência em growth hacking e marketing digital.",
+    "location": "São Paulo, SP",
+    "skills": [
+      "Growth Hacking",
+      "Digital Marketing",
+      "Brand Strategy"
+    ],
+    "experience": "Expert",
+    "portfolio": "https://juliana-marketing.com",
+    "categories": [
+      "Marketing",
+      "Empreendedorismo"
+    ],
+    "verified": true,
+    "projects_count": 0,
+    "password": "$2b$12$C0nUTUhtdc/jKdO7NhRM6Os.nk9soloVveMLfwoWtRKBMBTK.u8bu",
+    "followers": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8578"
+    ],
+    "following": [],
+    "preferences": {
+      "categories": [],
+      "topics": [],
+      "contentTypes": []
+    },
+    "created_at": "2025-07-17T22:21:32.321Z",
+    "interactionHistory": [],
+    "__v": 4
+  }
+]

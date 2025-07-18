@@ -1,0 +1,572 @@
+[
+  {
+    "_id": "68797771b5562806180d87a5",
+    "remetente": "6879776cb5562806180d8577",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Tenho experiência na sua área e gostaria de te apoiar.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-13T21:19:33.011Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87a6",
+    "remetente": "6879776cb5562806180d8579",
+    "destinatario": "6879776cb5562806180d8575",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Você tem potencial incrível, podemos fazer uma mentoria?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-13T02:24:46.794Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87a7",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Podemos agendar um café para conversar sobre seu futuro?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-04T00:47:06.140Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87a8",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Olá! Vi seu projeto e gostaria de oferecer mentoria.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-02T20:46:28.730Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87a9",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Sua apresentação foi excelente! Vamos trocar ideias?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-11T20:44:59.504Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87aa",
+    "remetente": "6879776cb5562806180d8577",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Parabéns pelo trabalho! Posso ajudar com algumas dicas?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-14T04:07:46.122Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87ab",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Olá! Vi seu projeto e gostaria de oferecer mentoria.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-06-28T02:12:14.365Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87ac",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8575",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Podemos agendar um café para conversar sobre seu futuro?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-13T01:46:30.532Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87ad",
+    "remetente": "6879776cb5562806180d8577",
+    "destinatario": "6879776cb5562806180d8576",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Você tem potencial incrível, podemos fazer uma mentoria?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-16T10:23:56.075Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87ae",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8576",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Olá! Vi seu projeto e gostaria de oferecer mentoria.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-02T13:55:24.018Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87af",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Interessado em discutir estratégias para o seu projeto.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-13T16:59:07.759Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b0",
+    "remetente": "6879776cb5562806180d8577",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Tenho experiência na sua área e gostaria de te apoiar.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-08T12:58:50.208Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b1",
+    "remetente": "6879776cb5562806180d8578",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Olá! Vi seu projeto e gostaria de oferecer mentoria.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-15T17:57:13.104Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b2",
+    "remetente": "6879776cb5562806180d8578",
+    "destinatario": "6879776cb5562806180d8576",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Olá! Vi seu projeto e gostaria de oferecer mentoria.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-06-29T09:43:36.932Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b3",
+    "remetente": "6879776cb5562806180d8577",
+    "destinatario": "6879776cb5562806180d8576",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Interessado em discutir estratégias para o seu projeto.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-09T15:07:11.200Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b4",
+    "remetente": "6879776cb5562806180d857a",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Oferta de Mentoria",
+    "mensagem": "Que tal conversarmos sobre oportunidades de crescimento?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-04T01:58:50.379Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b5",
+    "remetente": "6879776cb5562806180d8572",
+    "destinatario": "6879776cb5562806180d8576",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Vi seu trabalho e acho que podemos fazer algo incrível!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-07T17:06:23.636Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b6",
+    "remetente": "6879776cb5562806180d8576",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Acho que nossos projetos podem se complementar.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-12T09:28:06.611Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b7",
+    "remetente": "6879776cb5562806180d8572",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Que tal criarmos um projeto em conjunto?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-09T19:59:12.089Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b8",
+    "remetente": "6879776cb5562806180d8572",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Vi seu trabalho e acho que podemos fazer algo incrível!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-04T23:34:15.447Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87b9",
+    "remetente": "6879776cb5562806180d8574",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Tenho uma ideia que combina com seu expertise.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-16T06:10:00.749Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87ba",
+    "remetente": "6879776cb5562806180d8573",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Acho que nossos projetos podem se complementar.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-12T12:11:20.434Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87bb",
+    "remetente": "6879776cb5562806180d8572",
+    "destinatario": "6879776cb5562806180d8575",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Vamos fazer networking e trocar experiências?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-04T06:45:59.519Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87bc",
+    "remetente": "6879776cb5562806180d8574",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Vamos fazer networking e trocar experiências?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-09T11:55:33.497Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87bd",
+    "remetente": "6879776cb5562806180d8573",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Tenho uma ideia que combina com seu expertise.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-08T06:52:19.638Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87be",
+    "remetente": "6879776cb5562806180d8574",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Proposta de Colaboração",
+    "mensagem": "Acho que nossos projetos podem se complementar.",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-14T04:24:24.180Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87bf",
+    "remetente": "6879776cb5562806180d856f",
+    "destinatario": "6879776cb5562806180d8574",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Estou seguindo suas dicas e funcionando!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-11T10:08:52.337Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c0",
+    "remetente": "6879776cb5562806180d856f",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Estou seguindo suas dicas e funcionando!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-12T20:45:26.871Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c1",
+    "remetente": "6879776cb5562806180d8570",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Você é uma inspiração para muitos!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-07T03:58:16.421Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c2",
+    "remetente": "6879776cb5562806180d8570",
+    "destinatario": "6879776cb5562806180d8575",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Que projeto incrível! Como posso aprender mais?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-16T00:15:03.813Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c3",
+    "remetente": "6879776cb5562806180d856f",
+    "destinatario": "6879776cb5562806180d8573",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Posso fazer uma pergunta sobre empreendedorismo?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-02T11:34:11.441Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c4",
+    "remetente": "6879776cb5562806180d8570",
+    "destinatario": "6879776cb5562806180d8576",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Sou fã do seu trabalho, continue assim!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-14T10:20:53.517Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c5",
+    "remetente": "6879776cb5562806180d856f",
+    "destinatario": "6879776cb5562806180d857a",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Que projeto incrível! Como posso aprender mais?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-07-05T19:16:20.516Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c6",
+    "remetente": "6879776cb5562806180d8570",
+    "destinatario": "6879776cb5562806180d8572",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Você é uma inspiração para muitos!",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-06-25T21:44:58.485Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c7",
+    "remetente": "6879776cb5562806180d8570",
+    "destinatario": "6879776cb5562806180d857a",
+    "assunto": "Mensagem de Apoio",
+    "mensagem": "Quando vai ter novo conteúdo?",
+    "tipo": "general",
+    "metadata": {
+      "status": "pending"
+    },
+    "data_envio": "2025-06-25T19:30:06.018Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c8",
+    "remetente": "6879776cb5562806180d8574",
+    "destinatario": "6879776cb5562806180d8578",
+    "assunto": "Solicitação de Mentoria - Projeto: StartupHub - Ecossistema Empreendedor",
+    "mensagem": "Olá Prof. Marina UX,\n\nGostaria de convidá-lo para ser mentor/sponsor do projeto \"StartupHub - Ecossistema Empreendedor\".\n\nO projeto é focado em 6879776ab5562806180d8569 e usamos tecnologias como Next.js, TypeScript.\n\nSeria uma honra ter sua orientação e experiência para ajudar no desenvolvimento deste projeto.\n\nObrigado!",
+    "tipo": "mentorship_request",
+    "metadata": {
+      "projeto_id": "6879776cb5562806180d85b1",
+      "tipo_solicitacao": "mentorship",
+      "status": "pending"
+    },
+    "data_envio": "2025-07-16T02:45:15.519Z",
+    "lida": true,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87c9",
+    "remetente": "6879776cb5562806180d8575",
+    "destinatario": "6879776cb5562806180d8577",
+    "assunto": "Solicitação de Mentoria - Projeto: TeamSync - Gestão Colaborativa",
+    "mensagem": "Olá Dr. Carlos Tech,\n\nGostaria de convidá-lo para ser mentor/sponsor do projeto \"TeamSync - Gestão Colaborativa\".\n\nO projeto é focado em 6879776ab5562806180d856a e usamos tecnologias como Vue.js, Node.js.\n\nSeria uma honra ter sua orientação e experiência para ajudar no desenvolvimento deste projeto.\n\nObrigado!",
+    "tipo": "mentorship_request",
+    "metadata": {
+      "projeto_id": "6879776cb5562806180d85b2",
+      "tipo_solicitacao": "mentorship",
+      "status": "pending"
+    },
+    "data_envio": "2025-07-13T11:20:30.509Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87ca",
+    "remetente": "6879776cb5562806180d8578",
+    "destinatario": "6879776cb5562806180d8578",
+    "assunto": "Solicitação de Mentoria - Projeto: TechInnovate - Hub de Inovação",
+    "mensagem": "Olá Prof. Marina UX,\n\nGostaria de convidá-lo para ser mentor/sponsor do projeto \"TechInnovate - Hub de Inovação\".\n\nO projeto é focado em 6879776ab5562806180d8567 e usamos tecnologias como Docker, Kubernetes.\n\nSeria uma honra ter sua orientação e experiência para ajudar no desenvolvimento deste projeto.\n\nObrigado!",
+    "tipo": "mentorship_request",
+    "metadata": {
+      "projeto_id": "6879776cb5562806180d85b5",
+      "tipo_solicitacao": "mentorship",
+      "status": "pending"
+    },
+    "data_envio": "2025-07-11T16:04:50.974Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87cb",
+    "remetente": "6879776cb5562806180d8579",
+    "destinatario": "6879776cb5562806180d8578",
+    "assunto": "Solicitação de Mentoria - Projeto: CreativeCollab - Rede Criativa",
+    "mensagem": "Olá Prof. Marina UX,\n\nGostaria de convidá-lo para ser mentor/sponsor do projeto \"CreativeCollab - Rede Criativa\".\n\nO projeto é focado em 6879776ab5562806180d8568 e usamos tecnologias como React, Express.\n\nSeria uma honra ter sua orientação e experiência para ajudar no desenvolvimento deste projeto.\n\nObrigado!",
+    "tipo": "mentorship_request",
+    "metadata": {
+      "projeto_id": "6879776cb5562806180d85b6",
+      "tipo_solicitacao": "mentorship",
+      "status": "pending"
+    },
+    "data_envio": "2025-07-16T07:21:36.961Z",
+    "lida": false,
+    "__v": 0
+  },
+  {
+    "_id": "68797771b5562806180d87cc",
+    "remetente": "6879776cb5562806180d8572",
+    "destinatario": "6879776cb5562806180d8578",
+    "assunto": "Solicitação de Mentoria - Projeto: Plataforma Giga Talentos - Sistema Completo",
+    "mensagem": "Olá Prof. Marina UX,\n\nGostaria de convidá-lo para ser mentor/sponsor do projeto \"Plataforma Giga Talentos - Sistema Completo\".\n\nO projeto é focado em 6879776ab5562806180d8567 e usamos tecnologias como Next.js, TypeScript.\n\nSeria uma honra ter sua orientação e experiência para ajudar no desenvolvimento deste projeto.\n\nObrigado!",
+    "tipo": "mentorship_request",
+    "metadata": {
+      "projeto_id": "6879776cb5562806180d85b7",
+      "tipo_solicitacao": "mentorship",
+      "status": "pending"
+    },
+    "data_envio": "2025-07-15T02:41:19.893Z",
+    "lida": false,
+    "__v": 0
+  }
+]

@@ -20,7 +20,18 @@
     "seed:categories": "npx tsx scripts/seedCategories.ts",
     "seed:profiles": "npx tsx scripts/seedUserProfiles.ts",
     "seed:all": "npm run seed:categories && npm run seed:profiles",
-    "seed:complete": "npx tsx scripts/seedExtendedFeatures.ts"
+    "seed:complete": "npx tsx scripts/seedExtendedFeatures.ts",
+    "seed:validate": "node scripts/validate-seed-data.js",
+    "seed:structured": "npm run seed:validate && echo 'Validation passed! Ready to seed with structured data.'",
+    "seed:backup": "node scripts/seed-manager.js backup",
+    "seed:restore": "node scripts/seed-manager.js restore",
+    "seed:samples": "node scripts/seed-manager.js samples",
+    "seed:manager": "node scripts/seed-manager.js",
+    "seed:safe": "node scripts/pre-seed.js",
+    "db:backup": "node scripts/mongodb-backup-native.js backup",
+    "db:restore": "node scripts/mongodb-backup-native.js restore",
+    "db:list-backups": "node scripts/mongodb-backup-native.js list",
+    "db:backup-manager": "node scripts/mongodb-backup-native.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -71,6 +82,7 @@
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
     "next-themes": "^0.4.4",
+    "node-fetch": "^2.7.0",
     "nodemailer": "^7.0.5",
     "react": "^19",
     "react-day-picker": "^9.1.3",

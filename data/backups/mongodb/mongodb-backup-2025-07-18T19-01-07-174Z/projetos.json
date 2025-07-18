@@ -1,0 +1,1624 @@
+[
+  {
+    "_id": "6879776cb5562806180d85af",
+    "nome": "AI Problem Solver - Sistema Inteligente",
+    "descricao": "Sistema de IA que resolve problemas complexos de otimização usando algoritmos avançados de machine learning.",
+    "objetivo": "Desenvolver Sistema de IA que resolve problemas complexos de otimização usando algoritmos avançados de machine learning.",
+    "video_apresentacao": "https://ai-solver-demo.vercel.app",
+    "seguidores": 73,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/ai-problem-solver.svg",
+    "categoria": "6879776ab5562806180d8567",
+    "tecnologias": [
+      "Python",
+      "TensorFlow",
+      "React",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "repositorio_url": "https://github.com/exemplo/ai-solver",
+    "demo_url": "https://ai-solver-demo.vercel.app",
+    "talento_lider_id": "6879776cb5562806180d8572",
+    "criador_id": "6879776cb5562806180d8572",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d857c",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d857a"
+    ],
+    "sponsors": [
+      "6879776cb5562806180d8577"
+    ],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"AI Problem Solver - Sistema Inteligente\". Tenho experiência em 6879776ab5562806180d8567 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T22:21:33.335Z",
+        "respondido_em": "2025-07-13T21:10:39.056Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776db5562806180d8631"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-17T22:21:33.335Z",
+        "respondido_em": "2025-06-18T07:21:52.716Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d8632"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T22:21:33.335Z",
+        "respondido_em": "2025-07-08T17:20:45.800Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8633"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-01T22:21:33.335Z",
+        "respondido_em": "2025-07-05T12:00:16.556Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d8634"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d857a"
+    ],
+    "verificado": false,
+    "demo": true,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.561Z",
+    "atualizado_em": "2025-07-17T22:21:32.561Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b0",
+    "nome": "Creative Studio Platform",
+    "descricao": "Plataforma colaborativa para artistas e designers criarem projetos inovadores usando ferramentas digitais avançadas.",
+    "objetivo": "Desenvolver Plataforma colaborativa para artistas e designers criarem projetos inovadores usando ferramentas digitais avançadas.",
+    "video_apresentacao": "https://creative-studio.netlify.app",
+    "seguidores": 79,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/creative-studio.svg",
+    "categoria": "6879776ab5562806180d8568",
+    "tecnologias": [
+      "React",
+      "TypeScript",
+      "Figma API",
+      "WebRTC",
+      "Canvas",
+      "Node.js"
+    ],
+    "repositorio_url": "https://github.com/exemplo/creative-studio",
+    "demo_url": "https://creative-studio.netlify.app",
+    "talento_lider_id": "6879776cb5562806180d8573",
+    "criador_id": "6879776cb5562806180d8573",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d857d",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f"
+    ],
+    "sponsors": [
+      "6879776cb5562806180d857a"
+    ],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React e Node.js e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-08T22:21:33.611Z",
+        "respondido_em": "2025-07-13T12:30:03.202Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776db5562806180d8636"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-06T22:21:33.611Z",
+        "respondido_em": "2025-07-07T22:49:03.445Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776db5562806180d8637"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"Creative Studio Platform\". Tenho experiência em 6879776ab5562806180d8568 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-20T22:21:33.611Z",
+        "respondido_em": "2025-06-22T16:29:07.516Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776db5562806180d8638"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-26T22:21:33.611Z",
+        "respondido_em": "2025-06-29T20:29:32.308Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8639"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React Native e Flutter e adoraria fazer parte da equipe.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-07-12T22:21:33.611Z",
+        "respondido_em": "2025-07-17T22:39:13.269Z",
+        "resposta_mensagem": "Agradecemos sua candidatura. O perfil não se encaixa no momento, mas fique à vontade para se candidatar a outros projetos.",
+        "_id": "6879776db5562806180d863a"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d857a"
+    ],
+    "verificado": false,
+    "demo": true,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.561Z",
+    "atualizado_em": "2025-07-17T22:21:32.561Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b1",
+    "nome": "StartupHub - Ecossistema Empreendedor",
+    "descricao": "Plataforma que conecta empreendedores apaixonados com recursos, mentores e oportunidades de investimento.",
+    "objetivo": "Desenvolver Plataforma que conecta empreendedores apaixonados com recursos, mentores e oportunidades de investimento.",
+    "video_apresentacao": "https://startup-hub.vercel.app",
+    "seguidores": 91,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/startup-hub.svg",
+    "categoria": "6879776ab5562806180d8569",
+    "tecnologias": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Stripe",
+      "Socket.io",
+      "Tailwind CSS"
+    ],
+    "repositorio_url": "https://github.com/exemplo/startup-hub",
+    "demo_url": "https://startup-hub.vercel.app",
+    "talento_lider_id": "6879776cb5562806180d8574",
+    "criador_id": "6879776cb5562806180d8574",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d857e",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Leadership e Architecture e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-08T22:21:33.793Z",
+        "respondido_em": "2025-07-12T09:22:45.049Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d863c"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React e Node.js e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-23T22:21:33.793Z",
+        "respondido_em": "2025-06-27T16:12:11.554Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d863d"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-08T22:21:33.813Z",
+        "respondido_em": "2025-07-10T13:31:47.826Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d863e"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8579",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Sustainability e Environmental Engineering e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T22:21:33.813Z",
+        "respondido_em": "2025-07-07T00:57:54.269Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776db5562806180d863f"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-18T22:21:33.813Z",
+        "respondido_em": "2025-06-22T08:17:01.366Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8640"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"StartupHub - Ecossistema Empreendedor\". Tenho experiência em 6879776ab5562806180d8569 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-21T22:21:33.813Z",
+        "respondido_em": "2025-06-24T05:37:56.460Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8641"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8578"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d857a"
+    ],
+    "verificado": false,
+    "demo": true,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.562Z",
+    "atualizado_em": "2025-07-17T22:21:32.562Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b2",
+    "nome": "TeamSync - Gestão Colaborativa",
+    "descricao": "Ferramenta de gestão de equipes que promove liderança distribuída e colaboração efetiva em projetos.",
+    "objetivo": "Desenvolver Ferramenta de gestão de equipes que promove liderança distribuída e colaboração efetiva em projetos.",
+    "video_apresentacao": "https://teamsync-app.com",
+    "seguidores": 38,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/team-sync.svg",
+    "categoria": "6879776ab5562806180d856a",
+    "tecnologias": [
+      "Vue.js",
+      "Node.js",
+      "MongoDB",
+      "WebSocket",
+      "Express",
+      "JWT"
+    ],
+    "repositorio_url": "https://github.com/exemplo/teamsync",
+    "demo_url": "https://teamsync-app.com",
+    "talento_lider_id": "6879776cb5562806180d8575",
+    "criador_id": "6879776cb5562806180d8575",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d857f",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8579"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T22:21:33.849Z",
+        "respondido_em": "2025-07-11T22:53:56.954Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776db5562806180d8643"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-25T22:21:33.849Z",
+        "respondido_em": "2025-06-28T01:05:16.108Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8644"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T22:21:33.849Z",
+        "respondido_em": "2025-06-25T06:01:19.003Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776db5562806180d8645"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T22:21:33.849Z",
+        "respondido_em": "2025-07-09T20:15:46.698Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8646"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8574"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571"
+    ],
+    "verificado": false,
+    "demo": true,
+    "status": "concluido",
+    "criado_em": "2025-07-17T22:21:32.562Z",
+    "atualizado_em": "2025-07-17T22:21:32.562Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b3",
+    "nome": "ImpactTracker - Medição Social",
+    "descricao": "Plataforma para organizações medirem e reportarem seu impacto social e ambiental de forma transparente.",
+    "objetivo": "Desenvolver Plataforma para organizações medirem e reportarem seu impacto social e ambiental de forma transparente.",
+    "video_apresentacao": "https://impact-tracker.org",
+    "seguidores": 45,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/impact-tracker.svg",
+    "categoria": "6879776ab5562806180d856b",
+    "tecnologias": [
+      "React",
+      "TypeScript",
+      "D3.js",
+      "PostgreSQL",
+      "GraphQL",
+      "Chart.js"
+    ],
+    "repositorio_url": "https://github.com/exemplo/impact-tracker",
+    "demo_url": "https://impact-tracker.org",
+    "talento_lider_id": "6879776cb5562806180d8576",
+    "criador_id": "6879776cb5562806180d8576",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8580",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d856f"
+    ],
+    "sponsors": [
+      "6879776cb5562806180d8577"
+    ],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Python e Django e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-15T22:21:33.903Z",
+        "respondido_em": "2025-07-16T01:00:03.966Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d8648"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"ImpactTracker - Medição Social\". Tenho experiência em 6879776ab5562806180d856b e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-29T22:21:33.903Z",
+        "respondido_em": "2025-07-01T07:47:04.509Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8649"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"ImpactTracker - Medição Social\". Tenho experiência em 6879776ab5562806180d856b e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-18T22:21:33.903Z",
+        "respondido_em": "2025-06-19T16:57:43.091Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776db5562806180d864a"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"ImpactTracker - Medição Social\". Tenho experiência em 6879776ab5562806180d856b e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-30T22:21:33.903Z",
+        "respondido_em": "2025-07-04T13:06:47.168Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d864b"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "pendente",
+        "solicitado_em": "2025-06-30T22:21:33.904Z",
+        "_id": "6879776db5562806180d864c"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React e Node.js e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-21T22:21:33.904Z",
+        "respondido_em": "2025-06-24T00:04:04.172Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d864d"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8579",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Sustainability e Environmental Engineering e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-08T22:21:33.904Z",
+        "respondido_em": "2025-07-12T16:01:41.590Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776db5562806180d864e"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8577"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8579"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8570"
+    ],
+    "verificado": false,
+    "demo": true,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.563Z",
+    "atualizado_em": "2025-07-17T22:21:32.563Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b4",
+    "nome": "AdaptLearn - Aprendizado Resiliente",
+    "descricao": "Sistema educacional que se adapta aos desafios e falhas dos usuários, promovendo crescimento através da superação.",
+    "objetivo": "Desenvolver Sistema educacional que se adapta aos desafios e falhas dos usuários, promovendo crescimento através da superação.",
+    "video_apresentacao": "https://adaptlearn.app",
+    "seguidores": 62,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/adapt-learn.svg",
+    "categoria": "6879776ab5562806180d856c",
+    "tecnologias": [
+      "React Native",
+      "Python",
+      "TensorFlow",
+      "Firebase",
+      "Flask",
+      "SQLite"
+    ],
+    "repositorio_url": "https://github.com/exemplo/adaptlearn",
+    "demo_url": "https://adaptlearn.app",
+    "talento_lider_id": "6879776cb5562806180d8573",
+    "criador_id": "6879776cb5562806180d8577",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8581",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8578"
+    ],
+    "sponsors": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8579"
+    ],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-11T22:21:33.940Z",
+        "respondido_em": "2025-07-13T10:40:07.538Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d8650"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-22T22:21:33.940Z",
+        "respondido_em": "2025-06-24T17:33:39.331Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8651"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "pendente",
+        "solicitado_em": "2025-07-02T22:21:33.940Z",
+        "_id": "6879776db5562806180d8652"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"AdaptLearn - Aprendizado Resiliente\". Tenho experiência em 6879776ab5562806180d856c e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-28T22:21:33.940Z",
+        "respondido_em": "2025-06-29T21:15:28.542Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8653"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"AdaptLearn - Aprendizado Resiliente\". Tenho experiência em 6879776ab5562806180d856c e acredito que posso contribuir significativamente.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-07-06T22:21:33.940Z",
+        "respondido_em": "2025-07-09T11:28:14.598Z",
+        "resposta_mensagem": "Obrigado pela candidatura. Buscamos um perfil mais específico para esta vaga.",
+        "_id": "6879776db5562806180d8654"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-22T22:21:33.940Z",
+        "respondido_em": "2025-06-24T23:14:07.770Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d8655"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8578"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d857a"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d856f"
+    ],
+    "verificado": false,
+    "demo": true,
+    "status": "concluido",
+    "criado_em": "2025-07-17T22:21:32.564Z",
+    "atualizado_em": "2025-07-17T22:21:32.564Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b5",
+    "nome": "TechInnovate - Hub de Inovação",
+    "descricao": "Plataforma para desenvolvedores colaborarem em soluções técnicas inovadoras para problemas complexos.",
+    "objetivo": "Desenvolver Plataforma para desenvolvedores colaborarem em soluções técnicas inovadoras para problemas complexos.",
+    "video_apresentacao": "https://tech-innovate.com",
+    "seguidores": 45,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/tech-innovate.svg",
+    "categoria": "6879776ab5562806180d8567",
+    "tecnologias": [
+      "Docker",
+      "Kubernetes",
+      "React",
+      "PostgreSQL",
+      "Redis",
+      "GraphQL"
+    ],
+    "repositorio_url": "https://github.com/exemplo/tech-innovate",
+    "demo_url": "https://tech-innovate.com",
+    "talento_lider_id": null,
+    "criador_id": "6879776cb5562806180d8578",
+    "lideranca_status": "buscando_lider",
+    "solicitacao_lideranca": {
+      "candidato_id": "6879776cb5562806180d8575",
+      "mensagem": "Gostaria de liderar este projeto. Tenho experiência na área e estou motivado para contribuir!",
+      "solicitado_em": "2025-07-13T18:54:18.339Z",
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8582",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8575"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"TechInnovate - Hub de Inovação\". Tenho experiência em 6879776ab5562806180d8567 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-20T22:21:33.977Z",
+        "respondido_em": "2025-06-21T23:43:38.152Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776db5562806180d8657"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Excelente projeto! Minha experiência em Avançado pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T22:21:33.977Z",
+        "respondido_em": "2025-07-06T15:13:07.307Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776db5562806180d8658"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Excelente projeto! Minha experiência em Avançado pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-03T22:21:33.977Z",
+        "respondido_em": "2025-07-04T21:32:33.282Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776db5562806180d8659"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Figma e Adobe XD e adoraria fazer parte da equipe.",
+        "status": "pendente",
+        "solicitado_em": "2025-06-17T22:21:33.977Z",
+        "_id": "6879776db5562806180d865a"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-22T22:21:33.977Z",
+        "respondido_em": "2025-06-29T08:30:27.820Z",
+        "resposta_mensagem": "Agradecemos sua candidatura. O perfil não se encaixa no momento, mas fique à vontade para se candidatar a outros projetos.",
+        "_id": "6879776db5562806180d865b"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8579",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Sustainability e Environmental Engineering e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-02T22:21:33.977Z",
+        "respondido_em": "2025-07-06T19:45:49.888Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776db5562806180d865c"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8573"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8579"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d856f"
+    ],
+    "verificado": true,
+    "demo": true,
+    "status": "pausado",
+    "criado_em": "2025-07-17T22:21:32.565Z",
+    "atualizado_em": "2025-07-17T22:21:32.565Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b6",
+    "nome": "CreativeCollab - Rede Criativa",
+    "descricao": "Rede social para criativos compartilharem ideias disruptivas e colaborarem em projetos inovadores.",
+    "objetivo": "Desenvolver Rede social para criativos compartilharem ideias disruptivas e colaborarem em projetos inovadores.",
+    "video_apresentacao": "https://creative-collab.net",
+    "seguidores": 49,
+    "avatar": "/placeholder-logo.png",
+    "imagem_capa": "/projects/creative-collab.svg",
+    "categoria": "6879776ab5562806180d8568",
+    "tecnologias": [
+      "React",
+      "Express",
+      "MongoDB",
+      "Cloudinary",
+      "Socket.io",
+      "Styled Components"
+    ],
+    "repositorio_url": "https://github.com/exemplo/creative-collab",
+    "demo_url": "https://creative-collab.net",
+    "talento_lider_id": null,
+    "criador_id": "6879776cb5562806180d8579",
+    "lideranca_status": "buscando_lider",
+    "solicitacao_lideranca": {
+      "candidato_id": "6879776cb5562806180d8575",
+      "mensagem": "Gostaria de liderar este projeto. Tenho experiência na área e estou motivado para contribuir!",
+      "solicitado_em": "2025-07-14T19:11:00.324Z",
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8583",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d856e"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Leadership e Architecture e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-14T22:21:34.022Z",
+        "respondido_em": "2025-07-17T05:47:48.499Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d865e"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Excelente projeto! Minha experiência em Intermediário pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-16T22:21:34.022Z",
+        "respondido_em": "2025-07-19T14:18:27.730Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d865f"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T22:21:34.022Z",
+        "respondido_em": "2025-07-08T07:24:08.166Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d8660"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8573"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8570"
+    ],
+    "verificado": true,
+    "demo": true,
+    "status": "pausado",
+    "criado_em": "2025-07-17T22:21:32.565Z",
+    "atualizado_em": "2025-07-17T22:21:32.565Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b7",
+    "nome": "Plataforma Giga Talentos - Sistema Completo",
+    "descricao": "Desenvolvimento da plataforma completa Giga Talentos usando Next.js, MongoDB e tecnologias modernas. Sistema de gestão de talentos, desafios e projetos.",
+    "objetivo": "Criar a melhor plataforma para desenvolvimento de talentos empreendedores",
+    "video_apresentacao": "https://youtube.com/watch?v=giga-talentos-demo",
+    "seguidores": 50,
+    "avatar": "/giga-talentos-logo.svg",
+    "imagem_capa": "/projects/giga-talentos-platform.svg",
+    "categoria": "6879776ab5562806180d8567",
+    "tecnologias": [
+      "Next.js",
+      "TypeScript",
+      "MongoDB",
+      "NextAuth",
+      "Tailwind CSS"
+    ],
+    "repositorio_url": "https://github.com/carlosdenner/GigaTalentos",
+    "demo_url": "https://giga-talentos.datasciencetech.ca",
+    "talento_lider_id": "6879776cb5562806180d8572",
+    "criador_id": "6879776cb5562806180d856e",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8585",
+    "desafio_vinculacao_status": "aprovado",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8579"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T22:21:34.049Z",
+        "respondido_em": "2025-07-07T05:24:15.961Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d8662"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8579",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-09T22:21:34.049Z",
+        "respondido_em": "2025-07-12T01:03:34.998Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d8663"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Excelente projeto! Minha experiência em Avançado pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T22:21:34.049Z",
+        "respondido_em": "2025-07-10T03:55:58.675Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776eb5562806180d8664"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Figma e Adobe XD e adoraria fazer parte da equipe.",
+        "status": "pendente",
+        "solicitado_em": "2025-07-05T22:21:34.049Z",
+        "_id": "6879776eb5562806180d8665"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Excelente projeto! Minha experiência em Avançado pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-15T22:21:34.049Z",
+        "respondido_em": "2025-07-16T09:05:30.970Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776eb5562806180d8666"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-23T22:21:34.049Z",
+        "respondido_em": "2025-06-25T15:22:20.205Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776eb5562806180d8667"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-10T22:21:34.049Z",
+        "respondido_em": "2025-07-14T23:36:12.716Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d8668"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8573"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8578"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d856f"
+    ],
+    "verificado": true,
+    "demo": false,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.566Z",
+    "atualizado_em": "2025-07-17T22:21:32.566Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b8",
+    "nome": "IA para Identificação de Talentos",
+    "descricao": "Sistema de inteligência artificial para identificação automática de talentos baseado em análise comportamental e performance em desafios.",
+    "objetivo": "Automatizar descoberta de talentos usando machine learning",
+    "video_apresentacao": "https://youtube.com/watch?v=ai-talent-demo",
+    "seguidores": 73,
+    "avatar": "/placeholder-logo.svg",
+    "imagem_capa": "/projects/ai-talent-identification.svg",
+    "categoria": "6879776ab5562806180d8567",
+    "tecnologias": [
+      "Python",
+      "TensorFlow",
+      "Machine Learning",
+      "API REST"
+    ],
+    "repositorio_url": "https://github.com/carlosdenner/AI-Talent-Identifier",
+    "demo_url": "https://ai-talent-demo.datasciencetech.ca",
+    "talento_lider_id": null,
+    "criador_id": "6879776cb5562806180d856e",
+    "lideranca_status": "buscando_lider",
+    "solicitacao_lideranca": {
+      "candidato_id": "6879776cb5562806180d8573",
+      "mensagem": "Tenho experiência em IA e machine learning. Gostaria de liderar este projeto inovador!",
+      "solicitado_em": "2025-07-15T22:21:32.558Z",
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8585",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8578"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Excelente projeto! Minha experiência em Intermediário pode agregar muito valor. Gostaria de participar.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-07-12T22:21:34.086Z",
+        "respondido_em": "2025-07-16T16:32:36.893Z",
+        "resposta_mensagem": "Obrigado pela candidatura. Buscamos um perfil mais específico para esta vaga.",
+        "_id": "6879776eb5562806180d866a"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Leadership e Architecture e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-14T22:21:34.086Z",
+        "respondido_em": "2025-07-17T04:35:33.480Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d866b"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Growth Hacking e Digital Marketing e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-03T22:21:34.086Z",
+        "respondido_em": "2025-07-07T17:24:05.718Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d866c"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-07T22:21:34.086Z",
+        "respondido_em": "2025-07-08T16:19:31.535Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d866d"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-26T22:21:34.087Z",
+        "respondido_em": "2025-07-02T07:30:13.411Z",
+        "resposta_mensagem": "Agradecemos sua candidatura. O perfil não se encaixa no momento, mas fique à vontade para se candidatar a outros projetos.",
+        "_id": "6879776eb5562806180d866e"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8578"
+    ],
+    "verificado": true,
+    "demo": false,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.568Z",
+    "atualizado_em": "2025-07-17T22:21:32.568Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85b9",
+    "nome": "Mentoria Digital Automatizada",
+    "descricao": "Plataforma de mentoria digital que conecta mentores e talentos usando algoritmos de matching inteligente.",
+    "objetivo": "Revolucionar o processo de mentoria usando tecnologia",
+    "video_apresentacao": "https://youtube.com/watch?v=mentoria-digital",
+    "seguidores": 46,
+    "avatar": "/placeholder-logo.svg",
+    "imagem_capa": "/projects/digital-mentorship.svg",
+    "categoria": "6879776ab5562806180d856b",
+    "tecnologias": [
+      "React",
+      "Node.js",
+      "WebRTC",
+      "Socket.io"
+    ],
+    "repositorio_url": "https://github.com/carlosdenner/Digital-Mentorship",
+    "demo_url": "https://mentoria-digital.datasciencetech.ca",
+    "talento_lider_id": "6879776cb5562806180d8574",
+    "criador_id": "6879776cb5562806180d856e",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8585",
+    "desafio_vinculacao_status": "aprovado",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8576"
+    ],
+    "sponsors": [
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d8578"
+    ],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-30T22:21:34.169Z",
+        "respondido_em": "2025-07-02T14:16:10.512Z",
+        "resposta_mensagem": "Obrigado pela candidatura. Buscamos um perfil mais específico para esta vaga.",
+        "_id": "6879776eb5562806180d8670"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Figma e Adobe XD e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-12T22:21:34.169Z",
+        "respondido_em": "2025-07-13T07:36:35.618Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d8671"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"Mentoria Digital Automatizada\". Tenho experiência em 6879776ab5562806180d856b e acredito que posso contribuir significativamente.",
+        "status": "pendente",
+        "solicitado_em": "2025-07-07T22:21:34.169Z",
+        "_id": "6879776eb5562806180d8672"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"Mentoria Digital Automatizada\". Tenho experiência em 6879776ab5562806180d856b e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-06T22:21:34.169Z",
+        "respondido_em": "2025-07-09T22:49:53.914Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d8673"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React Native e Flutter e adoraria fazer parte da equipe.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-20T22:21:34.169Z",
+        "respondido_em": "2025-06-27T17:04:16.768Z",
+        "resposta_mensagem": "Obrigado pelo interesse! No momento já temos a equipe completa para esta função.",
+        "_id": "6879776eb5562806180d8674"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Leadership e Architecture e adoraria fazer parte da equipe.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-22T22:21:34.169Z",
+        "respondido_em": "2025-06-29T02:40:00.263Z",
+        "resposta_mensagem": "Agradecemos sua candidatura. O perfil não se encaixa no momento, mas fique à vontade para se candidatar a outros projetos.",
+        "_id": "6879776eb5562806180d8675"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8578"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8575"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8579"
+    ],
+    "verificado": true,
+    "demo": false,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.568Z",
+    "atualizado_em": "2025-07-17T22:21:32.568Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85ba",
+    "nome": "StartupBoost - Aceleração de Talentos",
+    "descricao": "Programa de aceleração para talentos empreendedores com foco em desenvolvimento de habilidades e networking.",
+    "objetivo": "Implementar programa de aceleração para talentos empreendedores com foco em desenvolvimento de habilidades e networking.",
+    "video_apresentacao": "https://youtube.com/watch?v=mentor-project-0",
+    "seguidores": 72,
+    "avatar": "/placeholder-logo.svg",
+    "imagem_capa": "/projects/mentor-project-1.svg",
+    "categoria": "6879776ab5562806180d8567",
+    "tecnologias": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "TypeScript"
+    ],
+    "repositorio_url": "https://github.com/mentor/projeto-1",
+    "demo_url": "https://mentor-projeto-1.com",
+    "talento_lider_id": null,
+    "criador_id": "6879776cb5562806180d8577",
+    "lideranca_status": "buscando_lider",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8581",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8570",
+      "6879776cb5562806180d8571"
+    ],
+    "sponsors": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8578"
+    ],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"StartupBoost - Aceleração de Talentos\". Tenho experiência em 6879776ab5562806180d8567 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-25T22:21:34.200Z",
+        "respondido_em": "2025-06-28T05:59:17.412Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d8677"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-06T22:21:34.200Z",
+        "respondido_em": "2025-07-07T20:36:13.944Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d8678"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-10T22:21:34.200Z",
+        "respondido_em": "2025-07-15T12:32:50.551Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d8679"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-19T22:21:34.200Z",
+        "respondido_em": "2025-06-22T06:44:52.067Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776eb5562806180d867a"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React Native e Flutter e adoraria fazer parte da equipe.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-24T22:21:34.200Z",
+        "respondido_em": "2025-07-01T21:51:39.751Z",
+        "resposta_mensagem": "Obrigado pela candidatura. Buscamos um perfil mais específico para esta vaga.",
+        "_id": "6879776eb5562806180d867b"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"StartupBoost - Aceleração de Talentos\". Tenho experiência em 6879776ab5562806180d8567 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-25T22:21:34.200Z",
+        "respondido_em": "2025-06-26T16:16:42.090Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d867c"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Python e Django e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T22:21:34.200Z",
+        "respondido_em": "2025-07-07T12:06:39.891Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d867d"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8579",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-03T22:21:34.200Z",
+        "respondido_em": "2025-07-04T17:52:18.776Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d867e"
+      }
+    ],
+    "participantes_solicitados": [],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8578",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8579"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8571"
+    ],
+    "verificado": true,
+    "demo": false,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.569Z",
+    "atualizado_em": "2025-07-17T22:21:32.569Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85bb",
+    "nome": "ImpactHub - Rede de Impacto Social",
+    "descricao": "Plataforma que conecta projetos de impacto social com investidores e voluntários.",
+    "objetivo": "Implementar plataforma que conecta projetos de impacto social com investidores e voluntários.",
+    "video_apresentacao": "https://youtube.com/watch?v=mentor-project-1",
+    "seguidores": 36,
+    "avatar": "/placeholder-logo.svg",
+    "imagem_capa": "/projects/mentor-project-2.svg",
+    "categoria": "6879776ab5562806180d856b",
+    "tecnologias": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "TypeScript"
+    ],
+    "repositorio_url": "https://github.com/mentor/projeto-2",
+    "demo_url": "https://mentor-projeto-2.com",
+    "talento_lider_id": null,
+    "criador_id": "6879776cb5562806180d8578",
+    "lideranca_status": "buscando_lider",
+    "solicitacao_lideranca": {
+      "candidato_id": "6879776cb5562806180d8576",
+      "mensagem": "Olá! Sou especialista em consciência social & integridade e tenho grande interesse em liderar este projeto. Posso contribuir com minha experiência e visão estratégica.",
+      "solicitado_em": "2025-07-12T22:59:50.533Z",
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8582",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8576",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8572",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d856e",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8571"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d8572",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React e Node.js e adoraria fazer parte da equipe.",
+        "status": "pendente",
+        "solicitado_em": "2025-06-29T22:21:34.241Z",
+        "_id": "6879776eb5562806180d8680"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-21T22:21:34.241Z",
+        "respondido_em": "2025-06-24T03:10:25.703Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d8681"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8579",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-04T22:21:34.241Z",
+        "respondido_em": "2025-07-07T16:37:27.549Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d8682"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-05T22:21:34.241Z",
+        "respondido_em": "2025-07-09T01:06:23.714Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776eb5562806180d8683"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Excelente projeto! Minha experiência em Expert pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-29T22:21:34.241Z",
+        "respondido_em": "2025-07-01T14:36:14.052Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d8684"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Excelente projeto! Minha experiência em Avançado pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-05T22:21:34.241Z",
+        "respondido_em": "2025-07-06T04:15:36.228Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d8685"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Excelente projeto! Minha experiência em Avançado pode agregar muito valor. Gostaria de participar.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-03T22:21:34.241Z",
+        "respondido_em": "2025-07-05T21:04:01.579Z",
+        "resposta_mensagem": "Aprovado! Sua expertise complementa muito bem nossa equipe.",
+        "_id": "6879776eb5562806180d8686"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com React Native e Flutter e adoraria fazer parte da equipe.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-21T22:21:34.241Z",
+        "respondido_em": "2025-06-23T11:52:35.034Z",
+        "resposta_mensagem": "Agradecemos sua candidatura. O perfil não se encaixa no momento, mas fique à vontade para se candidatar a outros projetos.",
+        "_id": "6879776eb5562806180d8687"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8572"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8579",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8575"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8571",
+      "6879776cb5562806180d8572"
+    ],
+    "verificado": true,
+    "demo": false,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.570Z",
+    "atualizado_em": "2025-07-17T22:21:32.570Z",
+    "__v": 1
+  },
+  {
+    "_id": "6879776cb5562806180d85bc",
+    "nome": "CreativeSpace - Ambiente de Inovação",
+    "descricao": "Espaço virtual colaborativo para desenvolvimento de ideias criativas e inovadoras.",
+    "objetivo": "Implementar espaço virtual colaborativo para desenvolvimento de ideias criativas e inovadoras.",
+    "video_apresentacao": "https://youtube.com/watch?v=mentor-project-2",
+    "seguidores": 41,
+    "avatar": "/placeholder-logo.svg",
+    "imagem_capa": "/projects/mentor-project-3.svg",
+    "categoria": "6879776ab5562806180d8568",
+    "tecnologias": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "TypeScript"
+    ],
+    "repositorio_url": "https://github.com/mentor/projeto-3",
+    "demo_url": "https://mentor-projeto-3.com",
+    "talento_lider_id": "6879776cb5562806180d8572",
+    "criador_id": "6879776cb5562806180d8579",
+    "lideranca_status": "ativo",
+    "solicitacao_lideranca": {
+      "status": "pendente"
+    },
+    "portfolio_id": "6879776cb5562806180d8583",
+    "desafio_vinculacao_status": "pendente",
+    "desafio_aprovado": false,
+    "likes": [
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8577",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8575",
+      "6879776cb5562806180d8571"
+    ],
+    "sponsors": [],
+    "solicitacoes_participacao": [
+      {
+        "usuario_id": "6879776cb5562806180d857a",
+        "mensagem": "Oi! Tenho muita experiência em projetos similares e acredito que posso ajudar vocês a alcançar os objetivos.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-21T22:21:34.276Z",
+        "respondido_em": "2025-06-23T21:05:10.709Z",
+        "resposta_mensagem": "Excelente! Adoramos seu perfil e motivação. Vamos trabalhar juntos!",
+        "_id": "6879776eb5562806180d8689"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8578",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Design Thinking e UX Strategy e adoraria fazer parte da equipe.",
+        "status": "pendente",
+        "solicitado_em": "2025-07-14T22:21:34.276Z",
+        "_id": "6879776eb5562806180d868a"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8573",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"CreativeSpace - Ambiente de Inovação\". Tenho experiência em 6879776ab5562806180d8568 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-07-06T22:21:34.276Z",
+        "respondido_em": "2025-07-08T02:20:10.899Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d868b"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8574",
+        "mensagem": "Oi! Seu projeto me chamou muito a atenção. Tenho experiência com Vue.js e React e adoraria fazer parte da equipe.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-24T22:21:34.276Z",
+        "respondido_em": "2025-06-28T21:18:11.998Z",
+        "resposta_mensagem": "Bem-vindo ao time! Mal podemos esperar para ver suas contribuições.",
+        "_id": "6879776eb5562806180d868c"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8577",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"CreativeSpace - Ambiente de Inovação\". Tenho experiência em 6879776ab5562806180d8568 e acredito que posso contribuir significativamente.",
+        "status": "aprovado",
+        "solicitado_em": "2025-06-18T22:21:34.276Z",
+        "respondido_em": "2025-06-20T03:41:49.414Z",
+        "resposta_mensagem": "Perfeito! Sua experiência será muito valiosa. Bem-vindo ao projeto!",
+        "_id": "6879776eb5562806180d868d"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8576",
+        "mensagem": "Olá! Fiquei impressionado com a proposta do projeto. Tenho o perfil ideal para contribuir e aprender juntos.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-07-09T22:21:34.276Z",
+        "respondido_em": "2025-07-15T07:14:48.333Z",
+        "resposta_mensagem": "Obrigado pelo interesse! No momento já temos a equipe completa para esta função.",
+        "_id": "6879776eb5562806180d868e"
+      },
+      {
+        "usuario_id": "6879776cb5562806180d8575",
+        "mensagem": "Olá! Gostaria muito de participar do projeto \"CreativeSpace - Ambiente de Inovação\". Tenho experiência em 6879776ab5562806180d8568 e acredito que posso contribuir significativamente.",
+        "status": "rejeitado",
+        "solicitado_em": "2025-06-17T22:21:34.276Z",
+        "respondido_em": "2025-06-20T13:01:49.512Z",
+        "resposta_mensagem": "Obrigado pela candidatura. Buscamos um perfil mais específico para esta vaga.",
+        "_id": "6879776eb5562806180d868f"
+      }
+    ],
+    "participantes_solicitados": [
+      "6879776cb5562806180d8578"
+    ],
+    "participantes_aprovados": [
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d8573",
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d8577"
+    ],
+    "favoritos": [
+      "6879776cb5562806180d8574",
+      "6879776cb5562806180d857a",
+      "6879776cb5562806180d856f",
+      "6879776cb5562806180d8573"
+    ],
+    "verificado": true,
+    "demo": false,
+    "status": "ativo",
+    "criado_em": "2025-07-17T22:21:32.571Z",
+    "atualizado_em": "2025-07-17T22:21:32.571Z",
+    "__v": 1
+  }
+]

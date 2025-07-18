@@ -1,0 +1,72 @@
+[
+  {
+    "youtube_id": "8aGhZQkoFbQ",
+    "title": "Como Desenvolver Pensamento Analítico Para Empreendedores",
+    "description": "Aprenda as técnicas essenciais para desenvolver pensamento crítico e analítico no empreendedorismo, incluindo frameworks de resolução de problemas e tomada de decisão baseada em dados.",
+    "channel_name": "Sebrae",
+    "category_name": "Habilidade Cognitiva & Técnica",
+    "featured": true,
+    "tags": ["pensamento crítico", "análise", "tomada de decisão", "framework"],
+    "duration": "15:32"
+  },
+  {
+    "youtube_id": "QRZ_l7cVzzU",
+    "title": "Metodologia Lean Startup: Validação de Ideias de Negócio",
+    "description": "Entenda como usar a metodologia Lean Startup para validar suas ideias de negócio de forma científica e eficiente, reduzindo riscos e aumentando chances de sucesso.",
+    "channel_name": "StartSe",
+    "category_name": "Habilidade Cognitiva & Técnica",
+    "featured": false,
+    "tags": ["lean startup", "validação", "mvp", "metodologia"],
+    "duration": "18:45"
+  },
+  {
+    "youtube_id": "NugRZGDbPFU",
+    "title": "Design Thinking Para Inovação Em Negócios",
+    "description": "Aprenda como aplicar Design Thinking para inovar em produtos e serviços, desenvolvendo soluções centradas no usuário e criando valor diferenciado no mercado.",
+    "channel_name": "IDEO",
+    "category_name": "Criatividade & Inovação",
+    "featured": true,
+    "tags": ["design thinking", "inovação", "criatividade", "ux"],
+    "duration": "16:28"
+  },
+  {
+    "youtube_id": "4q-aGaP0qE8",
+    "title": "Liderança Inspiradora: Como Motivar Sua Equipe",
+    "description": "Desenvolva habilidades de liderança inspiradora para motivar equipes, criar culturas de alto desempenho e alcançar resultados extraordinários em ambientes empresariais.",
+    "channel_name": "Felipe Miranda",
+    "category_name": "Liderança & Colaboração",
+    "featured": true,
+    "tags": ["liderança", "motivação", "equipe", "cultura"],
+    "duration": "19:12"
+  },
+  {
+    "youtube_id": "8S0FDjFBj8o",
+    "title": "Resiliência Empreendedora: Como Superar Fracassos",
+    "description": "Desenvolva resiliência mental para superar fracassos empresariais, aprender com erros e manter motivação em momentos desafiadores da jornada empreendedora.",
+    "channel_name": "Flávio Augusto",
+    "category_name": "Adaptabilidade & Resistência",
+    "featured": true,
+    "tags": ["resiliência", "fracasso", "mindset", "superação"],
+    "duration": "13:27"
+  },
+  {
+    "youtube_id": "WkMM3LJZaqs",
+    "title": "Comunicação Persuasiva Para Empreendedores",
+    "description": "Desenvolva habilidades de comunicação persuasiva para pitch de negócios, vendas e liderança, aprendendo técnicas de storytelling e influência ética.",
+    "channel_name": "TED Talks",
+    "category_name": "Motivação & Paixão",
+    "featured": true,
+    "tags": ["comunicação", "persuasão", "pitch", "storytelling"],
+    "duration": "17:23"
+  },
+  {
+    "youtube_id": "vBYnQQj3Q_o",
+    "title": "Ética Empresarial e Responsabilidade Social",
+    "description": "Explore os princípios de ética empresarial e responsabilidade social corporativa, entendendo como construir negócios sustentáveis e socialmente responsáveis.",
+    "channel_name": "Harvard Business Review",
+    "category_name": "Consciência Social & Integridade",
+    "featured": false,
+    "tags": ["ética", "responsabilidade social", "sustentabilidade", "ESG"],
+    "duration": "14:56"
+  }
+]

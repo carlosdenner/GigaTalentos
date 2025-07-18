@@ -1,0 +1,74 @@
+[
+  {
+    "title": "AI Problem Solver - Sistema Inteligente",
+    "description": "Sistema de IA que resolve problemas complexos de otimização usando algoritmos avançados de machine learning.",
+    "category": "Habilidade Cognitiva & Técnica",
+    "technologies": ["Python", "TensorFlow", "React", "FastAPI", "PostgreSQL", "Docker"],
+    "demo_url": "https://ai-solver-demo.vercel.app",
+    "repository_url": "https://github.com/exemplo/ai-solver",
+    "image": "/projects/ai-problem-solver.svg"
+  },
+  {
+    "title": "Creative Studio Platform",
+    "description": "Plataforma colaborativa para artistas e designers criarem projetos inovadores usando ferramentas digitais avançadas.",
+    "category": "Criatividade & Inovação",
+    "technologies": ["React", "TypeScript", "Figma API", "WebRTC", "Canvas", "Node.js"],
+    "demo_url": "https://creative-studio.netlify.app",
+    "repository_url": "https://github.com/exemplo/creative-studio",
+    "image": "/projects/creative-studio.svg"
+  },
+  {
+    "title": "StartupHub - Ecossistema Empreendedor",
+    "description": "Plataforma que conecta empreendedores apaixonados com recursos, mentores e oportunidades de investimento.",
+    "category": "Motivação & Paixão",
+    "technologies": ["Next.js", "TypeScript", "Supabase", "Stripe", "Socket.io", "Tailwind CSS"],
+    "demo_url": "https://startup-hub.vercel.app",
+    "repository_url": "https://github.com/exemplo/startup-hub",
+    "image": "/projects/startup-hub.svg"
+  },
+  {
+    "title": "TeamSync - Gestão Colaborativa",
+    "description": "Ferramenta de gestão de equipes que promove liderança distribuída e colaboração efetiva em projetos.",
+    "category": "Liderança & Colaboração",
+    "technologies": ["Vue.js", "Node.js", "MongoDB", "WebSocket", "Express", "JWT"],
+    "demo_url": "https://teamsync-app.com",
+    "repository_url": "https://github.com/exemplo/teamsync",
+    "image": "/projects/team-sync.svg"
+  },
+  {
+    "title": "ImpactTracker - Medição Social",
+    "description": "Plataforma para organizações medirem e reportarem seu impacto social e ambiental de forma transparente.",
+    "category": "Consciência Social & Integridade",
+    "technologies": ["React", "TypeScript", "D3.js", "PostgreSQL", "GraphQL", "Chart.js"],
+    "demo_url": "https://impact-tracker.org",
+    "repository_url": "https://github.com/exemplo/impact-tracker",
+    "image": "/projects/impact-tracker.svg"
+  },
+  {
+    "title": "AdaptLearn - Aprendizado Resiliente",
+    "description": "Sistema educacional que se adapta aos desafios e falhas dos usuários, promovendo crescimento através da superação.",
+    "category": "Adaptabilidade & Resistência",
+    "technologies": ["React Native", "Python", "TensorFlow", "Firebase", "Flask", "SQLite"],
+    "demo_url": "https://adaptlearn.app",
+    "repository_url": "https://github.com/exemplo/adaptlearn",
+    "image": "/projects/adapt-learn.svg"
+  },
+  {
+    "title": "TechInnovate - Hub de Inovação",
+    "description": "Plataforma para desenvolvedores colaborarem em soluções técnicas inovadoras para problemas complexos.",
+    "category": "Habilidade Cognitiva & Técnica",
+    "technologies": ["Docker", "Kubernetes", "React", "PostgreSQL", "Redis", "GraphQL"],
+    "demo_url": "https://tech-innovate.com",
+    "repository_url": "https://github.com/exemplo/tech-innovate",
+    "image": "/projects/tech-innovate.svg"
+  },
+  {
+    "title": "CreativeCollab - Rede Criativa",
+    "description": "Rede social para criativos compartilharem ideias disruptivas e colaborarem em projetos inovadores.",
+    "category": "Criatividade & Inovação",
+    "technologies": ["React", "Express", "MongoDB", "Cloudinary", "Socket.io", "Styled Components"],
+    "demo_url": "https://creative-collab.net",
+    "repository_url": "https://github.com/exemplo/creative-collab",
+    "image": "/projects/creative-collab.svg"
+  }
+]
