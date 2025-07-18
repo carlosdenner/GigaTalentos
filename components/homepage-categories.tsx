@@ -69,7 +69,7 @@ export default function HomepageCategories() {
   return (
     <section className="space-y-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold text-white">Habilidades Empreendedoras Fundamentais</h2>
+        <h2 className="text-3xl font-bold text-white">Habilidades Empreendedoras</h2>
         <Link href="/categories">
           <Button 
             variant="outline" 
