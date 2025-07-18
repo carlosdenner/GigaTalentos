@@ -41,7 +41,7 @@ export default function Sidebar() {
               <span className="text-[#3b82f6]">Talentos</span>
             </span>
           </Link>
-          <div className="text-[#3b82f6] text-sm mt-1">Empreendedorismo & Tecnologia</div>
+          <div className="text-[#3b82f6] text-sm mt-1">Empreendedorismo & Inovação</div>
         </div>
 
         <div className="mt-6 px-4">

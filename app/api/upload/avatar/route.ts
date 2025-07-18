@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 
 // POST /api/upload/avatar - Upload user avatar image
 export async function POST(request: NextRequest) {
@@ -35,14 +37,30 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // For now, we'll use a placeholder URL since we don't have cloud storage configured
-    // In production, you would upload to Cloudinary, AWS S3, etc.
+    // Create a safe filename
     const timestamp = Date.now();
-    const fileName = `avatar_${timestamp}_${file.name}`;
+    const fileExtension = path.extname(file.name);
+    const safeFileName = `avatar_${session.user.email.replace(/[^a-zA-Z0-9]/g, '_')}_${timestamp}${fileExtension}`;
     
-    // Simulated upload - return a placeholder URL
-    // In production, replace this with actual cloud storage upload
-    const avatarUrl = `/placeholder-user.jpg`; // For demo purposes
+    // Convert file to buffer
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    
+    // Save to public/uploads directory
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+    const filePath = path.join(uploadDir, safeFileName);
+    
+    // Create directory if it doesn't exist
+    const fs = require('fs');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    
+    // Write file
+    await writeFile(filePath, buffer);
+    
+    // Create public URL
+    const avatarUrl = `/uploads/${safeFileName}`;
     
     await connectDB();
     

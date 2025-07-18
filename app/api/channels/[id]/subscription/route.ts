@@ -10,6 +10,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     console.log('GET subscription - Session:', session?.user);
     
@@ -20,7 +21,7 @@ export async function GET(
     await connectDB();
     
     const subscription = await Subscription.findOne({
-      channel_id: params.id,
+      channel_id: id,
       user_id: session.user.id
     });
 
@@ -38,6 +39,7 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     console.log('Session in subscription API:', session);
     
@@ -49,12 +51,12 @@ export async function POST(
       );
     }
 
-    console.log('User ID:', session.user.id, 'Channel ID:', params.id);
+    console.log('User ID:', session.user.id, 'Channel ID:', id);
 
     await connectDB();
 
     // Check if channel exists
-    const channel = await Channel.findById(params.id);
+    const channel = await Channel.findById(id);
     if (!channel) {
       return NextResponse.json(
         { error: "Channel not found" },
@@ -71,19 +73,19 @@ export async function POST(
     }
 
     const existingSubscription = await Subscription.findOne({
-      channel_id: params.id,
+      channel_id: id,
       user_id: session.user.id
     });
 
     if (existingSubscription) {
       // Unfollow - remove subscription
       await Subscription.deleteOne({
-        channel_id: params.id,
+        channel_id: id,
         user_id: session.user.id
       });
 
       // Update channel subscriber count
-      await Channel.findByIdAndUpdate(params.id, {
+      await Channel.findByIdAndUpdate(id, {
         $inc: { subscribers: -1 }
       });
 
@@ -94,14 +96,14 @@ export async function POST(
     } else {
       // Follow - create subscription
       await Subscription.create({
-        channel_id: params.id,
+        channel_id: id,
         user_id: session.user.id,
         notifications_enabled: true,
         subscribed_at: new Date()
       });
 
       // Update channel subscriber count
-      await Channel.findByIdAndUpdate(params.id, {
+      await Channel.findByIdAndUpdate(id, {
         $inc: { subscribers: 1 }
       });
 

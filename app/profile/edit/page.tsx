@@ -30,6 +30,7 @@ export default function EditProfilePage() {
   
   const [newSkill, setNewSkill] = useState("");
   const [newCategory, setNewCategory] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   const availableCategories = [
     "Tecnologia", "Design", "Marketing", "Música", "Arte", "Esportes",
@@ -98,6 +99,64 @@ export default function EditProfilePage() {
     }));
   };
 
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      toast({
+        title: "Erro",
+        description: "Tipo de arquivo inválido. Use JPEG, PNG, GIF ou WebP.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      toast({
+        title: "Erro",
+        description: "Arquivo muito grande. Tamanho máximo: 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('/api/upload/avatar', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const { avatarUrl } = await response.json();
+      setFormData(prev => ({ ...prev, avatar: avatarUrl }));
+      
+      toast({
+        title: "Sucesso",
+        description: "Foto do perfil atualizada!",
+      });
+    } catch (error) {
+      toast({
+        title: "Erro",
+        description: "Falha ao fazer upload da foto",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -151,11 +210,27 @@ export default function EditProfilePage() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <Button variant="outline" className="text-white border-gray-600">
-                    📷 Alterar Foto
-                  </Button>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
+                    className="hidden"
+                    id="avatar-upload"
+                  />
+                  <label htmlFor="avatar-upload">
+                    <Button 
+                      variant="outline" 
+                      className="text-white border-gray-600 cursor-pointer"
+                      disabled={isUploading}
+                      asChild
+                    >
+                      <span>
+                        {isUploading ? "Enviando..." : "📷 Alterar Foto"}
+                      </span>
+                    </Button>
+                  </label>
                   <p className="text-gray-400 text-sm mt-2">
-                    JPG, PNG ou GIF. Máximo 2MB.
+                    JPG, PNG ou GIF. Máximo 5MB.
                   </p>
                 </div>
               </div>
