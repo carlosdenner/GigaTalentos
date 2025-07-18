@@ -24,20 +24,50 @@ export default function ContactPage() {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate API call
-    setTimeout(() => {
-      toast({
-        title: "Mensagem enviada",
-        description: "Entraremos em contato o mais breve possível.",
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+        }),
       })
 
-      // Reset form
-      setName("")
-      setEmail("")
-      setSubject("general")
-      setMessage("")
+      const data = await response.json()
+
+      if (response.ok) {
+        toast({
+          title: "Mensagem enviada com sucesso!",
+          description: "Entraremos em contato o mais breve possível.",
+        })
+
+        // Reset form
+        setName("")
+        setEmail("")
+        setSubject("general")
+        setMessage("")
+      } else {
+        toast({
+          title: "Erro ao enviar mensagem",
+          description: data.error || "Tente novamente mais tarde.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error('Erro ao enviar email:', error)
+      toast({
+        title: "Erro ao enviar mensagem",
+        description: "Verifique sua conexão e tente novamente.",
+        variant: "destructive",
+      })
+    } finally {
       setIsLoading(false)
-    }, 1500)
+    }
   }
 
   return (
