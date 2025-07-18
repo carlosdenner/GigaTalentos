@@ -24,7 +24,7 @@ function CreateProjectForm() {
 
   // Redirect if not talent or mentor
   useEffect(() => {
-    if (!userTypeLoading && !['talent', 'mentor'].includes(userType || '')) {
+    if (!userTypeLoading && !['talent', 'mentor', 'admin'].includes(userType || '')) {
       router.push('/projetos');
     }
   }, [userType, userTypeLoading, router]);
@@ -258,9 +258,17 @@ function CreateProjectForm() {
                     </SelectContent>
                   </Select>
                   {portfolios.length === 0 && (
-                    <p className="text-sm text-gray-400 mt-1">
-                      Primeiro você precisa ter um portfólio/canal criado
-                    </p>
+                    <div className="text-sm text-gray-400 mt-1">
+                      <p>Primeiro você precisa ter um portfólio/canal criado.</p>
+                      <Button
+                        type="button"
+                        variant="link"
+                        className="p-0 h-auto text-[#10b981] hover:text-[#10b981]/90"
+                        onClick={() => router.push('/channel/create?returnTo=project-create')}
+                      >
+                        Criar um canal agora →
+                      </Button>
+                    </div>
                   )}
                 </div>
               </div>

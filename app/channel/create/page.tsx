@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUserType } from "@/hooks/useUserType";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -18,9 +18,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function CreateChannelPage() {
+function CreateChannelForm() {
   const { userType } = useUserType();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get('returnTo');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -32,10 +34,10 @@ export default function CreateChannelPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (userType !== "talent") {
+    if (!['talent', 'admin'].includes(userType || '')) {
       toast({
         title: "Access Denied",
-        description: "Only talent accounts can create channels",
+        description: "Only talent and admin accounts can create channels",
         variant: "destructive",
       });
       return;
@@ -58,7 +60,12 @@ export default function CreateChannelPage() {
         description: "Your channel has been created.",
       });
 
-      router.push(`/channels/${channelResponse.data._id}`);
+      // If user came from project creation flow, redirect to project creation
+      if (returnTo === 'project-create') {
+        router.push('/projetos/create');
+      } else {
+        router.push(`/channels/${channelResponse.data._id}`);
+      }
     } catch (error: any) {
       console.error("Error creating channel:", error);
       toast({
@@ -87,12 +94,12 @@ export default function CreateChannelPage() {
     loadCategories();
   }, []);
 
-  if (userType !== "talent") {
+  if (!['talent', 'admin'].includes(userType || '')) {
     return (
       <div className="text-center py-16">
         <h2 className="text-2xl font-bold text-white mb-4">Access Denied</h2>
         <p className="text-gray-400">
-          Only talent accounts can create channels.
+          Only talent and admin accounts can create channels.
         </p>
       </div>
     );
@@ -178,5 +185,13 @@ export default function CreateChannelPage() {
         </Button>
       </form>
     </div>
+  );
+}
+
+export default function CreateChannelPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateChannelForm />
+    </Suspense>
   );
 }

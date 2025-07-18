@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import FeaturedContent from "@/components/featured-content"
 import HomepageCategories from "@/components/homepage-categories"
+import SubmitProjectButton from "@/components/submit-project-button"
 
 export default function Home() {
   return (
@@ -28,11 +29,7 @@ export default function Home() {
         <p className="text-xl text-gray-400 mb-8">
           Junte-se a jovens talentos brasileiros em tecnologias emergentes, empreendedorismo e sustentabilidade
         </p>
-        <Link href="/talents/add">
-          <Button className="bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white text-lg px-8 py-4">
-            Submeter Seu Projeto
-          </Button>
-        </Link>
+        <SubmitProjectButton />
       </section>
     </div>
   )
