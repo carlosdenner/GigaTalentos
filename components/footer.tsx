@@ -11,7 +11,7 @@ export default function Footer() {
             <span className="text-[#10b981]">Giga</span>
             <span className="text-[#3b82f6]">Talentos</span>
           </Link>
-          <p className="text-sm text-gray-400">Desenvolvendo talentos brasileiros</p>
+          <p className="text-sm text-gray-400">Desenvolvendo o potencial inovador de jovens brasileiros</p>
         </div>
         <div className="flex items-center space-x-4">
           <Link href="/about" className="text-gray-400 hover:text-white text-sm">

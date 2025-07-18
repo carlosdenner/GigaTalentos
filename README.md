@@ -2,9 +2,11 @@
 
 **Giga Talentos** é uma plataforma brasileira de identificação e desenvolvimento de talentos empreendedores, focada nas 6 dimensões científicas fundamentais para o sucesso no empreendedorismo e inovação.
 
-## 🎯 Missão
+## 🎯 Nossa Missão
 
-Democratizar o acesso ao empreendedorismo no Brasil, conectando talentos promissores com oportunidades, mentores e recursos para transformar ideias em negócios de impacto social positivo.
+O **GigaTalentos** é um programa dedicado à identificação, ao desenvolvimento e ao estímulo do potencial inovador de jovens brasileiros, especialmente aqueles com altas habilidades e interesses em tecnologias emergentes, empreendedorismo e sustentabilidade.
+
+Acreditamos que o talento pode transformar a sociedade, e nosso compromisso é oferecer aos jovens um ambiente dinâmico e desafiador, repleto de oportunidades práticas e mentorias especializadas. Por meio de desafios reais, projetos educacionais e conexões estratégicas com o ecossistema empreendedor, capacitamos os participantes a construir suas carreiras, desenvolver competências essenciais e gerar soluções inovadoras que tenham impacto positivo no mundo.
 
 ## ✅ Status do Projeto - PRODUÇÃO PRONTA
 

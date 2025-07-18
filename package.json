@@ -2,6 +2,7 @@
   "name": "giga-talentos",
   "version": "0.1.0",
   "private": true,
+  "description": "Programa dedicado à identificação, ao desenvolvimento e ao estímulo do potencial inovador de jovens brasileiros em tecnologias emergentes, empreendedorismo e sustentabilidade",
   "overrides": {
     "vaul": {
       "react": "$react",
