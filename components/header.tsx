@@ -1,18 +1,18 @@
 import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, User } from "lucide-react"
+import { User } from "lucide-react"
+import GlobalSearch from "./global-search"
 
 export default function Header() {
   return (
     <header className="bg-[#0a192f] border-b border-gray-800 py-4 px-6 flex items-center justify-between">
       <div className="flex-1">{/* You can add a breadcrumb or page title here if needed */}</div>
       <div className="flex-1 max-w-md">
-        <div className="relative">
-          <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          <Input className="bg-[#1a2942] border-none text-white pl-10" placeholder="Search for talents..." />
-        </div>
+        <GlobalSearch 
+          className="w-full"
+          placeholder="Buscar vídeos, projetos, talentos..."
+        />
       </div>
       <div className="flex-1 flex justify-end">
         <Link href="/profile">

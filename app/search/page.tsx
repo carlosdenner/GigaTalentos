@@ -1,177 +1,568 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Eye, Heart, SearchIcon } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { 
+  SearchIcon, 
+  Video, 
+  Users, 
+  Target, 
+  FolderKanban, 
+  Play, 
+  Heart, 
+  Eye, 
+  Star,
+  Clock,
+  User,
+  Code2,
+  Award,
+  Building,
+  Layers,
+  Hash,
+  Sparkles,
+  Loader2,
+  Filter,
+  TrendingUp
+} from "lucide-react"
 import Link from "next/link"
-import { supabase } from "@/lib/supabase"
+import { useDebounce } from "@/hooks/use-debounce"
+
+interface SearchResult {
+  id: string;
+  type: 'video' | 'channel' | 'user' | 'projeto' | 'desafio' | 'category' | 'skill';
+  title: string;
+  description?: string;
+  avatar?: string;
+  metadata?: any;
+  score: number;
+  category?: string;
+  tags?: string[];
+}
+
+interface SearchResponse {
+  results: SearchResult[];
+  groupedResults: { [key: string]: SearchResult[] };
+  suggestions: string[];
+  totalCount: number;
+  query: string;
+}
+
+const getTypeIcon = (type: string) => {
+  switch (type) {
+    case 'video': return <Video className="w-4 h-4" />;
+    case 'projeto': return <FolderKanban className="w-4 h-4" />;
+    case 'desafio': return <Target className="w-4 h-4" />;
+    case 'user': return <User className="w-4 h-4" />;
+    case 'channel': return <Play className="w-4 h-4" />;
+    case 'category': return <Layers className="w-4 h-4" />;
+    case 'skill': return <Code2 className="w-4 h-4" />;
+    default: return <SearchIcon className="w-4 h-4" />;
+  }
+};
+
+const getTypeName = (type: string) => {
+  switch (type) {
+    case 'video': return 'Vídeos';
+    case 'projeto': return 'Projetos';
+    case 'desafio': return 'Desafios';
+    case 'user': return 'Pessoas';
+    case 'channel': return 'Canais';
+    case 'category': return 'Categorias';
+    case 'skill': return 'Habilidades';
+    default: return type;
+  }
+};
+
+const getTypeColor = (type: string) => {
+  switch (type) {
+    case 'video': return 'bg-red-900/20 text-red-300 border-red-800';
+    case 'projeto': return 'bg-blue-900/20 text-blue-300 border-blue-800';
+    case 'desafio': return 'bg-purple-900/20 text-purple-300 border-purple-800';
+    case 'user': return 'bg-green-900/20 text-green-300 border-green-800';
+    case 'channel': return 'bg-orange-900/20 text-orange-300 border-orange-800';
+    case 'category': return 'bg-indigo-900/20 text-indigo-300 border-indigo-800';
+    case 'skill': return 'bg-yellow-900/20 text-yellow-300 border-yellow-800';
+    default: return 'bg-gray-900/20 text-gray-300 border-gray-600';
+  }
+};
 
 export default function SearchPage() {
   const [query, setQuery] = useState("")
-  const [activeTab, setActiveTab] = useState("videos")
-  const [videos, setVideos] = useState<any[]>([])
-  const [channels, setChannels] = useState<any[]>([])
+  const [activeTab, setActiveTab] = useState("all")
+  const [searchResults, setSearchResults] = useState<SearchResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [recentSearches, setRecentSearches] = useState<string[]>([])
 
-  const handleSearch = async () => {
-    if (!query.trim()) return
+  // Debounce search query for better performance
+  const debouncedQuery = useDebounce(query, 300)
+
+  // Load recent searches from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('giga-recent-searches')
+    if (stored) {
+      setRecentSearches(JSON.parse(stored))
+    }
+  }, [])
+
+  // Save search to recent searches
+  const saveRecentSearch = useCallback((searchQuery: string) => {
+    if (!searchQuery.trim()) return
+    
+    const updated = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 8)
+    setRecentSearches(updated)
+    localStorage.setItem('giga-recent-searches', JSON.stringify(updated))
+  }, [recentSearches])
+
+  // Perform search
+  const performSearch = useCallback(async (searchQuery: string) => {
+    if (!searchQuery || searchQuery.trim().length < 2) {
+      setSearchResults(null)
+      return
+    }
 
     setIsLoading(true)
 
     try {
-      // Search videos
-      const { data: videosData } = await supabase
-        .from("videos")
-        .select("*, channels(*)")
-        .ilike("title", `%${query}%`)
-        .order("views", { ascending: false })
-        .limit(20)
+      const params = new URLSearchParams({
+        q: searchQuery.trim(),
+        type: activeTab,
+        limit: '50'
+      })
 
-      // Search channels
-      const { data: channelsData } = await supabase
-        .from("channels")
-        .select("*")
-        .ilike("name", `%${query}%`)
-        .order("subscribers", { ascending: false })
-        .limit(20)
+      const response = await fetch(`/api/search?${params}`)
+      const data: SearchResponse = await response.json()
 
-      setVideos(videosData || [])
-      setChannels(channelsData || [])
+      setSearchResults(data)
+      saveRecentSearch(searchQuery.trim())
     } catch (error) {
-      console.error("Error searching:", error)
+      console.error("Search error:", error)
+      setSearchResults(null)
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [activeTab, saveRecentSearch])
 
+  // Trigger search when debounced query changes
   useEffect(() => {
-    if (query) {
-      handleSearch()
+    performSearch(debouncedQuery)
+  }, [debouncedQuery, performSearch])
+
+  // Filter results based on active tab
+  const filteredResults = useMemo(() => {
+    if (!searchResults) return []
+    
+    if (activeTab === 'all') {
+      return searchResults.results || []
     }
-  }, [activeTab])
+    
+    return searchResults.groupedResults?.[activeTab] || []
+  }, [searchResults, activeTab])
+
+  // Get result counts by type
+  const resultCounts = useMemo(() => {
+    if (!searchResults) return {}
+    
+    const counts: { [key: string]: number } = { all: searchResults.totalCount || 0 }
+    
+    // Safely handle groupedResults which might be undefined
+    if (searchResults.groupedResults) {
+      Object.entries(searchResults.groupedResults).forEach(([type, results]) => {
+        counts[type] = results?.length || 0
+      })
+    }
+    
+    return counts
+  }, [searchResults])
+
+  const renderResultCard = (result: SearchResult) => {
+    const getResultLink = () => {
+      switch (result.type) {
+        case 'video':
+          return `/videos/${result.id}`;
+        case 'projeto':
+          return `/projetos/${result.id}`;
+        case 'desafio':
+          return `/desafios/${result.id}`;
+        case 'user':
+          return `/profile/${result.id}`;
+        case 'channel':
+          return `/channel/${result.id}`;
+        case 'category':
+          return `/categories?category=${encodeURIComponent(result.title)}`;
+        case 'skill':
+          return `/search?q=${encodeURIComponent(result.title)}&type=users`;
+        default:
+          return '#';
+      }
+    };
+
+    return (
+      <Link key={result.id} href={getResultLink()}>
+        <Card className="hover:shadow-md transition-all duration-200 border-l-4 border-l-transparent hover:border-l-emerald-500 group bg-[#1a2942] border-gray-600">
+          <CardContent className="p-4">
+            <div className="flex items-start gap-3">
+              {/* Avatar/Icon */}
+              <div className="flex-shrink-0">
+                {result.avatar ? (
+                  <Avatar className="w-10 h-10">
+                    <AvatarImage src={result.avatar} alt={result.title} />
+                    <AvatarFallback className="bg-[#0a192f] text-gray-300">{result.title.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                ) : (
+                  <div className="w-10 h-10 rounded-lg bg-[#0a192f] border border-gray-600 flex items-center justify-center">
+                    {getTypeIcon(result.type)}
+                  </div>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-white group-hover:text-emerald-400 transition-colors line-clamp-1">
+                      {result.title}
+                    </h3>
+                    
+                    {result.description && (
+                      <p className="text-sm text-gray-300 mt-1 line-clamp-2">
+                        {result.description}
+                      </p>
+                    )}
+
+                    {/* Metadata row */}
+                    <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
+                      <Badge variant="outline" className={`${getTypeColor(result.type)} text-xs border-gray-600`}>
+                        {getTypeIcon(result.type)}
+                        <span className="ml-1">{getTypeName(result.type)}</span>
+                      </Badge>
+
+                      {/* Type-specific metadata */}
+                      {result.type === 'video' && result.metadata && (
+                        <>
+                          <span className="flex items-center gap-1">
+                            <Eye className="w-3 h-3" />
+                            {result.metadata.views?.toLocaleString()}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {result.metadata.duration}
+                          </span>
+                        </>
+                      )}
+
+                      {result.type === 'projeto' && result.metadata && (
+                        <>
+                          <span className="flex items-center gap-1">
+                            <Users className="w-3 h-3" />
+                            {result.metadata.participants} participantes
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Heart className="w-3 h-3" />
+                            {result.metadata.likes}
+                          </span>
+                          {result.metadata.verified && (
+                            <Badge className="bg-blue-100 text-blue-800 text-xs">
+                              <Award className="w-3 h-3 mr-1" />
+                              Verificado
+                            </Badge>
+                          )}
+                        </>
+                      )}
+
+                      {result.type === 'desafio' && result.metadata && (
+                        <>
+                          <span className="flex items-center gap-1">
+                            <Star className="w-3 h-3" />
+                            {result.metadata.favorites} favoritos
+                          </span>
+                          <Badge className={`text-xs ${
+                            result.metadata.difficulty === 'Avançado' ? 'bg-red-100 text-red-800' :
+                            result.metadata.difficulty === 'Intermediário' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-green-100 text-green-800'
+                          }`}>
+                            {result.metadata.difficulty}
+                          </Badge>
+                          {result.metadata.prizes?.[0] && (
+                            <Badge className="bg-emerald-100 text-emerald-800 text-xs">
+                              <Award className="w-3 h-3 mr-1" />
+                              {result.metadata.prizes[0].value}
+                            </Badge>
+                          )}
+                        </>
+                      )}
+
+                      {result.type === 'user' && result.metadata && (
+                        <>
+                          <Badge className={`text-xs ${
+                            result.metadata.account_type === 'mentor' ? 'bg-purple-100 text-purple-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {result.metadata.account_type === 'mentor' ? 'Mentor' : 'Talento'}
+                          </Badge>
+                          <span className="flex items-center gap-1">
+                            <Users className="w-3 h-3" />
+                            {result.metadata.followers} seguidores
+                          </span>
+                        </>
+                      )}
+
+                      {result.type === 'skill' && result.metadata && (
+                        <span className="flex items-center gap-1">
+                          <Users className="w-3 h-3" />
+                          {result.metadata.user_count} pessoa{result.metadata.user_count === 1 ? '' : 's'}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Tags */}
+                    {result.tags && result.tags.length > 0 && (
+                      <div className="flex gap-1 mt-2">
+                        {result.tags.slice(0, 3).map((tag, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs">
+                            <Hash className="w-2 h-2 mr-1" />
+                            {tag}
+                          </Badge>
+                        ))}
+                        {result.tags.length > 3 && (
+                          <Badge variant="secondary" className="text-xs">
+                            +{result.tags.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Score indicator (for debugging - can be removed in production) */}
+                  {process.env.NODE_ENV === 'development' && (
+                    <div className="text-xs text-gray-400 font-mono">
+                      {Math.round(result.score)}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </Link>
+    );
+  };
 
   return (
-    <div className="space-y-8">
-      <h1 className="text-4xl font-bold text-white mb-8">Buscar</h1>
+    <div className="min-h-screen bg-[#0a192f]">
+      <div className="max-w-6xl mx-auto p-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-white mb-2">Buscar</h1>
+          <p className="text-gray-400">
+            Descubra vídeos, projetos, desafios, talentos e muito mais
+          </p>
+        </div>
 
-      <div className="flex gap-4 mb-8">
-        <div className="relative flex-1">
-          <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        {/* Search Input */}
+        <div className="relative mb-6">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            {isLoading ? (
+              <Loader2 className="h-5 w-5 text-gray-400 animate-spin" />
+            ) : (
+              <SearchIcon className="h-5 w-5 text-gray-400" />
+            )}
+          </div>
           <Input
-            className="bg-[#1a2942] border-gray-700 text-white pl-10 h-12"
+            type="text"
             placeholder="Buscar por vídeos, canais ou criadores..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            className="pl-10 pr-4 py-3 text-lg bg-[#1a2942] border-gray-600 text-white placeholder:text-gray-400 focus:border-[#10b981] focus:ring-[#10b981]"
+            autoFocus
           />
+          
+          {/* Clear button */}
+          {query && (
+            <button
+              onClick={() => setQuery('')}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center"
+            >
+              <span className="text-gray-400 hover:text-gray-300 text-sm">✕</span>
+            </button>
+          )}
         </div>
-        <Button
-          className="bg-[#10b981] hover:bg-[#10b981]/90 text-white h-12 px-6"
-          onClick={handleSearch}
-          disabled={isLoading}
-        >
-          {isLoading ? "Buscando..." : "Buscar"}
-        </Button>
-      </div>
 
-      {query && (
-        <Tabs defaultValue="videos" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="bg-[#1a2942]">
-            <TabsTrigger value="videos" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Vídeos
-            </TabsTrigger>
-            <TabsTrigger value="channels" className="data-[state=active]:bg-[#10b981] data-[state=active]:text-white">
-              Canais
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="videos" className="mt-6">
-            {videos.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-400">Nenhum vídeo encontrado para "{query}"</p>
+        {/* Recent Searches */}
+        {!query && recentSearches.length > 0 && (
+          <Card className="mb-6 bg-[#1a2942] border-gray-600">
+            <CardHeader className="pb-3">
+              <h3 className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                Buscas Recentes
+              </h3>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="flex flex-wrap gap-2">
+                {recentSearches.map((search, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setQuery(search)}
+                    className="text-xs bg-[#0a192f] border-gray-600 text-gray-300 hover:bg-[#10b981] hover:text-white hover:border-[#10b981]"
+                  >
+                    {search}
+                  </Button>
+                ))}
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {videos.map((video: any) => (
-                  <Link href={`/talents/${video.id}`} key={video.id} className="group">
-                    <Card className="bg-[#1a2942] border-gray-800">
-                      <CardContent className="p-4">
-                        <div className="relative aspect-video rounded-lg overflow-hidden mb-4">
-                          <iframe
-                            width="100%"
-                            height="100%"
-                            src="https://www.youtube.com/embed/5zUyhX6Lp64"
-                            title={video.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          ></iframe>
-                        </div>
-                        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#10b981]">
-                          {video.title}
-                        </h3>
-                        <div className="flex items-center gap-2 mb-2">
-                          <Avatar className="h-6 w-6">
-                            <AvatarImage src={video.channels?.avatar} alt={video.channels?.name} />
-                            <AvatarFallback>{video.channels?.name.substring(0, 2).toUpperCase()}</AvatarFallback>
-                          </Avatar>
-                          <span className="text-sm text-[#3b82f6]">{video.channels?.name}</span>
-                        </div>
-                        <div className="flex items-center justify-between text-sm text-gray-400">
-                          <span className="flex items-center">
-                            <Eye className="h-4 w-4 mr-1" /> {video.views.toLocaleString()}
-                          </span>
-                          <span className="flex items-center">
-                            <Heart className="h-4 w-4 mr-1" /> {video.likes.toLocaleString()}
-                          </span>
-                        </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Search Suggestions */}
+        {searchResults?.suggestions && searchResults.suggestions.length > 0 && (
+          <Card className="mb-6 bg-[#1a2942] border-gray-600">
+            <CardHeader className="pb-3">
+              <h3 className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                Sugestões
+              </h3>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="flex flex-wrap gap-2">
+                {searchResults.suggestions.map((suggestion, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setQuery(suggestion)}
+                    className="text-xs bg-[#0a192f] border-gray-600 text-gray-300 hover:bg-[#10b981] hover:text-white hover:border-[#10b981]"
+                  >
+                    {suggestion}
+                  </Button>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Results Tabs */}
+        {searchResults && (
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-8 mb-6 bg-[#1a2942] border border-gray-600">
+              <TabsTrigger value="all" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                Todos {resultCounts.all ? `(${resultCounts.all})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="video" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <Video className="w-3 h-3 mr-1" />
+                Vídeos {resultCounts.video ? `(${resultCounts.video})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="projeto" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <FolderKanban className="w-3 h-3 mr-1" />
+                Projetos {resultCounts.projeto ? `(${resultCounts.projeto})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="desafio" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <Target className="w-3 h-3 mr-1" />
+                Desafios {resultCounts.desafio ? `(${resultCounts.desafio})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="user" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <Users className="w-3 h-3 mr-1" />
+                Pessoas {resultCounts.user ? `(${resultCounts.user})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="channel" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <Play className="w-3 h-3 mr-1" />
+                Canais {resultCounts.channel ? `(${resultCounts.channel})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="category" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <Layers className="w-3 h-3 mr-1" />
+                Categorias {resultCounts.category ? `(${resultCounts.category})` : ''}
+              </TabsTrigger>
+              <TabsTrigger value="skill" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <Code2 className="w-3 h-3 mr-1" />
+                Habilidades {resultCounts.skill ? `(${resultCounts.skill})` : ''}
+              </TabsTrigger>
+            </TabsList>
+
+            {/* Results */}
+            <TabsContent value={activeTab} className="mt-0">
+              {isLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
+                  <span className="ml-2 text-gray-600">Buscando...</span>
+                </div>
+              ) : filteredResults.length > 0 ? (
+                <div className="space-y-3">
+                  {filteredResults.map(renderResultCard)}
+                  
+                  {filteredResults.length >= 50 && (
+                    <Card>
+                      <CardContent className="p-4 text-center">
+                        <p className="text-gray-600">
+                          Mostrando primeiros 50 resultados. Refine sua busca para encontrar conteúdo mais específico.
+                        </p>
                       </CardContent>
                     </Card>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </TabsContent>
+                  )}
+                </div>
+              ) : query.trim().length >= 2 ? (
+                <Card className="bg-[#1a2942] border-gray-600">
+                  <CardContent className="p-8 text-center">
+                    <SearchIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-white mb-2">
+                      Nenhum resultado encontrado
+                    </h3>
+                    <p className="text-gray-300 mb-4">
+                      Não encontramos resultados para "{query}" em {getTypeName(activeTab)}.
+                    </p>
+                    <div className="flex gap-2 justify-center">
+                      <Button variant="outline" onClick={() => setActiveTab('all')} className="border-gray-600 text-gray-300 hover:bg-[#10b981] hover:text-white hover:border-[#10b981]">
+                        Buscar em tudo
+                      </Button>
+                      <Button variant="outline" onClick={() => setQuery('')} className="border-gray-600 text-gray-300 hover:bg-[#10b981] hover:text-white hover:border-[#10b981]">
+                        Limpar busca
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : null}
+            </TabsContent>
+          </Tabs>
+        )}
 
-          <TabsContent value="channels" className="mt-6">
-            {channels.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-400">Nenhum canal encontrado para "{query}"</p>
+        {/* Search Tips */}
+        {!query && (
+          <Card className="mt-8 bg-[#1a2942] border-gray-600">
+            <CardHeader>
+              <h3 className="text-lg font-medium text-white flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Dicas de Busca
+              </h3>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+                <div>
+                  <h4 className="font-medium text-white mb-2">Busque por:</h4>
+                  <ul className="space-y-1">
+                    <li>• Nomes de projetos ou desafios</li>
+                    <li>• Tecnologias (React, Python, etc.)</li>
+                    <li>• Nomes de talentos ou mentores</li>
+                    <li>• Categorias de habilidades</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">Exemplos:</h4>
+                  <ul className="space-y-1">
+                    <li>• "FinTech Revolution"</li>
+                    <li>• "Next.js"</li>
+                    <li>• "Roberto Silva"</li>
+                    <li>• "Liderança"</li>
+                  </ul>
+                </div>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {channels?.map((channel: any) => (
-                  <Card key={channel.id} className="bg-[#1a2942] border-gray-800">
-                    <CardContent className="p-6">
-                      <div className="flex items-center mb-4">
-                        <Avatar className="h-12 w-12 mr-4">
-                          <AvatarImage src={channel.avatar} alt={channel.name} />
-                          <AvatarFallback>{channel.name.substring(0, 2).toUpperCase()}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <h3 className="text-xl font-semibold text-white">{channel.name}</h3>
-                          <p className="text-sm text-gray-400">{channel.category}</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-300 mb-4 line-clamp-2">{channel.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-gray-400">{channel.subscribers.toLocaleString()} inscritos</span>
-                        <Link href={`/channels/${channel.id}`}>
-                          <Button variant="outline">Ver Canal</Button>
-                        </Link>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </TabsContent>
-        </Tabs>
-      )}
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   )
 }
