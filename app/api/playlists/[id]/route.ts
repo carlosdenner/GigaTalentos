@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import Playlist from "@/models/Playlist";
 
@@ -28,7 +29,7 @@ export async function GET(
     }
 
     // Check if playlist is private
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!playlist.is_public && playlist.user_id._id.toString() !== session?.user?.id) {
       return NextResponse.json({ error: "Access denied" }, { status: 403 });
     }
@@ -61,7 +62,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
@@ -112,7 +113,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }

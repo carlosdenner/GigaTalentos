@@ -74,7 +74,9 @@ export default function PlaylistsPage() {
         }
 
         // Fetch followed playlists
-        const followedResponse = await fetch('/api/playlists/followed');
+        const followedResponse = await fetch('/api/playlists/followed', {
+          credentials: 'include',
+        });
         if (followedResponse.ok) {
           const followedData = await followedResponse.json();
           setFollowedPlaylists(followedData);
@@ -104,7 +106,11 @@ export default function PlaylistsPage() {
 
     try {
       const response = await fetch(`/api/playlists/${playlistId}/follow`, {
-        method: 'POST'
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
       });
 
       if (response.ok) {

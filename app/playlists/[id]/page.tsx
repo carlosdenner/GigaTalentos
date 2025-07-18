@@ -80,7 +80,9 @@ export default function PlaylistDetailPage() {
   const fetchPlaylist = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/playlists/${params.id}`);
+      const response = await fetch(`/api/playlists/${params.id}`, {
+        credentials: 'include',
+      });
       
       if (!response.ok) {
         if (response.status === 404) {
@@ -121,7 +123,11 @@ export default function PlaylistDetailPage() {
 
     try {
       const response = await fetch(`/api/playlists/${params.id}/follow`, {
-        method: 'POST'
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
       });
 
       if (response.ok) {
@@ -146,7 +152,11 @@ export default function PlaylistDetailPage() {
   const handleUnfollowPlaylist = async () => {
     try {
       const response = await fetch(`/api/playlists/${params.id}/follow`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
       });
 
       if (response.ok) {
