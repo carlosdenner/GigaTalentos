@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback, useMemo } from "react"
+import { useState, useEffect, useCallback, useMemo, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -27,6 +28,7 @@ import {
   Sparkles,
   Loader2,
   Filter,
+  FileText,
   TrendingUp
 } from "lucide-react"
 import Link from "next/link"
@@ -34,7 +36,7 @@ import { useDebounce } from "@/hooks/use-debounce"
 
 interface SearchResult {
   id: string;
-  type: 'video' | 'channel' | 'user' | 'projeto' | 'desafio' | 'category' | 'skill';
+  type: 'video' | 'channel' | 'user' | 'projeto' | 'desafio' | 'category' | 'skill' | 'page';
   title: string;
   description?: string;
   avatar?: string;
@@ -61,6 +63,7 @@ const getTypeIcon = (type: string) => {
     case 'channel': return <Play className="w-4 h-4" />;
     case 'category': return <Layers className="w-4 h-4" />;
     case 'skill': return <Code2 className="w-4 h-4" />;
+    case 'page': return <FileText className="w-4 h-4" />;
     default: return <SearchIcon className="w-4 h-4" />;
   }
 };
@@ -72,8 +75,9 @@ const getTypeName = (type: string) => {
     case 'desafio': return 'Desafios';
     case 'user': return 'Pessoas';
     case 'channel': return 'Canais';
-    case 'category': return 'Categorias';
+    case 'category': return 'Habilidades';
     case 'skill': return 'Habilidades';
+    case 'page': return 'Páginas';
     default: return type;
   }
 };
@@ -87,19 +91,32 @@ const getTypeColor = (type: string) => {
     case 'channel': return 'bg-orange-900/20 text-orange-300 border-orange-800';
     case 'category': return 'bg-indigo-900/20 text-indigo-300 border-indigo-800';
     case 'skill': return 'bg-yellow-900/20 text-yellow-300 border-yellow-800';
+    case 'page': return 'bg-cyan-900/20 text-cyan-300 border-cyan-800';
     default: return 'bg-gray-900/20 text-gray-300 border-gray-600';
   }
 };
 
 export default function SearchPage() {
+  const searchParams = useSearchParams()
   const [query, setQuery] = useState("")
   const [activeTab, setActiveTab] = useState("all")
   const [searchResults, setSearchResults] = useState<SearchResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [recentSearches, setRecentSearches] = useState<string[]>([])
+  const hasInitialized = useRef(false)
+  const lastSearchQuery = useRef("")
 
   // Debounce search query for better performance
   const debouncedQuery = useDebounce(query, 300)
+
+  // Initialize query from URL parameters on mount
+  useEffect(() => {
+    const urlQuery = searchParams.get('q')
+    if (urlQuery && !hasInitialized.current) {
+      setQuery(urlQuery)
+      hasInitialized.current = true
+    }
+  }, [searchParams])
 
   // Load recent searches from localStorage
   useEffect(() => {
@@ -109,48 +126,65 @@ export default function SearchPage() {
     }
   }, [])
 
-  // Save search to recent searches
-  const saveRecentSearch = useCallback((searchQuery: string) => {
-    if (!searchQuery.trim()) return
-    
-    const updated = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 8)
-    setRecentSearches(updated)
-    localStorage.setItem('giga-recent-searches', JSON.stringify(updated))
-  }, [recentSearches])
-
-  // Perform search
-  const performSearch = useCallback(async (searchQuery: string) => {
-    if (!searchQuery || searchQuery.trim().length < 2) {
+  // Trigger search when debounced query changes
+  useEffect(() => {
+    if (!debouncedQuery || debouncedQuery.trim().length < 2) {
       setSearchResults(null)
+      lastSearchQuery.current = ""
       return
     }
 
+    const searchQuery = debouncedQuery.trim()
+    
+    // Prevent duplicate searches using ref
+    if (lastSearchQuery.current === searchQuery) {
+      return
+    }
+    
+    let isCancelled = false
+    lastSearchQuery.current = searchQuery
     setIsLoading(true)
 
-    try {
-      const params = new URLSearchParams({
-        q: searchQuery.trim(),
-        type: activeTab,
-        limit: '50'
-      })
+    const performSearchAction = async () => {
+      try {
+        const params = new URLSearchParams({
+          q: searchQuery,
+          type: 'all', // Always search all types
+          limit: '50'
+        })
 
-      const response = await fetch(`/api/search?${params}`)
-      const data: SearchResponse = await response.json()
+        const response = await fetch(`/api/search?${params}`)
+        const data: SearchResponse = await response.json()
 
-      setSearchResults(data)
-      saveRecentSearch(searchQuery.trim())
-    } catch (error) {
-      console.error("Search error:", error)
-      setSearchResults(null)
-    } finally {
-      setIsLoading(false)
+        if (!isCancelled) {
+          setSearchResults(data)
+          
+          // Save to recent searches
+          setRecentSearches(prevSearches => {
+            const updated = [searchQuery, ...prevSearches.filter(s => s !== searchQuery)].slice(0, 8)
+            localStorage.setItem('giga-recent-searches', JSON.stringify(updated))
+            return updated
+          })
+        }
+      } catch (error) {
+        console.error("Search error:", error)
+        if (!isCancelled) {
+          setSearchResults(null)
+        }
+      } finally {
+        if (!isCancelled) {
+          setIsLoading(false)
+        }
+      }
     }
-  }, [activeTab, saveRecentSearch])
 
-  // Trigger search when debounced query changes
-  useEffect(() => {
-    performSearch(debouncedQuery)
-  }, [debouncedQuery, performSearch])
+    performSearchAction()
+
+    // Cleanup function
+    return () => {
+      isCancelled = true
+    }
+  }, [debouncedQuery])
 
   // Filter results based on active tab
   const filteredResults = useMemo(() => {
@@ -196,6 +230,8 @@ export default function SearchPage() {
           return `/categories?category=${encodeURIComponent(result.title)}`;
         case 'skill':
           return `/search?q=${encodeURIComponent(result.title)}&type=users`;
+        case 'page':
+          return result.metadata?.url || '/';
         default:
           return '#';
       }
@@ -315,6 +351,13 @@ export default function SearchPage() {
                         <span className="flex items-center gap-1">
                           <Users className="w-3 h-3" />
                           {result.metadata.user_count} pessoa{result.metadata.user_count === 1 ? '' : 's'}
+                        </span>
+                      )}
+
+                      {result.type === 'page' && result.metadata && (
+                        <span className="flex items-center gap-1">
+                          <Building className="w-3 h-3" />
+                          {result.metadata.category}
                         </span>
                       )}
                     </div>
@@ -475,11 +518,11 @@ export default function SearchPage() {
               </TabsTrigger>
               <TabsTrigger value="category" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
                 <Layers className="w-3 h-3 mr-1" />
-                Categorias {resultCounts.category ? `(${resultCounts.category})` : ''}
+                Habilidades {resultCounts.category ? `(${resultCounts.category})` : ''}
               </TabsTrigger>
-              <TabsTrigger value="skill" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
-                <Code2 className="w-3 h-3 mr-1" />
-                Habilidades {resultCounts.skill ? `(${resultCounts.skill})` : ''}
+              <TabsTrigger value="page" className="text-xs data-[state=active]:bg-[#10b981] data-[state=active]:text-white text-gray-300">
+                <FileText className="w-3 h-3 mr-1" />
+                Páginas {resultCounts.page ? `(${resultCounts.page})` : ''}
               </TabsTrigger>
             </TabsList>
 

@@ -9,7 +9,7 @@ import Category from "@/models/Category";
 
 interface SearchResult {
   id: string;
-  type: 'video' | 'channel' | 'user' | 'projeto' | 'desafio' | 'category' | 'skill';
+  type: 'video' | 'channel' | 'user' | 'projeto' | 'desafio' | 'category' | 'skill' | 'page';
   title: string;
   description?: string;
   avatar?: string;
@@ -110,14 +110,7 @@ export async function GET(request: Request) {
 
     // 2. SEARCH PROJETOS
     if (type === "projetos" || type === "all") {
-      const projetos = await Projeto.find({
-        $or: [
-          { nome: searchRegex },
-          { descricao: searchRegex },
-          { objetivo: searchRegex },
-          { tecnologias: { $in: [searchRegex] } }
-        ]
-      })
+      const projetos = await Projeto.find({})
       .populate('criador_id', 'name avatar account_type')
       .populate('talento_lider_id', 'name avatar')
       .populate('categoria', 'name')
@@ -137,10 +130,18 @@ export async function GET(request: Request) {
           score += 45;
         }
         
+        // Creator match
+        if (projeto.criador_id?.name?.toLowerCase().includes(searchTerm.toLowerCase())) {
+          score += 75;
+        }
+        
         // Technology match (high relevance)
         if (projeto.tecnologias?.some((tech: string) => tech.toLowerCase().includes(searchTerm.toLowerCase()))) {
           score += 70;
         }
+        
+        // Only add results with a score > 0 (i.e., that match the search term)
+        if (score === 0) return;
         
         // Engagement boost
         score += Math.min((projeto.likes?.length || 0) * 2, 20);
@@ -179,15 +180,9 @@ export async function GET(request: Request) {
 
     // 3. SEARCH DESAFIOS
     if (type === "desafios" || type === "all") {
-      const desafios = await Desafio.find({
-        $or: [
-          { title: searchRegex },
-          { description: searchRegex },
-          { category: searchRegex },
-          { difficulty: searchRegex }
-        ]
-      })
+      const desafios = await Desafio.find({})
       .populate('created_by', 'name avatar account_type')
+      .populate('category', 'name')
       .limit(type === "desafios" ? limit : Math.ceil(limit * 0.2))
       .lean();
 
@@ -204,8 +199,13 @@ export async function GET(request: Request) {
           score += 40;
         }
         
+        // Creator match
+        if (desafio.created_by?.name?.toLowerCase().includes(searchTerm.toLowerCase())) {
+          score += 75;
+        }
+        
         // Category match
-        if (desafio.category?.toLowerCase().includes(searchTerm.toLowerCase())) {
+        if (desafio.category?.name?.toLowerCase().includes(searchTerm.toLowerCase())) {
           score += 60;
         }
         
@@ -213,6 +213,9 @@ export async function GET(request: Request) {
         if (desafio.difficulty?.toLowerCase().includes(searchTerm.toLowerCase())) {
           score += 30;
         }
+        
+        // Only add results with a score > 0 (i.e., that match the search term)
+        if (score === 0) return;
         
         // Engagement boost
         score += Math.min((desafio.favoritos?.length || 0) * 2, 25);
@@ -233,10 +236,10 @@ export async function GET(request: Request) {
           type: 'desafio',
           title: desafio.title,
           description: desafio.description,
-          avatar: `/categories/${desafio.category?.toLowerCase().replace(/\s+/g, '-')}.svg`,
+          avatar: `/categories/${desafio.category?.name?.toLowerCase().replace(/\s+/g, '-')}.svg`,
           metadata: {
             creator: desafio.created_by?.name,
-            category: desafio.category,
+            category: desafio.category?.name,
             difficulty: desafio.difficulty,
             status: desafio.status,
             duration: desafio.duration,
@@ -246,12 +249,10 @@ export async function GET(request: Request) {
             featured: desafio.featured
           },
           score,
-          category: desafio.category
+          category: desafio.category?.name
         });
       });
-    }
-
-    // 4. SEARCH USERS (TALENTOS & MENTORES)
+    }    // 4. SEARCH USERS (TALENTOS & MENTORES & ADMINS)
     if (type === "users" || type === "talentos" || type === "mentores" || type === "all") {
       const users = await User.find({
         $and: [
@@ -265,7 +266,7 @@ export async function GET(request: Request) {
           },
           type === "talentos" ? { account_type: 'talent' } :
           type === "mentores" ? { account_type: 'mentor' } :
-          { account_type: { $in: ['talent', 'mentor'] } }
+          { account_type: { $in: ['talent', 'mentor', 'admin'] } }
         ]
       })
       .limit(type === "users" || type === "talentos" || type === "mentores" ? limit : Math.ceil(limit * 0.15))
@@ -437,6 +438,80 @@ export async function GET(request: Request) {
           });
         });
       }
+    }
+
+    // 7. SEARCH PAGES (Static Content)
+    if (type === "pages" || type === "all") {
+      const pageContent = [
+        {
+          id: 'about',
+          title: 'Sobre Nós',
+          description: 'Conheça nossa equipe e missão',
+          content: 'Carlos Denner Nossa Equipe Fundador administrador plataforma Giga Talentos identificação desenvolvimento talentos empreendedores',
+          url: '/about',
+          category: 'Institucional'
+        },
+        {
+          id: 'terms',
+          title: 'Termos de Uso',
+          description: 'Termos e condições de uso da plataforma',
+          content: 'termos condições uso plataforma política privacidade',
+          url: '/terms',
+          category: 'Legal'
+        },
+        {
+          id: 'privacy',
+          title: 'Política de Privacidade',
+          description: 'Nossa política de privacidade e proteção de dados',
+          content: 'política privacidade proteção dados pessoais LGPD',
+          url: '/privacy',
+          category: 'Legal'
+        },
+        {
+          id: 'contact',
+          title: 'Contato',
+          description: 'Entre em contato conosco',
+          content: 'contato suporte ajuda dúvidas Carlos Denner equipe',
+          url: '/contact',
+          category: 'Suporte'
+        }
+      ];
+
+      pageContent.forEach((page: any) => {
+        let score = 0;
+        
+        // Title match
+        if (page.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+          score += page.title.toLowerCase() === searchTerm.toLowerCase() ? 100 : 80;
+        }
+        
+        // Description match
+        if (page.description?.toLowerCase().includes(searchTerm.toLowerCase())) {
+          score += 60;
+        }
+        
+        // Content match
+        if (page.content?.toLowerCase().includes(searchTerm.toLowerCase())) {
+          score += 40;
+        }
+        
+        // Only add if there's a match
+        if (score > 0) {
+          results.push({
+            id: page.id,
+            type: 'page',
+            title: page.title,
+            description: page.description,
+            avatar: '/pages-icon.svg',
+            metadata: {
+              url: page.url,
+              category: page.category
+            },
+            score,
+            category: page.category
+          });
+        }
+      });
     }
 
     // Sort by score (highest first) and apply limit
